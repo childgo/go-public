@@ -7,11 +7,11 @@ case $opt in
 
 ########################################################
 "Total IP connected to Server 1")
-clear;while x=0; do clear;date;echo "";echo "[Total Number]";echo "-------------------";echo "Port[80]"; netstat -plan | grep :80 | wc -l;echo "Port[443]";netstat -plan | grep :443 | wc -l;echo "Port[3306]";netstat -plan | grep :3306 | wc -l; sleep 5;done;;
+clear;while x=0; do clear;date;echo "";echo "   [Total Number]";echo "-------------------";echo Port[80]; netstat -plan | grep :80 | wc -l;  echo Port[443]; netstat -plan | grep :443 | wc -l;echo Port[3306]; netstat -plan | grep :3306 | wc -l; sleep 5;done ;;
 ########################################################
 
 "List of IP connected to Server 2")
-clear;while x=0; do clear;date;echo "";echo "[Total Number]";echo "-------------------";netstat -ntu | awk '{print $5}' | cut -d: -f1 | sort | uniq -c | sort -n; sleep 15;done;;
+clear;while x=0; do clear;date;echo "";echo "  [Total Number]";echo "-------------------";netstat -ntu | awk '{print $5}' | cut -d: -f1 | sort | uniq -c | sort -n; sleep 15;done;;
 ########################################################
 
 "Number of IP per Domain 3")
