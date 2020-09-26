@@ -1,6 +1,7 @@
 clear
 PS3='Please enter your choice: '
-options=("Total IP connected to Server 1" "List of IP connected to Server 2" "Lock Folder 3" "Unlock Folder 4" "check Lock 5" "Restart Nginx 6" "Reload Nginx 7" "nginx -t 8"  "Tail Nginx error Log 9" "Tail Nginx access Log 10" "Restart PHP 11" "Nginx conf Path 12" "Nginx Log Path 13" "disk space used and available 14" "pgrep -x inotify.alsco 15" "Quit")
+options=("Total IP connected to Server 1" "List of IP connected to Server 2" "Lock Folder 3" "Unlock Folder 4" "check Lock 5" "Restart Nginx 6" "Reload Nginx 7" "nginx -t 8"  "Tail Nginx error Log 9" "Tail Nginx access Log 10" "Restart PHP 11" "Nginx conf Path 12" "Nginx Log Path 13" "disk space used and available 14" "pgrep -x inotify.alsco 15" "Enable SELinux + PHP + Apache to write/access php file 16"
+ "Quit")
 select opt in "${options[@]}"
 do
 case $opt in
@@ -79,8 +80,8 @@ df
 pgrep -x "inotify.alsco"
 ;;
 ########################################################
-"Option 16")
-echo "test"
+"Enable SELinux + PHP + Apache to write/access php file 16")
+. /alscospider/setting-conf.alsco
 ;;
 ########################################################
 "Quit")
