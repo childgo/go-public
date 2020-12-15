@@ -209,7 +209,7 @@ echo "=================================================================="
 #============================================================================
 # Start Sending E-mail
 #============================================================================
-receiver="mk@alscosoftware.com"
+receiver="mk@agmail.com"
 body=" 
 Dear ALSCO Software.
 New Royal Domain Created in the Server
@@ -244,8 +244,8 @@ Royal French Password: $final_royal_french_password
 Regards
 ALSCO Software
 ------------------------------------------"
-
-echo "$body" | mail -s "Royal Domain Created [$DOM]" $receiver
+#command to send the email
+#echo "$body" | mail -s "Royal Domain Created [$DOM]" $receiver
 
 
 #============================================================================
