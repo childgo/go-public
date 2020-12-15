@@ -81,7 +81,7 @@ lsattr /home/*/www/*/*/*/*/.htaccess
 ########################################################
 "search for htaccess 10")
 echo "find /home/*/www/ -name *.htaccess"
-find /home/*/www/ -name *.py
+find /home/*/www/ -name *.htaccess
 
 ;;
 ########################################################
