@@ -82,21 +82,29 @@ lsattr /home/*/www/*/*/*/*/.htaccess
 "search for htaccess 10")
 echo "find /home/*/www/ -name *.htaccess"
 find /home/*/www/ -name *.py
+
+;;
 ########################################################
-"search for asp|aspx 11")
+"search for asp,aspx 11")
 echo "find /home/*/www/ -name *.asp"
 echo "find /home/*/www/ -name *.aspx"
 
 find /home/*/www/ -name *.asp
 find /home/*/www/ -name *.aspx
+
+;;
 ########################################################
 "search for sh 12")
 echo "find /home/*/www/ -name *.sh"
 find /home/*/www/ -name *.sh
+
+;;
 ########################################################
 "search for txt 13")
 echo "find /home/*/www/ -name *.txt"
 find /home/*/www/ -name *.txt
+
+;;
 ########################################################
 
 "Option 14")
