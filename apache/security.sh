@@ -2,7 +2,7 @@ clear
 
 PS3='Please enter your choice: '
 
-options=("Grep WHM root IP login for 2020 1" "search for python|txt|htaccess|asp|sh files 2" "Grep words and exclude some files extension 3" "find files older than 20 days 4" "grep SecRuleEngine Off from userdata 5" "find every symbolic link on a server 6" "List all connected SSH sessions 7" "find all hidden files 8" "check all immutable files 9" "Option 10" "Quit")
+options=("Grep WHM root IP login for 2020 1" "search for python 2" "Grep words and exclude some files extension 3" "find files older than 20 days 4" "grep SecRuleEngine Off from userdata 5" "find every symbolic link on a server 6" "List all connected SSH sessions 7" "find all hidden files 8" "check all immutable files 9" "search for htaccess 10" "Option 11" "search for asp|aspx 11" "search for sh 12" "search for txt 13" "Option 14" "Quit")
 
 select opt in "${options[@]}"
 do
@@ -15,18 +15,10 @@ grep  2020 //usr/local/cpanel/logs/access_log | grep -E '\sroot\s' | cut -f1 -d\
 ;;
 ########################################################
 
-"search for python|txt|htaccess|asp|sh files 2")
+"search for python 2")
 echo "find /home/*/www/ -name *.py"
-echo "find /home/*/www/ -name *.txt"
-echo "find /home/*/www/ -name *.htaccess"
-echo "find /home/*/www/ -name *.asp"
-echo "find /home/*/www/ -name *.sh"
-
 find /home/*/www/ -name *.py
-find /home/*/www/ -name *.txt
-find /home/*/www/ -name *.htaccess
-find /home/*/www/ -name *.asp
-find /home/*/www/ -name *.sh
+
 
 
 ;;
@@ -87,7 +79,27 @@ lsattr /home/*/www/*/*/*/*/.htaccess
 
 ;;
 ########################################################
-"Option 10")
+"search for htaccess 10")
+echo "find /home/*/www/ -name *.htaccess"
+find /home/*/www/ -name *.py
+########################################################
+"search for asp|aspx 11")
+echo "find /home/*/www/ -name *.asp"
+echo "find /home/*/www/ -name *.aspx"
+
+find /home/*/www/ -name *.asp
+find /home/*/www/ -name *.aspx
+########################################################
+"search for sh 12")
+echo "find /home/*/www/ -name *.sh"
+find /home/*/www/ -name *.sh
+########################################################
+"search for txt 13")
+echo "find /home/*/www/ -name *.txt"
+find /home/*/www/ -name *.txt
+########################################################
+
+"Option 14")
 echo "test"
 ;;
 ########################################################
