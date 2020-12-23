@@ -2,7 +2,7 @@ clear
 
 PS3='Please enter your choice: '
 
-options=("Grep WHM root IP login for 2020 1" "search for python 2" "Grep words and exclude some files extension 3" "find files older than 20 days 4" "grep SecRuleEngine Off from userdata 5" "find every symbolic link on a server 6" "List all connected SSH sessions 7" "find all hidden files 8" "check all immutable files 9" "search for htaccess 10" "search for asp 11" "search for sh 12" "search for txt 13" "Option 14" "Quit")
+options=("Grep WHM root IP login for 2020 1" "search for python 2" "Grep words and exclude some files extension 3" "find files older than 20 days 4" "grep SecRuleEngine Off from userdata 5" "find every symbolic link on a server 6" "List all connected SSH sessions 7" "find all hidden files 8" "check all immutable files 9" "search for htaccess 10" "search for asp 11" "search for sh 12" "search for txt 13" "search for log 14" "grep TCP_IN 15" "Option 16" "Quit")
 
 select opt in "${options[@]}"
 do
@@ -106,8 +106,24 @@ find /home/*/www/ -name *.txt
 
 ;;
 ########################################################
+"search for log 14")
+echo "find /home/*/www/ -name *.log"
+find /home/*/www/ -name *.log
 
-"Option 14")
+;;
+########################################################
+"grep TCP_IN 15")
+echo "egrep '^TCP_IN =' /etc/csf/csf.conf"
+echo "egrep '^TCP_OUT =' /etc/csf/csf.conf"
+
+egrep '^TCP_IN =' /etc/csf/csf.conf
+egrep '^TCP_OUT =' /etc/csf/csf.conf
+
+;;
+########################################################
+
+
+"Option 16")
 echo "test"
 ;;
 ########################################################
