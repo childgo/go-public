@@ -88,7 +88,7 @@ df
 ;;
 ########################################################
 "pgrep -x inotify.alsco 15")
-echo "pgrep -x "inotify.alsco""
+echo "pgrep -x \"inotify.alsco\""
 echo "to kill process use, kill 1234"
 echo "================"
 pgrep -x "inotify.alsco"
