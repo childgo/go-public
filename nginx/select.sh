@@ -24,49 +24,60 @@ clear;while x=0; do clear;date;echo "";echo "[Total Number]";echo "-------------
 ########################################################
 
 "Lock Folder 3")
+echo "chattr -R +i /var/www/html/"
 chattr -R +i /var/www/html/
 
 ;;
 ########################################################
 "Unlock Folder 4")
+echo "chattr -R -i /var/www/html/"
 chattr -R -i /var/www/html/
 
 ;;
 ########################################################
 "check Lock 5")
+echo "lsattr /var/www/html/"
 lsattr /var/www/html/
 ;;
 ########################################################
 "Restart Nginx 6")
+echo "systemctl restart nginx"
 systemctl restart nginx
 ;;
 ########################################################
 "Reload Nginx 7")
+echo "systemctl reload nginx"
 systemctl reload nginx
 ;;
 ########################################################
 "nginx -t 8")
+echo "nginx -t"
 nginx -t
 ;;
 ########################################################
 "Tail Nginx error Log 9")
+echo "tail -f /var/log/nginx/error.log"
 tail -f /var/log/nginx/error.log
 ;;
 ########################################################
 "Tail Nginx access Log 10")
+echo "tail -f /var/log/nginx/access.log"
 tail -f /var/log/nginx/access.log
 ;;
 ########################################################
 "Restart PHP 11")
+echo "service php-fpm restart"
 service php-fpm restart
 ;;
 ########################################################
 "Nginx conf Path 12")
+echo "cd /etc/nginx/conf.d"
 cd /etc/nginx/conf.d
 pwd
 ;;
 ########################################################
 "Nginx Log Path 13")
+echo "cd /var/log/nginx/"
 cd /var/log/nginx/
 pwd
 ;;
@@ -77,10 +88,12 @@ df
 ;;
 ########################################################
 "pgrep -x inotify.alsco 15")
+echo "pgrep -x "inotify.alsco""
 pgrep -x "inotify.alsco"
 ;;
 ########################################################
 "Enable SELinux + PHP + Apache to write/access php file 16")
+echo ". /alscospider/setting-conf.alsco"
 . /alscospider/setting-conf.alsco
 ;;
 ########################################################
