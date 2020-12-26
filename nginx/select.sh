@@ -89,12 +89,15 @@ df
 ########################################################
 "pgrep -x inotify.alsco 15")
 echo "pgrep -x "inotify.alsco""
+echo "to kill process use, kill 1234"
+echo "================"
 pgrep -x "inotify.alsco"
 ;;
 ########################################################
 "Enable SELinux + PHP + Apache to write/access php file 16")
 echo ". /alscospider/setting-conf.alsco"
 . /alscospider/setting-conf.alsco
+echo ". /alscospider/setting-conf.alsco"
 ;;
 ########################################################
 "Quit")
