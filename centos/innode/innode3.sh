@@ -5,7 +5,7 @@ usr=$1
 while :
 do
 	echo "Press [CTRL+C] to stop.."
-	sleep 1
+	
 
 	#start command
 	echo "Master server"
@@ -16,7 +16,7 @@ do
 	echo "======================="
 	echo "======================="
 	#end command
-
+	sleep 1
 
 
 done
