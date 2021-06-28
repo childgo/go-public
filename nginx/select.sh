@@ -57,15 +57,12 @@ nginx -t
 ########################################################
 "Tail Nginx error Log 9")
 echo "tail -f /var/log/nginx/error.log"
-echo "tail -f /var/log/nginx/error.log | grep '66.249.64.171'"
 tail -f /var/log/nginx/error.log
 ;;
 ########################################################
 "Tail Nginx access Log 10")
 echo "tail -f /var/log/nginx/access.log"
-echp ""
-echo "tail -f /var/log/nginx/access.log | grep '66.249.64.171'"
-echp ""
+
 
 tail -f /var/log/nginx/access.log
 ;;
