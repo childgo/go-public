@@ -2,6 +2,8 @@
 # ^ that line is important
 clear
 
+royal_program_list='account,file,block,topic,article,menu,multimenu,headline,album,video,section,tender,dispatch,setting,theme,program,log,myaccount';
+
 
 #============================================================================
 #Start Generate Password
@@ -143,9 +145,9 @@ uapi --user=$USR Mysql set_privileges_on_database user=$DB_USER_ROYAL database=$
 
 echo '<?php
 $host = "localhost"; 
-$dbname = "'$DB_NAME_ROYAL'";  
-$user = "'$DB_USER_ROYAL'"; 
-$password = "'$DB_PASS_ROYAL'";   
+$dbname_royala = "'$DB_NAME_ROYAL'";  
+$user_royalb = "'$DB_USER_ROYAL'"; 
+$password_royalc = "'$DB_PASS_ROYAL'";   
 ?>'>/home/$USR/public_html/config/db.php
 
 
@@ -167,9 +169,20 @@ mysql -p$DB_PASS_ROYAL -u $DB_USER_ROYAL $DB_NAME_ROYAL < /alscospider/today/roy
 
 
 #update usera and password in database
-mysql -u $DB_USER_ROYAL -p$DB_PASS_ROYAL $DB_NAME_ROYAL -e "UPDATE account SET username = '$final_royal_arabic_user', password = '$final_royal_arabic_password' where language = 'ar' ";
-mysql -u $DB_USER_ROYAL -p$DB_PASS_ROYAL $DB_NAME_ROYAL -e "UPDATE account SET username = '$final_royal_english_user', password = '$final_royal_english_password' where language = 'en' ";
-mysql -u $DB_USER_ROYAL -p$DB_PASS_ROYAL $DB_NAME_ROYAL -e "UPDATE account SET username = '$final_royal_french_user', password = '$final_royal_french_password' where language = 'fr' ";
+#mysql -u $DB_USER_ROYAL -p$DB_PASS_ROYAL $DB_NAME_ROYAL -e "UPDATE account SET username = '$final_royal_arabic_user', password = '$final_royal_arabic_password' where language = 'ar' ";
+#mysql -u $DB_USER_ROYAL -p$DB_PASS_ROYAL $DB_NAME_ROYAL -e "UPDATE account SET username = '$final_royal_english_user', password = '$final_royal_english_password' where language = 'en' ";
+#mysql -u $DB_USER_ROYAL -p$DB_PASS_ROYAL $DB_NAME_ROYAL -e "UPDATE account SET username = '$final_royal_french_user', password = '$final_royal_french_password' where language = 'fr' ";
+
+
+#Insert Arabic Info
+mysql -u $DB_USER_ROYAL -p$DB_PASS_ROYAL $DB_NAME_ROYAL -e "INSERT INTO account (name, level, email, phone, username, password, program, language) VALUES ('name_ar', 'client', 'info@gmail.com', '96411111111','$final_royal_arabic_user', '$final_royal_arabic_password','$royal_program_list','ar')";
+
+#Insert English Info
+mysql -u $DB_USER_ROYAL -p$DB_PASS_ROYAL $DB_NAME_ROYAL -e "INSERT INTO account (name, level, email, phone, username, password, program, language) VALUES ('name_en', 'client', 'info@gmail.com', '96411111111','$final_royal_english_user', '$final_royal_english_password','$royal_program_list','en')";
+
+#Insert French Info
+mysql -u $DB_USER_ROYAL -p$DB_PASS_ROYAL $DB_NAME_ROYAL -e "INSERT INTO account (name, level, email, phone, username, password, program, language) VALUES ('name_fr', 'client', 'info@gmail.com', '96411111111','$final_royal_french_user', '$final_royal_french_password','$royal_program_list','fr')";
+
 
 
 #Delete DataBase
@@ -191,6 +204,7 @@ echo "Printing Result..."
 echo "=================================================================="
 echo "Domain:" $DOM
 echo "cPanel_User: "$USR 
+echo "cPanel_Pass: "$final_cpanel_password
 echo "=================================================================="
 echo "Royal Arabic user:" $final_royal_arabic_user
 echo "Royal Arabic Password:" $final_royal_arabic_password
