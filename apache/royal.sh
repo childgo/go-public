@@ -2,7 +2,7 @@
 # ^ that line is important
 clear
 
-royal_program_list='account,file,block,topic,article,menu,multimenu,headline,album,video,section,tender,dispatch,setting,theme,program,log,myaccount';
+royal_program_list='file,block,topic,article,menu,multimenu,headline,album,video,section,setting,theme,program,myaccount';
 
 
 #============================================================================
