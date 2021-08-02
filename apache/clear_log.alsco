@@ -1,0 +1,26 @@
+#!/bin/bash
+# ^ that line is important
+clear
+
+
+#start clear error log
+find /home/ -name "*.gz" -type f -delete
+
+
+#start clear error log
+find /home -type f -name error_log -exec rm -f {} \;
+
+
+
+echo "All Errors Logs was Deleted Correctly"
+
+
+
+
+ 
+/scripts/fixquotas
+
+
+
+echo "Finish"
+echo ""
