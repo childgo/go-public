@@ -1,12 +1,12 @@
 clear
 PS3='Please enter your choice: '
-options=("Lock All public_html  1" "Un-Lock All public_html 2" "Check All public_html 3" "Un-Lock Only one public_html 4" "Option 5" "Quit")
+options=("Lock All public_html 1" "Un-Lock All public_html 2" "Check All public_html 3" "Un-Lock Only one public_html 4" "Option 5" "Quit")
 select opt in "${options[@]}"
 do
 case $opt in
 
 ########################################################
-"Lock All public_html  1")
+"Lock All public_html 1")
 
 clear
 chattr -R +i /home/*/public_html/
@@ -47,7 +47,7 @@ echo "Finish Lock"
 ;;
 ########################################################
 
-"Uu-Lock All public_html 2")
+"Un-Lock All public_html 2")
 
 clear
 echo "----Start unlock"
@@ -103,7 +103,7 @@ echo "----Finish Checking"
 
 ;;
 ########################################################
-"UN-Lock Only one public_html 4")
+"Un-Lock Only one public_html 4")
 
 echo "please Type the User,followed by [ENTER]:"
 read usr
