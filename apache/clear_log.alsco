@@ -4,11 +4,11 @@ clear
 
 
 #start clear error log
-find /home/ -name "*.gz" -type f -delete
+#find /home/ -name "*.gz" -type f -delete
 
 
 #start clear error log
-find /home -type f -name error_log -exec rm -f {} \;
+find /home/*/www/* -type f -name error_log -exec rm -f {} \;
 
 
 
