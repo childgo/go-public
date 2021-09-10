@@ -115,7 +115,7 @@ echo "cd /etc/nginx/conf.d/alsco_data_cookie_and_ip"
 echo "grep -r "allow all""
 echo ""
 cd /etc/nginx/conf.d/alsco_data_cookie_and_ip
-grep -r "allow all"
+grep --color=always -r "allow all"
 ;;
 ########################################################
 
