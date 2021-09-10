@@ -1,6 +1,6 @@
 clear
 PS3='Please enter your choice: '
-options=("Total IP connected to Server 1" "List of IP connected to Server 2" "Lock Folder 3" "Unlock Folder 4" "check Lock 5" "Restart Nginx 6" "Reload Nginx 7" "nginx -t 8"  "Tail Nginx error Log 9" "Tail Nginx access Log 10" "Restart PHP 11" "Nginx conf Path 12" "Nginx Log Path 13" "disk space used and available 14" "pgrep --color=always -x inotify.alsco 15" "Enable SELinux + PHP + Apache to write/access php file 16" "check Nginx version 17" "Check ALSCO IP Firewall Setting 18"
+options=("Total IP connected to Server 1" "List of IP connected to Server 2" "Lock Folder 3" "Unlock Folder 4" "check Lock 5" "Restart Nginx 6" "Reload Nginx 7" "nginx -t 8"  "Tail Nginx error Log 9" "Tail Nginx access Log 10" "Restart PHP 11" "Nginx conf Path 12" "Nginx Log Path 13" "disk space used and available 14" "pgrep -x inotify.alsco 15" "Enable SELinux + PHP + Apache to write/access php file 16" "check Nginx version 17" "Check ALSCO IP Firewall Setting 18"
  "Quit")
 select opt in "${options[@]}"
 do
@@ -9,7 +9,7 @@ case $opt in
 ########################################################
 "Total IP connected to Server 1")
 
-clear;while x=0; do clear;date;echo "";echo "[Total Number]";echo "-------------------";echo "Port[80]"; netstat -plan | grep --color=always :80 | wc -l;echo "Port[443]";netstat -plan | grep --color=always :443 | wc -l;echo "Port[3306]";netstat -plan | grep --color=always :3306 | wc -l; sleep 5;done
+clear;while x=0; do clear;date;echo "";echo "[Total Number]";echo "-------------------";echo "Port[80]"; netstat -plan | grepzz :80 | wc -l;echo "Port[443]";netstat -plan | grep :443 | wc -l;echo "Port[3306]";netstat -plan | grep :3306 | wc -l; sleep 5;done
 
 
 ;;
@@ -93,7 +93,7 @@ df
 echo "pgrep -x \"inotify.alsco\""
 echo "to kill process use, kill 1234"
 echo "================"
-pgrep --color=always -x "inotify.alsco"
+pgrep -x "inotify.alsco"
 ;;
 ########################################################
 "Enable SELinux + PHP + Apache to write/access php file 16")
