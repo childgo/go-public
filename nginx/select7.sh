@@ -118,7 +118,7 @@ cd /etc/nginx/conf.d/alsco_data_cookie_and_ip
 grep --color=always -r "allow all"
 ;;
 ########################################################
-"SF Firewall Setting 19")
+"CSF Firewall Setting 19")
 echo "grep --color=always -r "TESTING =" csf.conf"
 echo "grep --color=always -r "TCP_IN =" csf.conf"
 echo "----------------"
