@@ -122,7 +122,6 @@ grep --color=always -r "allow all"
 echo "grep --color=always -r "TESTING =" csf.conf"
 echo "grep --color=always -r "TCP_IN =" csf.conf"
 echo "----------------"
-
 cd /etc/csf/
 echo "--------------------------------"
 grep --color=always -r "TESTING =" csf.conf
@@ -130,13 +129,15 @@ grep --color=always -r "TCP_IN =" csf.conf
 grep --color=always -r "TCP_OUT =" csf.conf
 grep --color=always -r "UDP_IN =" csf.conf
 grep --color=always -r "UDP_OUT =" csf.conf
-
 echo ""
 echo ""
 echo "--------------------------------"
+echo "This is csf.allow "
 cat csf.allow
 echo "--------------------------------"
 echo ""
+echo "--------------------------------"
+echo "This is csf.deny "
 cat csf.deny
 echo "--------------------------------"
 ;;
