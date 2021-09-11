@@ -119,6 +119,7 @@ grep --color=always -r "allow all"
 ;;
 ########################################################
 "CSF Firewall Setting 19")
+clear
 echo "grep --color=always -r "TESTING =" csf.conf"
 echo "grep --color=always -r "TCP_IN =" csf.conf"
 echo "----------------"
