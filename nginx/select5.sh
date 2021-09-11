@@ -1,7 +1,6 @@
 clear
 PS3='Please enter your choice: '
-options=("Total IP connected to Server 1" "List of IP connected to Server 2" "Lock Folder 3" "Unlock Folder 4" "check Lock 5" "Restart Nginx 6" "Reload Nginx 7" "nginx -t 8"  "Tail Nginx error Log 9" "Tail Nginx access Log 10" "Restart PHP 11" "Nginx conf Path 12" "Nginx Log Path 13" "disk space used and available 14" "pgrep -x inotify.alsco 15" "Enable SELinux + PHP + Apache to write/access php file 16" "check Nginx version 17" "Check ALSCO IP Firewall Setting 18"
- "Quit")
+options=("Total IP connected to Server 1" "List of IP connected to Server 2" "Lock Folder 3" "Unlock Folder 4" "check Lock 5" "Restart Nginx 6" "Reload Nginx 7" "nginx -t 8"  "Tail Nginx error Log 9" "Tail Nginx access Log 10" "Restart PHP 11" "Nginx conf Path 12" "Nginx Log Path 13" "disk space used and available 14" "pgrep -x inotify.alsco 15" "Enable SELinux + PHP + Apache to write/access php file 16" "check Nginx version 17" "Check ALSCO IP Firewall Setting 18" "CSF Firewall Setting 19" "Quit")
 select opt in "${options[@]}"
 do
 case $opt in
@@ -118,6 +117,29 @@ clear
 cd /etc/nginx/conf.d/alsco_data_cookie_and_ip
 grep --color=always -r "allow all"
 ;;
+########################################################
+"SF Firewall Setting 19")
+echo "grep --color=always -r "TESTING =" csf.conf"
+echo "grep --color=always -r "TCP_IN =" csf.conf"
+echo "----------------"
+
+cd /etc/csf/
+echo "--------------------------------"
+grep --color=always -r "TESTING =" csf.conf
+grep --color=always -r "TCP_IN =" csf.conf
+grep --color=always -r "TCP_OUT =" csf.conf
+grep --color=always -r "UDP_IN =" csf.conf
+grep --color=always -r "UDP_OUT =" csf.conf
+
+echo ""
+echo ""
+echo "--------------------------------"
+cat csf.allow
+echo "--------------------------------"
+echo ""
+cat csf.deny
+echo "--------------------------------"
+
 ########################################################
 
 "Quit")
