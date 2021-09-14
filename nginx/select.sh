@@ -144,10 +144,9 @@ echo "--------------------------------"
 ;;
 ########################################################
 "Check Rate Limit  Excess 20")
-echo "grep --color=always -r "limiting requests" /var/log/nginx/error.log"
+clear
 echo "grep --color=always -r "limiting requests" /var/log/nginx/error.log"
 echo ""
-clear
 grep --color=always -r "limiting requests" /var/log/nginx/error.log
 ;;
 ########################################################
