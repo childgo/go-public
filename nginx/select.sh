@@ -146,6 +146,11 @@ echo "--------------------------------"
 "Check Rate Limit  Excess 20")
 clear
 echo "grep --color=always -r "limiting requests" /var/log/nginx/error.log"
+echo "grep --color=always -r "zone=mobile_Auth_ratelimit" /etc/nginx/conf.d/0-setting.conf"
+echo ""
+grep --color=always -r "zone=mobile_Auth_ratelimit" /etc/nginx/conf.d/0-setting.conf
+echo ""
+echo "grep --color=always -r "limiting requests" /var/log/nginx/error.log"
 echo ""
 grep --color=always -r "limiting requests" /var/log/nginx/error.log
 ;;
