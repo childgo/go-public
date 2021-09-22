@@ -129,13 +129,13 @@ egrep '^TCP_OUT =' /etc/csf/csf.conf
 echo "grep "whostmgrd"  hosts.allow"
 echo ""
 echo ""
-grep --color=always -r "whostmgrd"  hosts.allow
+grep --color=always -r "whostmgrd"  /etc/hosts.allow
 echo ""
-grep --color=always -r "sshd"  hosts.allow
+grep --color=always -r "sshd"  /etc/hosts.allow
 echo ""
-grep --color=always -r "cpaneld"  hosts.allow
+grep --color=always -r "cpaneld"  /etc/hosts.allow
 echo ""
-grep --color=always -r "ftp"  hosts.allow
+grep --color=always -r "ftp"  /etc/hosts.allow
 echo ""
 
 
