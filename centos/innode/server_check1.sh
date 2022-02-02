@@ -4,6 +4,7 @@
 # the server if triggered
 # integrate SSD existence test
 
+# STATUS: do not update here, moved to internal https://github.com/GetPageSpeed/servcheck
 
 if [ "$(id -u)" != "0" ]; then
    echo "This script must be run as root or via sudo" 1>&2
