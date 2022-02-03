@@ -121,9 +121,19 @@ pgrep -x "inotify.alsco"
 ;;
 ########################################################
 "Enable SELinux + PHP + Apache to write/access php file 16")
-echo ". /alscospider/setting-conf.alsco"
-. /alscospider/setting-conf.alsco
-echo ". /alscospider/setting-conf.alsco"
+#echo ". /alscospider/setting-conf.alsco"
+#. /alscospider/setting-conf.alsco
+#echo ". /alscospider/setting-conf.alsco"
+
+
+#Enable Write On conf.d files
+sudo chcon -t httpd_sys_rw_content_t /etc/nginx/conf.d/alsco_data_cookie_and_ip/ -R
+chown apache $(find /etc/nginx/conf.d/alsco_data_cookie_and_ip/ -type f  -name '*.map')
+chown apache $(find /etc/nginx/conf.d/alsco_data_cookie_and_ip/ -type f  -name '*.ip.alsco')
+chown apache $(find /etc/nginx/conf.d/alsco_data_cookie_and_ip/ -type f  -name '*.ipsetting.alsco')
+chown apache $(find /etc/nginx/conf.d/alsco_data_cookie_and_ip/ -type f  -name '*.ratelimit_tempIP_block.alsco')
+echo "Done"
+
 ;;
 ########################################################
 "check Nginx version 17")
@@ -166,6 +176,9 @@ echo "--------------------------------"
 echo "This is csf.deny "
 cat csf.deny
 echo "--------------------------------"
+echo "Check CSF Function in Server"
+
+perl /usr/local/csf/bin/csftest.pl
 ;;
 ########################################################
 "Check Rate Limit  Excess 20")
