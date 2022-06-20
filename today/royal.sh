@@ -206,14 +206,15 @@ echo "Domain:" $DOM
 echo "cPanel_User: "$USR 
 echo "cPanel_Pass: "$final_cpanel_password
 echo "=================================================================="
-echo "Royal Arabic user:" $final_royal_arabic_user
-echo "Royal Arabic Password:" $final_royal_arabic_password
 echo "=================================================================="
-echo "Royal English user:" $final_royal_english_user
-echo "Royal English Password:" $final_royal_english_password
+echo "Arabic User:" $final_royal_arabic_user
+echo "Arabic Password:" $final_royal_arabic_password
 echo "=================================================================="
-echo "Royal French user:" $final_royal_french_user
-echo "Royal French Password:" $final_royal_french_password
+echo "English User:" $final_royal_english_user
+echo "English Password:" $final_royal_english_password
+echo "=================================================================="
+echo "French User:" $final_royal_french_user
+echo "French Password:" $final_royal_french_password
 echo "=================================================================="
 
 
@@ -223,9 +224,9 @@ echo "=================================================================="
 #============================================================================
 # Start Sending E-mail
 #============================================================================
-receiver="mk@agmail.com"
+receiver="alscotoday@agmail.com"
 body=" 
-Dear ALSCO Software.
+Dear ALSC.
 New Royal Domain Created in the Server
 
 ------------------------------------------
@@ -244,13 +245,13 @@ Database Pass: $DB_PASS_ROYAL
 
 ------------------------------------------
 
-Royal Arabic user: $final_royal_arabic_user
+Royal Arabic User: $final_royal_arabic_user
 Royal Arabic Password: $final_royal_arabic_password
 
-Royal English user: $final_royal_english_user
+Royal English User: $final_royal_english_user
 Royal English Password: $final_royal_english_password
 
-Royal French user: $final_royal_french_user
+Royal French User: $final_royal_french_user
 Royal French Password: $final_royal_french_password
 
 
