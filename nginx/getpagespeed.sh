@@ -1,5 +1,10 @@
 #!/bin/bash
 
+
+
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/nginx/getpagespeed.sh)
+
+
 #yum -y install epel-release nginx createrepo
 #yum-utils moreutils
 #mkdir -p /home/repolin/www/repo/public/{base,centosplus,extras,updates,epel}
