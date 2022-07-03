@@ -2,8 +2,8 @@
 # ^ that line is important
 clear
 
-#Install Repo
-#bash <(curl -s https://repo.alscoip.com/alsco_repo.alsco)
+#this is nginx package | to install repo
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/nginx/alsco_nginx_repo.sh)
 
 
 ALSCO_Path="/etc/yum.repos.d/alsco.repo"
