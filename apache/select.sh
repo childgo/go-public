@@ -176,10 +176,6 @@ read email_id36
 result_user=$(grep $usrdom36 /etc/trueuserdomains | awk '{print $2}' )
 
 
-
-
-
-
 #============================================================================
 #Start Generate Password
 #============================================================================
@@ -200,10 +196,10 @@ special_second_characters=$(cat /dev/urandom | tr -dc '!@#' | fold -w 2 | head -
 special_third_characters=$(cat /dev/urandom | tr -dc '!@#' | fold -w 2 | head -n 1)
 
 
-#Mysql and cPanel Password
+#Email Randon Password
 final_email_password=$lowercase_first_letters$uppercase_first_letters$special_second_characters$numbers_second_only$lowercase_second_letters
 #============================================================================
-#Start Generate Password
+#End Generate Password
 #============================================================================
 
 
@@ -214,7 +210,7 @@ echo "New Password for Email $USRDOMnid36 is edfDYT@#@23ewZ@4f33"
 
 /scripts/restartsrv_exim
 /scripts/restartsrv_dovecot
-echo " "
+echo "======================================================================"
 echo " "
 echo "cPanel User is [$result_user]  fo Domain [$usrdom36]"
 echo " "
