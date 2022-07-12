@@ -199,6 +199,13 @@ USRDOMn="$usrdom"
 
 grep $USRDOMn /etc/trueuserdomains
 
+grep $USRDOMn /etc/trueuserdomains | awk '{print $2}'
+
+result=$($USRDOMn /etc/trueuserdomains | awk '{print $2}')
+
+
+echo "Print $result"
+
 ;;
 ########################################################
 "Option 36")
