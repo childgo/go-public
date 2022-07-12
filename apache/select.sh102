@@ -174,7 +174,11 @@ read alsco_get_email_id
 alsco_get_domain=$(cut -d "@" -f2 <<< "$alsco_get_email_id")
 
 #Get cPanel User from Domain
-alsco_get_user=$(grep $alsco_get_domain /etc/trueuserdomains | awk '{print $2}' )
+#alsco_get_user=$(grep $alsco_get_domain /etc/trueuserdomains | awk '{print $2}' )
+alsco_get_user=$(/scripts/whoowns aqsaalmadenah.com)
+
+
+
 
 
 #============================================================================
@@ -232,7 +236,10 @@ USRDOMn="$usrdom"
 
 #grep $USRDOMn /etc/trueuserdomains
 
-result_user=$(grep $USRDOMn /etc/trueuserdomains | awk '{print $2}' )
+#result_user=$(grep $USRDOMn /etc/trueuserdomains | awk '{print $2}' )
+result_user=$(/scripts/whoowns aqsaalmadenah.com)
+
+
 
 
 echo "User are:  $result_user"
