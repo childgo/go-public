@@ -214,7 +214,7 @@ echo "New Password for Email $USRDOMnid36 is edfDYT@#@23ewZ@4f33"
 /scripts/restartsrv_dovecot
 echo "======================================================================"
 echo " "
-echo "Domain is [$alsco_get_domain] cPanel User is [$alsco_get_user]  fo Domain [$usrdom36]"
+echo "Domain is [$alsco_get_domain] cPanel User is [$alsco_get_user] and E-mail Account is: [$email_id36]"
 echo " "
 echo "New Password for Email: [$email_id36] is: [$final_email_password]"
 echo " "
