@@ -208,16 +208,19 @@ final_email_password=$lowercase_first_letters$uppercase_first_letters$special_se
 uapi --output=jsonpretty --user=$alsco_get_user Email passwd_pop email=$alsco_get_email_id password=$final_email_password
 
 
-echo "New Password for Email $USRDOMnid36 is edfDYT@#@23ewZ@4f33"
-
+#Start Restart exim and imap
 /scripts/restartsrv_exim
 /scripts/restartsrv_dovecot
+
+
 echo "======================================================================"
 echo " "
-echo "Domain is [$alsco_get_domain] cPanel User is [$alsco_get_user] and E-mail Account is: [$alsco_get_email_id]"
+echo "Domain is [$alsco_get_domain] cPanel User is [$alsco_get_user] and E-Mail Account is: [$alsco_get_email_id]"
 echo " "
 echo "New Password for Email: [$alsco_get_email_id] is: [$final_email_password]"
 echo " "
+echo "======================================================================"
+
 echo " "
 
 ;;
