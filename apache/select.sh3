@@ -180,6 +180,17 @@ grep $USRDOMn /etc/trueuserdomains
 ########################################################
 "Option 36")
 echo "test"
+
+echo "please Type cPanel Username for Account,followed by [ENTER]:"
+read usrdom36
+USRDOMn36="$usrdom36"
+
+
+echo "please Type Email Account ID you want to chanel,followed by [ENTER]:"
+read usrdomid36
+USRDOMnid36="$usrdomid36"
+
+uapi --output=jsonpretty --user=$USRDOMn Email passwd_pop email='$USRDOMnid36' password='edfDYT@#@23ewZ@4fe'
 ;;
 ########################################################
 
