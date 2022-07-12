@@ -201,7 +201,7 @@ grep $USRDOMn /etc/trueuserdomains
 
 grep $USRDOMn /etc/trueuserdomains | awk '{print $2}'
 
-result=$($USRDOMn /etc/trueuserdomains | awk '{print $2}')
+result=$(grep $USRDOMn /etc/trueuserdomains | awk '{print $2}' )
 
 
 echo "Print $result"
