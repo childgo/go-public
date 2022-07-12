@@ -127,7 +127,7 @@ df -i
 ;;
 ########################################################
 "Broadcasting server IP 25")
-curl https://cpanel.com/showip.shtml
+curl https://cpanel.net/showip.shtml
 ;;
 ########################################################
 "cPanel fix quotas 26")
@@ -169,7 +169,13 @@ echo "test"
 ;;
 ########################################################
 "Find cPanel User for Domain 35")
-echo "test"
+echo "please Type the domain name,followed by [ENTER]:"
+read usrdom
+USRDOMn="$usrdom"
+
+
+grep $USRDOMn /etc/trueuserdomains
+
 ;;
 ########################################################
 "Option 36")
