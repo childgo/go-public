@@ -169,10 +169,10 @@ du -msh /alscogatewaytmp/
 
 
 echo "please Type Email Account ID you want to chanel,followed by [ENTER]:"
-read email_id36
+read alsco_get_email_id
 
 #Get Only Domain from Email Account
-alsco_get_domain=$(cut -d "@" -f2 <<< "$email_id36") ; echo "$result_user"
+alsco_get_domain=$(cut -d "@" -f2 <<< "$alsco_get_email_id")
 
 #Get cPanel User from Domain
 alsco_get_user=$(grep $alsco_get_domain /etc/trueuserdomains | awk '{print $2}' )
@@ -205,7 +205,7 @@ final_email_password=$lowercase_first_letters$uppercase_first_letters$special_se
 #============================================================================
 
 
-uapi --output=jsonpretty --user=$alsco_get_user Email passwd_pop email=$email_id36 password=$final_email_password
+uapi --output=jsonpretty --user=$alsco_get_user Email passwd_pop email=$alsco_get_email_id password=$final_email_password
 
 
 echo "New Password for Email $USRDOMnid36 is edfDYT@#@23ewZ@4f33"
@@ -214,9 +214,9 @@ echo "New Password for Email $USRDOMnid36 is edfDYT@#@23ewZ@4f33"
 /scripts/restartsrv_dovecot
 echo "======================================================================"
 echo " "
-echo "Domain is [$alsco_get_domain] cPanel User is [$alsco_get_user] and E-mail Account is: [$email_id36]"
+echo "Domain is [$alsco_get_domain] cPanel User is [$alsco_get_user] and E-mail Account is: [$alsco_get_email_id]"
 echo " "
-echo "New Password for Email: [$email_id36] is: [$final_email_password]"
+echo "New Password for Email: [$alsco_get_email_id] is: [$final_email_password]"
 echo " "
 echo " "
 
