@@ -167,8 +167,10 @@ du -msh /alscogatewaytmp/
 ########################################################
 "Change Email Password 34")
 
+echo "please Type Domain,followed by [ENTER]:"
+read alsco_get_domain
 
-echo "please Type Email Account ID you want to chanel,followed by [ENTER]:"
+echo "please Type Email Account ID,followed by [ENTER]:"
 read alsco_get_email_id
 
 #Get Only Domain from Email Account
