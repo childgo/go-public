@@ -214,7 +214,7 @@ echo "======================================================================"
 echo " "
 echo "cPanel User is [$result_user]  fo Domain [$usrdom36]"
 echo " "
-echo "New Password for Email $USRDOMnid36 is: [$final_email_password]"
+echo "New Password for Email $email_id36 is: [$final_email_password]"
 echo " "
 echo " "
 
