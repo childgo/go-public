@@ -181,6 +181,11 @@ echo "New Password for Email $USRDOMnid36 is edfDYT@#@23ewZ@4f33"
 
 /scripts/restartsrv_exim
 /scripts/restartsrv_dovecot
+echo " "
+echo " "
+echo " "
+
+echo "New Password for Email $USRDOMnid36 is edfDYT@#@23ewZ@4f33"
 
 ;;
 ########################################################
