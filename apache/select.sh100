@@ -177,7 +177,7 @@ result_user=$(grep $usrdom36 /etc/trueuserdomains | awk '{print $2}' )
 
 
 
-uapi --output=jsonpretty --user=$result_user Email passwd_pop email=$email_id36 password='edfDYT@#@23ewZ@4f33'
+uapi --output=jsonpretty --user=$result_user Email passwd_pop email=$email_id36 password='edfDYT@#@23ewZ@4f333'
 
 
 echo "New Password for Email $USRDOMnid36 is edfDYT@#@23ewZ@4f33"
