@@ -1,2 +1,0 @@
-clear
-curl ipinfo.io
