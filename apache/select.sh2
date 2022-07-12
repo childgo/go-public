@@ -172,8 +172,11 @@ read usrdom36
 echo "please Type Email Account ID you want to chanel,followed by [ENTER]:"
 read email_id36
 
+#Get Only Domain from Email Account
+alsco_get_domain=$(cut -d "@" -f2 <<< "$email_id36") ; echo "$result_user"
+
 #Get cPanel User from Domain
-result_user=$(grep $usrdom36 /etc/trueuserdomains | awk '{print $2}' )
+result_user=$(grep $alsco_get_domain /etc/trueuserdomains | awk '{print $2}' )
 
 
 #============================================================================
