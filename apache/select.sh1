@@ -175,6 +175,10 @@ read usrdomid36
 USRDOMnid36="$usrdomid36"
 
 uapi --output=jsonpretty --user=$USRDOMn36 Email passwd_pop email=$USRDOMnid36 password='edfDYT@#@23ewZ@4f33'
+
+
+echo "New Password for Email $USRDOMnid36 is edfDYT@#@23ewZ@4f33"
+
 ;;
 ########################################################
 "Find cPanel User for Domain 35")
