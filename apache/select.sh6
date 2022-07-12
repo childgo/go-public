@@ -174,7 +174,7 @@ echo "please Type Email Account ID you want to chanel,followed by [ENTER]:"
 read usrdomid36
 USRDOMnid36="$usrdomid36"
 
-uapi --output=jsonpretty --user=$USRDOMn36 Email passwd_pop email='$USRDOMnid36' password='edfDYT@#@23ewZ@4fe'
+uapi --output=jsonpretty --user=$USRDOMn36 Email passwd_pop email=$USRDOMnid36 password='edfDYT@#@23ewZ@4fe'
 ;;
 ########################################################
 "Find cPanel User for Domain 35")
