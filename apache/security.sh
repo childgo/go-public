@@ -10,6 +10,13 @@ case $opt in
 ########################################################
 "Grep WHM root IP login for 2022 1")
 echo "grep  2022 //usr/local/cpanel/logs/access_log | grep -E '\sroot\s' | cut -f1 -d\  | sort -u"
+echo " "
+echo "Logins for the cPanel software are logged at the following file"
+echo "grep "68.183.188.48" /usr/local/cpanel/logs/session_log"
+echo " "
+
+
+
 grep  2022 //usr/local/cpanel/logs/access_log | grep -E '\sroot\s' | cut -f1 -d\  | sort -u
 ;;
 ########################################################
