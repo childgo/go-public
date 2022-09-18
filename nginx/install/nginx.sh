@@ -1,3 +1,4 @@
+yum update;sleep 3;
 yum -y update;sleep 3;
 yum install epel-release;sleep 3;
 yum install nginx;sleep 3;
