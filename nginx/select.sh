@@ -81,7 +81,9 @@ nginx -t
 ########################################################
 "Tail Nginx error Log 9")
 echo "tail -f /var/log/nginx/error.log"
-tail -f /var/log/nginx/error.log
+echo "tail -f /var/log/nginx/alsco_error.log"
+
+tail -f /var/log/nginx/alsco_error.log
 ;;
 ########################################################
 "Tail Nginx access Log 10")
