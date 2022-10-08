@@ -113,6 +113,12 @@ pwd
 "disk space used and available 14")
 echo "command: df"
 df
+
+echo "----------------------------------------"
+echo "Check Ram"
+echo "----------------------------------------"
+echo "free -m -h"
+free -m -h
 ;;
 ########################################################
 "pgrep -x inotify.alsco 15")
