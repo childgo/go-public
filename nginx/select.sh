@@ -25,6 +25,8 @@ options=(
 "check SELinux 22"
 "Grepping Access_Log logs for IP 23"
 "Grepping Error_Log logs for IP 24"
+"IP Trace 25"
+
 
 "Quit")
 
@@ -242,6 +244,14 @@ echo ""
 tail -f /var/log/nginx/alsco_error.log | grep --color '50.253.239.118'
 
 ;;
+########################################################
+"IP Trace 25")
+echo "traceroute -I 185.52.101.72"
+echo ""
+traceroute -I 50.253.239.118
+
+;;
+
 ########################################################
 
 "Quit")
