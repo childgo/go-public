@@ -230,16 +230,16 @@ echo "Done"
 
 ########################################################
 "Grepping Access_Log logs for IP 23")
-echo "tail -f /var/log/nginx/access.log | grep 50.253.239.118"
+echo "tail -f /var/log/nginx/access.log | grep  --color  50.253.239.118"
 echo ""
-tail -f /var/log/nginx/access.log | grep 50.253.239.118
+tail -f /var/log/nginx/access.log | grep --color '50.253.239.118'
 
 ;;
 ########################################################
 "Grepping Error_Log logs for IP 24")
-echo "tail -f /var/log/nginx/alsco_error.log | grep 50.253.239.118"
+echo "tail -f /var/log/nginx/alsco_error.log | grep  --color '50.253.239.118'"
 echo ""
-tail -f /var/log/nginx/alsco_error.log | grep 50.253.239.118
+tail -f /var/log/nginx/alsco_error.log | grep --color '50.253.239.118'
 
 ;;
 ########################################################
