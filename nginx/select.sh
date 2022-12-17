@@ -23,6 +23,9 @@ options=(
 "Check Rate Limit  Excess 20"
 "clear the contents of ratelimit_tempIP_block 21"
 "check SELinux 22"
+"Grepping Access_Log logs for IP 23"
+"Grepping Error_Log logs for IP 24"
+
 "Quit")
 
 
@@ -225,6 +228,20 @@ cat /etc/selinux/config
 echo "Done"
 ;;
 
+########################################################
+"Grepping Access_Log logs for IP 23")
+echo "tail -f /var/log/nginx/access.log | grep 50.253.239.118"
+echo ""
+tail -f /var/log/nginx/access.log | grep 50.253.239.118
+
+;;
+########################################################
+"Grepping Error_Log logs for IP 24")
+echo "tail -f /var/log/nginx/alsco_error.log | grep 50.253.239.118"
+echo ""
+tail -f /var/log/nginx/alsco_error.log | grep 50.253.239.118
+
+;;
 ########################################################
 
 "Quit")
