@@ -55,13 +55,17 @@ clear;while x=0; do clear;date;echo "";echo "[Total Number]";echo "-------------
 "Lock Folder 3")
 echo "chattr -R +i /var/www/html/"
 chattr -R +i /var/www/html/
-
+echo ""
+echo "Checking..."
+lsattr /var/www/html/
 ;;
 ########################################################
 "Unlock Folder 4")
 echo "chattr -R -i /var/www/html/"
 chattr -R -i /var/www/html/
-
+echo ""
+echo "Checking..."
+lsattr /var/www/html/
 ;;
 ########################################################
 "check Lock 5")
