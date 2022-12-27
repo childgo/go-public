@@ -60,7 +60,8 @@ grep -r "UDP6_OUTT =" /etc/csf/csf.conf
 #======================================================================
 
 
-
+systemctl enable csf
+systemctl enable lfd
 service csf start
 service lfd start
 perl /usr/local/csf/bin/csftest.pl
