@@ -61,7 +61,9 @@ grep -r "UDP6_OUTT =" /etc/csf/csf.conf
 
 
 
-
+service csf start
+service lfd start
+perl /usr/local/csf/bin/csftest.pl
 
 
 
