@@ -55,21 +55,21 @@ Size_GeoIP_ISP=$(du -sb $Myfile4_phpPath | awk '{ print $1 }')
 
 
 #Check if GeoLite2_City size less then 90kb
-if (($Size_GeoLite2_City<90000)) ; then
+if(($Size_GeoLite2_City<90000)); then
      echo "${RED}${bold}Error file [GeoLite2_City] is less 90KB${NC}
-      exit N
+     exit
 else
     echo "GeoLite2-City not less 90KB";
- fi
+fi
 
 
 
 
 
 #Check if GeoLite2_ASN size less then 90kb
-if (($Size_GeoLite2_ASN<90000)) ; then
+if(($Size_GeoLite2_ASN<90000)); then
       echo "${RED}${bold}Error file [GeoLite2_ASN] is less 90KB${NC}
-      exit N
+      exit
 else
     echo "GeoLite2-ASN not less 90KB";
 fi
@@ -78,9 +78,9 @@ fi
 
 
 #Check if GeoLite_Country size less then 90kb
-if (($Size_GeoLite_Country<90000)) ; then
+if(($Size_GeoLite_Country<90000)); then
      echo "${RED}${bold}Error file [GeoLite_Country] is less 90KB${NC}
-      exit N
+      exit
 else
     echo "GeoLite2-Country not less 90KB";
 fi
@@ -89,9 +89,9 @@ fi
 
 
 #Check if GeoIP_ISP size less then 90kb
-if (($Size_GeoIP2-ISP<90000)) ; then
+if(($Size_GeoIP2-ISP<90000)); then
      echo "${RED}${bold}Error file [GeoIP2-ISP] is less 90KB${NC}
-     exit N
+      exit
 else
     echo "GeoIP2-ISP not less 90KB";
 fi
