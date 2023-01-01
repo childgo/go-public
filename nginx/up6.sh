@@ -47,7 +47,7 @@ wget https://alscoip.com/ASN-max/DataBase/GeoIP2-ISP.mmdb -O new-GeoIP2-ISP.mmdb
 
 echo "step0"
 
-SIZE_GeoLite2-City=$(du -sb echo $Myfile1_phpPath | awk '{ print $1 }')
+SIZE_GeoLite2-City=$(du -sb /var/www/html/verify/ASN-Maxmind/DataBase/GeoLite2-City.mmdb | awk '{ print $1 }')
 SIZE_GeoLite2-ASN=$(du -sb $Myfile2_phpPath | awk '{ print $1 }')
 SIZE_GeoLite2-Country=$(du -sb $Myfile3_phpPath | awk '{ print $1 }')
 SIZE_GeoIP2-ISP=$(du -sb $Myfile4_phpPath | awk '{ print $1 }')
