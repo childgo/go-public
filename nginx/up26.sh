@@ -57,7 +57,7 @@ Size_GeoIP_ISP=$(wc -c "/var/www/html/verify/ASN-Maxmind/DataBase/new-GeoIP2-ISP
 #Check if GeoLite2_City size less then 90kb
 if(($Size_GeoLite2_City<90000)); then
      echo "${RED}${bold}Error file [new-GeoLite2-City.mmdb] is less 90KB${NC}"
-     #exit
+     exit
 else
     echo "GeoLite2-City not less 90KB";
 fi
@@ -101,7 +101,7 @@ fi
 
 echo ""
 echo ""
-
+#Start Delete Files
 rm $Myfile1_phpPath
 rm $Myfile2_phpPath
 rm $Myfile3_phpPath
