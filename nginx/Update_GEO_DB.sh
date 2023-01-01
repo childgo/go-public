@@ -45,12 +45,63 @@ wget https://alscoip.com/ASN-max/DataBase/GeoIP2-ISP.mmdb -O new-GeoIP2-ISP.mmdb
 
 
 
+#Get Size for each file
+Size_GeoLite2_City=$(wc -c "/var/www/html/verify/ASN-Maxmind/DataBase/new-GeoLite2-City.mmdb" | awk '{print $1}')
+Size_GeoLite2_ASN=$(wc -c "/var/www/html/verify/ASN-Maxmind/DataBase/new-GeoLite2-ASN.mmdb" | awk '{print $1}')
+Size_GeoLite_Country=$(wc -c "/var/www/html/verify/ASN-Maxmind/DataBase/new-GeoLite2-Country.mmdb" | awk '{print $1}')
+Size_GeoIP_ISP=$(wc -c "/var/www/html/verify/ASN-Maxmind/DataBase/new-GeoIP2-ISP.mmdb" | awk '{print $1}')
+
+
+
+
+#Check if GeoLite2_City size less then 90kb
+if(($Size_GeoLite2_City>90000)); then
+    echo "GeoLite2-City not less 90KB";
+else
+    echo "${RED}${bold}Error file [new-GeoLite2-City.mmdb] is less 90KB${NC}"
+    exit
+fi
+
+
+
+
+
+#Check if GeoLite2_ASN size less then 90kb
+if(($Size_GeoLite2_ASN>90000)); then
+    echo "GeoLite2-ASN not less 90KB";
+else
+    echo "${RED}${bold}Error file [new-GeoLite2-ASN.mmdb] is less 90KB${NC}"
+    exit
+fi
+
+
+
+
+#Check if GeoLite_Country size less then 90kb
+if(($Size_GeoLite_Country>90000)); then
+    echo "GeoLite2-Country not less 90KB";
+else
+    echo "${RED}${bold}Error file [new-GeoLite2-Country.mmdb] is less 90KB${NC}"
+    exit
+fi
+
+
+
+
+#Check if GeoIP_ISP size less then 90kb
+if(($Size_GeoIP_ISP>90000)); then
+    echo "GeoIP2-ISP not less 90KB";
+else
+    echo "${RED}${bold}Error file [new-GeoIP2-ISP.mmdb] is less 90KB${NC}"
+    exit
+fi
+
 
 
 
 echo ""
 echo ""
-
+#Start Delete Files
 rm $Myfile1_phpPath
 rm $Myfile2_phpPath
 rm $Myfile3_phpPath
