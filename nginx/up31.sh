@@ -89,7 +89,7 @@ fi
 
 
 #Check if GeoIP_ISP size less then 90kb
-if(($Size_GeoIP2-ISP>90000)); then
+if(($Size_GeoIP_ISP>90000)); then
     echo "GeoIP2-ISP not less 90KB";
 else
     echo "${RED}${bold}Error file [new-GeoIP2-ISP.mmdb] is less 90KB${NC}"
