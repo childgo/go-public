@@ -54,10 +54,10 @@ wget https://alscoip.com/ASN-max/DataBase/GeoIP2-ISP.mmdb -O new-GeoIP2-ISP.mmdb
 
 echo "step0"
 
-SIZE_GeoLite2-City=$(cat $Myfile1_phpPath | wc -c)
-SIZE_GeoLite2-ASN=$(cat $Myfile2_phpPath | wc -c)
-SIZE_GeoLite2-Country=$(cat $Myfile3_phpPath | wc -c)
-SIZE_GeoIP2-ISP=$(cat $Myfile4_phpPath | wc -c)
+SIZE_GeoLite2-City=$(echo  cat $Myfile1_phpPath | wc -c)
+SIZE_GeoLite2-ASN=$(echo  cat $Myfile2_phpPath | wc -c)
+SIZE_GeoLite2-Country=$(echo  cat $Myfile3_phpPath | wc -c)
+SIZE_GeoIP2-ISP=$(echo  cat $Myfile4_phpPath | wc -c)
 
 
 
