@@ -60,7 +60,6 @@ if(($Size_GeoLite2_City>90000)); then
 else
     echo "${RED}${bold}Error file [new-GeoLite2-City.mmdb] is less 90KB${NC}"
     exit
-
 fi
 
 
