@@ -26,7 +26,7 @@ options=(
 "Grepping Access_Log logs for IP 23"
 "Grepping Error_Log logs for IP 24"
 "IP Trace 25"
-
+"Update GEO-IP Database 26"
 
 "Quit")
 
@@ -254,6 +254,11 @@ echo "traceroute -I 185.52.101.72"
 echo ""
 traceroute -I 50.253.239.118
 
+;;
+
+########################################################
+"Update GEO-IP Database 26")
+bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/nginx/Update_GEO_DB.sh)
 ;;
 
 ########################################################
