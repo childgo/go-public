@@ -3,7 +3,7 @@
 clear
 
 #this is nginx package | to install repo
-#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/nginx/alsco_nginx_repo.sh)
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/CentOS%20Repositories/install_centos7_repo.alsco)
 
 
 ALSCO_Path="/etc/yum.repos.d/alsco_CentOS7.repo"
