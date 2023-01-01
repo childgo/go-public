@@ -47,12 +47,12 @@ wget https://alscoip.com/ASN-max/DataBase/GeoIP2-ISP.mmdb -O new-GeoIP2-ISP.mmdb
 
 
 SIZE_GeoLite2-City=$(du -sb $Myfile1_phpPath | awk '{ print $1 }')
-SIZE_GeoLite2-ASN=$(du -sb $Myfile1_phpPath | awk '{ print $1 }')
-SIZE_GeoLite2-Country=$(du -sb $Myfile1_phpPath | awk '{ print $1 }')
-SIZE_GeoIP2-ISP=$(du -sb $Myfile1_phpPath | awk '{ print $1 }')
+SIZE_GeoLite2-ASN=$(du -sb $Myfile2_phpPath | awk '{ print $1 }')
+SIZE_GeoLite2-Country=$(du -sb $Myfile3_phpPath | awk '{ print $1 }')
+SIZE_GeoIP2-ISP=$(du -sb $Myfile4_phpPath | awk '{ print $1 }')
 
 
-
+echo "step1"
 
 #Check if GeoLite2-City size less then 90kb
 if (($SIZE_GeoLite2-City<90000)) ; then
