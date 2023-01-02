@@ -36,10 +36,10 @@ Myfile4_phpPath="/var/www/html/verify/ASN-Maxmind/DataBase/GeoIP2-ISP.mmdb"
 
 
 
-wget https://alscoip.com/ASN-max/DataBase/GeoLite2-City.mmdb -O new-GeoLite2-City.mmdb
-wget https://alscoip.com/ASN-max/DataBase/GeoLite2-ASN.mmdb -O new-GeoLite2-ASN.mmdb
-wget https://alscoip.com/ASN-max/DataBase/GeoLite2-Country.mmdb -O new-GeoLite2-Country.mmdb
-wget https://alscoip.com/ASN-max/DataBase/GeoIP2-ISP.mmdb -O new-GeoIP2-ISP.mmdb
+wget https://alscoip.com/GEO_Maxmind_Database/GeoLite2-City.mmdb -O new-GeoLite2-City.mmdb
+wget https://alscoip.com/GEO_Maxmind_Database/GeoLite2-ASN.mmdb -O new-GeoLite2-ASN.mmdb
+wget https://alscoip.com/GEO_Maxmind_Database/GeoLite2-Country.mmdb -O new-GeoLite2-Country.mmdb
+wget https://alscoip.com/GEO_Maxmind_Database/GeoIP2-ISP.mmdb -O new-GeoIP2-ISP.mmdb
 
 
 
@@ -171,8 +171,8 @@ Myfile2_Nginx="/usr/share/GeoIP/GeoLite2-Country.mmdb"
 
 
 
-wget https://alscoip.com/ASN-max/DataBase/GeoLite2-Country.mmdb -O new-GeoLite2-Country.mmdb
-wget https://alscoip.com/ASN-max/DataBase/GeoLite2-ASN.mmdb -O new-GeoLite2-ASN.mmdb
+wget https://alscoip.com/GEO_Maxmind_Database/GeoLite2-Country.mmdb -O new-GeoLite2-Country.mmdb
+wget https://alscoip.com/GEO_Maxmind_Database/GeoLite2-ASN.mmdb -O new-GeoLite2-ASN.mmdb
 
 
 
