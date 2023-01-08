@@ -151,6 +151,7 @@ libselinux-python
 inotify-tools
 selinux-policy-targeted
 lua-cjson
+libmaxminddb-devel
 
 
 wget
