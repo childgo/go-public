@@ -152,6 +152,7 @@ inotify-tools
 selinux-policy-targeted
 lua-cjson
 libmaxminddb-devel
+jq
 
 
 wget
