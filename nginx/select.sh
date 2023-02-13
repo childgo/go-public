@@ -91,12 +91,16 @@ nginx -t
 "Tail Nginx error Log 9")
 echo "tail -f /var/log/nginx/error.log"
 echo "tail -f /var/log/nginx/alsco_error.log"
-
+echo "tail -f /var/log/nginx/alsco_error.log | grep 50.253.239.118"
+echo ""
 tail -f /var/log/nginx/alsco_error.log
 ;;
 ########################################################
 "Tail Nginx access Log 10")
 echo "tail -f /var/log/nginx/access.log"
+echo "tail -f /var/log/nginx/access.log | grep 50.253.239.118"
+
+echo ""
 
 
 tail -f /var/log/nginx/access.log
