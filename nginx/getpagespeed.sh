@@ -1,10 +1,5 @@
 #!/bin/bash
 
-
-#To Start Download
-#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/nginx/getpagespeed.sh)
-
-
 #yum -y install epel-release nginx createrepo
 #yum-utils moreutils
 #mkdir -p /home/repolin/www/repo/public/{base,centosplus,extras,updates,epel}
@@ -140,12 +135,15 @@ closure-compiler
 cloud-utils-growpart
 mutt
 zip
+libmaxminddb-devel
 
 
 epel-release
 yum-utils
 nano
 createrepo
+htop
+tmpwatch
 e2fsprogs
 libselinux-python
 inotify-tools
@@ -153,7 +151,6 @@ selinux-policy-targeted
 lua-cjson
 libmaxminddb-devel
 jq
-
 
 wget
 perl
@@ -172,7 +169,7 @@ mysql-connector-odbc
 MySQL-python
 httrack
 goaccess
-
+sshpass
 "
 
 
