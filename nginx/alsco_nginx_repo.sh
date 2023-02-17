@@ -4,6 +4,7 @@ clear
 
 #this is nginx package | to install repo
 #bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/nginx/alsco_nginx_repo.sh)
+#yum list available | grep nginx-module
 
 
 ALSCO_Path="/etc/yum.repos.d/alsco.repo"
@@ -25,7 +26,7 @@ fi
 cat <<EOF >>/etc/yum.repos.d/alsco.repo
 [ALSCO]
 name=RHEL Apache
-baseurl=http://repo.alscoip.com/Linux/centos7/repository/
+baseurl=http://repo.alscoip.com/Linux/Nginx/repository/
 enabled=1
 gpgcheck=0
 EOF
