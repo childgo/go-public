@@ -68,6 +68,9 @@ yum clean metadata
 yum clean packages
 
 
+echo "";
+echo "";
+echo "";
 
 cd /etc/yum.repos.d/
 pwd
