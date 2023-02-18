@@ -7,7 +7,7 @@ php -v;sleep 3;
 service php-fpm restart;sleep 3;
 sudo systemctl start php-fpm;sleep 3;
 sudo systemctl enable php-fpm;sleep 3;
-
+yum remove httpd
 
 
 #======================================================================
