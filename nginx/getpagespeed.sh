@@ -135,8 +135,6 @@ closure-compiler
 cloud-utils-growpart
 mutt
 zip
-libmaxminddb-devel
-
 
 epel-release
 yum-utils
