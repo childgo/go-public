@@ -8,25 +8,14 @@ clear
 cd /etc/yum.repos.d/
 pwd
 rm -rf *
-
+echo "Old Rrepository found and deleted";
 ls -al
 #########################################################################################################
 #########################################################################################################
 #Install Centos7 Repo
 ALSCO_Path="/etc/yum.repos.d/alsco_CentOS7.repo"
 
-if [ -f "$ALSCO_Path" ] ; then
-    rm "$ALSCO_Path"
-    echo "Old Rrepository found and deleted";
-    echo""
-fi
-
-
 cat <<EOF >>/etc/yum.repos.d/alsco_CentOS7.repo
-# ALSCO Centos7
-#
-#
-#
 
 [ALSCO-local-base]
 name=CentOS Base
@@ -56,26 +45,8 @@ EOF
 #########################################################################################################
 #########################################################################################################
 
-
-
-
-#########################################################################################################
-#########################################################################################################
 #Install Ngnix Reop
 ALSCO_Path="/etc/yum.repos.d/ALSCO_Nginx.repo"
-
-
-
-
-
-if [ -f "$ALSCO_Path" ] ; then
-    rm "$ALSCO_Path"
-    echo "Old Rrepository found and deleted";
-    echo""
-fi
-
-
-
 
 
 cat <<EOF >>/etc/yum.repos.d/ALSCO_Nginx.repo
