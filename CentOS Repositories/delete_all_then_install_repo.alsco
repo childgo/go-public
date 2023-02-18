@@ -60,9 +60,17 @@ EOF
 #########################################################################################################
 
 
-
+#Some Code
 
 yum clean all
 yum clean headers
 yum clean metadata
 yum clean packages
+
+
+
+cd /etc/yum.repos.d/
+pwd
+rm -rf *
+echo "Old Rrepository found and deleted";
+ls
