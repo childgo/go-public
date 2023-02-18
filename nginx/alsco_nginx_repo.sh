@@ -7,7 +7,7 @@ clear
 #yum list available | grep nginx-module
 
 
-ALSCO_Path="/etc/yum.repos.d/alsco.repo"
+ALSCO_Path="/etc/yum.repos.d/ALSCO_Nginx.repo"
 
 
 
@@ -23,7 +23,7 @@ fi
 
 
 
-cat <<EOF >>/etc/yum.repos.d/alsco.repo
+cat <<EOF >>/etc/yum.repos.d/ALSCO_Nginx.repo
 [ALSCO-Nginx]
 name=RHEL Apache
 baseurl=http://repo.alscoip.com/Linux/Nginx/repository/
