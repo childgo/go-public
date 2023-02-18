@@ -71,6 +71,5 @@ yum clean packages
 
 cd /etc/yum.repos.d/
 pwd
-rm -rf *
-echo "Old Rrepository found and deleted";
+echo "List ALL";
 ls
