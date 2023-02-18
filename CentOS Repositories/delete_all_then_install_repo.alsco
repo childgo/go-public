@@ -85,3 +85,13 @@ baseurl=http://repo.alscoip.com/Linux/Nginx/repository/
 enabled=1
 gpgcheck=0
 EOF
+#########################################################################################################
+#########################################################################################################
+
+
+
+
+yum clean all
+yum clean headers
+yum clean metadata
+yum clean packages
