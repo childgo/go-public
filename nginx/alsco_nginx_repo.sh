@@ -24,7 +24,7 @@ fi
 
 
 cat <<EOF >>/etc/yum.repos.d/alsco.repo
-[ALSCO]
+[ALSCO-Nginx]
 name=RHEL Apache
 baseurl=http://repo.alscoip.com/Linux/Nginx/repository/
 enabled=1
