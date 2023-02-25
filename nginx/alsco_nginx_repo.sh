@@ -26,7 +26,7 @@ fi
 cat <<EOF >>/etc/yum.repos.d/ALSCO_Nginx.repo
 [ALSCO-Nginx]
 name=RHEL Apache
-baseurl=http://repo.alscoip.com/Linux/Nginx/repository/
+baseurl=http://repo.alscoip.com/Linux/Nginx_Cenotos7/
 enabled=1
 gpgcheck=0
 EOF
