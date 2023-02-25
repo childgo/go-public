@@ -2,14 +2,11 @@
 
 #yum -y install epel-release nginx createrepo
 #yum-utils moreutils
-#mkdir -p /home/repolin/www/repo/public/{base,centosplus,extras,updates,epel}
-
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/nginx/getpagespeed.sh)
 
 ##specify all local repositories in a single variable
 
-#LOCAL_REPOS="nginx-module-geoip getpagespeed-extras"
-
-LOCAL_REPOS="
+LOCAL_REPOS_Nginx="
 nginx
 nginx-all-modules
 nginx-owasp-crs
@@ -100,7 +97,6 @@ nginx-module-statsd
 nginx-module-sticky
 nginx-module-stream-lua	
 nginx-module-stream-upsync
-nginx-module-substitutions
 nginx-module-sysguard
 nginx-module-testcookie
 nginx-module-traffic-accounting
@@ -117,8 +113,12 @@ nginx-module-zip
 nginx-cloudflare-ips-v4
 nginx-cloudflare-ips-v6
 nginx-module-vod
+"
 
 
+
+
+LOCAL_REPOS_Tools="
 mysqltuner-cron
 mysqltuner
 ngxtop
@@ -137,7 +137,6 @@ closure-compiler
 cloud-utils-growpart
 mutt
 zip
-
 epel-release
 yum-utils
 nano
@@ -151,7 +150,6 @@ selinux-policy-targeted
 lua-cjson
 libmaxminddb-devel
 jq
-
 wget
 perl
 ipset
@@ -172,13 +170,19 @@ goaccess
 sshpass
 "
 
-
-
-
+#==============================================
 ##a loop to update repos one at a time
-for REPO in ${LOCAL_REPOS}; do
-
-repotrack -a x86_64 -p /home/final/Linux/cento7/$REPO $REPO
-
-
+for REPO in ${LOCAL_REPOS_Nginx}; do
+repotrack -a x86_64 -p /home/final/Linux/cento7/Nginx/$REPO $REPO
 done
+#==============================================
+
+
+
+
+#==============================================
+##a loop to update repos one at a time
+for REPO in ${LOCAL_REPOS_Tools}; do
+repotrack -a x86_64 -p /home/final/Linux/cento7/Tools/$REPO $REPO
+done
+#==============================================
