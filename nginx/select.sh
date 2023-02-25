@@ -161,11 +161,28 @@ echo "Done"
 echo "nginx -v"
 nginx -v
 echo ""
+echo "=======================e"
 echo "nginx -V"
 nginx -V
 printf '\n\n\n'
+
+echo "=======================e"
+echo "Below is Available Nginx Module"
+echo "yum list available | grep nginx-module"
+yum list available | grep nginx-module
+echo "=======================e"
+
+printf '\n\n\n'
+echo "=======================e"
+echo "Below is Installed Nginx Module"
 echo "yum list installed | grep nginx"
 yum list installed | grep nginx
+echo "=======================e"
+
+printf '\n\n\n'
+
+
+
 
 ;;
 ########################################################
