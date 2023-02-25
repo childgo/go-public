@@ -163,6 +163,10 @@ nginx -v
 echo ""
 echo "nginx -V"
 nginx -V
+printf '\n\n\n'
+echo "yum list installed | grep nginx"
+yum list installed | grep nginx
+
 ;;
 ########################################################
 "Check ALSCO IP Firewall Setting 18")
