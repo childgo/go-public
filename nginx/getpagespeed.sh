@@ -22,6 +22,7 @@ nginx-module-accept-language
 nginx-module-ajp
 nginx-module-array-var
 nginx-module-auth-ldap
+nginx-module-json-var
 nginx-module-auth-pam
 nginx-module-aws-auth
 nginx-module-bot-verifier
