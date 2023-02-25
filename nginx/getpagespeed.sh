@@ -45,6 +45,7 @@ nginx-module-fancyindex
 nginx-module-fips-check
 nginx-module-flv
 nginx-module-form-input
+nginx-module-substitutions
 nginx-module-geoip
 nginx-module-geoip2
 nginx-module-google
