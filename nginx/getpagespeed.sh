@@ -168,6 +168,7 @@ MySQL-python
 httrack
 goaccess
 sshpass
+sysbench
 "
 
 #==============================================
