@@ -171,8 +171,11 @@ MySQL-python
 httrack
 goaccess
 iftop
+iptraf
 sshpass
 sysbench
+tcptrack
+iptraf
 xmail
 "
 
