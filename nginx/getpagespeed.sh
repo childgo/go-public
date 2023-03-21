@@ -141,6 +141,7 @@ mutt
 zip
 epel-release
 yum-utils
+yum install nload
 nano
 createrepo
 htop
@@ -169,8 +170,10 @@ mysql-connector-odbc
 MySQL-python
 httrack
 goaccess
+iftop
 sshpass
 sysbench
+xmail
 "
 
 #==============================================
