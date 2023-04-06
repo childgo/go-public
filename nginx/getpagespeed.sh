@@ -177,6 +177,7 @@ sysbench
 tcptrack
 iptraf
 xmail
+imapsync
 "
 
 #==============================================
