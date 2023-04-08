@@ -26,7 +26,8 @@ options=(
 "Grepping Access_Log logs for IP 23"
 "Grepping Error_Log logs for IP 24"
 "IP Trace 25"
-"Update GEO-IP Database 26"
+"Broadcasting server IP 26"
+"Update GEO-IP Database 27"
 
 "Quit")
 
@@ -143,9 +144,6 @@ pgrep -x "inotify.alsco"
 ########################################################
 "Enable SELinux + PHP + Apache to write/access php file 16")
 #echo ". /alscospider/setting-conf.alsco"
-#. /alscospider/setting-conf.alsco
-#echo ". /alscospider/setting-conf.alsco"
-
 
 #Enable Write On conf.d files
 sudo chcon -t httpd_sys_rw_content_t /etc/nginx/conf.d/alsco_data_cookie_and_ip/ -R
@@ -153,6 +151,7 @@ chown apache $(find /etc/nginx/conf.d/alsco_data_cookie_and_ip/ -type f  -name '
 chown apache $(find /etc/nginx/conf.d/alsco_data_cookie_and_ip/ -type f  -name '*.ip.alsco')
 chown apache $(find /etc/nginx/conf.d/alsco_data_cookie_and_ip/ -type f  -name '*.ipsetting.alsco')
 chown apache $(find /etc/nginx/conf.d/alsco_data_cookie_and_ip/ -type f  -name '*.ratelimit_tempIP_block.alsco')
+echo "Finish Write On conf.d"
 echo "Done"
 
 ;;
@@ -282,12 +281,14 @@ echo ""
 traceroute -I 50.253.239.118
 
 ;;
-
 ########################################################
-"Update GEO-IP Database 26")
+"Broadcasting server IP 26")
+curl https://cpanel.net/showip.shtml
+;;
+########################################################
+"Update GEO-IP Database 27")
 bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/nginx/Update_GEO_DB.sh)
 ;;
-
 ########################################################
 
 "Quit")
