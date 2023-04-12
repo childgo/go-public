@@ -28,6 +28,7 @@ options=(
 "IP Trace 25"
 "Broadcasting server IP 26"
 "Update GEO-IP Database 27"
+"ALSCO Centos7 Repository 28"
 
 "Quit")
 
@@ -288,6 +289,16 @@ curl https://cpanel.net/showip.shtml
 ########################################################
 "Update GEO-IP Database 27")
 bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/nginx/Update_GEO_DB.sh)
+;;
+########################################################
+"ALSCO Centos7 Repository 28")
+yum clean all
+yum clean headers
+yum clean metadata
+yum clean packages
+
+bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/CentOS%20Repositories/delete_all_then_install_repo.alsco)
+
 ;;
 ########################################################
 
