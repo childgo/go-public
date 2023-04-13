@@ -12,10 +12,10 @@ yum install jq libmaxminddb-devel;sleep 2;
 cd /usr/share/GeoIP/
 pwd
 
-#wget https://alscoip.com/GEO_Maxmind_Database/GeoLite2-City.mmdb -O GeoLite2-City.mmdb
-#wget https://alscoip.com/GEO_Maxmind_Database/GeoLite2-ASN.mmdb -O GeoLite2-ASN.mmdb
-#wget https://alscoip.com/GEO_Maxmind_Database/GeoLite2-Country.mmdb -O GeoLite2-Country.mmdb
-#wget https://alscoip.com/GEO_Maxmind_Database/GeoIP2-ISP.mmdb -O GeoIP2-ISP.mmdb
+wget https://alscoip.com/GEO_Maxmind_Database/GeoLite2-City.mmdb -O GeoLite2-City.mmdb
+wget https://alscoip.com/GEO_Maxmind_Database/GeoLite2-ASN.mmdb -O GeoLite2-ASN.mmdb
+wget https://alscoip.com/GEO_Maxmind_Database/GeoLite2-Country.mmdb -O GeoLite2-Country.mmdb
+wget https://alscoip.com/GEO_Maxmind_Database/GeoIP2-ISP.mmdb -O GeoIP2-ISP.mmdb
 
 
 sleep 2;
