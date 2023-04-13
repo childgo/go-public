@@ -32,6 +32,14 @@ systemctl restart nginx
 
 
 sleep 2;
+echo "==================================="
+echo ""
+echo "Check mmdblookup Command...."
+echo ""
+echo ""
+
+
+
 #Checking
 mmdblookup --file /usr/share/GeoIP/GeoLite2-City.mmdb --ip 66.111.53.5 country names en |awk -F'"' '{print $2}' | tr '\n' ' '
 mmdblookup --file /usr/share/GeoIP/GeoLite2-ASN.mmdb --ip 66.111.53.5 | sed -e ':a;N;$!ba;s/\n/ /g' |sed -e 's/ <[a-z0-9_]\+>/,/g' |sed -e 's/,\s\+}/}/g' | jq '(.autonomous_system_number)'
