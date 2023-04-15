@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #yum -y install epel-release createrepo yum-utils
-#bash <(https://raw.githubusercontent.com/childgo/go-public/master/nginx/sync_mirror_centos7.sh)
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/nginx/sync_mirror_centos7.sh)
 
 
 
