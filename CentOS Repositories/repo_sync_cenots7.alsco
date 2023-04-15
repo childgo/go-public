@@ -7,7 +7,7 @@
 
 ##specify all local repositories in a single variable
 
-LOCAL_REPOS="base extras updates epel centosplus"
+LOCAL_REPOS="base extras updates centosplus"
 
 ALSCO_Path='/home/repolin/public_html/Linux/centos7-mirror/'
 
