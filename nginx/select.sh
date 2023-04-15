@@ -181,6 +181,22 @@ echo "======================="
 
 printf '\n\n\n'
 
+
+
+
+printf '\n\n\n'
+echo "======================="
+echo "Below is libmodsecurity Vertion"
+echo "yum info libmodsecurity"
+yum info libmodsecurity
+echo "======================="
+
+printf '\n\n\n'
+
+
+
+
+
 echo "======================="
 echo "nginx -v | Get Nginx Vertion"
 nginx -v
