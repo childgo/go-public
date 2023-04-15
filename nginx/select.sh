@@ -28,7 +28,7 @@ options=(
 "IP Trace 25"
 "Broadcasting server IP 26"
 "Update GEO-IP Database 27"
-"ALSCO Centos7 Repository 28"
+"ALSCO Centos7 Repository Build 28"
 
 "Quit")
 
@@ -396,7 +396,7 @@ echo ""
 ;;
 ################################################################################################################
 ################################################################################################################
-"ALSCO Centos7 Repository 28")
+"ALSCO Centos7 Repository Build 28")
 yum clean all
 yum clean headers
 yum clean metadata
