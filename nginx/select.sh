@@ -416,22 +416,22 @@ ALSCO_Path="/etc/yum.repos.d/alsco_CentOS7.repo"
 cat <<EOF >>/etc/yum.repos.d/alsco_CentOS7.repo
 [ALSCO-local-base]
 name=CentOS Base
-baseurl=https://repo.alscoip.com/Linux/centos7-mirror/base/
+baseurl=https://repo.alscoip.com/Linux/Centos7-Sync/base/
 gpgcheck=0
 enabled=1
 [ALSCO-local-centosplus]
 name=CentOS CentOSPlus
-baseurl=https:/repo.alscoip.com/Linux/centos7-mirror/centosplus/
+baseurl=https:/repo.alscoip.com/Linux/Centos7-Sync/centosplus/
 gpgcheck=0
 enabled=0
 [ALSCO-local-extras]
 name=CentOS Extras
-baseurl=https://repo.alscoip.com/Linux/centos7-mirror/extras/
+baseurl=https://repo.alscoip.com/Linux/Centos7-Sync/extras/
 gpgcheck=0
 enabled=1
 [ALSCO-local-updates]
 name=CentOS Updates
-baseurl=https://repo.alscoip.com/Linux/centos7-mirror/updates/
+baseurl=https://repo.alscoip.com/Linux/Centos7-Sync/updates/
 gpgcheck=0
 enabled=1
 EOF
