@@ -3,7 +3,7 @@
 #yum -y install epel-release nginx createrepo
 #yum-utils moreutils
 #bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/nginx/getpagespeed.sh)
-#rsync -avz  --delete --progress -e "ssh -p 1215" /home/final/Linux/cento7/ root@66.111.53.111:/home/repolin/public_html/Linux/Nginx_Centos7/
+#rsync -avz  --delete --progress -e "ssh -p 111" /home/final/Linux/cento7/ root@50.50.50.50:/home/repolin/public_html/Linux/Nginx_Centos7/
 
 ##specify all local repositories in a single variable
 
