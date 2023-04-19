@@ -45,7 +45,7 @@ case $opt in
 "Total IP connected to Server 1")
 #clear;while x=0; do clear;date;echo "";echo "   [Total Number]";echo "-------------------";echo Port[80]; netstat -plan | grep :80 | wc -l;  echo Port[443]; netstat -plan | grep :443 | wc -l;echo Port[3306]; netstat -plan | grep :3306 | wc -l; sleep 5;done ;;
 
-clear;while x=0; do clear;date;echo "";echo "   [Total Number]";echo "-------------------";echo Port[80]; netstat -plan | grep :80 | wc -l;  echo Port[443]; netstat -plan | grep :443 | wc -l;echo Port[3306]; netstat -plan | grep :3306 | wc -l;;echo Port[2096]; netstat -plan | grep :2096 | wc -l;echo Port[2095]; netstat -plan | grep :2095 | wc -l;echo Port[2086]; netstat -plan | grep :2086 | wc -l;echo Port[2087]; netstat -plan | grep :2087 | wc -l; sleep 5;done ;;
+clear;while x=0; do clear;date;echo "";echo "   [Total Number]";echo "-------------------";echo Port[80]; netstat -plan | grep :80 | wc -l;  echo Port[443]; netstat -plan | grep :443 | wc -l; echo Port[3306]; netstat -plan | grep :3306 | wc -l;echo Port[2096]; netstat -plan | grep :2096 | wc -l;echo Port[2095]; netstat -plan | grep :2095 | wc -l;echo Port[2086]; netstat -plan | grep :2086 | wc -l;echo Port[2087]; netstat -plan | grep :2087 | wc -l; sleep 5;done ;;
 ########################################################
 
 "List of IP connected to Server 2")
