@@ -1,13 +1,51 @@
 clear
 PS3='Please enter your choice: '
-options=("Total IP connected to Server 1" "List of IP connected to Server 2" "Number of IP per Domain 3" "Clear mod_security Database 4" "Rebuild httpd conf and Restart Httpd 5" "Number of IP per Domain 6" "Clear All Domains Log And Fix Disk Space Quota 7" "Full Backup Immediately 8" "Clear All Mail In Queue 9" "Update cPanel License 10" "Report How Many Emails Sent From Server 11" "check_cpanel_rpms Script 12" "Repair all MySql 13" "analyze all MySql 14" "optimize all MySql 15" "Remove all Block ip in CSF 16" "Restart MySQL 17" "Restart SMTP 18" "Restart IMAP/POP3 19" "Restart DNS 20" "Clear all error log 21" "display all files and folders sorted by MegaBytes 22" "find files in the "home" directory that are 500000k or larger 23" "server disk space 24" "Broadcasting server IP 25" "cPanel fix quotas 26" "Rebuild and reload DNS Zone 27" "Create Email 28" "delete Email  29" "view cronjob 30" "Apache graceful restart 31" "empty alscogatewaytmp 32" "Fix Quotas 33" "Change Email Password 34" "Find cPanel User for Domain 35" "Option 36" "Quit")
+options=("Total IP connected to Server 1"
+"List of IP connected to Server 2"
+"Number of IP per Domain 3"
+"Clear mod_security Database 4"
+"Rebuild httpd conf and Restart Httpd 5"
+"Number of IP per Domain 6"
+"Clear All Domains Log And Fix Disk Space Quota 7"
+"Full Backup Immediately 8"
+"Clear All Mail In Queue 9"
+"Update cPanel License 10"
+"Report How Many Emails Sent From Server 11"
+"check_cpanel_rpms Script 12"
+"Repair all MySql 13"
+"analyze all MySql 14"
+"optimize all MySql 15"
+"Remove all Block ip in CSF 16"
+"Restart MySQL 17"
+"Restart SMTP 18"
+"Restart IMAP/POP3 19"
+"Restart DNS 20"
+"Clear all error log 21"
+"display all files and folders sorted by MegaBytes 22"
+"find files in the "home" directory that are 500000k or larger 23"
+"server disk space 24"
+"Broadcasting server IP 25"
+"cPanel fix quotas 26"
+"Rebuild and reload DNS Zone 27"
+"Create Email 28"
+"delete Email  29"
+"view cronjob 30"
+"Apache graceful restart 31"
+"empty alscogatewaytmp 32"
+"Fix Quotas 33"
+"Change Email Password 34"
+"Find cPanel User for Domain 35"
+"Option 36"
+"Quit")
 select opt in "${options[@]}"
 do
 case $opt in
 
 ########################################################
 "Total IP connected to Server 1")
-clear;while x=0; do clear;date;echo "";echo "   [Total Number]";echo "-------------------";echo Port[80]; netstat -plan | grep :80 | wc -l;  echo Port[443]; netstat -plan | grep :443 | wc -l;echo Port[3306]; netstat -plan | grep :3306 | wc -l; sleep 5;done ;;
+#clear;while x=0; do clear;date;echo "";echo "   [Total Number]";echo "-------------------";echo Port[80]; netstat -plan | grep :80 | wc -l;  echo Port[443]; netstat -plan | grep :443 | wc -l;echo Port[3306]; netstat -plan | grep :3306 | wc -l; sleep 5;done ;;
+
+clear;while x=0; do clear;date;echo "";echo "   [Total Number]";echo "-------------------";echo Port[80]; netstat -plan | grep :80 | wc -l;  echo Port[443]; netstat -plan | grep :443 | wc -l;echo Port[3306]; netstat -plan | grep :3306 | wc -l;;echo Port[2096]; netstat -plan | grep :2096 | wc -l;echo Port[2095]; netstat -plan | grep :2095 | wc -l;echo Port[2086]; netstat -plan | grep :2086 | wc -l;echo Port[2087]; netstat -plan | grep :2087 | wc -l; sleep 5;done ;;
 ########################################################
 
 "List of IP connected to Server 2")
