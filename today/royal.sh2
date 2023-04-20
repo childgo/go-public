@@ -144,11 +144,12 @@ uapi --user=$USR Mysql set_privileges_on_database user=$DB_USER_ROYAL database=$
 
 
 echo '<?php
-$host = "localhost"; 
-$dbname_royala = "'$DB_NAME_ROYAL'";  
-$user_royalb = "'$DB_USER_ROYAL'"; 
-$password_royalc = "'$DB_PASS_ROYAL'";   
+$host_aa = "localhost"; 
+$dbname_bb  = "'$DB_NAME_ROYAL'";  
+$user_cc = "'$DB_USER_ROYAL'"; 
+$password_dd = "'$DB_PASS_ROYAL'";   
 ?>'>/home/$USR/public_html/config/db.php
+
 
 
 #============================================================================
