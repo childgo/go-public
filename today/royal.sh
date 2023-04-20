@@ -95,7 +95,7 @@ whmapi1 php_set_vhost_versions version=ea-php74 vhost=$DOM
 #Start Copy Files
 #============================================================================
 ROYAL_ORIGINAL_Files="royal"
-ROYAL_ORIGINAL_DataBase="royal_db"
+ROYAL_ORIGINAL_DataBase="royal_royal_db"
 
 
 
@@ -144,11 +144,12 @@ uapi --user=$USR Mysql set_privileges_on_database user=$DB_USER_ROYAL database=$
 
 
 echo '<?php
-$host = "localhost"; 
-$dbname_royala = "'$DB_NAME_ROYAL'";  
-$user_royalb = "'$DB_USER_ROYAL'"; 
-$password_royalc = "'$DB_PASS_ROYAL'";   
+$host_aa = "localhost"; 
+$dbname_bb  = "'$DB_NAME_ROYAL'";  
+$user_cc = "'$DB_USER_ROYAL'"; 
+$password_dd = "'$DB_PASS_ROYAL'";   
 ?>'>/home/$USR/public_html/config/db.php
+
 
 
 #============================================================================
@@ -175,13 +176,13 @@ mysql -p$DB_PASS_ROYAL -u $DB_USER_ROYAL $DB_NAME_ROYAL < /alscospider/today/roy
 
 
 #Insert Arabic Info
-mysql -u $DB_USER_ROYAL -p$DB_PASS_ROYAL $DB_NAME_ROYAL -e "INSERT INTO account (name, level, email, phone, username, password, program, language) VALUES ('name_ar', 'client', 'info@gmail.com', '96411111111','$final_royal_arabic_user', '$final_royal_arabic_password','$royal_program_list','ar')";
+mysql -u $DB_USER_ROYAL -p$DB_PASS_ROYAL $DB_NAME_ROYAL -e "INSERT INTO account (name, level, phone, username, password, program, language) VALUES ('name_ar', 'client', '96411111111','$final_royal_arabic_user', '$final_royal_arabic_password','$royal_program_list','ar')";
 
 #Insert English Info
-mysql -u $DB_USER_ROYAL -p$DB_PASS_ROYAL $DB_NAME_ROYAL -e "INSERT INTO account (name, level, email, phone, username, password, program, language) VALUES ('name_en', 'client', 'info@gmail.com', '96411111111','$final_royal_english_user', '$final_royal_english_password','$royal_program_list','en')";
+mysql -u $DB_USER_ROYAL -p$DB_PASS_ROYAL $DB_NAME_ROYAL -e "INSERT INTO account (name, level, phone, username, password, program, language) VALUES ('name_en', 'client', '96411111111','$final_royal_english_user', '$final_royal_english_password','$royal_program_list','en')";
 
 #Insert French Info
-mysql -u $DB_USER_ROYAL -p$DB_PASS_ROYAL $DB_NAME_ROYAL -e "INSERT INTO account (name, level, email, phone, username, password, program, language) VALUES ('name_fr', 'client', 'info@gmail.com', '96411111111','$final_royal_french_user', '$final_royal_french_password','$royal_program_list','fr')";
+mysql -u $DB_USER_ROYAL -p$DB_PASS_ROYAL $DB_NAME_ROYAL -e "INSERT INTO account (name, level, phone, username, password, program, language) VALUES ('name_fr', 'client',  '96411111111','$final_royal_french_user', '$final_royal_french_password','$royal_program_list','fr')";
 
 
 
