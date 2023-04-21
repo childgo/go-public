@@ -499,10 +499,9 @@ done
 for ipv6 in $IPv6; do
   echo "tcp|in|d=80|s=$ipv6"
 done
+echo "#==End IP4=================="
 
 
-
-echo "#===================="
 echo "##cloudflare HTTPS/Port443"
 #Loop through the IP4/Port443
 for ip in $IPs4; do
@@ -514,7 +513,7 @@ done
 for ipv6 in $IPv6; do
   echo "tcp|in|d=443|s=$ipv6"
 done
-echo "#============================"
+echo "#==End IP6=========================="
 
 
 echo -e "\n\n\n"
