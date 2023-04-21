@@ -29,6 +29,7 @@ options=(
 "Broadcasting server IP 26"
 "Update GEO-IP Database 27"
 "ALSCO Centos7 Repository Build 28"
+"Generate Cloudflare IP List for CSF 29"
 
 "Quit")
 
@@ -477,6 +478,68 @@ ls
 
 ;;
 ########################################################
+########################################################
+
+"Generate Cloudflare IP List for CSF 29")
+clear
+# Retrieve the IP addresses from the URL
+IPs4=$(curl -s https://www.cloudflare.com/ips-v4)
+IPv6=$(curl -s https://www.cloudflare.com/ips-v6)
+
+
+echo "#============================"
+echo "#cloudflare HTTP/Port80"
+#Loop through the IP4/Port80
+for ip in $IPs4; do
+  echo "tcp|in|d=80|s=$ip"
+done
+
+
+#Loop through the IP6/Port80
+for ipv6 in $IPv6; do
+  echo "tcp|in|d=80|s=$ipv6"
+done
+
+
+
+echo "#===================="
+echo "##cloudflare HTTPS/Port443"
+#Loop through the IP4/Port443
+for ip in $IPs4; do
+  echo "tcp|in|d=443|s=$ip"
+done
+
+
+#Loop through the IP6/Port443
+for ipv6 in $IPv6; do
+  echo "tcp|in|d=443|s=$ipv6"
+done
+echo "#============================"
+
+
+echo -e "\n\n\n"
+
+echo "#This is for Nginx"
+echo "#============================"
+echo "# - IPv4"
+
+#Loop through the IPv4
+for ip in $IPs4; do
+  echo "set_real_ip_from $ip;"
+done
+
+
+echo "# - IPv6"
+# Loop through the IPv6
+for ip in $IPv6; do
+  echo "set_real_ip_from $ip;"
+done
+
+echo "real_ip_header     CF-Connecting-IP;"
+echo "#===End========================="
+;;
+################################################################################################################
+
 
 "Quit")
 break
