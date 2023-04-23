@@ -183,16 +183,14 @@ printf '\n\n\n'
 printf '\n\n\n'
 printf '\n\n\n'
 
-printf '\n\n\n'
+
 echo "======================="
 echo "Below is nginx-module-geoip"
 echo "yum info nginx-module-geoip"
 yum info nginx-module-geoip
 echo "======================="
 
-printf '\n\n\n'
-printf '\n\n\n'
-printf '\n\n\n'
+
 
 printf '\n\n\n'
 echo "======================="
@@ -200,11 +198,6 @@ echo "Below is nginx-module-geoip2"
 echo "yum info nginx-module-geoip2"
 yum info nginx-module-geoip2
 echo "======================="
-
-printf '\n\n\n'
-printf '\n\n\n'
-printf '\n\n\n'
-
 
 printf '\n\n\n'
 echo "======================="
@@ -215,7 +208,6 @@ echo "======================="
 
 
 printf '\n\n\n'
-printf '\n\n\n'
 echo "======================="
 echo "Below nginx-owasp-crs Vertion"
 echo "yum info nginx-owasp-crsy"
@@ -225,19 +217,22 @@ echo "======================="
 
 
 printf '\n\n\n'
-printf '\n\n\n'
-printf '\n\n\n'
 echo "======================="
 echo "Below is libmodsecurity Vertion"
 echo "yum info libmodsecurity"
 yum info libmodsecurity
 echo "======================="
 
+
+
+printf '\n\n\n'
+echo "======================="
+echo "Below is Nginx Vertion"
+echo "yum info nginx"
+yum info nginx
+echo "======================="
 printf '\n\n\n'
 printf '\n\n\n'
-
-
-
 
 
 echo "======================="
