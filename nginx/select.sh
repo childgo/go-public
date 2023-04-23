@@ -162,83 +162,83 @@ echo "Done"
 echo "nginx -v"
 nginx -v
 echo ""
-echo "======================="
+echo "============================================="
 echo "nginx -V"
 nginx -V
 printf '\n\n\n'
 
-echo "======================="
+echo "============================================="
 echo "Below is Available Nginx Module"
 echo "yum list available | grep nginx-module"
 yum list available | grep nginx-module
-echo "=======================e"
+echo "============================================="
 
 printf '\n\n\n'
-echo "======================="
+echo "============================================="
 echo "Below is Installed Nginx Module"
 echo "yum list installed | grep nginx"
 yum list installed | grep nginx
-echo "======================="
+echo "============================================="
 printf '\n\n\n'
 printf '\n\n\n'
 printf '\n\n\n'
 
 
-echo "======================="
+echo "============================================="
 echo "Below is nginx-module-geoip"
 echo "yum info nginx-module-geoip"
 yum info nginx-module-geoip
-echo "======================="
+echo "============================================="
 
 
 
 printf '\n\n\n'
-echo "======================="
+echo "============================================="
 echo "Below is nginx-module-geoip2"
 echo "yum info nginx-module-geoip2"
 yum info nginx-module-geoip2
-echo "======================="
+echo "============================================="
 
 printf '\n\n\n'
-echo "======================="
+echo "============================================="
 echo "Below is Nginx-module-security Vertion"
 echo "yum info nginx-module-security"
 yum info nginx-module-security
-echo "======================="
+echo "============================================="
 
 
 printf '\n\n\n'
-echo "======================="
+echo "============================================="
 echo "Below nginx-owasp-crs Vertion"
 echo "yum info nginx-owasp-crsy"
 yum info nginx-owasp-crs
-echo "======================="
+echo "============================================="
 
 
 
 printf '\n\n\n'
-echo "======================="
+echo "============================================="
 echo "Below is libmodsecurity Vertion"
 echo "yum info libmodsecurity"
 yum info libmodsecurity
-echo "======================="
+echo "============================================="
 
 
 
 printf '\n\n\n'
-echo "======================="
+echo "============================================="
 echo "Below is Nginx Vertion"
 echo "yum info nginx"
 yum info nginx
-echo "======================="
+echo "============================================="
 printf '\n\n\n'
 printf '\n\n\n'
 
 
-echo "======================="
+echo "============================================="
 echo "nginx -v | Get Nginx Vertion"
 nginx -v
-echo "======================="
+echo "============================================="
 
 ;;
 ########################################################
