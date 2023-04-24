@@ -115,6 +115,7 @@ nginx-cloudflare-ips-v4
 nginx-cloudflare-ips-v6
 nginx-module-vod
 nginx-mod-module-proxy-connect
+syslog-ng
 
 "
 
