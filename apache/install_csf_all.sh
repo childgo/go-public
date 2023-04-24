@@ -1,6 +1,14 @@
 
-
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/apache/install_csf_all.sh)
 clear
+
+#Install ALL
+#[ConfigServer Security and Firewall]
+#Installtion [ConfigServer Explorer]
+#Installtion [ConfigServer Mail Manage]
+#Installtion [ConfigServer Mail Manage]
+
+
 
 
 
