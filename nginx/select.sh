@@ -296,7 +296,7 @@ grep --color=always -r "limiting requests" /var/log/nginx/error.log
 
 "clear the contents of ratelimit_tempIP_block 21")
 clear
-cat /etc/nginx/conf.d/alsco_data_cookie_and_ip/ALSCO-Setting/.ratelimit_tempIP_block.alsc
+cat /etc/nginx/conf.d/alsco_data_cookie_and_ip/ALSCO-Setting/.ratelimit_tempIP_block.alsco
 echo""
 echo "truncate -s 0 /etc/nginx/conf.d/alsco_data_cookie_and_ip/ALSCO-Setting/.ratelimit_tempIP_block.alsco"
 truncate -s 0 /etc/nginx/conf.d/alsco_data_cookie_and_ip/ALSCO-Setting/.ratelimit_tempIP_block.alsco
