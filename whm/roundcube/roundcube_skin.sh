@@ -2,6 +2,9 @@
 clear
 
 
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/whm/roundcube/roundcube_skin.sh)
+
+
 #=======================Start edit config.inc.php=======================#
 # define the file path
 filepath="/usr/local/cpanel/base/3rdparty/roundcube/config/config.inc.php"
