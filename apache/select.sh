@@ -5,7 +5,7 @@ options=("Total IP connected to Server 1"
 "Number of IP per Domain 3"
 "Clear mod_security Database 4"
 "Rebuild httpd conf and Restart Httpd 5"
-"Number of IP per Domain 6"
+"Monitor Webmail 2096 Port and Load 6""
 "Clear All Domains Log And Fix Disk Space Quota 7"
 "Full Backup Immediately 8"
 "Clear All Mail In Queue 9"
@@ -75,15 +75,23 @@ find /var/log/apache2/modsec_audit/ | wc -l
 /scripts/restartsrv_httpd
 ;;
 ########################################################
-"Number of IP per Domain 6")
-echo "please Type the domain name,followed by [ENTER]:"
-read usrdom
-USRDOMn="$usrdom"
+"Monitor Webmail 2096 Port and Load 6")
 
-echo "please Type the User for the domain,followed by [ENTER]:"
-read usrdomw
-USRDOMnw="$usrdomw"
-watch "tail -n 500  /home/$USRDOMnw/access-logs/$USRDOMn | cut -d' ' -f1 | sort | uniq -c | sort -gr"
+while true; do
+    echo "[Port: 2096]"
+    ss -ant '( sport = :2096 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn
+    
+    echo "[Port: 2095]"
+    ss -ant '( sport = :2095 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn
+    
+    echo "System Load Averages:"
+    uptime | awk '{print "1-minute load average: "$10"\n5-minute load average: "$11"\n15-minute load average: "$12}'
+    sleep 5
+    clear
+done
+
+
+
 ;;
 ########################################################
 "Clear All Domains Log And Fix Disk Space Quota 7")
