@@ -86,13 +86,30 @@ while true; do
     uptime | awk '{print "1-minute load average: "$10"\n5-minute load average: "$11"\n15-minute load average: "$12}'
     
     echo ""
-    echo "[Port: 2096]"
+    echo "[WebMail Port: 2096]"
     ss -ant '( sport = :2096 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn
     echo ""
-
     
-    echo "[Port: 2095]"
+    echo "[Webmail Port: 2095]"
     ss -ant '( sport = :2095 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn
+    echo ""
+    
+    echo "[IMAP Port: 993]"
+    ss -ant '( sport = :993 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn
+    echo ""
+    
+    echo "[POP3 Port: 995]"
+    ss -ant '( sport = :995 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn
+    echo ""
+    
+    echo "[SMTP Port: 465]"
+    ss -ant '( sport = :465 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn
+    echo ""
+    
+    echo "[SMTP Port: 25]"
+    ss -ant '( sport = :25 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn
+    echo ""
+    
     
     sleep 5
     clear
