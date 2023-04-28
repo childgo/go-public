@@ -16,6 +16,7 @@ chattr +i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/images/seal.pn
 chattr +i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/images/logo.svg
 chattr +i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/templates/includes/footer.html
 chattr +i /usr/local/cpanel/base/frontend/jupiter/images/roundcube.png
+echo "The unlocking of files is complete...."
 #End Unlocking Files
 #######################################################
 
