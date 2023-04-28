@@ -10,13 +10,8 @@ filepath="/usr/local/cpanel/base/3rdparty/roundcube/config/config.inc.php"
 # remove the 'skins_allowed' line
 sed -i "/\$config\['skins_allowed'\]/d" $filepath
 
-
 # add the 'skins_allowed' line with value 'elastic'
 sed -i "/\$config = \[\];/a \$config\['skins_allowed'\] = \['elastic'\];" $filepath
-
-
-
-
 
 
 
@@ -26,11 +21,6 @@ sed -i "/\$config\['skin'\]/d" $filepath
 
 # add the 'skin' line with value 'elastic'
 sed -i "/\$config = \[\];/a \$config\['skin'\] = 'elastic';" $filepath
-
-
-
-
-
 
 
 
@@ -75,9 +65,9 @@ grep -E "\$config\['skins_allowed'\]|\$config\['skin'\]|\$config\['plugins'\]" $
 
 
 
-
-#Download
-
+#=============================================================================================================
+#Download Images
+#=============================================================================================================
 # Define the URLs and filenames
 url1="https://github.com/childgo/go-public/raw/master/whm/roundcube/seal.png"
 url2="https://github.com/childgo/go-public/raw/master/whm/roundcube/logo.svg"
@@ -90,6 +80,7 @@ folderpath="/usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/images"
 # Download the images and overwrite if they exist
 wget -q -O "${folderpath}/${filename1}" "${url1}" && echo "Downloaded ${filename1}"
 wget -q -O "${folderpath}/${filename2}" "${url2}" && echo "Downloaded ${filename2}"
+#=============================================================================================================
 
 
 
@@ -113,8 +104,7 @@ wget -q -O "${folderpath}/${filename2}" "${url2}" && echo "Downloaded ${filename
 
 
 
-
-
+#=============================================================================================================
 #add seal to footer
 
 # Define the file path
@@ -125,11 +115,15 @@ code_to_add="<br><br><p><div style=\"position: fixed; z-index: 1000; width: 150p
 
 # Use sed to insert the code above </body>
 sed -i "s|</body>|${code_to_add}</body>|" "${file_path}"
+#=============================================================================================================
 
 
 
 
-
-
+#Lock Files
+chattr +i /usr/local/cpanel/base/3rdparty/roundcube/config/config.inc.php
+chattr +i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/images/seal.png
+chattr +i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/images/logo.svg
+chattr +i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/templates/includes/footer.html
 
 
