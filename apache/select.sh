@@ -86,27 +86,35 @@ while true; do
     uptime | awk '{print "1-minute load average: "$10"\n5-minute load average: "$11"\n15-minute load average: "$12}'
     
     echo ""
-    echo "[WebMail Port: 2096]"
+    echo "[WebMail Secure Port: 2096]"
     ss -ant '( sport = :2096 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn
     echo ""
     
-    echo "[Webmail Port: 2095]"
+    echo "[Webmail UnSecure Port: 2095]"
     ss -ant '( sport = :2095 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn
     echo ""
     
-    echo "[IMAP Port: 993]"
+    echo "[IMAP Secure Port: 993]"
     ss -ant '( sport = :993 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn
     echo ""
     
-    echo "[POP3 Port: 995]"
+    echo "[IMAP UnSecure Port: 143]"
+    ss -ant '( sport = :143 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn
+    echo ""
+    
+    echo "[POP3 Secure Port: 995]"
     ss -ant '( sport = :995 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn
     echo ""
     
-    echo "[SMTP Port: 465]"
+    echo "[POP3 UnSecure Port: 110]"
+    ss -ant '( sport = :110 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn
+    echo ""
+    
+    echo "[SMTP Secure Port: 465]"
     ss -ant '( sport = :465 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn
     echo ""
     
-    echo "[SMTP Port: 25]"
+    echo "[SMTP UnSecure Port: 25]"
     ss -ant '( sport = :25 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn
     echo ""
     
