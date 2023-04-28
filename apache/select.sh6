@@ -159,12 +159,17 @@ perl <(curl -s https://raw.githubusercontent.com/cPanelTechs/SSE/master/sse.pl) 
 "Start delete all email messages in the Trash folders 13")
 clear
 echo "Start delete all email messages in the Trash folders of cPanel email account"
+echo "find /home/*/mail/*/*/.Trash/{cur,new} -type f -exec rm -f '{}' \;"
+echo "..."
 find /home/*/mail/*/*/.Trash/{cur,new} -type f -exec rm -f '{}' \;
 echo "Done"
 ;;
 ########################################################
-"Analyze and Repair all MySql  14")
+"Analyze and Repair all MySql 14")
 clear
+echo "mysqlcheck --all-databases -a"
+echo "mysqlcheck --all-databases -r"
+echo ""
 mysqlcheck --all-databases -a
 mysqlcheck --all-databases -r
 echo "Done"
@@ -195,6 +200,7 @@ mysqlcheck --all-databases -o
 ;;
 ########################################################
 "Clear all error log 21")
+echo "find /home -type f -name error_log -exec rm -f {} \;"
 find /home -type f -name error_log -exec rm -f {} \;
 ;;
 ########################################################
