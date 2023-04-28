@@ -1,37 +1,71 @@
 #!/bin/bash
 clear
-
-
 #bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/whm/roundcube/roundcube_skin.sh)
 
 
+
+
+
+
+
+
+#######################################################
+#Start Unlocking Files...
+chattr +i /usr/local/cpanel/base/3rdparty/roundcube/config/config.inc.php
+chattr +i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/images/seal.png
+chattr +i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/images/logo.svg
+chattr +i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/templates/includes/footer.html
+chattr +i /usr/local/cpanel/base/frontend/jupiter/images/roundcube.png
+#End Unlocking Files
+#######################################################
+
+
+
+#######################################################
+#Ask me if i want to contine 
+echo "Do you want to continue install a new skin now? [y/n]"
+read choice
+
+if [ "$choice" == "n" ]; then
+  echo "Exiting..."
+  exit 0
+else
+  echo "Continuing..."
+fi
+#######################################################
+
+
+
+
+
+=========================================================================
 #=======================Start edit config.inc.php=======================#
 # define the file path
 filepath="/usr/local/cpanel/base/3rdparty/roundcube/config/config.inc.php"
 
 
-# remove the 'skins_allowed' line
+#Remove config['skins_allowed']
 sed -i "/\$config\['skins_allowed'\]/d" $filepath
 
-# add the 'skins_allowed' line with value 'elastic'
+#Add New config['skins_allowed']
 sed -i "/\$config = \[\];/a \$config\['skins_allowed'\] = \['elastic'\];" $filepath
 
 
 
 
-# remove the 'skin' line
+#Remove $config['skin']
 sed -i "/\$config\['skin'\]/d" $filepath
 
-# add the 'skin' line with value 'elastic'
+#Add new $config['skin']
 sed -i "/\$config = \[\];/a \$config\['skin'\] = 'elastic';" $filepath
 
 
 
 
-# remove the 'plugins' line
+#Remove the $config['plugins']
 sed -i "/\$config\['plugins'\]/d" $filepath
 
-# add the 'plugins' line with the specified plugins
+#Add new $config['plugins']
 sed -i "/\$config = \[\];/a \$config\['plugins'\] = array('cpanellogin','cpanellogout','archive','calendar', 'return_to_webmail','markasjunk','alsco_auth');" $filepath
 
 
@@ -42,20 +76,7 @@ echo "New lines:"
 echo "==========="
 grep -E "\$config\['skins_allowed'\]|\$config\['skin'\]|\$config\['plugins'\]" $filepath
 #=======================Start edit config.inc.php=======================#
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+=========================================================================
 
 
 
@@ -91,22 +112,6 @@ wget -q -O "${folderpath}/${filename2}" "${url2}" && echo "Downloaded ${filename
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #=============================================================================================================
 #add seal to footer
 
@@ -124,11 +129,8 @@ sed -i "s|</body>|${code_to_add}</body>|" "${file_path}"
 
 
 
-
-
-
 #=============================================================================================================
-# Define the file path and URL
+#Start changing the logo before open roundcube
 file_path="/usr/local/cpanel/base/frontend/jupiter/images/roundcube.png"
 url="https://github.com/childgo/go-public/raw/master/whm/roundcube/roundcube.png"
 
@@ -144,13 +146,14 @@ echo "Image downloaded and saved to ${file_path}"
 
 
 
-
+#=============================================================================================================
 #Lock Files
 chattr +i /usr/local/cpanel/base/3rdparty/roundcube/config/config.inc.php
 chattr +i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/images/seal.png
 chattr +i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/images/logo.svg
 chattr +i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/templates/includes/footer.html
 chattr +i /usr/local/cpanel/base/frontend/jupiter/images/roundcube.png
+#=============================================================================================================
 
 
 
