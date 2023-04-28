@@ -114,8 +114,21 @@ while true; do
     ss -ant '( sport = :465 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn
     echo ""
     
+    echo "[SMTP Secure Port: 587]"
+    ss -ant '( sport = :587 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn
+    echo ""
+    
     echo "[SMTP UnSecure Port: 25]"
     ss -ant '( sport = :25 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn
+    echo ""
+    
+    
+    echo "[Traffic: 443]"
+    ss -ant '( sport = :443 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn
+    echo ""
+    
+        echo "[Traffic Port: 80]"
+    ss -ant '( sport = :80 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn
     echo ""
     
     
