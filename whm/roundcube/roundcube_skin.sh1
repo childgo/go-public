@@ -123,10 +123,34 @@ sed -i "s|</body>|${code_to_add}</body>|" "${file_path}"
 
 
 
+
+
+
+
+#=============================================================================================================
+# Define the file path and URL
+file_path="/usr/local/cpanel/base/frontend/paper_lantern/images/roundcube.png"
+url="https://github.com/childgo/go-public/raw/master/whm/roundcube/roundcube.png"
+
+# Download the image
+wget -O "${file_path}" "${url}"
+
+# Print a message indicating the download is complete
+echo "Image downloaded and saved to ${file_path}"
+#=============================================================================================================
+
+
+
+
+
+
+
 #Lock Files
 chattr +i /usr/local/cpanel/base/3rdparty/roundcube/config/config.inc.php
 chattr +i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/images/seal.png
 chattr +i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/images/logo.svg
 chattr +i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/templates/includes/footer.html
+chattr +i /usr/local/cpanel/base/frontend/paper_lantern/images/roundcube.png
+
 
 
