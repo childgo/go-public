@@ -12,8 +12,8 @@ options=("Total IP connected to Server 1"
 "Update cPanel License 10"
 "Report How Many Emails Sent From Server 11"
 "check_cpanel_rpms Script 12"
-"Repair all MySql 13"
-"analyze all MySql 14"
+"Start delete all email messages in the Trash folders 13"
+"Analyze and Repair all MySql 14"
 "optimize all MySql 15"
 "Remove all Block ip in CSF 16"
 "Restart MySQL 17"
@@ -156,12 +156,18 @@ perl <(curl -s https://raw.githubusercontent.com/cPanelTechs/SSE/master/sse.pl) 
 /scripts/check_cpanel_rpms --fix
 ;;
 ########################################################
-"Repair all MySql 13")
-mysqlcheck --all-databases -r
+"Start delete all email messages in the Trash folders 13")
+clear
+echo "Start delete all email messages in the Trash folders of cPanel email account"
+find /home/*/mail/*/*/.Trash/{cur,new} -type f -exec rm -f '{}' \;
+echo "Done"
 ;;
 ########################################################
-"analyze all MySql 14")
+"Analyze and Repair all MySql  14")
+clear
 mysqlcheck --all-databases -a
+mysqlcheck --all-databases -r
+echo "Done"
 ;;
 ########################################################
 "optimize all MySql 15")
