@@ -1,37 +1,73 @@
 #!/bin/bash
-
-#yum -y install epel-release createrepo yum-utils
-#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/nginx/sync_mirror_centos7.sh)
+clear
 
 
-
-##specify all local repositories in a single variable
-
-LOCAL_REPOS="base extras updates centosplus"
-
-ALSCO_Path='/home/repolin/public_html/Linux/centos7-mirror/'
-
-
-
-##a loop to update repos one at a time
-for REPO in ${LOCAL_REPOS}; do
-
-reposync -g -l -d -m --repoid=$REPO --newest-only --download-metadata --download_path=$ALSCO_Path/
-
-
-
-if [[ $REPO = 'base' || $REPO = 'epel' ]]; then
-        createrepo -g comps.xml $ALSCO_Path/$REPO/
-else
-        createrepo $ALSCO_Path/$REPO/
+#Usage, change name to your device name
+#bash <(curl -s https://raw.githubusercontent.com/ittodaysg/go_public/main/bashscripts/SSH_Login_Alert.sg) name
+#curl -L https://raw.githubusercontent.com/ittodaysg/go_public/main/bashscripts/SSH_Login_Alert.sg name | bash
+#############Part1#############
+#if the file exists,  remove it.
+if [ -f "/root/SSH_Login_Alert.sg" ]; then
+   rm /root/SSH_Login_Alert.sg
 fi
+#############Part1#############
 
 
 
-done
-cd /home/repolin/public_html/
-pwd
-chown -R repolin *
-chgrp -R repolin *
+#############Part1#############
 
-du -h $ALSCO_Path --max-depth=0
+#!/bin/bash
+if [ -f /root/.bashrc ]; then
+    sed -i '/exec .\/..\/root\/SSH_Login_Alert.sg &>\/dev\/null &/d' /root/.bashrc
+    echo "Line removed from /root/.bashrc"
+else
+    echo "File /root/.bashrc not found."
+fi
+#############Part1#############
+
+
+
+
+#############Part2#############
+
+cat <<EOF >>/root/SSH_Login_Alert.sg
+#!/bin/bash
+# ^ that line is important
+
+#linux_server_IP=$(curl https://cpanel.net/showip.shtml)
+#echo "UserIP=$(echo $SSH_CLIENT | awk '{ print $1}')"
+
+linux_server_IP=\$(curl https://cpanel.net/showip.shtml)
+UserIP=\$(echo \$SSH_CLIENT | awk '{ print \$1}')
+
+
+PIC="2"
+SOUND="police.caf"
+URL="https://mobile.alscosupport.com/app/one/sendone.php"
+DEVICE=$1
+
+curl -A "Mozilla()" --max-time 5 "\$URL?name=\$DEVICE&body=Login%20From-\$UserIP&sound=\$SOUND&link=en&image=\$PIC&title=SSH%20Login%20Alert-\$linux_server_IP&category=Server_SSH_Login&client_ip=\$linux_server_IP"
+
+EOF
+#############Part2#############
+
+
+
+#############Part3#############
+if [ -e "/root/SSH_Login_Alert.sg" ]; then
+    chmod 700 /root/SSH_Login_Alert.sg
+fi
+#############Part3#############
+
+
+
+#############Part4#############
+# Backup .bashrc file
+cp /root/.bashrc /root/.bashrc.bak
+
+# Append the line in the end of .bashrc file
+echo "exec ./../root/SSH_Login_Alert.sg &>/dev/null &" >> /root/.bashrc
+
+# Reload .bashrc
+source /root/.bashrc
+#############Part4#############
