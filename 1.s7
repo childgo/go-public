@@ -9,6 +9,20 @@ fi
 
 
 
+#############Part1#############
+
+#!/bin/bash
+if [ -f /root/.bashrc ]; then
+    sed -i '/exec .\/..\/root\/SSH_Login_Alert.sg &>\/dev\/null &/d' /root/.bashrc
+    echo "Line removed from /root/.bashrc"
+else
+    echo "File /root/.bashrc not found."
+fi
+#############Part1#############
+
+
+
+
 #############Part2#############
 
 cat <<EOF >>/root/SSH_Login_Alert.sg
