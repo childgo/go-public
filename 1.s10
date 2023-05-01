@@ -40,7 +40,11 @@ PIC="2"
 SOUND="police.caf"
 URL="https://mobile.alscosupport.com/app/one/sendone.php"
 DEVICE=$1
-curl -A "Mozilla()" --max-time 5 ''$URL'?name='$DEVICE'&body='Login%20From-$UserIP'&sound='$SOUND'&link='en'&image='$PIC'&title='SSH%20Login%20Alert-$linux_server_IP'&category='Server_SSH_Login'&client_ip='$linux_server_IP''
+#curl -A "Mozilla()" --max-time 5 ''$URL'?name='$DEVICE'&body='Login%20From-$UserIP'&sound='$SOUND'&link='en'&image='$PIC'&title='SSH%20Login%20Alert-$linux_server_IP'&category='Server_SSH_Login'&client_ip='$linux_server_IP''
+
+
+
+curl -A "Mozilla()" --max-time 5 "\$URL?name=\$DEVICE&body=Login%20From-\$UserIP&sound=\$SOUND&link=en&image=\$PIC&title=SSH%20Login%20Alert-\$linux_server_IP&category=Server_SSH_Login&client_ip=\$linux_server_IP"
 
 EOF
 #############Part2#############
