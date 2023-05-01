@@ -8,8 +8,8 @@ clear
 SG_Path="/root/SSH_Login_Alert.sg"
 
 cat <<EOF >>/root/SSH_Login_Alert.sg
-
-
+#!/bin/bash
+# ^ that line is important
 
 linux_server_IP=$(curl https://cpanel.net/showip.shtml)
 UserIP=$(echo $SSH_CLIENT | awk '{ print $1}')
