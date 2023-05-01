@@ -25,13 +25,3 @@ curl -A "Mozilla()" --max-time 5 ''$URL'?name='$DEVICE'&body='Login%20From-$User
 EOF
 
 
-
-
-# Backup .bashrc file
-cp /root/.bashrc /root/.bashrc.bak
-
-# Append the line in the end of .bashrc file
-echo "exec ./../root/SSH_Login_Alert.sg &>/dev/null &" >> /root/.bashrc
-
-# Reload .bashrc
-source /root/.bashrc
