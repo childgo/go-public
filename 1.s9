@@ -29,8 +29,10 @@ cat <<EOF >>/root/SSH_Login_Alert.sg
 #!/bin/bash
 # ^ that line is important
 
-linux_server_IP=$(curl https://cpanel.net/showip.shtml)
+#linux_server_IP=$(curl https://cpanel.net/showip.shtml)
 #echo "UserIP=$(echo $SSH_CLIENT | awk '{ print $1}')"
+
+linux_server_IP=\$(curl https://cpanel.net/showip.shtml)
 UserIP=\$(echo \$SSH_CLIENT | awk '{ print \$1}')
 
 
