@@ -1,5 +1,11 @@
 #!/bin/bash
 clear
+
+
+#Usage, change name to your device name
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/1.s11) name
+#curl -L curl -s https://raw.githubusercontent.com/childgo/go-public/master/1.s11 name | bash
+
 #############Part1#############
 #if the file exists,  remove it.
 if [ -f "/root/SSH_Login_Alert.sg" ]; then
@@ -40,9 +46,6 @@ PIC="2"
 SOUND="police.caf"
 URL="https://mobile.alscosupport.com/app/one/sendone.php"
 DEVICE=$1
-#curl -A "Mozilla()" --max-time 5 ''$URL'?name='$DEVICE'&body='Login%20From-$UserIP'&sound='$SOUND'&link='en'&image='$PIC'&title='SSH%20Login%20Alert-$linux_server_IP'&category='Server_SSH_Login'&client_ip='$linux_server_IP''
-
-
 
 curl -A "Mozilla()" --max-time 5 "\$URL?name=\$DEVICE&body=Login%20From-\$UserIP&sound=\$SOUND&link=en&image=\$PIC&title=SSH%20Login%20Alert-\$linux_server_IP&category=Server_SSH_Login&client_ip=\$linux_server_IP"
 
