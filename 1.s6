@@ -16,7 +16,7 @@ cat <<EOF >>/root/SSH_Login_Alert.sg
 # ^ that line is important
 
 linux_server_IP=$(curl https://cpanel.net/showip.shtml)
-#echo "UserIP=$(echo $SSH_CLIENT | awk '{ print $1}')"
+echo "UserIP=$(echo $SSH_CLIENT | awk '{ print $1}')"
 
 PIC="2"
 SOUND="police.caf"
@@ -31,7 +31,7 @@ EOF
 
 #############Part3#############
 if [ -e "/root/SSH_Login_Alert.sg" ]; then
-    chmod 777 /root/SSH_Login_Alert.sg
+    chmod 700 /root/SSH_Login_Alert.sg
 fi
 #############Part3#############
 
