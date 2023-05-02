@@ -1,4 +1,9 @@
 
+ bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/RockyLinux8/csf_install.sh1)
+
+
+
+
 
 #Install the dependencies
 dnf install perl-libwww-perl perl-Math-BigInt wget -y;sleep 3;
@@ -25,6 +30,7 @@ csf -e
 
 
 
+perl /usr/local/csf/bin/csftest.pl;sleep 3;
 
 
 
@@ -67,11 +73,8 @@ grep -r "UDP6_IN =" /etc/csf/csf.conf
 grep -r "UDP6_OUTT =" /etc/csf/csf.conf
 #======================================================================
 
-
-systemctl enable csf
-systemctl enable lfd
-service csf start
-service lfd start
+systemctl enable csf && systemctl enable lfd
+systemctl start csf && systemctl restart lfd
 perl /usr/local/csf/bin/csftest.pl
 
 
