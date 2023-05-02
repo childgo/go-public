@@ -6,7 +6,7 @@
 
 
 #Install the dependencies
-dnf install perl-libwww-perl perl-Math-BigInt wget -y;sleep 3;
+#dnf install perl-libwww-perl perl-Math-BigInt wget -y;sleep 3;
 
 #Download CSF files and extract them
 cd /usr/src;sleep 3;
