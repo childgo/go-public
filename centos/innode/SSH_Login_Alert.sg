@@ -3,7 +3,7 @@ clear
 
 
 #Usage, change name to your device name
-#bash <(https://raw.githubusercontent.com/childgo/go-public/master/1.a1) name
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/1.a1) name
 #curl -L https://raw.githubusercontent.com/childgo/go-public/master/1.a1 name | bash
 #############Part1#############
 #if the file exists,  remove it.
