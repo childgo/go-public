@@ -25,14 +25,7 @@ systemctl enable csf && systemctl enable lfd
 systemctl start csf && systemctl restart lfd
 
 
-#Check if both services have started with no issues
-systemctl status csf
-systemctl status lfd
-csf -e
 
-
-
-perl /usr/local/csf/bin/csftest.pl;sleep 3;
 
 
 
@@ -75,9 +68,20 @@ grep -r "UDP6_IN =" /etc/csf/csf.conf
 grep -r "UDP6_OUTT =" /etc/csf/csf.conf
 #======================================================================
 
+
+
+
 systemctl enable csf && systemctl enable lfd
 systemctl start csf && systemctl restart lfd
+
+
+#Check if both services have started with no issues
 perl /usr/local/csf/bin/csftest.pl
+systemctl status csf
+systemctl status lfd
+csf -e
+
+
 
 
 
