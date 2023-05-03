@@ -87,11 +87,82 @@ echo "Done"
 ########################################################
 "Fix A Corrupted RoundCube SQLite Database 3")
 clear
-echo "Start delete all email messages in the Trash folders of cPanel email account"
-echo "find /home/*/mail/*/*/.Trash/{cur,new} -type f -exec rm -f '{}' \;"
-echo "..."
-find /home/*/mail/*/*/.Trash/{cur,new} -type f -exec rm -f '{}' \;
-echo "Done"
+
+
+
+#===Color Setting
+GREEN=$'\e[0;32m'
+RED=$'\e[0;31m'
+NC=$'\e[0m'
+bold=$(tput bold)
+#===Color Setting End
+
+
+
+
+
+
+# Ask for email address
+read -p "Enter email address: " email_address
+
+
+
+#Extract Username 
+Only_Account=$(echo $email_address | cut -d "@" -f1)
+
+#Extract Domain
+Only_Domain=$(echo $email_address | cut -d "@" -f2)
+
+#Get Domain Owner
+User_Domain=$(awk -F ': ' '$1 == "'$Only_Domain'" {print $2}' /etc/trueuserdomains)
+
+
+# Change directory
+cd /home/$User_Domain/etc/$Only_Domain/
+cwd=$(pwd)
+
+
+# Print username and domain and email
+printf '\n\n\n'
+echo "EMail: ${RED}${bold} $email_address ${NC}"
+echo "Username: ${RED}${bold} $Only_Account ${NC}"
+echo "Domain: ${RED}${bold} $Only_Domain ${NC}"
+echo "cPanel User: ${RED}${bold} $User_Domain ${NC}"
+echo "The current path is ${RED}${bold} $cwd ${NC}"
+printf '\n\n\n'
+
+
+#######################################################
+#Ask me if i want to contine 
+echo "Do you want to continue install a new skin now? [y/n]"
+read choice
+
+if [ "$choice" == "n" ]; then
+  echo "Exiting..."
+  exit 0
+else
+  echo "Continuing..."
+fi
+#######################################################
+
+
+
+
+
+
+# Rename file
+mv -v $Only_Account.rcube.db $Only_Account.rcube.db.bak
+
+
+
+
+# Sleep for 3 seconds
+sleep 3
+printf '\n\n\n'
+
+
+/scripts/restartsrv_cpsrvd --hard
+
 ;;
 ########################################################
 
