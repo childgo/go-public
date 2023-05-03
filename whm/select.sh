@@ -141,7 +141,10 @@ done
 ;;
 ########################################################
 "Clear All Domains Log And Fix Disk Space Quota 7")
+clear
 find /home/ -name "*.gz" -type f -delete
+find /home/*/www/* -type f -name error_log -exec rm -f {} \;
+
 /scripts/fixquotas
 ;;
 
