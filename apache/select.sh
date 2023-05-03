@@ -172,7 +172,7 @@ read -p "Enter Domain: " Domain_Name
 User_Domain=$(awk -F ': ' '$1 == "'$Domain_Name'" {print $2}' /etc/trueuserdomains)
 
 # Change directory
-cd /home/$User_Domain/etc/$Only_Domain/
+cd /home/$User_Domain/www/
 cwd_point9=$(pwd)
 
 echo "cPanel User: ${RED}${bold} $User_Domain ${NC}"
