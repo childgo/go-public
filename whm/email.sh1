@@ -171,6 +171,17 @@ printf '\n\n\n'
 "Change Email Password 4")
 clear
 
+
+#===Color Setting
+GREEN=$'\e[0;32m'
+RED=$'\e[0;31m'
+NC=$'\e[0m'
+bold=$(tput bold)
+#===Color Setting End
+
+
+
+
 echo "please Type Email Account ID,followed by [ENTER]:"
 read alsco_get_email_id
 
@@ -219,7 +230,11 @@ echo "======================================================================"
 echo " "
 echo "Domain is [$alsco_get_domain] cPanel User is [$alsco_get_user] and E-Mail Account is: [$alsco_get_email_id]"
 echo " "
-echo "New Password for Email: [$alsco_get_email_id] is: [$final_email_password]"
+#echo "New Password for Email: [$alsco_get_email_id] is: [$final_email_password]"
+echo "Email: ${RED}${bold} [$alsco_get_email_id] ${NC}"
+echo "New Password: ${RED}${bold} [$final_email_password] ${NC}"
+
+
 echo " "
 echo "======================================================================"
 
