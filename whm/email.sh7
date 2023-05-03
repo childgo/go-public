@@ -342,10 +342,10 @@ fi
 
 
 echo "The current Size is:"
-du -h /home/$usr --max-depth=0
+du -h /home/$User_Domain --max-depth=0
 
 echo "The current Total Files:"
-find /home/$usr/ -type f | wc -l
+find /home/$User_Domain/ -type f | wc -l
 echo ""
 echo ""
 
@@ -354,16 +354,16 @@ for ((i=0; i < ${#source[@]}; i++))
 do
 
 
-find /home/$USR/mail/$DOM/*/${source[$i]} -mtime +$TIM -type f -delete
+find /home/$USR/mail/Only_Domain/*/${source[$i]} -mtime +$TIM -type f -delete
 
 done
 
 
 echo "The New Size is:"
-du -h /home/$usr --max-depth=0
+du -h /home/$USR --max-depth=0
 
 echo "The New Total Files Number is:"
-find /home/$usr/ -type f | wc -l
+find /home/$USR/ -type f | wc -l
 echo ""
 echo ""
 ;;
