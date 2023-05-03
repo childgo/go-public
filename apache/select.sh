@@ -8,7 +8,7 @@ options=("Total IP connected to Server 1"
 "Monitor Webmail 2096 Port and Load 6"
 "Clear All Domains Log And Fix Disk Space Quota 7"
 "Full Backup Immediately 8"
-"Clear All Mail In Queue 9"
+"cPanel User for domain 9"
 "Update cPanel License 10"
 "Report How Many Emails Sent From Server 11"
 "check_cpanel_rpms Script 12"
@@ -153,8 +153,32 @@ find /home/ -name "*.gz" -type f -delete
 ########################################################
 
 
-"Clear All Mail In Queue 9")
-exim -bp | awk '/^ *[0-9]+[mhd]/{print "exim -Mrm " $3}' | bash
+"cPanel User for domain 9")
+clear
+
+#===Color Setting
+GREEN=$'\e[0;32m'
+RED=$'\e[0;31m'
+NC=$'\e[0m'
+bold=$(tput bold)
+#===Color Setting End
+
+# Ask for email address
+read -p "Enter Domain: " Domain_Name
+
+
+
+#Get Domain Owner
+User_Domain=$(awk -F ': ' '$1 == "'$Domain_Name'" {print $2}' /etc/trueuserdomains)
+
+# Change directory
+cd /home/$User_Domain/etc/$Only_Domain/
+cwd_point9=$(pwd)
+
+echo "cPanel User: ${RED}${bold} $User_Domain ${NC}"
+echo "The current path is ${RED}${bold} $cwd_point9 ${NC}"
+
+
 ;;
 ########################################################
 "Update cPanel License 10")
