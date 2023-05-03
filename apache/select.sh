@@ -8,9 +8,9 @@ options=("Total IP connected to Server 1"
 "Monitor Webmail 2096 Port and Load 6"
 "Clear All Domains Log And Fix Disk Space Quota 7"
 "Full Backup Immediately 8"
-"cPanel User for domain 9"
+"Find cPanel User for domain 9"
 "Update cPanel License 10"
-"Report How Many Emails Sent From Server 11"
+"R_Smart to Fix All Files And Change Permissions 11"
 "check_cpanel_rpms Script 12"
 "Start delete all email messages in the Trash folders 13"
 "Analyze and Repair all MySql 14"
@@ -153,7 +153,7 @@ find /home/ -name "*.gz" -type f -delete
 ########################################################
 
 
-"cPanel User for domain 9")
+"Find cPanel User for domain 9")
 clear
 
 #===Color Setting
@@ -185,8 +185,24 @@ echo "The current path is ${RED}${bold} $cwd_point9 ${NC}"
 /usr/local/cpanel/cpkeyclt
 ;;
 ########################################################
-"Report How Many Emails Sent From Server 11")
-perl <(curl -s https://raw.githubusercontent.com/cPanelTechs/SSE/master/sse.pl) -s
+"R_Smart to Fix All Files And Change Permissions 11")
+
+
+
+find /home/*/public_html/ -type f -perm 000;
+#find /home/*/public_html/ -type f -perm 000 -iname ".*" -ls
+
+
+echo "Please Enter your WebSite UserName"
+read user
+IP="$user"
+echo "the user name is:"
+echo "$IP"
+
+
+find /home/$IP/public_html/ -type f -perm 000 -exec chmod 644 {} \; -exec chown $IP {} \; -exec chgrp $IP {} \; 
+
+
 ;;
 ########################################################
 "check_cpanel_rpms Script 12")
