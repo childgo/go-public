@@ -8,6 +8,8 @@ options=("Monitor Webmail 2096 Port and Load 1"
 "Change Email Password 6"
 "Create Email 7"
 "Delete Email 8"
+"Delete Emails Older Than [X] Days 9"
+
 
 
 "Quit")
@@ -288,6 +290,17 @@ clear
 /scripts/delpop
 ;;
 ########################################################
+
+
+
+########################################################
+"Delete Emails Older Than [X] Days 9")
+clear
+/scripts/delpop
+;;
+########################################################
+
+
 
 
 "Option 36")
