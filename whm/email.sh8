@@ -354,16 +354,16 @@ for ((i=0; i < ${#source[@]}; i++))
 do
 
 
-find /home/$USR/mail/Only_Domain/*/${source[$i]} -mtime +$TIM -type f -delete
+find /home/$User_Domain/mail/$Only_Domain/*/${source[$i]} -mtime +$TIM -type f -delete
 
 done
 
 
 echo "The New Size is:"
-du -h /home/$USR --max-depth=0
+du -h /home/$User_Domain --max-depth=0
 
 echo "The New Total Files Number is:"
-find /home/$USR/ -type f | wc -l
+find /home/$User_Domain/ -type f | wc -l
 echo ""
 echo ""
 ;;
