@@ -318,12 +318,18 @@ TIM="$tim"
 User_Domain=$(awk -F ': ' '$1 == "'$Only_Domain'" {print $2}' /etc/trueuserdomains)
 
 
+# Change directory
+cd /home/$User_Domain/mail/$Only_Domain/
+cwd=$(pwd)
+
+
 
 # Print username and domain and email
 printf '\n\n\n'
 echo "Domain: ${RED}${bold} $Only_Domain ${NC}"
 echo "cPanel User: ${RED}${bold} $User_Domain ${NC}"
 echo "Days : ${RED}${bold} $tim ${NC}"
+echo "The current path is ${RED}${bold} $cwd ${NC}"
 printf '\n\n\n'
 
 
