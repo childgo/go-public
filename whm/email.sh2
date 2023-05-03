@@ -231,8 +231,8 @@ echo " "
 echo "Domain is [$alsco_get_domain] cPanel User is [$alsco_get_user] and E-Mail Account is: [$alsco_get_email_id]"
 echo " "
 #echo "New Password for Email: [$alsco_get_email_id] is: [$final_email_password]"
-echo "Email: ${RED}${bold} [$alsco_get_email_id] ${NC}"
-echo "New Password: ${RED}${bold} [$final_email_password] ${NC}"
+echo "Email: ${RED}${bold} $alsco_get_email_id ${NC}"
+echo "New Password: ${RED}${bold} $final_email_password ${NC}"
 
 
 echo " "
