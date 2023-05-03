@@ -296,7 +296,76 @@ clear
 ########################################################
 "Delete Emails Older Than [X] Days 9")
 clear
-/scripts/delpop
+
+#===Color Setting
+GREEN=$'\e[0;32m'
+RED=$'\e[0;31m'
+NC=$'\e[0m'
+bold=$(tput bold)
+#===Color Setting End
+
+
+echo "please Type the Domain,followed by [ENTER]:"
+read dom
+$Only_Domain="$dom"
+
+echo "please Type days,followed by [ENTER]:"
+read tim
+TIM="$tim"
+
+
+#Get Domain Owner
+User_Domain=$(awk -F ': ' '$1 == "'$Only_Domain'" {print $2}' /etc/trueuserdomains)
+
+
+
+# Print username and domain and email
+printf '\n\n\n'
+echo "Domain: ${RED}${bold} $Only_Domain ${NC}"
+echo "cPanel User: ${RED}${bold} $User_Domain ${NC}"
+echo "Days : ${RED}${bold} $tim ${NC}"
+printf '\n\n\n'
+
+
+#######################################################
+#Ask me if i want to contine 
+echo "Do you want to continue install a new skin now? [y/n]"
+read choice
+
+if [ "$choice" == "n" ]; then
+  echo "Exiting..."
+  exit 0
+else
+  echo "Continuing..."
+fi
+#######################################################
+
+
+echo "The current Size is:"
+du -h /home/$usr --max-depth=0
+
+echo "The current Total Files:"
+find /home/$usr/ -type f | wc -l
+echo ""
+echo ""
+
+source=("cur" ".Drafts" ".Junk" ".Sent" ".Trash" "new" "tmp")
+for ((i=0; i < ${#source[@]}; i++))
+do
+
+
+find /home/$USR/mail/$DOM/*/${source[$i]} -mtime +$TIM -type f -delete
+
+done
+
+
+echo "The New Size is:"
+du -h /home/$usr --max-depth=0
+
+echo "The New Total Files Number is:"
+find /home/$usr/ -type f | wc -l
+echo ""
+echo ""
 ;;
 ########################################################
 
