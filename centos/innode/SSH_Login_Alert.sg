@@ -54,7 +54,6 @@ EOF
 #############Part2#############
 
 
-
 #############Part3#############
 if [ -e "/root/SSH_Login_Alert.sg" ]; then
     chmod 700 /root/SSH_Login_Alert.sg
