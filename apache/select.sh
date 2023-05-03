@@ -12,7 +12,7 @@ options=("Total IP connected to Server 1"
 "Update cPanel License 10"
 "R_Smart to Fix All Files And Change Permissions 11"
 "check_cpanel_rpms Script 12"
-"Start delete all email messages in the Trash folders 13"
+"List All Domain In Server 13"
 "Analyze and Repair all MySql 14"
 "optimize all MySql 15"
 "Remove all Block ip in CSF 16"
@@ -186,7 +186,7 @@ echo "The current path is ${RED}${bold} $cwd_point9 ${NC}"
 ;;
 ########################################################
 "R_Smart to Fix All Files And Change Permissions 11")
-
+clear
 
 
 find /home/*/public_html/ -type f -perm 000;
@@ -209,12 +209,11 @@ find /home/$IP/public_html/ -type f -perm 000 -exec chmod 644 {} \; -exec chown 
 /scripts/check_cpanel_rpms --fix
 ;;
 ########################################################
-"Start delete all email messages in the Trash folders 13")
+"List All Domain In Server 13")
 clear
-echo "Start delete all email messages in the Trash folders of cPanel email account"
-echo "find /home/*/mail/*/*/.Trash/{cur,new} -type f -exec rm -f '{}' \;"
-echo "..."
-find /home/*/mail/*/*/.Trash/{cur,new} -type f -exec rm -f '{}' \;
+echo "cat /etc/trueuserdomains"
+echo "Start..."
+cat /etc/trueuserdomains
 echo "Done"
 ;;
 ########################################################
