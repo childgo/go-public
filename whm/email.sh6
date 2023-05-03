@@ -307,7 +307,7 @@ bold=$(tput bold)
 
 echo "please Type the Domain,followed by [ENTER]:"
 read dom
-$Only_Domain="$dom"
+Only_Domain="$dom"
 
 echo "please Type days,followed by [ENTER]:"
 read tim
