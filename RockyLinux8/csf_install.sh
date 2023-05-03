@@ -1,5 +1,5 @@
 
-#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/RockyLinux8/csf_install.sh1)
+#bash <(curl -s https://raw.githubusercontent.com/ittodaysg/go_public/main/bashscripts/RockyLinux8_csf_install.sh)
 
 
 
