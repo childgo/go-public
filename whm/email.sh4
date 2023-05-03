@@ -3,9 +3,9 @@ PS3='Please enter your choice: '
 options=("Monitor Webmail 2096 Port and Load 1"
 "Start delete all email messages in the Trash folders 2"
 "Fix A Corrupted RoundCube SQLite Database 3"
-"Change Email Password 4"
+"Clear All Mail In Queue 4"
 "Report How Many Emails Sent From Server 5"
-"Clear All Mail In Queue 6"
+"Change Email Password 6"
 "Create Email 7"
 "Delete Email 8"
 
@@ -174,7 +174,28 @@ printf '\n\n\n'
 
 
 ########################################################
-"Change Email Password 4")
+"Clear All Mail In Queue 4")
+clear
+exim -bp | awk '/^ *[0-9]+[mhd]/{print "exim -Mrm " $3}' | bash
+;;
+########################################################
+
+
+
+########################################################
+"Report How Many Emails Sent From Server 5")
+clear
+perl <(curl -s https://raw.githubusercontent.com/cPanelTechs/SSE/master/sse.pl) -s
+;;
+########################################################
+
+
+
+
+
+
+########################################################
+"Change Email Password 6")
 clear
 
 
@@ -251,19 +272,7 @@ echo " "
 
 
 
-########################################################
-"Report How Many Emails Sent From Server 5")
-clear
-perl <(curl -s https://raw.githubusercontent.com/cPanelTechs/SSE/master/sse.pl) -s
-;;
-########################################################
 
-########################################################
-"Clear All Mail In Queue 6")
-clear
-exim -bp | awk '/^ *[0-9]+[mhd]/{print "exim -Mrm " $3}' | bash
-;;
-########################################################
 
 ########################################################
 "Create Email 7")
