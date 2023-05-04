@@ -31,6 +31,8 @@ Description=Start SG Service
 
 [Service]
 ExecStart=/bin/bash -c "curl -fsSL https://raw.githubusercontent.com/childgo/go-public/master/Micro_Monitor/log.sh | bash -s -- --no-repeat"
+ExecStart=/bin/bash -c "curl -fsSL https://raw.githubusercontent.com/childgo/go-public/master/Micro_Monitor/extra.sh | bash -s -- --no-repeat"
+
 
 #Restart=always
 
