@@ -55,4 +55,4 @@ sudo systemctl enable SG_Log.timer
 
 
 #check the logs
-#journalctl -u SG_MyMonitor.timer
+#journalctl -u SG_Log.timer
