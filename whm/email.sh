@@ -9,6 +9,7 @@ options=("Monitor Webmail 2096 Port and Load 1"
 "Create Email 7"
 "Delete Email 8"
 "Delete Emails Older Than [X] Days 9"
+"Remove all Block ip in CSF 10"
 
 
 
@@ -378,8 +379,19 @@ echo ""
 
 
 
-"Option 36")
-echo "test"
+########################################################
+"Remove all Block ip in CSF 10")
+clear
+/usr/sbin/csf -df
+echo "Done"
+
+;;
+########################################################
+
+
+
+"Option 11")
+echo "Done"
 
 
 ;;
