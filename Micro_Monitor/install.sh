@@ -50,4 +50,9 @@ sudo systemctl enable SG_Log.timer
 
 
 
+#list all active timers in the systemd 
+#systemctl list-timers --all
 
+
+#check the logs
+#journalctl -u SG_MyMonitor.timer
