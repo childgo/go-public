@@ -24,6 +24,7 @@ Hostname=$(hostname)
 echo "Hostname: $Hostname"
 echo -e "\n\n"
 
+
 cmd_uptime=$(uptime)
 echo "uptime: $cmd_uptime"
 echo -e "\n\n"
@@ -58,16 +59,16 @@ echo -e "\n\n"
 #Working with Concurrent Connections
 ########################################################################
 
-Port_80_Connection=$(netstat -plan | grep :80 | wc -l)
+Port_80_Connection=$(netstat -an | grep :80 | grep ESTABLISHED | wc -l)
 echo "Port_80_Connection: $Port_80_Connection"
 
 
 
-Port_443_Connection=$(netstat -plan | grep :443 | wc -l)
+Port_443_Connection=$(netstat -an | grep :443 | grep ESTABLISHED | wc -l)
 echo "Port_443_Connection: $Port_443_Connection"
 
 
-Port_3306_Connection=$(netstat -plan | grep :3306 | wc -l)
+Port_3306_Connection=$(netstat -an | grep :3306 | grep ESTABLISHED | wc -l)
 echo "Port_3306_Connection: $Port_3306_Connection"
 
 ########################################################################
@@ -287,6 +288,133 @@ Network_up_down="1"
 
 
 
+########################################################################
+#Start Get Port for each port
+echo ""
+echo ""
+
+
+Port_21_Connection=$(netstat -an | grep :21 | grep ESTABLISHED | wc -l)
+echo "Port_21_Connection: $Port_21_Connection"
+
+
+Port_22_Connection=$(netstat -an | grep :22 | grep ESTABLISHED | wc -l)
+echo "Port_22_Connection: $Port_22_Connection"
+
+
+Port_25_Connection=$(netstat -an | grep :25 | grep ESTABLISHED | wc -l)
+echo "Port_25_Connection: $Port_25_Connection"
+
+
+Port_26_Connection=$(netstat -an | grep :26 | grep ESTABLISHED | wc -l)
+echo "Port_26_Connection: $Port_26_Connection"
+
+
+Port_53_Connection=$(netstat -an | grep :53 | grep ESTABLISHED | wc -l)
+echo "Port_53_Connection: $Port_53_Connection"
+
+
+Port_110_Connection=$(netstat -an | grep :110 | grep ESTABLISHED | wc -l)
+echo "Port_110_Connection: $Port_110_Connection"
+
+
+Port_143_Connection=$(netstat -an | grep :143 | grep ESTABLISHED | wc -l)
+echo "Port_143_Connection: $Port_143_Connection"
+
+
+Port_465_Connection=$(netstat -an | grep :465 | grep ESTABLISHED | wc -l)
+echo "Port_465_Connection: $Port_465_Connection"
+
+
+Port_587_Connection=$(netstat -an | grep :587 | grep ESTABLISHED | wc -l)
+echo "Port_587_Connection: $Port_587_Connection"
+
+
+Port_993_Connection=$(netstat -an | grep :993 | grep ESTABLISHED | wc -l)
+echo "Port_993_Connection: $Port_993_Connection"
+
+
+Port_995_Connection=$(netstat -an | grep :95 | grep ESTABLISHED | wc -l)
+echo "Port_995_Connection: $Port_995_Connection"
+
+
+Port_2082_Connection=$(netstat -an | grep :2082 | grep ESTABLISHED | wc -l)
+echo "Port_2082_Connection: $Port_2082_Connection"
+
+
+Port_2083_Connection=$(netstat -an | grep :2083 | grep ESTABLISHED | wc -l)
+echo "Port_2083_Connection: $Port_2083_Connection"
+
+
+Port_2086_Connection=$(netstat -an | grep :2086 | grep ESTABLISHED | wc -l)
+echo "Port_2086_Connection: $Port_2086_Connection"
+
+
+Port_2087_Connection=$(netstat -an | grep :2087 | grep ESTABLISHED | wc -l)
+echo "Port_2087_Connection: $Port_2087_Connection"
+
+
+Port_2095_Connection=$(netstat -an | grep :2095 | grep ESTABLISHED | wc -l)
+echo "Port_2095_Connection: $Port_2095_Connection"
+
+
+Port_2096_Connection=$(netstat -an | grep :2096 | grep ESTABLISHED | wc -l)
+echo "Port_2096_Connection: $Port_2096_Connection"
+
+
+Port_873_Connection=$(netstat -an | grep :873 | grep ESTABLISHED | wc -l)
+echo "Port_873_Connection: $Port_873_Connection"
+
+
+Port_5432_Connection=$(netstat -an | grep :5432 | grep ESTABLISHED | wc -l)
+echo "Port_5432_Connection: $Port_5432_Connection"
+
+
+echo ""
+echo ""
+
+########################################################################
+
+
+
+########################################################################
+full_Concurrent_Connection=""
+full_Concurrent_Connection+="[WebMail Secure Port: 2096]\n$(ss -ant '( sport = :2096 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn)\n"
+full_Concurrent_Connection+="[Webmail UnSecure Port: 2095]\n$(ss -ant '( sport = :2095 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn)\n"
+full_Concurrent_Connection+="[IMAP Secure Port: 993]\n$(ss -ant '( sport = :993 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn)\n"
+full_Concurrent_Connection+="[IMAP UnSecure Port: 143]\n$(ss -ant '( sport = :143 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn)\n"
+full_Concurrent_Connection+="[POP3 Secure Port: 995]\n$(ss -ant '( sport = :995 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn)\n"
+full_Concurrent_Connection+="[POP3 UnSecure Port: 110]\n$(ss -ant '( sport = :110 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn)\n"
+full_Concurrent_Connection+="[SMTP Secure Port: 465]\n$(ss -ant '( sport = :465 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn)\n"
+full_Concurrent_Connection+="[SMTP Secure Port: 587]\n$(ss -ant '( sport = :587 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn)\n"
+full_Concurrent_Connection+="[SMTP UnSecure Port: 25]\n$(ss -ant '( sport = :25 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn)\n"
+full_Concurrent_Connection+="[Traffic: 443]\n$(ss -ant '( sport = :443 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn)\n"
+full_Concurrent_Connection+="[Traffic Port: 80]\n$(ss -ant '( sport = :80 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn)\n"
+full_Concurrent_Connection+="[Traffic Port: 3306]\n$(ss -ant '( sport = :3306 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn)\n"
+full_Concurrent_Connection+="[Traffic Port: 53]\n$(ss -ant '( sport = :53 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn)\n"
+full_Concurrent_Connection+="[WHM Secure Port: 2087]\n$(ss -ant '( sport = :2087 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn)\n"
+full_Concurrent_Connection+="[WHM UnSecure: 2086]\n$(ss -ant '( sport = :2086 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn)\n"
+
+
+#echo -e $full_Concurrent_Connection
+########################################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 curl -A "My User Agent" -X POST https://monitor.cdn-today.com/micro_report/api.php \
@@ -307,11 +435,31 @@ curl -A "My User Agent" -X POST https://monitor.cdn-today.com/micro_report/api.p
   -d "Port_80_Connection=$Port_80_Connection" \
   -d "Port_443_Connection=$Port_443_Connection" \
   -d "Port_3306_Connection=$Port_3306_Connection" \
+  -d "Port_21_Connection=$Port_21_Connection" \
+  -d "Port_22_Connection=$Port_22_Connection" \
+  -d "Port_25_Connection=$Port_25_Connection" \
+  -d "Port_26_Connection=$Port_26_Connection" \
+  -d "Port_53_Connection=$Port_53_Connection" \
+  -d "Port_110_Connection=$Port_110_Connection" \
+  -d "Port_143_Connection=$Port_143_Connection" \
+  -d "Port_465_Connection=$Port_465_Connection" \
+  -d "Port_587_Connection=$Port_587_Connection" \
+  -d "Port_993_Connection=$Port_993_Connection" \
+  -d "Port_995_Connection=$Port_995_Connection" \
+  -d "Port_2082_Connection=$Port_2082_Connection" \
+  -d "Port_2083_Connection=$Port_2083_Connection" \
+  -d "Port_2086_Connection=$Port_2086_Connection" \
+  -d "Port_2087_Connection=$Port_2087_Connection" \
+  -d "Port_2095_Connection=$Port_2095_Connection" \
+  -d "Port_2096_Connection=$Port_2096_Connection" \
+  -d "Port_873_Connection=$Port_873_Connection" \
+  -d "Port_5432_Connection=$Port_5432_Connection" \
   -d "CSF_firewall_status=$CSF_firewall_status" \
   -d "CSF_TCP4=$CSF_TCP4" \
   -d "CSF_TCP6=$CSF_TCP6" \
   -d "Hosts_Allow=$Hosts_Allow" \
   -d "cmd_uptime=$cmd_uptime" \
+  -d "full_Concurrent_Connection=$full_Concurrent_Connection" \
   -d "server_disk_usage=$server_disk_usage" \
   -d "ssh_connnection_ip=$ssh_connnection_ip" \
   -d "cmd_hostnamectl=$cmd_hostnamectl" \
@@ -322,7 +470,7 @@ curl -A "My User Agent" -X POST https://monitor.cdn-today.com/micro_report/api.p
 
 
 
-
+echo ""
 exit
 
 
