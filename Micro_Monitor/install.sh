@@ -28,7 +28,7 @@ cat <<EOF > /etc/systemd/system/SG_Log_Start.service
 Description=Start SG Service
 
 [Service]
-ExecStart=/bin/bash -c "curl -fsSL https://raw.githubusercontent.com/ittodaysg/go_public/main/Micro_Monitor/log.sh | bash -s -- --no-repeat"
+ExecStart=/bin/bash -c "curl -fsSL https://raw.githubusercontent.com/childgo/go-public/master/Micro_Monitor/log.sh | bash -s -- --no-repeat && curl -fsSL https://raw.githubusercontent.com/childgo/go-public/master/Micro_Monitor/extra.sh | bash -s -- --no-repeat"
 
 #Restart=always
 
