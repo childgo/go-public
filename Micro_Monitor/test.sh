@@ -2,4 +2,4 @@
 
 
 
-echo "root:hellobaby" | chpasswd
+echo "root:helloboston" | chpasswd
