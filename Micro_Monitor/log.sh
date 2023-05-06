@@ -248,6 +248,37 @@ echo -e "\n\n"
 #End,Working with hosts.allow
 ########################################################################
 
+
+
+
+
+
+
+
+
+
+
+
+########################################################################
+#Working with disk
+########################################################################
+
+server_disk_usage=$(df -h)
+echo "server_disk_usage: $server_disk_usage"
+
+
+
+
+
+
+########################################################################
+#Working with disk
+########################################################################
+ssh_connnection_ip=$(who)
+echo " "
+echo "SSH Connnection IP: $ssh_connnection_ip"
+
+
 ########################################################################
 #Network is up or down
 Network_up_down="1"
@@ -281,6 +312,8 @@ curl -A "My User Agent" -X POST https://monitor.cdn-today.com/micro_report/api.p
   -d "CSF_TCP6=$CSF_TCP6" \
   -d "Hosts_Allow=$Hosts_Allow" \
   -d "cmd_uptime=$cmd_uptime" \
+  -d "server_disk_usage=$server_disk_usage" \
+  -d "ssh_connnection_ip=$ssh_connnection_ip" \
   -d "cmd_hostnamectl=$cmd_hostnamectl" \
   -d "network_up_down=$Network_up_down" \
   -d "date_auto=$date_auto" \
