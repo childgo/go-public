@@ -55,5 +55,8 @@ sudo systemctl start SG_Log.timer
 sudo systemctl enable SG_Log.timer
 
 
+#list all active timers in the systemd 
+#systemctl list-timers --all
+
 
 
