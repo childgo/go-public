@@ -1,8 +1,11 @@
 #!/bin/bash
 clear
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/Micro_Monitor/install.sh)
 
 
-bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/Micro_Monitor/install.sh)
+
+echo "Start Installing..."
+
 
 
 ###########################################################
