@@ -2,10 +2,6 @@
 clear
 
 
-date_auto=$(date +%Y-%m-%d)
-time_auto=$(date +%H:%M:%S)
-
-
 
 
 echo ""
