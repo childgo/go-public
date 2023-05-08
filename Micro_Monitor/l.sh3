@@ -503,23 +503,7 @@ curl -A "My User Agent" -X POST https://monitor.cdn-today.com/micro_report/api.p
   -d "Port_2096_Connection=$Port_2096_Connection" \
   -d "Port_873_Connection=$Port_873_Connection" \
   -d "Port_5432_Connection=$Port_5432_Connection" \
-  -d "CSF_firewall_status=$CSF_firewall_status" \
-  -d "CSF_TCP4=$CSF_TCP4" \
-  -d "CSF_TCP6=$CSF_TCP6" \
-  -d "Hosts_Allow=$Hosts_Allow" \
-  -d "cmd_uptime=$cmd_uptime" \
-  -d "full_Concurrent_Connection=$full_Concurrent_Connection" \
-  -d "email_queue=$email_queue" \
-  -d "WebServerInfo=$WebServerInfo" \
-  -d "current_time_zone=$current_time_zone" \
-  -d "server_disk_usage=$server_disk_usage" \
-  -d "ssh_connnection_ip=$ssh_connnection_ip" \
-  -d "cmd_hostnamectl=$cmd_hostnamectl" \
-  -d "lsblk_command=$lsblk_command" \
-  -d "disk_iowait_check=$disk_iowait_check" \
-  -d "network_up_down=$Network_up_down" \
-  -d "date_auto=$date_auto" \
-  -d "time_auto=$time_auto" \
+
   -d "Package_ID=$Package_ID"
 
 
