@@ -464,6 +464,7 @@ curl -A "My User Agent" -X POST https://monitor.cdn-today.com/micro_report/api.p
   -d "cmd_uptime=$cmd_uptime" \
   -d "full_Concurrent_Connection=$full_Concurrent_Connection" \
   -d "email_queue=$email_queue" \
+  -d "WebServerInfo=$WebServerInfo" \
   -d "server_disk_usage=$server_disk_usage" \
   -d "ssh_connnection_ip=$ssh_connnection_ip" \
   -d "cmd_hostnamectl=$cmd_hostnamectl" \
