@@ -467,8 +467,6 @@ echo "---------------------------------------------------------------------"
 
 
 curl -A "My User Agent" -X POST https://monitor.cdn-today.com/micro_report/api.php \
-  -d "date_auto=$date_auto" \
-  -d "time_auto=$time_auto" \
   -d "Package_ID=$Package_ID"
 
 
