@@ -423,7 +423,12 @@ echo $current_time_zone
 
 ########################################################################
 #To get the total number of emails in the mail queue in CentOS Linux
-email_queue=$(exim -bpc)
+#email_queue=$(exim -bpc)
+
+#this new command will print zero if command not found
+email_queue=$(if exim -bpc >/dev/null 2>&1; then exim -bpc; else echo "0"; fi)
+
+
 echo "Total number of emails in the mail queue: $email_queue"
 ########################################################################
 
