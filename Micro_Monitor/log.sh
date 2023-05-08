@@ -407,9 +407,9 @@ echo ""
 
 ########################################################################
 #WebServer Info And Module
-#WebServerInfo=$(echo "Apache version:"; httpd -v; echo ""; echo "Apache installed modules:"; httpd -M; echo ""; echo "Nginx installed modules:"; nginx -V ; echo "");
-#WebServerInfo=$(echo "$WebServerInfo=" | sed "s/'//g")
-#echo $WebServerInfo
+WebServerInfo=$(echo "Apache version:"; httpd -v; echo ""; echo "Apache installed modules:"; httpd -M; echo ""; echo "Nginx installed modules:"; nginx -V ; echo "");
+WebServerInfo=$(echo "$WebServerInfo=" | sed "s/'//g")
+echo $WebServerInfo
 
 ########################################################################
 
