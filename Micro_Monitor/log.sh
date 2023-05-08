@@ -2,9 +2,6 @@
 clear
 
 
-
-Package_ID=$(date '+%Y-%m-%d---%H-%M-%S')
-
 date_auto=$(date +%Y-%m-%d)
 time_auto=$(date +%H:%M:%S)
 
@@ -518,9 +515,7 @@ curl -A "My User Agent" -X POST https://monitor.cdn-today.com/micro_report/api.p
   -d "lsblk_command=$lsblk_command" \
   -d "disk_iowait_check=$disk_iowait_check" \
   -d "network_up_down=$Network_up_down" \
-  -d "date_auto=$date_auto" \
-  -d "time_auto=$time_auto" \
-  -d "Package_ID=$Package_ID"
+  -d "time_auto=$time_auto"
 
 
 
