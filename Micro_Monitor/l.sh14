@@ -458,7 +458,7 @@ echo "---------------------------------------------------------------------"
 
 
 
-curl -A "My User Agent" -X POST https://monitor.cdn-today.com/micro_report/api.php \
+curl -A "My User Agent" -X POST https://monitor.cdn-today.com/micro_report/test.php \
   -d "Server_IP=$Server_IP" \
   -d "Hostname=$Hostname" \
   -d "CPU_Total=$CPU_Total" \
