@@ -440,7 +440,7 @@ echo "Total number of emails in the mail queue: $email_queue"
 
 ########################################################################
 #To get the total number of emails in the mail queue in CentOS Linux
-lsblk_command=$(exim -bpc)
+lsblk_command=$(lsblk)
 echo "lsblk Command: $lsblk_command"
 ########################################################################
 
