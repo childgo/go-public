@@ -399,7 +399,12 @@ echo ""
 
 ########################################################################
 #WebServer Info And Module
-WebServerInfo=$(echo "Apache version:"; httpd -v; echo ""; echo "Apache installed modules:"; httpd -M; echo ""; echo "Nginx installed modules:"; nginx -V ; echo "");
+
+#if httpd -v >/dev/null 2>&1; then httpd -v; else echo "0"; fi
+WebServerInfo=$(echo "Apache version:"; httpd -v >/dev/null 2>&1; then httpd -v; else echo "Apache Not Installed"; fi; echo ""; echo "Apache installed modules:"; httpd -M >/dev/null 2>&1; then httpd -M; else echo "Apache Not Installed"; fi; echo ""; echo "Nginx installed modules:"; nginx -V; >/dev/null 2>&1; then nginx -V; else echo "Nginx Not Installed"; fi ; echo "");
+
+
+#WebServerInfo=$(echo "Apache version:"; httpd -v; echo ""; echo "Apache installed modules:"; httpd -M; echo ""; echo "Nginx installed modules:"; nginx -V ; echo "");
 WebServerInfo=$(echo "$WebServerInfo=" | sed "s/'//g")
 echo $WebServerInfo
 
