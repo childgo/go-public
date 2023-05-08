@@ -396,7 +396,9 @@ full_Concurrent_Connection+="[WHM Secure Port: 2087]\n$(ss -ant '( sport = :2087
 full_Concurrent_Connection+="[WHM UnSecure: 2086]\n$(ss -ant '( sport = :2086 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn)\n"
 
 
-#echo -e $full_Concurrent_Connection
+echo -e $full_Concurrent_Connection
+echo ""
+
 ########################################################################
 
 
@@ -410,10 +412,11 @@ full_Concurrent_Connection+="[WHM UnSecure: 2086]\n$(ss -ant '( sport = :2086 )'
 
 ########################################################################
 #To get the total number of emails in the mail queue in CentOS Linux
-#email_queue=$(exim -bpc)
+email_queue=$(exim -bpc)
 echo "Total number of emails in the mail queue: $email_queue"
 ########################################################################
 
+echo "ccccccccccccccccccccccccc"
 
 
 
