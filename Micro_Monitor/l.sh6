@@ -468,17 +468,6 @@ echo "---------------------------------------------------------------------"
 
 curl -A "My User Agent" -X POST https://monitor.cdn-today.com/micro_report/api.php \
   -d "Server_IP=$Server_IP" \
-  -d "Hostname=$Hostname" \
-  -d "CPU_Total=$CPU_Total" \
-  -d "CPU_load=$CPU_load" \
-  -d "RAM_Mem_Used=$RAM_Mem_Used" \
-  -d "RAM_Mem_Free=$RAM_Mem_Free" \
-  -d "RAM_Mem_shared=$RAM_Mem_shared" \
-  -d "RAM_Mem_buff_cache=$RAM_Mem_buff_cache" \
-  -d "RAM_Mem_available=$RAM_Mem_available" \
-  -d "RAM_Swap_total=$RAM_Swap_total" \
-  -d "RAM_Swap_used=$RAM_Swap_used" \
-  -d "RAM_Swap_Free=$RAM_Swap_Free" \
   -d "Port_80_Connection=$Port_80_Connection" \
   -d "Port_443_Connection=$Port_443_Connection" \
   -d "Port_3306_Connection=$Port_3306_Connection" \
