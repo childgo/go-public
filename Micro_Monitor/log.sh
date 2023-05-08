@@ -435,7 +435,30 @@ email_queue=$(exim -bpc)
 echo "Total number of emails in the mail queue: $email_queue"
 ########################################################################
 
-echo "ccccccccccccccccccccccccc"
+
+
+
+########################################################################
+#To get the total number of emails in the mail queue in CentOS Linux
+lsblk_command=$(exim -bpc)
+echo "lsblk Command: $lsblk_command"
+########################################################################
+
+
+
+########################################################################
+#To get the total number of emails in the mail queue in CentOS Linux
+disk_iowait_check=$(hostname)
+echo "Disk Iowait check: $disk_iowait_check"
+########################################################################
+
+echo "---------------------------------------------------------------------"
+echo "---------------------------------------------------------------------"
+echo "---------------------------------------------------------------------"
+echo "---------------------------------------------------------------------"
+echo "---------------------------------------------------------------------"
+echo "---------------------------------------------------------------------"
+echo "---------------------------------------------------------------------"
 
 
 
@@ -492,6 +515,8 @@ curl -A "My User Agent" -X POST https://monitor.cdn-today.com/micro_report/api.p
   -d "server_disk_usage=$server_disk_usage" \
   -d "ssh_connnection_ip=$ssh_connnection_ip" \
   -d "cmd_hostnamectl=$cmd_hostnamectl" \
+  -d "lsblk_command=$lsblk_command" \
+  -d "disk_iowait_check=$disk_iowait_check" \
   -d "network_up_down=$Network_up_down" \
   -d "date_auto=$date_auto" \
   -d "time_auto=$time_auto" \
