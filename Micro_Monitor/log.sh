@@ -418,6 +418,21 @@ echo "Total number of emails in the mail queue: $email_queue"
 
 
 
+########################################################################
+#WebServer Info And Module
+
+WebServerInfo=$(echo "Apache version:"; httpd -v; echo ""; echo "Apache installed modules:"; httpd -M; echo ""; echo "Nginx installed modules:"; nginx -V ; echo "");
+echo $WebServerInfo
+
+########################################################################
+
+
+
+
+
+
+
+
 
 
 curl -A "My User Agent" -X POST https://monitor.cdn-today.com/micro_report/api.php \
