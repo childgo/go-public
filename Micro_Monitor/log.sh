@@ -135,6 +135,10 @@ RAM_Swap_Free=$(free -m | awk '/^Swap:/ {print $4}')
 echo "RAM_Swap_Free: $RAM_Swap_Free"
 
 
+RAM_usage_percentage=$(free | awk '/Mem/{printf("%.2f"), $3/$2*100}')
+echo "RAM Usage Percentage: $RAM_usage_percentage"
+
+
 ########################################################################
 #End,Working with RAM
 ########################################################################
@@ -478,6 +482,7 @@ curl -A "My User Agent" -X POST https://monitor.cdn-today.com/micro_report/api.p
   -d "RAM_Swap_used=$RAM_Swap_used" \
   -d "RAM_Swap_Free=$RAM_Swap_Free" \
   -d "RAM_Full_Command=$RAM_Full_Command" \
+  -d "RAM_usage_percentage=$RAM_usage_percentage" \
   -d "Port_80_Connection=$Port_80_Connection" \
   -d "Port_443_Connection=$Port_443_Connection" \
   -d "Port_3306_Connection=$Port_3306_Connection" \
