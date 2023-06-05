@@ -9,6 +9,7 @@
 dnf install perl-libwww-perl -y;sleep 3;
 dnf install perl-Math-BigInt -y;sleep 3;
 dnf install wget -y;sleep 3;
+dnf install tar;sleep 3;
 
 #Download CSF files and extract them
 cd /usr/src;sleep 3;
