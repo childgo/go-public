@@ -41,6 +41,7 @@ baseurl=https://repo.alscoip.com/Linux/Centos7-Sync/updates/
 gpgcheck=0
 enabled=1
 
+
 EOF
 #########################################################################################################
 #########################################################################################################
@@ -52,9 +53,10 @@ ALSCO_Path="/etc/yum.repos.d/ALSCO_Nginx.repo"
 cat <<EOF >>/etc/yum.repos.d/ALSCO_Nginx.repo
 [ALSCO-Nginx]
 name=RHEL Apache
-baseurl=https://repo.alscoip.com/Linux/Nginx_Centos7/
+baseurl=http://repo.alscoip.com/Linux/Nginx_Centos7/
 enabled=1
 gpgcheck=0
+
 EOF
 #########################################################################################################
 #########################################################################################################
