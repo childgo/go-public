@@ -357,6 +357,8 @@ tail -f /var/log/nginx/alsco_error.log | grep --color '50.253.239.118'
 "IP Trace 25")
 echo "yum install traceroute"
 echo "traceroute -I 185.52.101.72"
+echo "traceroute -I alscoip.com"
+
 echo ""
 traceroute -I 50.253.239.118
 
