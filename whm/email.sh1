@@ -10,6 +10,7 @@ options=("Monitor Webmail 2096 Port and Load 1"
 "Delete Email 8"
 "Delete Emails Older Than [X] Days 9"
 "Remove all Block ip in CSF 10"
+"List All Domains And Folder Size 11"
 
 
 
@@ -390,7 +391,56 @@ echo "Done"
 
 
 
-"Option 11")
+
+########################################################
+"List All Domains And Folder Size 11")
+clear
+# Function to calculate folder size in GB or MB
+get_folder_size() {
+    size_in_bytes=$(du -sb "$1" | awk '{ print $1 }')
+    size_in_gb=$(echo "scale=2; $size_in_bytes / (1024*1024*1024)" | bc)
+
+    if (( $(bc <<< "$size_in_gb >= 1") )); then
+        echo "${size_in_gb}GB"
+    else
+        size_in_mb=$(echo "scale=2; $size_in_bytes / (1024*1024)" | bc)
+        echo "${size_in_mb}MB"
+    fi
+}
+
+# Function to count total files in a directory
+count_files() {
+    find "$1" -type f | wc -l
+}
+
+# Read domains and user associations from /etc/trueuserdomains
+while IFS= read -r line; do
+    user=$(echo "$line" | awk '{ print $2 }')
+    domain=$(echo "$line" | awk '{ print $1 }')
+
+    echo "Domain: $domain"
+
+    # Calculate the total size of the user's path
+    user_path="/home/$user"
+    total_size=$(get_folder_size "$user_path")
+
+    # Count total files in the user's path
+    total_files=$(count_files "$user_path")
+
+    echo "cPanel User: $user"
+    echo "Total Size: $total_size"
+    echo "Total Files: $total_files"
+    echo "------------------------"
+done < /etc/trueuserdomains
+echo "Done"
+
+;;
+########################################################
+
+
+
+
+"Option 12")
 echo "Done"
 
 
