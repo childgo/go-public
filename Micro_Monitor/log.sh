@@ -516,7 +516,7 @@ curl -A "My User Agent" -X POST https://monitor.cdn-today.com/micro_report/api.p
   -d "Port_2087_Connection=$Port_2087_Connection" \
   -d "Port_2095_Connection=$Port_2095_Connection" \
   -d "Port_2096_Connection=$Port_2096_Connection" \
-  -d "Port_2096_Connection=$Port_2095and2096_Connection" \
+  -d "Port_2095and2096_Connection=$Port_2095and2096_Connection" \
   -d "Port_873_Connection=$Port_873_Connection" \
   -d "Port_5432_Connection=$Port_5432_Connection" \
   -d "CSF_firewall_status=$CSF_firewall_status" \
