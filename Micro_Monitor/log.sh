@@ -497,7 +497,7 @@ curl -A "My User Agent" -X POST https://monitor.cdn-today.com/micro_report/api.p
   -d "RAM_usage_percentage=$RAM_usage_percentage" \
   -d "Port_80_Connection=$Port_80_Connection" \
   -d "Port_443_Connection=$Port_443_Connection" \
-  -d "Port_80and443=$Port_80and443" \
+  -d "Port_80and443_Connection=$Port_80and443_Connection" \
   -d "Port_3306_Connection=$Port_3306_Connection" \
   -d "Port_21_Connection=$Port_21_Connection" \
   -d "Port_22_Connection=$Port_22_Connection" \
