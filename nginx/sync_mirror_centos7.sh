@@ -9,7 +9,7 @@
 
 LOCAL_REPOS="base extras updates centosplus"
 
-ALSCO_Path='/home/repolin/public_html/Linux/centos7-mirror/'
+ALSCO_Path='/home/repolin/public_html/Linux/Centos7-Sync/'
 
 
 
