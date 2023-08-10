@@ -51,21 +51,24 @@ echo -e "\n\n"
 #Working with Concurrent Connections
 ########################################################################
 
-Port_80_Connection=$(netstat -an | grep :80 | grep ESTABLISHED | wc -l)
+#Port_80_Connection=$(netstat -an | grep :80 | grep ESTABLISHED | wc -l)
+Port_80_Connection=$(netstat -an | grep :80 | wc -l)
 echo "Port_80_Connection: $Port_80_Connection"
 
 
 
-Port_443_Connection=$(netstat -an | grep :443 | grep ESTABLISHED | wc -l)
+#Port_443_Connection=$(netstat -an | grep :443 | grep ESTABLISHED | wc -l)
+Port_443_Connection=$(netstat -an | grep :443 | wc -l)
 echo "Port_443_Connection: $Port_443_Connection"
 
 
-Port_3306_Connection=$(netstat -an | grep :3306 | grep ESTABLISHED | wc -l)
+#Port_3306_Connection=$(netstat -an | grep :3306 | grep ESTABLISHED | wc -l)
+Port_3306_Connection=$(netstat -an | grep :3306 | wc -l)
 echo "Port_3306_Connection: $Port_3306_Connection"
 
 
-
-Port_80and443_Connection=$(netstat -an | grep -E '(:80|:443)' | grep ESTABLISHED | wc -l)
+#Port_80and443_Connection=$(netstat -an | grep -E '(:80|:443)' | grep ESTABLISHED | wc -l)
+Port_80and443_Connection=$(netstat -an | grep -E '(:80|:443)' | wc -l)
 echo "Port 80 and 443: $Port_80and443_Connection"
 
 
