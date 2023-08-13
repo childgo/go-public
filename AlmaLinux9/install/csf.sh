@@ -14,9 +14,9 @@ rm -rf /opt/csf.tgz;sleep 3;
 cd ~;sleep 3;
 systemctl enable csf;sleep 3;
 systemctl enable lfd;sleep 3;
-service csf start;sleep 3;
-service lfd start;sleep 3;
-perl /usr/local/csf/bin/csftest.pl;sleep 3;
+#service csf start;sleep 3;
+#service lfd start;sleep 3;
+#perl /usr/local/csf/bin/csftest.pl;sleep 3;
 
 
 
