@@ -18,5 +18,19 @@ php -v;sleep 3;
 
 
 
+#======================================================================
+#php changing setting
+#======================================================================
+echo "Start php Value...."
+sed -i 's/session.cookie_httponly =/session.cookie_httponly = true/' /etc/php.ini
+sed -i 's/session.cookie_samesite =/session.cookie_samesite = true/' /etc/php.ini
+
+
+service php-fpm restart;sleep 3;
+
+echo ""
+echo "Verify that the change was successful. ...."
+grep -r "session.cookie_httponly" /etc/php.ini
+grep -r "session.cookie_samesite" /etc/php.ini
 
 
