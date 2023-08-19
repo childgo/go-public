@@ -3,7 +3,7 @@
 clear
 
 #royal_program_list='file,block,topic,article,menu,multimenu,headline,album,video,setting,theme,program,myaccount';
-royal_program_list='file,block,topic,article,page,multimenu,headline,album,video,ads,header,structure,setting,program';
+royal_program_list='account,file,block,topic,article,page,multimenu,headline,album,video,ads,header,footer,structure,setting,program';
 
 
 #============================================================================
@@ -174,6 +174,14 @@ mysql -p$DB_PASS_ROYAL -u $DB_USER_ROYAL $DB_NAME_ROYAL < /alscospider/today/roy
 #mysql -u $DB_USER_ROYAL -p$DB_PASS_ROYAL $DB_NAME_ROYAL -e "UPDATE account SET username = '$final_royal_arabic_user', password = '$final_royal_arabic_password' where language = 'ar' ";
 #mysql -u $DB_USER_ROYAL -p$DB_PASS_ROYAL $DB_NAME_ROYAL -e "UPDATE account SET username = '$final_royal_english_user', password = '$final_royal_english_password' where language = 'en' ";
 #mysql -u $DB_USER_ROYAL -p$DB_PASS_ROYAL $DB_NAME_ROYAL -e "UPDATE account SET username = '$final_royal_french_user', password = '$final_royal_french_password' where language = 'fr' ";
+
+
+#update footer
+mysql -u $DB_USER_ROYAL -p$DB_PASS_ROYAL $DB_NAME_ROYAL -e "UPDATE setting SET footer_gateway = 'off' ";
+
+
+#update log
+mysql -u $DB_USER_ROYAL -p$DB_PASS_ROYAL $DB_NAME_ROYAL -e "UPDATE setting SET statistics_status = 'off' ";
 
 
 #Insert Arabic Info
