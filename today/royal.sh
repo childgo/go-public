@@ -185,13 +185,13 @@ mysql -u $DB_USER_ROYAL -p$DB_PASS_ROYAL $DB_NAME_ROYAL -e "UPDATE setting SET s
 
 
 #Insert Arabic Info
-mysql -u $DB_USER_ROYAL -p$DB_PASS_ROYAL $DB_NAME_ROYAL -e "INSERT INTO account (name, level, phone, username, password, program, language) VALUES ('name_ar', 'client', '96411111111','$final_royal_arabic_user', '$final_royal_arabic_password','$royal_program_list','ar')";
+mysql -u $DB_USER_ROYAL -p$DB_PASS_ROYAL $DB_NAME_ROYAL -e "INSERT INTO account (name, level, phone, username, password, program, power, language) VALUES ('name_ar', 'client', '96411111111','$final_royal_arabic_user', '$final_royal_arabic_password','$royal_program_list','full','ar')";
 
 #Insert English Info
-mysql -u $DB_USER_ROYAL -p$DB_PASS_ROYAL $DB_NAME_ROYAL -e "INSERT INTO account (name, level, phone, username, password, program, language) VALUES ('name_en', 'client', '96411111111','$final_royal_english_user', '$final_royal_english_password','$royal_program_list','en')";
+mysql -u $DB_USER_ROYAL -p$DB_PASS_ROYAL $DB_NAME_ROYAL -e "INSERT INTO account (name, level, phone, username, password, program, power, language) VALUES ('name_en', 'client', '96411111111','$final_royal_english_user', '$final_royal_english_password','$royal_program_list','full','en')";
 
 #Insert French Info
-mysql -u $DB_USER_ROYAL -p$DB_PASS_ROYAL $DB_NAME_ROYAL -e "INSERT INTO account (name, level, phone, username, password, program, language) VALUES ('name_fr', 'client',  '96411111111','$final_royal_french_user', '$final_royal_french_password','$royal_program_list','fr')";
+mysql -u $DB_USER_ROYAL -p$DB_PASS_ROYAL $DB_NAME_ROYAL -e "INSERT INTO account (name, level, phone, username, password, program ,power, language) VALUES ('name_fr', 'client',  '96411111111','$final_royal_french_user', '$final_royal_french_password','$royal_program_list','full','fr')";
 
 
 
