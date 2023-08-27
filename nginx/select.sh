@@ -175,9 +175,15 @@ chown apache $(find /etc/nginx/conf.d/alsco_data_cookie_and_ip/ -type f  -name '
 chown apache $(find /etc/nginx/conf.d/alsco_data_cookie_and_ip/ -type f  -name '*.ip.alsco')
 chown apache $(find /etc/nginx/conf.d/alsco_data_cookie_and_ip/ -type f  -name '*.ipsetting.alsco')
 chown apache $(find /etc/nginx/conf.d/alsco_data_cookie_and_ip/ -type f  -name '*.ratelimit_tempIP_block.alsco')
-echo "Finish Write On conf.d"
+echo "Finish Write On conf.d......."
 echo "Done"
+echo ""
+echo ""
 
+echo "pgrep -x \"inotify.alsco\""
+echo "to kill process use, kill 1234"
+echo "================"
+pgrep -x "inotify.alsco"
 ;;
 ########################################################
 "check Nginx version 17")
