@@ -50,18 +50,25 @@ sed -i 's/UDP6_OUT .*/UDP6_OUT =""/' /etc/csf/csf.conf
 #Enable IPSET
 sed -i 's/^LF_IPSET =.*/LF_IPSET = "1"/' /etc/csf/csf.conf
 
-
+echo ""
 echo "Verify that the change was successful. ...."
 grep -r "TCP_IN =" /etc/csf/csf.conf
 grep -r "TCP_OUT =" /etc/csf/csf.conf
 grep -r "UDP_IN =" /etc/csf/csf.conf
 grep -r "UDP_OUT =" /etc/csf/csf.conf
-
+echo ""
 
 grep -r "TCP6_IN =" /etc/csf/csf.conf
 grep -r "TCP6_OUT =" /etc/csf/csf.conf
 grep -r "UDP6_IN =" /etc/csf/csf.conf
 grep -r "UDP6_OUTT =" /etc/csf/csf.conf
+
+echo ""
+grep -r "LF_IPSET =" /etc/csf/csf.conf
+
+
+echo ""
+
 #======================================================================
 
 
