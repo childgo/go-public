@@ -74,4 +74,9 @@ perl /usr/local/csf/bin/csftest.pl
 
 
 
+#======================================================================
+#Uninstall CSF Firewall
+#cd /etc/csf
+#sh uninstall.sh
+
 
