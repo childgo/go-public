@@ -1,3 +1,6 @@
+https://raw.githubusercontent.com/childgo/go-public/master/CentOS_7/install/GEO_AND_Maxmind.sh
+clear
+
 systemctl disable firewalld;sleep 3;
 systemctl stop firewalld;sleep 3;
 yum clean all;sleep 3;
