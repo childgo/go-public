@@ -1,3 +1,7 @@
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/AlmaLinux9/install/mysql.sh)
+
+
+clear
 yum update;sleep 3;
 yum -y update;sleep 3;
 yum install wget nano inotify-tools rsync sshpass;sleep 3;
