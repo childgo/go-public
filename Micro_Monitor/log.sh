@@ -437,9 +437,7 @@ echo $WebServerInfo
 
 ########################################################################
 #current time zone 
-
-current_time_zone=$(timedatectl);
-current_time_zone=$(echo "$current_time_zone" | sed "s/'//g")
+current_time_zone=$(timedatectl --no-pager | tr -d "'")
 echo $current_time_zone
 ########################################################################
 
