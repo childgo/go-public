@@ -1,4 +1,4 @@
-#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/CentOS_7/install/index_server_default_page.html)
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/CentOS_7/install/nginx.sh)
 
 clear
 
