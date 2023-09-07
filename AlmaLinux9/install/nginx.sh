@@ -1,4 +1,4 @@
-#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/AlmaLinux9/install/mysql.sh)
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/AlmaLinux9/install/nginx.sh)
 
 
 clear
