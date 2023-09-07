@@ -24,7 +24,13 @@ echo -e "\n\n"
 
 
 
-cmd_hostnamectl=$(hostnamectl | tr -d "'")
+#cmd_hostnamectl=$(hostnamectl | tr -d "'")
+cmd_hostnamectl=$(hostnamectl | tr -d "'" | sed ':a;N;$!ba;s/\n/<br>/g')
+
+
+
+
+
 echo "cmd_hostnamectl: $cmd_hostnamectl"
 
 
