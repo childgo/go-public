@@ -28,3 +28,17 @@ echo ""
 echo "Verify that the change was successful. ...."
 grep -r "session.cookie_httponly" /etc/php.ini
 grep -r "session.cookie_samesite" /etc/php.ini
+
+
+
+
+
+#------------------------------------------------------------------------------------------------------------------
+#Clean Repo
+
+repo_dir="/etc/yum.repos.d/"
+
+# Delete all .repo files except for the specified ones
+find "$repo_dir" -type f -name '*.repo' ! -name 'alsco_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
+yum clean all
+#------------------------------------------------------------------------------------------------------------------
