@@ -1,3 +1,5 @@
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/CentOS_7/install/index_server_default_page.html)
+clear
 
 #Part1
 yum -y install mariadb-server mariadb;sleep 3;
