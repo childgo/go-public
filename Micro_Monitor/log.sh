@@ -542,7 +542,6 @@ curl -A "My User Agent" -X POST https://monitor.cdn-today.com/micro_report/api.p
   -d "bandwidth_Download_Rate=$bandwidth_Download_Rate" \
   -d "bandwidth_Upload_Num=$bandwidth_Upload_Num" \
   -d "bandwidth_Upload_Rate=$bandwidth_Upload_Rate" \
-
   -d "WebServerInfo=$WebServerInfo" \
   -d "current_time_zone=$current_time_zone" \
   -d "server_disk_usage=$server_disk_usage" \
