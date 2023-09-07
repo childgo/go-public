@@ -24,7 +24,7 @@ echo -e "\n\n"
 
 
 
-cmd_hostnamectl=$(hostnamectl)
+cmd_hostnamectl=$(hostnamectl | tr -d "'")
 echo "cmd_hostnamectl: $cmd_hostnamectl"
 
 
@@ -418,16 +418,8 @@ echo ""
 
 ########################################################################
 #WebServer Info And Module
-#WebServerInfo=$(echo "Nginx Version:"; nginx -V; echo ""; echo "Apache installed modules:"; httpd -v; echo "";  httpd -M;);
-#WebServerInfo=$(echo 'Nginx Version:'; nginx -V; echo ''; echo 'Apache installed modules:'; httpd -v; echo '';  httpd -M;);
-
-
 WebServerInfo=$(echo 'Nginx Version:'; nginx -V 2>&1 | tr -d "'" | sed "s/--/\n/g"; echo ''; echo 'Apache installed modules:'; httpd -v; echo ''; httpd -M | tr -d "'")
-
-
-#WebServerInfo=$(echo "$WebServerInfo=" | sed "s/'//g")
 echo $WebServerInfo
-
 ########################################################################
 
 
@@ -437,7 +429,7 @@ echo $WebServerInfo
 
 ########################################################################
 #current time zone 
-current_time_zone=$(timedatectl --no-pager | tr -d "'")
+current_time_zone=$(timedatectl | tr -d "'")
 echo $current_time_zone
 ########################################################################
 
@@ -469,7 +461,7 @@ bandwidth_Upload_Rate=4
 
 ########################################################################
 #To get the total number of emails in the mail queue in CentOS Linux
-lsblk_command=$(lsblk)
+lsblk_command=$(iostat -c 1 2 | awk '/^ /{print $4}' | tail -n 1)
 echo "lsblk Command: $lsblk_command"
 ########################################################################
 
