@@ -504,22 +504,22 @@ ALSCO_Path="/etc/yum.repos.d/alsco_CentOS7.repo"
 cat <<EOF >>/etc/yum.repos.d/alsco_CentOS7.repo
 [ALSCO-local-base]
 name=CentOS Base
-baseurl=https://repo.alscoip.com/Linux/Centos7-Sync/base/
+baseurl=https://repo.alscoip.com/Linux/CentOS_7/Centos7_Sync_Repository/base/
 gpgcheck=0
 enabled=1
 [ALSCO-local-centosplus]
 name=CentOS CentOSPlus
-baseurl=https:/repo.alscoip.com/Linux/Centos7-Sync/centosplus/
+baseurl=https://repo.alscoip.com/Linux/CentOS_7/Centos7_Sync_Repository/centosplus/
 gpgcheck=0
 enabled=0
 [ALSCO-local-extras]
 name=CentOS Extras
-baseurl=https://repo.alscoip.com/Linux/Centos7-Sync/extras/
+baseurl=https://repo.alscoip.com/Linux/CentOS_7/Centos7_Sync_Repository/extras/
 gpgcheck=0
 enabled=1
 [ALSCO-local-updates]
 name=CentOS Updates
-baseurl=https://repo.alscoip.com/Linux/Centos7-Sync/updates/
+baseurl=https://repo.alscoip.com/Linux/CentOS_7/Centos7_Sync_Repository/updates/
 gpgcheck=0
 enabled=1
 EOF
@@ -530,9 +530,9 @@ EOF
 ALSCO_Path="/etc/yum.repos.d/ALSCO_Nginx.repo"
 
 cat <<EOF >>/etc/yum.repos.d/ALSCO_Nginx.repo
-[ALSCO-Nginx]
+[ALSCO-Nginx-SecureGateway]
 name=RHEL Apache
-baseurl=http://repo.alscoip.com/Linux/Nginx_Centos7/
+baseurl=https://repo.alscoip.com/Linux/CentOS_7/Nginx_SecureGateway/
 enabled=1
 gpgcheck=0
 EOF
