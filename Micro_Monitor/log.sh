@@ -419,12 +419,10 @@ echo ""
 ########################################################################
 #WebServer Info And Module
 #WebServerInfo=$(echo "Nginx Version:"; nginx -V; echo ""; echo "Apache installed modules:"; httpd -v; echo "";  httpd -M;);
-WebServerInfo=$(echo 'Nginx Version:'; nginx -V; echo ''; echo 'Apache installed modules:'; httpd -v; echo '';  httpd -M;);
-
 #WebServerInfo=$(echo 'Nginx Version:'; nginx -V; echo ''; echo 'Apache installed modules:'; httpd -v; echo '';  httpd -M;);
 
 
-WebServerInfo=$(echo 'Nginx Version:'; nginx -V; echo ''; echo 'Apache installed modules:'; httpd -v; echo ''; httpd -M | tr -d "'")
+WebServerInfo=$(echo 'Nginx Version:'; nginx -V 2>&1 | tr -d "'" | sed "s/--/\n/g"; echo ''; echo 'Apache installed modules:'; httpd -v; echo ''; httpd -M | tr -d "'")
 
 
 #WebServerInfo=$(echo "$WebServerInfo=" | sed "s/'//g")
