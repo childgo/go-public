@@ -418,7 +418,9 @@ echo ""
 
 ########################################################################
 #WebServer Info And Module
-WebServerInfo=$(echo "Nginx Version:"; nginx -V; echo ""; echo "Apache installed modules:"; httpd -v; echo "";  httpd -M;);
+#WebServerInfo=$(echo "Nginx Version:"; nginx -V; echo ""; echo "Apache installed modules:"; httpd -v; echo "";  httpd -M;);
+WebServerInfo=$(echo 'Nginx Version:'; nginx -V; echo ''; echo 'Apache installed modules:'; httpd -v; echo '';  httpd -M;);
+
 #WebServerInfo=$(echo "$WebServerInfo=" | sed "s/'//g")
 echo $WebServerInfo
 
