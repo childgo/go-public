@@ -1,3 +1,7 @@
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/CentOS_7/install/nginx.sh)
+
+clear
+
 #sudo yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm;sleep 3;
 sudo yum -y install epel-release yum-utils;sleep 3;
 sudo yum-config-manager --disable remi-php54;sleep 3;
