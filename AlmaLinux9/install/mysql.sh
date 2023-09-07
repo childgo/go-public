@@ -1,3 +1,6 @@
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/AlmaLinux9/install/csf.sh)
+
+
 yum -y install mariadb-server mariadb;sleep 3;
 systemctl start mariadb;sleep 3;
 systemctl enable mariadb;sleep 3;
