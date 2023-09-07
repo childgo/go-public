@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/nginx/sync_getpagespeed.sh)
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/CentOS_7/sync_getpagespeed.sh)
 #rsync -avz  --delete --progress -e "ssh -p 111" /home/final/Linux/cento7/ root@50.50.50.50:/home/repolin/public_html/Linux/Nginx_Centos7/
 
 ##specify all local repositories in a single variable
