@@ -453,6 +453,15 @@ echo "Total number of emails in the mail queue: $email_queue"
 
 
 
+########################################################################
+#Bandwith
+bandwidth_Download_Num=1
+bandwidth_Download_Rate=2
+bandwidth_Upload_Num=3
+bandwidth_Upload_Rate=4
+
+########################################################################
+
 
 ########################################################################
 #To get the total number of emails in the mail queue in CentOS Linux
