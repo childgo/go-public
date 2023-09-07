@@ -1,4 +1,6 @@
-https://raw.githubusercontent.com/childgo/go-public/master/CentOS_7/install/GEO_AND_Maxmind.sh
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/CentOS_7/install/csf.sh)
+
+
 clear
 
 systemctl disable firewalld;sleep 3;
