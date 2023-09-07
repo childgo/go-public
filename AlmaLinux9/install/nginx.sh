@@ -15,4 +15,21 @@ firewall-cmd --zone=public --permanent --add-service=https;sleep 3;
 firewall-cmd --reload;sleep 3;
 systemctl reload nginx;sleep 3;
 systemctl restart nginx;sleep 3;
-#reboot;sleep 3;
+
+
+
+
+#------------------------------------------------------------------------------------------------------------------
+#Clean Repo
+
+repo_dir="/etc/yum.repos.d/"
+
+# Delete all .repo files except for the specified ones
+find "$repo_dir" -type f -name '*.repo' ! -name 'alsco_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
+yum clean all
+#------------------------------------------------------------------------------------------------------------------
+
+
+
+reboot;sleep 3;
+
