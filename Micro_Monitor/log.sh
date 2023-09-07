@@ -550,6 +550,8 @@ curl -A "My User Agent" -X POST https://monitor.cdn-today.com/micro_report/api.p
 
 
 echo ""
+echo "Version: 1"
+
 exit
 
 
