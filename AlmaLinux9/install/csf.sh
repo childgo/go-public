@@ -1,4 +1,4 @@
-#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/CentOS_7/install/csf.sh)
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/AlmaLinux9/install/csf.sh)
 
 systemctl disable firewalld;sleep 3;
 systemctl stop firewalld;sleep 3;
