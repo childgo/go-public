@@ -1,3 +1,5 @@
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/CentOS_7/install/csf.sh)
+
 systemctl disable firewalld;sleep 3;
 systemctl stop firewalld;sleep 3;
 yum clean all;sleep 3;
