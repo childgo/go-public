@@ -169,6 +169,71 @@ free -m -h
 ########################################################
 "free 15")
 
+
+
+
+
+
+
+
+
+while true; do
+    echo "Choose an option:"
+    echo "a) List all cookies"
+    echo "b) Delete all cookies"
+    echo "q) Quit"
+    read -p "Enter your choice (a/b/q): " choice
+
+    case $choice in
+        a)
+            # List all cookies
+            current_date=$(date +%s)
+            find /etc/nginx/conf.d/alsco_data_cookie_and_ip/ -type f -name '*.map' -print0 |
+            while IFS= read -r -d '' filepath; do
+                ex -s +'v/\S/d' -cwq "$filepath"
+                cat "$filepath" | while read ONELINE; do
+                    cookie_time=$(echo "$ONELINE" | awk -F'-' '{print $2}')
+                    real_cookie_alsco_time=$(date +'%Y-%m-%d %H:%M:%S' -d "@$cookie_time")
+                    real_current_alsco_time=$(date +'%Y-%m-%d %H:%M:%S' -d "@$current_date")
+                    echo "Keep: $cookie_time | Current Time: $real_current_alsco_time | Cookie Time: $real_cookie_alsco_time | $filepath"
+                done
+            done
+            ;;
+        b)
+            # Delete all cookies
+            find /etc/nginx/conf.d/alsco_data_cookie_and_ip/ -type f -name '*.map' -exec cp /dev/null {} \;
+            echo "All cookies deleted."
+            ;;
+        q)
+            echo "Exiting the script."
+            exit 0
+            ;;
+        *)
+            echo "Invalid choice. Please select 'a', 'b', or 'q'."
+            ;;
+    esac
+done
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ;;
 ########################################################
 "Inotify and Enable SELinux + PHP + Apache to write/access php 16")
