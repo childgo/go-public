@@ -13,12 +13,12 @@ options=(
 "Reload Nginx 7" "nginx -t 8"
 "Tail Nginx error Log 9"
 "Tail Nginx access Log 10"
-"Restart PHP 11"
+"Restart PHP and Session Path  11"
 "Nginx conf Path 12"
 "Nginx Log Path 13"
 "disk space used and available 14"
-"pgrep -x inotify.alsco 15"
-"Enable SELinux + PHP + Apache to write/access php file 16"
+"free 15"
+"Inotify and Enable SELinux + PHP + Apache to write/access php 16"
 "check Nginx version 17"
 "Check ALSCO IP Firewall Setting 18"
 "CSF Firewall Setting 19"
@@ -133,9 +133,15 @@ echo ""
 tail -f /var/log/nginx/access.log
 ;;
 ########################################################
-"Restart PHP 11")
+"Restart PHP and Session Path  11")
 echo "service php-fpm restart"
 service php-fpm restart
+
+
+echo -e "\n\n\n"
+session_path="/var/lib/php/session/"
+echo -e "Php Session path is: $session_path/\n"
+
 ;;
 ########################################################
 "Nginx conf Path 12")
@@ -161,14 +167,11 @@ echo "free -m -h"
 free -m -h
 ;;
 ########################################################
-"pgrep -x inotify.alsco 15")
-echo "pgrep -x \"inotify.alsco\""
-echo "to kill process use, kill 1234"
-echo "================"
-pgrep -x "inotify.alsco"
+"free 15")
+
 ;;
 ########################################################
-"Enable SELinux + PHP + Apache to write/access php file 16")
+"Inotify and Enable SELinux + PHP + Apache to write/access php 16")
 #echo ". /alscospider/setting-conf.alsco"
 
 #Enable Write On conf.d files
