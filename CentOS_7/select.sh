@@ -187,6 +187,8 @@ while true; do
 
 
 
+#==========================================
+#start here
 # Current date/time in number format
 current_date=$(date +%s)
 
@@ -200,11 +202,12 @@ calculate_time_difference() {
     local time_diff=$((end_time - start_time))
     local hours=$((time_diff / 3600))
     local minutes=$(( (time_diff % 3600) / 60 ))
-    echo "$hours hours $minutes minutes"
+    echo "$hours:$minutes"
 }
 
 # Color codes for formatting
 RED='\033[0;31m'
+BLUE='\033[0;34m'
 NC='\033[0m' # No color
 
 # First loop to find all files that end in .map
@@ -224,7 +227,7 @@ find /etc/nginx/conf.d/alsco_data_cookie_and_ip/ -type f -name '*.map' -print0 |
             domain=$(basename "$(dirname "$filepath")")
 
             if [ "$current_date_decrease" -gt "$cookie_time" ]; then
-                #Delete lines with the specified cookie_time
+                # Delete lines with the specified cookie_time
                 sed -i "/$cookie_time/d" "$filepath"
                 echo -e "${RED}Domain: $domain | Deleted: $cookie_time | Current Time: $real_current_alsco_time | Cookie Time: $real_cookie_alsco_time${NC}"
                 echo ""
@@ -232,13 +235,14 @@ find /etc/nginx/conf.d/alsco_data_cookie_and_ip/ -type f -name '*.map' -print0 |
             else
                 # Calculate the remaining time until deletion
                 remaining_time=$(calculate_time_difference "$cookie_time" "$current_date_decrease")
-                # Format the message with domain in red, remaining time, and other information
-                echo -e "${RED}Domain: $domain${NC} | Keep: $cookie_time | Current Time: $real_current_alsco_time | Cookie Time: $real_cookie_alsco_time | Remaining Time Until Delete: $remaining_time"
+                # Format the message with domain in red and remaining time in blue
+                echo -e "${RED}Domain: $domain${NC} | Keep: $cookie_time | Current Time: $real_current_alsco_time | Cookie Time: $real_cookie_alsco_time | Remaining Time Until Delete: ${BLUE}$remaining_time${NC}"
                 echo ""
             fi
         done < "$filepath"
     done
 
+#==========================================
 
 
 
