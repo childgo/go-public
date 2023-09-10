@@ -227,9 +227,11 @@ find /etc/nginx/conf.d/alsco_data_cookie_and_ip/ -type f -name '*.map' -print0 |
             domain=$(basename "$(dirname "$filepath")")
 
             if [ "$current_date_decrease" -gt "$cookie_time" ]; then
+                # Calculate the time elapsed since deletion
+                time_deleted=$(calculate_time_difference "$current_date_decrease" "$cookie_time")
                 # Delete lines with the specified cookie_time
                 sed -i "/$cookie_time/d" "$filepath"
-                echo -e "${RED}Domain: $domain | Deleted: $cookie_time | Current Time: $real_current_alsco_time | Cookie Time: $real_cookie_alsco_time${NC}"
+                echo -e "${RED}Domain: $domain | ${BLUE}Deleted: $cookie_time $time_deleted${NC} | Current Time: $real_current_alsco_time | Cookie Time: $real_cookie_alsco_time"
                 echo ""
 
             else
@@ -241,6 +243,7 @@ find /etc/nginx/conf.d/alsco_data_cookie_and_ip/ -type f -name '*.map' -print0 |
             fi
         done < "$filepath"
     done
+
 
 #==========================================
 
