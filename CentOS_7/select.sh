@@ -139,8 +139,18 @@ service php-fpm restart
 
 
 echo -e "\n\n\n"
-session_path="/var/lib/php/session/"
+session_path="/var/lib/php/session"
 echo -e "Php Session path is: $session_path/\n"
+
+
+
+
+echo -e "\n\n\n"
+echo "Verify that the change was successful. ...."
+grep -r "session.cookie_httponly" /etc/php.ini
+grep -r "session.cookie_samesite" /etc/php.ini
+
+
 
 ;;
 ########################################################
