@@ -17,7 +17,7 @@ options=(
 "Nginx conf Path 12"
 "Nginx Log Path 13"
 "disk space used and available 14"
-"free 15"
+"Cookie List 15"
 "Inotify and Enable SELinux + PHP + Apache to write/access php 16"
 "check Nginx version 17"
 "Check ALSCO IP Firewall Setting 18"
@@ -167,15 +167,7 @@ echo "free -m -h"
 free -m -h
 ;;
 ########################################################
-"free 15")
-
-
-
-
-
-
-
-
+"Cookie List 15")
 
 while true; do
     echo "Choose an option:"
@@ -213,21 +205,6 @@ while true; do
             ;;
     esac
 done
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
