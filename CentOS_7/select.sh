@@ -188,8 +188,7 @@ while true; do
 
 
 #==========================================
-#start here
-# Current date/time in number format
+#Start Here
 current_date=$(date +%s)
 
 # Current date/time minus 8 hours
@@ -197,8 +196,8 @@ current_date_decrease=$(date --date '-8 hours' +%s)
 
 # Function to calculate time difference in hours and minutes
 calculate_time_difference() {
-    local end_time=$1
-    local start_time=$2
+    local start_time=$1
+    local end_time=$2
     local time_diff=$((end_time - start_time))
     local hours=$((time_diff / 3600))
     local minutes=$(( (time_diff % 3600) / 60 ))
@@ -208,6 +207,7 @@ calculate_time_difference() {
 # Color codes for formatting
 RED='\033[0;31m'
 BLUE='\033[0;34m'
+ORANGE='\033[0;33m'
 NC='\033[0m' # No color
 
 # First loop to find all files that end in .map
@@ -228,7 +228,7 @@ find /etc/nginx/conf.d/alsco_data_cookie_and_ip/ -type f -name '*.map' -print0 |
 
             if [ "$current_date_decrease" -gt "$cookie_time" ]; then
                 # Calculate the time elapsed since deletion
-                time_deleted=$(calculate_time_difference "$current_date_decrease" "$cookie_time")
+                time_deleted=$(calculate_time_difference "$cookie_time" "$current_date_decrease")
                 # Delete lines with the specified cookie_time
                 sed -i "/$cookie_time/d" "$filepath"
                 echo -e "${RED}Domain: $domain | ${BLUE}Deleted: $cookie_time $time_deleted${NC} | Current Time: $real_current_alsco_time | Cookie Time: $real_cookie_alsco_time"
@@ -236,9 +236,11 @@ find /etc/nginx/conf.d/alsco_data_cookie_and_ip/ -type f -name '*.map' -print0 |
 
             else
                 # Calculate the remaining time until deletion
-                remaining_time=$(calculate_time_difference "$cookie_time" "$current_date_decrease")
-                # Format the message with domain in red and remaining time in blue
-                echo -e "${RED}Domain: $domain${NC} | Keep: $cookie_time | Current Time: $real_current_alsco_time | Cookie Time: $real_cookie_alsco_time | Remaining Time Until Delete: ${BLUE}$remaining_time${NC}"
+                remaining_time=$(calculate_time_difference "$current_date_decrease" "$cookie_time")
+                # Calculate how long ago the cookie was created
+                cookie_created_time=$(calculate_time_difference "$cookie_time" "$current_date")
+                # Format the message with domain, cookie created time in blue, and remaining time in orange
+                echo -e "${RED}Domain: $domain${NC} | Keep: $cookie_time | Current Time: $real_current_alsco_time | Cookie Time: $real_cookie_alsco_time | Remaining Time Until Delete: ${ORANGE}$remaining_time${NC} |Cookie Created Before: ${BLUE} $cookie_created_time${NC}"
                 echo ""
             fi
         done < "$filepath"
