@@ -179,17 +179,75 @@ while true; do
     case $choice in
         a)
             # List all cookies
-            current_date=$(date +%s)
-            find /etc/nginx/conf.d/alsco_data_cookie_and_ip/ -type f -name '*.map' -print0 |
-            while IFS= read -r -d '' filepath; do
-                ex -s +'v/\S/d' -cwq "$filepath"
-                cat "$filepath" | while read ONELINE; do
-                    cookie_time=$(echo "$ONELINE" | awk -F'-' '{print $2}')
-                    real_cookie_alsco_time=$(date +'%Y-%m-%d %H:%M:%S' -d "@$cookie_time")
-                    real_current_alsco_time=$(date +'%Y-%m-%d %H:%M:%S' -d "@$current_date")
-                    echo "Keep: $cookie_time | Current Time: $real_current_alsco_time | Cookie Time: $real_cookie_alsco_time | $filepath"
-                done
-            done
+
+
+
+
+
+
+
+
+# Current date/time in number format
+current_date=$(date +%s)
+
+# Current date/time minus 8 hours
+current_date_decrease=$(date --date '-8 hours' +%s)
+
+# Function to calculate time difference in hours and minutes
+calculate_time_difference() {
+    local end_time=$1
+    local start_time=$2
+    local time_diff=$((end_time - start_time))
+    local hours=$((time_diff / 3600))
+    local minutes=$(( (time_diff % 3600) / 60 ))
+    echo "$hours hours $minutes minutes"
+}
+
+# Color codes for formatting
+RED='\033[0;31m'
+NC='\033[0m' # No color
+
+# First loop to find all files that end in .map
+find /etc/nginx/conf.d/alsco_data_cookie_and_ip/ -type f -name '*.map' -print0 | 
+    while IFS= read -r -d '' filepath; do 
+        # Remove empty/blank lines from a file in Unix
+        ex -s +'v/\S/d' -cwq "$filepath"
+
+        # Read each line from the file
+        while read -r ONELINE; do
+            # Extract the timestamp enclosed in double quotes
+            cookie_time=$(echo "$ONELINE" | awk -F'-' '{print $2}' | tr -d '"')
+            real_cookie_alsco_time=$(date +'%Y-%m-%d %H:%M:%S' -d "@$cookie_time")
+            real_current_alsco_time=$(date +'%Y-%m-%d %H:%M:%S' -d "@$current_date")
+
+            # Extract the domain (last part of the file path)
+            domain=$(basename "$(dirname "$filepath")")
+
+            if [ "$current_date_decrease" -gt "$cookie_time" ]; then
+                #Delete lines with the specified cookie_time
+                sed -i "/$cookie_time/d" "$filepath"
+                echo -e "${RED}Domain: $domain | Deleted: $cookie_time | Current Time: $real_current_alsco_time | Cookie Time: $real_cookie_alsco_time${NC}"
+                echo ""
+
+            else
+                # Calculate the remaining time until deletion
+                remaining_time=$(calculate_time_difference "$cookie_time" "$current_date_decrease")
+                # Format the message with domain in red, remaining time, and other information
+                echo -e "${RED}Domain: $domain${NC} | Keep: $cookie_time | Current Time: $real_current_alsco_time | Cookie Time: $real_cookie_alsco_time | Remaining Time Until Delete: $remaining_time"
+                echo ""
+            fi
+        done < "$filepath"
+    done
+
+
+
+
+
+
+
+
+
+            
             ;;
         b)
             # Delete all cookies
