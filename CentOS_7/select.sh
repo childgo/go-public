@@ -134,6 +134,8 @@ tail -f /var/log/nginx/access.log
 ;;
 ########################################################
 "Restart PHP and Session Path  11")
+
+echo -e "\n\n\n"
 echo "service php-fpm restart"
 service php-fpm restart
 
@@ -143,14 +145,11 @@ session_path="/var/lib/php/session"
 echo -e "Php Session path is: $session_path/\n"
 
 
-
-
 echo -e "\n\n\n"
 echo "Verify that the change was successful. ...."
 grep -r "session.cookie_httponly" /etc/php.ini
 grep -r "session.cookie_samesite" /etc/php.ini
-
-
+echo -e "\n\n\n"
 
 ;;
 ########################################################
