@@ -1,5 +1,7 @@
 #!/bin/bash
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/whm/Backup_MySQL.sh)
 
+clear
 # Get the current date in the format "2023-9-22"
 date=$(date +%Y-%m-%d)
 
