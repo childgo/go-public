@@ -28,8 +28,8 @@ for DB in $(mysql -Be "show databases" | /usr/bin/grep -v 'row\|information_sche
     fi
 done
 
-# Delete folders older than 30 days
-find "$backup_root" -type d -mtime +30 -exec rm -rf {} +
+# Delete folders older than 10 days
+find "$backup_root" -type d -mtime +10 -exec rm -rf {} +
 
 # Print completion message
 echo "Complete."
