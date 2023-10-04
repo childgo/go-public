@@ -172,8 +172,6 @@ mysql -p$DB_PASS_ROYAL -u $DB_USER_ROYAL $DB_NAME_ROYAL < /alscospider/today/roy
 
 #update usera and password in database
 #mysql -u $DB_USER_ROYAL -p$DB_PASS_ROYAL $DB_NAME_ROYAL -e "UPDATE account SET username = '$final_royal_arabic_user', password = '$final_royal_arabic_password' where language = 'ar' ";
-#mysql -u $DB_USER_ROYAL -p$DB_PASS_ROYAL $DB_NAME_ROYAL -e "UPDATE account SET username = '$final_royal_english_user', password = '$final_royal_english_password' where language = 'en' ";
-#mysql -u $DB_USER_ROYAL -p$DB_PASS_ROYAL $DB_NAME_ROYAL -e "UPDATE account SET username = '$final_royal_french_user', password = '$final_royal_french_password' where language = 'fr' ";
 
 
 #update footer
@@ -192,6 +190,9 @@ mysql -u $DB_USER_ROYAL -p$DB_PASS_ROYAL $DB_NAME_ROYAL -e "INSERT INTO account 
 
 #Insert French Info
 mysql -u $DB_USER_ROYAL -p$DB_PASS_ROYAL $DB_NAME_ROYAL -e "INSERT INTO account (name, level, phone, username, password, program ,power, language) VALUES ('name_fr', 'client',  '96411111111','$final_royal_french_user', '$final_royal_french_password','$royal_program_list','full','fr')";
+
+#update Cloud Storage
+mysql -u "$DB_USER_ROYAL" -p"$DB_PASS_ROYAL" "$DB_NAME_ROYAL" -e "UPDATE cloud_setting SET url = 'https://api1.nodesbox.com/index.php?linkurl=external&token=efgf34835454543pdif&domain=$dom'";
 
 
 
