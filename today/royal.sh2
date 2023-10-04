@@ -192,7 +192,8 @@ mysql -u $DB_USER_ROYAL -p$DB_PASS_ROYAL $DB_NAME_ROYAL -e "INSERT INTO account 
 mysql -u $DB_USER_ROYAL -p$DB_PASS_ROYAL $DB_NAME_ROYAL -e "INSERT INTO account (name, level, phone, username, password, program ,power, language) VALUES ('name_fr', 'client',  '96411111111','$final_royal_french_user', '$final_royal_french_password','$royal_program_list','full','fr')";
 
 #update Cloud Storage
-mysql -u $DB_USER_ROYAL -p$DB_PASS_ROYAL $DB_NAME_ROYAL -e "UPDATE cloud_setting SET url = 'off' ";
+mysql -u "$DB_USER_ROYAL" -p"$DB_PASS_ROYAL" "$DB_NAME_ROYAL" -e "UPDATE cloud_setting SET url = 'https://api1.nodesbox.com/index.php?linkurl=external&token=edstrefdcswddde3re&domain=\'$dom\''";
+
 
 
 #Delete DataBase
