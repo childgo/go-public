@@ -386,7 +386,26 @@ sudo yum install nginx-module-lua
 ########################################################
 "Change Default  HomePage 8")
 
+clear
+  
+truncate -s 0 /usr/share/nginx/html/index.html
+echo "<html><head><title></title><meta http-equiv=\"refresh\" content=\"0; URL=https://google.com/\" /></head><body></body></html>" > /usr/share/nginx/html/index.html
 
+
+cat /usr/share/nginx/html/index.html
+
+echo "....."
+echo "....."
+echo "....."
+
+
+
+
+truncate -s 0 /usr/share/nginx/html/index.html
+echo "<html><head><title></title><meta http-equiv=\"refresh\" content=\"0; URL=https://google.com/\" /></head><body></body></html>" > /usr/share/nginx/html/index.html
+cat /usr/share/nginx/html/index.html
+
+echo "Done....."
 ;;
 ########################################################
 "Restart Nginx 9")
