@@ -53,7 +53,7 @@ sed -i 's/UDP6_OUT .*/UDP6_OUT =""/' /etc/csf/csf.conf
 
 
 
-#Enable IPSET
+#Enable IPSET [Change LF_IPSET from 0 to 1]
 sed -i 's/^LF_IPSET =.*/LF_IPSET = "1"/' /etc/csf/csf.conf
 
 
