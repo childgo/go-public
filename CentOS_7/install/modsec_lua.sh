@@ -33,6 +33,13 @@ chcon -t httpd_sys_script_exec_t  /alscospider/gateway_rules/url-english-id10.tx
 chcon -t httpd_sys_script_exec_t  /alscospider/gateway_rules/sql-Injection_Public-25.txt
 
 
+# Change the permissions of all files ending in .alsco or .sh to 700
+find /alscospider -type f \( -name "*.alsco" -o -name "*.sh" \) -exec chmod 0700 {} \;
+
+# Change the permissions of all files ending in .py to 0755
+find /alscospider -type f -name "*.py" -exec chmod 0755 {} \;
+
+
 
 #############################################################################################
 
