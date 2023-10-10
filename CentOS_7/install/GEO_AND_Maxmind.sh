@@ -58,3 +58,13 @@ mmdblookup --file /usr/share/GeoIP/GeoLite2-City.mmdb --ip 66.111.53.5 country n
 mmdblookup --file /usr/share/GeoIP/GeoLite2-ASN.mmdb --ip 66.111.53.5 | sed -e ':a;N;$!ba;s/\n/ /g' |sed -e 's/ <[a-z0-9_]\+>/,/g' |sed -e 's/,\s\+}/}/g' | jq '(.autonomous_system_number)'
 mmdblookup --file /usr/share/GeoIP/GeoLite2-ASN.mmdb --ip 66.111.53.5 | sed -e ':a;N;$!ba;s/\n/ /g' |sed -e 's/ <[a-z0-9_]\+>/,/g' |sed -e 's/,\s\+}/}/g' | jq '(.autonomous_system_organization)' | sed -e 's/^"//' -e 's/"$//'
 mmdblookup --file /usr/share/GeoIP/GeoLite2-Country.mmdb --ip 66.111.53.5 country iso_code |awk -F'"' '{print $2}' | tr '\n' ' '
+
+#------------------------------------------------------------------------------------------------------------------
+#Clean Repo
+
+repo_dir="/etc/yum.repos.d/"
+
+# Delete all .repo files except for the specified ones
+find "$repo_dir" -type f -name '*.repo' ! -name 'alsco_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
+yum clean all
+#------------------------------------------------------------------------------------------------------------------
