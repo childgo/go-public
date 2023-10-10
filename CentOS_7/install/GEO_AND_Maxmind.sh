@@ -1,4 +1,15 @@
 #bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/CentOS_7/install/GEO_AND_Maxmind.sh)
+clear
+#------------------------------------------------------------------------------------------------------------------
+#Clean Repo
+
+repo_dir="/etc/yum.repos.d/"
+
+# Delete all .repo files except for the specified ones
+find "$repo_dir" -type f -name '*.repo' ! -name 'alsco_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
+yum clean all
+#------------------------------------------------------------------------------------------------------------------
+
 
 #Install GEO AND Maxmind
 
