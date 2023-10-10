@@ -1,6 +1,18 @@
 #bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/CentOS_7/install/php73.sh)
 
 clear
+#------------------------------------------------------------------------------------------------------------------
+#Clean Repo
+
+repo_dir="/etc/yum.repos.d/"
+
+# Delete all .repo files except for the specified ones
+find "$repo_dir" -type f -name '*.repo' ! -name 'alsco_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
+yum clean all
+#------------------------------------------------------------------------------------------------------------------
+
+
+
 
 #sudo yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm;sleep 3;
 sudo yum -y install epel-release yum-utils;sleep 3;
