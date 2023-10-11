@@ -402,6 +402,19 @@ find /alscospider -type f -name "*.py" -exec chmod 0755 {} \;
 #install lua
 sudo yum install nginx-module-lua
 
+
+
+#------------------------------------------------------------------------------------------------------------------
+#Clean Repo
+
+repo_dir="/etc/yum.repos.d/"
+
+# Delete all .repo files except for the specified ones
+find "$repo_dir" -type f -name '*.repo' ! -name 'alsco_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
+yum clean all
+#------------------------------------------------------------------------------------------------------------------
+
+
 ;;
 ########################################################
 "Change Default  HomePage 8")
