@@ -203,7 +203,8 @@ grep -r "session.cookie_samesite" /etc/php.ini
 
 
 
-
+#remove php
+#yum -y remove php*
 
 #------------------------------------------------------------------------------------------------------------------
 #Clean Repo
