@@ -54,3 +54,8 @@ repo_dir="/etc/yum.repos.d/"
 find "$repo_dir" -type f -name '*.repo' ! -name 'alsco_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
 yum clean all
 #------------------------------------------------------------------------------------------------------------------
+
+
+
+#remove php
+#yum -y remove php*
