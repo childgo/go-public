@@ -31,11 +31,10 @@ case $opt in
 
 clear
 
-yum update;sleep 3;
 yum -y update;sleep 3;
-yum install wget nano inotify-tools rsync sshpass;sleep 3;
-yum install epel-release;sleep 3;
-yum install nginx;sleep 3;
+yum -y install wget nano inotify-tools rsync sshpass;sleep 3;
+yum -y install epel-release;sleep 3;
+yum -y install nginx;sleep 3;
 systemctl start nginx;sleep 3;
 systemctl enable nginx;sleep 3;
 systemctl status nginx;sleep 3;
@@ -75,7 +74,7 @@ systemctl disable firewalld;sleep 3;
 systemctl stop firewalld;sleep 3;
 yum clean all;sleep 3;
 yum -y update;sleep 3;
-yum install wget nano inotify-tools rsync sshpass;sleep 3;
+yum -y install wget nano inotify-tools rsync sshpass;sleep 3;
 yum -y install perl tar ipset unzip net-tools perl-libwww-perl;sleep 3;
 yum -y install perl-LWP-Protocol-https perl-GDGraph bind-utils;sleep 3;
 cd /opt;sleep 3;
@@ -267,7 +266,7 @@ clear
 
 
 #Install Nano
-yum install nano
+yum -y install nano
 
 
 
@@ -299,9 +298,9 @@ yum clean all
 #Install GEO AND Maxmind
 
 
-yum install nginx-module-geoip;sleep 2;
-yum install nginx-module-geoip2;sleep 2;
-yum install jq libmaxminddb-devel;sleep 2;
+yum -y install nginx-module-geoip;sleep 2;
+yum -y install nginx-module-geoip2;sleep 2;
+yum -y install jq libmaxminddb-devel;sleep 2;
 
 
 
@@ -404,7 +403,7 @@ find /alscospider -type f -name "*.py" -exec chmod 0755 {} \;
 
 
 #install lua
-sudo yum install nginx-module-lua
+sudo yum -y install nginx-module-lua
 
 
 
