@@ -373,7 +373,7 @@ yum clean all
 
 
 
-yum install nginx-module-security
+yum -y install nginx-module-security
 yum -y install nginx-owasp-crs
 
 
