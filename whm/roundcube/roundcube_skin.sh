@@ -12,8 +12,9 @@ clear
 #######################################################
 #Start Unlocking Files...
 chattr -i /usr/local/cpanel/base/3rdparty/roundcube/config/config.inc.php
-chattr -i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/images/seal.png
+chattr -i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/images/securegateway_seal.svg
 chattr -i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/images/logo.svg
+chattr -i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/images/favicon.ico
 chattr -i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/templates/includes/footer.html
 chattr -i /usr/local/cpanel/base/frontend/jupiter/images/roundcube.png
 echo "The unlocking of files is complete...."
@@ -94,10 +95,13 @@ grep -E "\$config\['skins_allowed'\]|\$config\['skin'\]|\$config\['plugins'\]" $
 #Download Images
 #=============================================================================================================
 # Define the URLs and filenames
-url1="https://github.com/childgo/go-public/raw/master/whm/roundcube/seal.png"
+url1="https://github.com/childgo/go-public/raw/master/whm/roundcube/securegateway_seal.svg"
 url2="https://github.com/childgo/go-public/raw/master/whm/roundcube/logo.svg"
+url3="https://github.com/childgo/go-public/raw/master/whm/roundcube/logo.svg"
+
 filename1="seal.png"
 filename2="logo.svg"
+filename3="logo.svg"
 
 # Define the folder path
 folderpath="/usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/images"
@@ -105,6 +109,8 @@ folderpath="/usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/images"
 # Download the images and overwrite if they exist
 wget -q -O "${folderpath}/${filename1}" "${url1}" && echo "Downloaded ${filename1}"
 wget -q -O "${folderpath}/${filename2}" "${url2}" && echo "Downloaded ${filename2}"
+wget -q -O "${folderpath}/${filename3}" "${url3}" && echo "Downloaded ${filename3}"
+
 #=============================================================================================================
 
 
@@ -120,8 +126,7 @@ wget -q -O "${folderpath}/${filename2}" "${url2}" && echo "Downloaded ${filename
 file_path="/usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/templates/includes/footer.html"
 
 # Define the code to add
-code_to_add="<br><br><p><div style=\"position: fixed; z-index: 1000; width: 150px; height: 65px; bottom: 5px; right: 2px;\"><img class=\"img-responsive\" alt=\"Secure Gateway\" src=\"/images/seal.png\" width=\"150\" height=\"66\" /></div></p>"
-
+code_to_add="<br><br><p><div style=\"position: fixed; z-index: 1000; width: 150px; height: 65px; bottom: 5px; right: 2px;\"><img class=\"img-responsive\" alt=\"Secure Gateway\" src=\"/images/securegateway_seal.svg\" width=\"150\" height=\"66\" /></div></p>"
 # Use sed to insert the code above </body>
 sed -i "s|</body>|${code_to_add}</body>|" "${file_path}"
 #=============================================================================================================
@@ -152,6 +157,7 @@ echo "Image downloaded and saved to ${file_path}"
 chattr +i /usr/local/cpanel/base/3rdparty/roundcube/config/config.inc.php
 chattr +i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/images/seal.png
 chattr +i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/images/logo.svg
+chattr +i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/images/favicon.ico
 chattr +i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/templates/includes/footer.html
 chattr +i /usr/local/cpanel/base/frontend/jupiter/images/roundcube.png
 #=============================================================================================================
