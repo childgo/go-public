@@ -95,13 +95,13 @@ grep -E "\$config\['skins_allowed'\]|\$config\['skin'\]|\$config\['plugins'\]" $
 #Download Images
 #=============================================================================================================
 # Define the URLs and filenames
-url1="https://github.com/childgo/go-public/raw/master/whm/roundcube/securegateway_seal.svg"
+url1="https://raw.githubusercontent.com/childgo/go-public/master/whm/roundcube/securegateway_seal.svg"
 url2="https://github.com/childgo/go-public/raw/master/whm/roundcube/logo.svg"
-url3="https://github.com/childgo/go-public/raw/master/whm/roundcube/logo.svg"
+url3="https://raw.githubusercontent.com/childgo/go-public/master/whm/roundcube/favicon.ico"
 
 filename1="seal.png"
 filename2="logo.svg"
-filename3="logo.svg"
+filename3="favicon.ico"
 
 # Define the folder path
 folderpath="/usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/images"
