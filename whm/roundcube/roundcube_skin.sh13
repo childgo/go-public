@@ -18,6 +18,11 @@ chattr -i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/images/secureg
 chattr -i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/images/logo.svg
 chattr -i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/images/favicon.ico
 
+#storageBox
+chattr -i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/templates/compose.html
+chattr -i /usr/local/cpanel/base/3rdparty/roundcube/secure_gateway_icon.png
+chattr -i /usr/local/cpanel/base/3rdparty/roundcube/StorageBox_Insert.php
+
 
 chattr -i /usr/local/cpanel/base/frontend/jupiter/images/roundcube.png
 echo "The unlocking of files is complete...."
@@ -241,6 +246,12 @@ chattr +i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/templates/abou
 chattr +i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/images/securegateway_seal.svg
 chattr +i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/images/logo.svg
 chattr +i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/images/favicon.ico
+
+
+#storageBox
+chattr +i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/templates/compose.html
+chattr +i /usr/local/cpanel/base/3rdparty/roundcube/secure_gateway_icon.png
+chattr +i /usr/local/cpanel/base/3rdparty/roundcube/StorageBox_Insert.php
 #=============================================================================================================
 
 
