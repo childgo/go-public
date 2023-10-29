@@ -99,7 +99,7 @@ url1="https://github.com/childgo/go-public/raw/master/whm/roundcube/securegatewa
 url2="https://github.com/childgo/go-public/raw/master/whm/roundcube/logo.svg"
 url3="https://github.com/childgo/go-public/raw/master/whm/roundcube/favicon.ico"
 
-filename1="seal.png"
+filename1="securegateway_seal.svg"
 filename2="logo.svg"
 filename3="favicon.ico"
 
