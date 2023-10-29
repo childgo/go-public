@@ -18,6 +18,7 @@ chattr -i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/images/favicon
 chattr -i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/templates/includes/footer.html
 chattr -i /usr/local/cpanel/base/frontend/jupiter/images/roundcube.png
 echo "The unlocking of files is complete...."
+sleep 5
 #End Unlocking Files
 #######################################################
 
@@ -174,7 +175,7 @@ echo "Image downloaded and saved to ${file_path}"
 #=============================================================================================================
 #Lock Files
 chattr +i /usr/local/cpanel/base/3rdparty/roundcube/config/config.inc.php
-chattr +i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/images/seal.png
+chattr +i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/images/securegateway_seal.svg
 chattr +i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/images/logo.svg
 chattr +i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/images/favicon.ico
 chattr +i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/templates/includes/footer.html
