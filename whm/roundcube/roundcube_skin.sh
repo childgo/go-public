@@ -221,6 +221,11 @@ sleep 3
 #=============================================================================================================
 
 
+
+
+
+
+
 #=============================================================================================================
 #Start changing the logo before open roundcube
 file_path="/usr/local/cpanel/base/frontend/jupiter/images/roundcube.png"
@@ -232,6 +237,37 @@ wget -O "${file_path}" "${url}"
 # Print a message indicating the download is complete
 echo "Image downloaded and saved to ${file_path}"
 #=============================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+#=============================================================================================================
+#Fix compose html formatted messages by default
+CONFIG_FILE_1="/usr/local/cpanel/base/3rdparty/roundcube/config/config.inc.php"
+
+# Use sed to replace the line
+sed -i "/^\$config\['htmleditor'\]/c\$config\['htmleditor'\] = 1;" "$CONFIG_FILE_1"
+#=============================================================================================================
+
+
+
+
+
+
+
+
+
+
+
 
 
 
