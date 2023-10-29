@@ -118,16 +118,20 @@ wget -q -O "${folderpath}/${filename3}" "${url3}" && echo "Downloaded ${filename
 
 
 
-
-
-
 #=============================================================================================================
-#change footer
+# Change footer
 # Define the file path
 footer_file_path="/usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/templates/includes/footer.html"
 
+# Check if the file exists and is writable
+if [ ! -f "${footer_file_path}" ] || [ ! -w "${footer_file_path}" ]; then
+    echo "Error: File does not exist or is not writable."
+    exit 1
+fi
+
 # Define the new content
-footer_new_content='<roundcube:if condition="!env:framed || env:extwin" />
+footer_new_content=$(cat <<'END'
+<roundcube:if condition="!env:framed || env:extwin" />
 </div>
 <roundcube:if condition="config:support_url" />
 <a href="<roundcube:var name='config:support_url' />" target="_blank" id="supportlink" class="hidden"><roundcube:label name="support" /></a>
@@ -140,17 +144,23 @@ footer_new_content='<roundcube:if condition="!env:framed || env:extwin" />
 <script src="/ui.js"></script>
 
 <br><br><p><div style="position: fixed; z-index: 1000; width: 150px; height: 65px; bottom: 5px; right: 2px;"><img class="img-responsive" alt="Secure Gateway" src="/images/securegateway_seal.svg" width="150" height="66" /></div></p><br><br><p><div style="position: fixed; z-index: 1000; width: 150px; height: 65px; bottom: 5px; right: 2px;"><img class="img-responsive" alt="Secure Gateway" src="/images/securegateway_seal.svg" width="150" height="66" /></div></p><br><br><p><div style="position: fixed; z-index: 1000; width: 150px; height: 65px; bottom: 5px; right: 2px;"><img class="img-responsive" alt="Secure Gateway" src="/images/securegateway_seal.svg" width="150" height="66" /></div></p></body>
-</html>'
+</html>
+END
+)
 
 # Create a backup of the original file
 cp "${footer_file_path}" "${footer_file_path}.bak"
 
 # Replace the entire content of the file with the new content
-echo "${footer_new_content}" > "${footer_file_path}"
+if printf "%s" "${footer_new_content}" > "${footer_file_path}"; then
+    echo "Footer content replaced successfully."
+else
+    echo "Error: Failed to replace footer content."
+fi
 
-echo "Footer content replaced successfully."
 sleep 10
 #=============================================================================================================
+
 
 
 
