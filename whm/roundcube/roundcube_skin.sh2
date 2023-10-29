@@ -95,9 +95,9 @@ grep -E "\$config\['skins_allowed'\]|\$config\['skin'\]|\$config\['plugins'\]" $
 #Download Images
 #=============================================================================================================
 # Define the URLs and filenames
-url1="https://raw.githubusercontent.com/childgo/go-public/master/whm/roundcube/securegateway_seal.svg"
+url1="https://github.com/childgo/go-public/raw/master/whm/roundcube/securegateway_seal.svg"
 url2="https://github.com/childgo/go-public/raw/master/whm/roundcube/logo.svg"
-url3="https://raw.githubusercontent.com/childgo/go-public/master/whm/roundcube/favicon.ico"
+url3="https://github.com/childgo/go-public/raw/master/whm/roundcube/favicon.ico"
 
 filename1="seal.png"
 filename2="logo.svg"
@@ -119,16 +119,35 @@ wget -q -O "${folderpath}/${filename3}" "${url3}" && echo "Downloaded ${filename
 
 
 
-#=============================================================================================================
-#add seal to footer
 
+#=============================================================================================================
 # Define the file path
 file_path="/usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/templates/includes/footer.html"
 
-# Define the code to add
-code_to_add="<br><br><p><div style=\"position: fixed; z-index: 1000; width: 150px; height: 65px; bottom: 5px; right: 2px;\"><img class=\"img-responsive\" alt=\"Secure Gateway\" src=\"/images/securegateway_seal.svg\" width=\"150\" height=\"66\" /></div></p>"
-# Use sed to insert the code above </body>
-sed -i "s|</body>|${code_to_add}</body>|" "${file_path}"
+# Define the new content
+new_content='<roundcube:if condition="!env:framed || env:extwin" />
+</div>
+<roundcube:if condition="config:support_url" />
+<a href="<roundcube:var name='config:support_url' />" target="_blank" id="supportlink" class="hidden"><roundcube:label name="support" /></a>
+<roundcube:endif />
+<roundcube:endif />
+
+<roundcube:object name="message" id="messagestack" />
+
+<script src="/deps/bootstrap.bundle.min.js"></script>
+<script src="/ui.js"></script>
+
+<br><br><p><div style="position: fixed; z-index: 1000; width: 150px; height: 65px; bottom: 5px; right: 2px;"><img class="img-responsive" alt="Secure Gateway" src="/images/securegateway_seal.svg" width="150" height="66" /></div></p><br><br><p><div style="position: fixed; z-index: 1000; width: 150px; height: 65px; bottom: 5px; right: 2px;"><img class="img-responsive" alt="Secure Gateway" src="/images/securegateway_seal.svg" width="150" height="66" /></div></p><br><br><p><div style="position: fixed; z-index: 1000; width: 150px; height: 65px; bottom: 5px; right: 2px;"><img class="img-responsive" alt="Secure Gateway" src="/images/securegateway_seal.svg" width="150" height="66" /></div></p></body>
+</html>'
+
+# Create a backup of the original file
+cp "${file_path}" "${file_path}.bak"
+
+# Replace the entire content of the file with the new content
+echo "${new_content}" > "${file_path}"
+
+echo "Footer content replaced successfully."
+sleep 10
 #=============================================================================================================
 
 
