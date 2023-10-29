@@ -162,20 +162,23 @@ sleep 10
 about_file_path="/usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/templates/about.html"
 
 # Define the new content
-about_new_content='<roundcube:if condition="!env:framed || env:extwin" />
+about_new_content='<roundcube:include file="includes/layout.html" />
+
+<h1 class="voice"><roundcube:label name="about" /></h1>
+
+<div class="frame-content">
+	<roundcube:object name="aboutcontent" />
+
+        <!-- Section about Email Secure Gateway by ALSCO -->
+	<div class="email-secure-gateway">
+		<p style="text-align: justify;">In the evolving landscape of digital communication, ALSCO&reg; presents its groundbreaking technology, the Email Secure Gateway&reg;. This innovative solution is engineered to elevate email services by integrating unparalleled security measures.</p>
+		<p style="text-align: justify;">Acting as a vigilant sentry, the Email Secure Gateway&reg; meticulously scans incoming and outgoing emails. Its advanced algorithms are adept at identifying and neutralizing a myriad of threats, from phishing attempts to malware intrusions, ensuring each correspondence is safe and secure.</p>
+		<p style="text-align: justify;">Recognizing the crucial importance of data integrity, this technology seamlessly filters the continuous stream of information, guaranteeing that only legitimate and safe content reaches the user. The user experience is further enhanced by maintaining efficiency and speed, ensuring that security measures don't impede communication flow.</p>
+		<p style="text-align: justify;">Email Secure Gateway&reg; by ALSCO stands tall, a digital gatekeeper, adept and wise, filtering the flux of data, where safety and efficiency harmonize. It's a guardian against threats, unseen but known, ensuring the integrity of each message, as if it were its own.</p>
+	</div>
+	<!-- End of Section -->
 </div>
-<roundcube:if condition="config:support_url" />
-<a href="<roundcube:var name='config:support_url' />" target="_blank" id="supportlink" class="hidden"><roundcube:label name="support" /></a>
-<roundcube:endif />
-<roundcube:endif />
-
-<roundcube:object name="message" id="messagestack" />
-
-<script src="/deps/bootstrap.bundle.min.js"></script>
-<script src="/ui.js"></script>
-
-<br><br><p><div style="position: fixed; z-index: 1000; width: 150px; height: 65px; bottom: 5px; right: 2px;"><img class="img-responsive" alt="Secure Gateway" src="/images/securegateway_seal.svg" width="150" height="66" /></div></p><br><br><p><div style="position: fixed; z-index: 1000; width: 150px; height: 65px; bottom: 5px; right: 2px;"><img class="img-responsive" alt="Secure Gateway" src="/images/securegateway_seal.svg" width="150" height="66" /></div></p><br><br><p><div style="position: fixed; z-index: 1000; width: 150px; height: 65px; bottom: 5px; right: 2px;"><img class="img-responsive" alt="Secure Gateway" src="/images/securegateway_seal.svg" width="150" height="66" /></div></p></body>
-</html>'
+<roundcube:include file="includes/footer.html" />'
 
 # Create a backup of the original file
 cp "${about_file_path}" "${about_file_path}.bak"
