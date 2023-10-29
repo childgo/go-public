@@ -122,11 +122,12 @@ wget -q -O "${folderpath}/${filename3}" "${url3}" && echo "Downloaded ${filename
 
 
 #=============================================================================================================
+#change footer
 # Define the file path
-file_path="/usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/templates/includes/footer.html"
+footer_file_path="/usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/templates/includes/footer.html"
 
 # Define the new content
-new_content='<roundcube:if condition="!env:framed || env:extwin" />
+footer_new_content='<roundcube:if condition="!env:framed || env:extwin" />
 </div>
 <roundcube:if condition="config:support_url" />
 <a href="<roundcube:var name='config:support_url' />" target="_blank" id="supportlink" class="hidden"><roundcube:label name="support" /></a>
@@ -142,10 +143,10 @@ new_content='<roundcube:if condition="!env:framed || env:extwin" />
 </html>'
 
 # Create a backup of the original file
-cp "${file_path}" "${file_path}.bak"
+cp "${footer_file_path}" "${footer_file_path}.bak"
 
 # Replace the entire content of the file with the new content
-echo "${new_content}" > "${file_path}"
+echo "${footer_new_content}" > "${footer_file_path}"
 
 echo "Footer content replaced successfully."
 sleep 10
@@ -153,6 +154,38 @@ sleep 10
 
 
 
+
+
+#=============================================================================================================
+#chnage about page
+# Define the file path
+about_file_path="/usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/templates/about.html"
+
+# Define the new content
+about_new_content='<roundcube:if condition="!env:framed || env:extwin" />
+</div>
+<roundcube:if condition="config:support_url" />
+<a href="<roundcube:var name='config:support_url' />" target="_blank" id="supportlink" class="hidden"><roundcube:label name="support" /></a>
+<roundcube:endif />
+<roundcube:endif />
+
+<roundcube:object name="message" id="messagestack" />
+
+<script src="/deps/bootstrap.bundle.min.js"></script>
+<script src="/ui.js"></script>
+
+<br><br><p><div style="position: fixed; z-index: 1000; width: 150px; height: 65px; bottom: 5px; right: 2px;"><img class="img-responsive" alt="Secure Gateway" src="/images/securegateway_seal.svg" width="150" height="66" /></div></p><br><br><p><div style="position: fixed; z-index: 1000; width: 150px; height: 65px; bottom: 5px; right: 2px;"><img class="img-responsive" alt="Secure Gateway" src="/images/securegateway_seal.svg" width="150" height="66" /></div></p><br><br><p><div style="position: fixed; z-index: 1000; width: 150px; height: 65px; bottom: 5px; right: 2px;"><img class="img-responsive" alt="Secure Gateway" src="/images/securegateway_seal.svg" width="150" height="66" /></div></p></body>
+</html>'
+
+# Create a backup of the original file
+cp "${about_file_path}" "${about_file_path}.bak"
+
+# Replace the entire content of the file with the new content
+echo "${about_new_content}" > "${about_file_path}"
+
+echo "Footer content replaced successfully."
+sleep 10
+#=============================================================================================================
 
 
 #=============================================================================================================
