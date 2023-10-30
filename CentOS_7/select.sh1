@@ -82,6 +82,8 @@ clear;while x=0; do clear;date;echo "";echo "[Total Number]";echo "-------------
 "Lock Folder 3")
 echo "chattr -R +i /var/www/html/"
 chattr -R +i /var/www/html/
+chattr -R -i /var/www/html/alscocloud/upload/
+
 echo ""
 echo "Checking..."
 lsattr /var/www/html/
