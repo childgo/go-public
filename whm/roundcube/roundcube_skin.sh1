@@ -142,13 +142,18 @@ wget -q -O "${folderpath_logo_sg}/${webmail_filename_logo}" "${url_webmail_logo_
 FILE_PATH_webmailLogo="/usr/local/cpanel/base/unprotected/cpanel/templates/login.tmpl"
 
 # Check if the file exists
-if [[ -f "$FILE_PATH_webmailLogo" ]]; then
+if [[ -f "$FILE_PATH" ]]; then
     # Use awk to modify the file content
     awk '
-        /SET app_images = \{/ {p=1}
-        p && /'webmaild' *=> *'webmail-logo.svg',/ && !done {sub(/'webmail-logo.svg'/, "alsco_securegateway_webmail.svg"); done=1}
+        BEGIN {block=0; modified=0;}
+        /SET app_images = \{/ {block=1;}
+        /};/ && block {block=0;}
+        block && /'webmaild' *=> *'webmail-logo.svg',/ && !modified {
+            sub(/'webmail-logo.svg'/, "alsco_securegateway_webmail.svg");
+            modified=1;
+        }
         {print}
-    ' "$FILE_PATH_webmailLogo" > tmp_file && mv tmp_file "$FILE_PATH_webmailLogo"
+    ' "$FILE_PATH" > tmp_file && mv tmp_file "$FILE_PATH"
     echo "File modified successfully."
 else
     echo "File does not exist."
