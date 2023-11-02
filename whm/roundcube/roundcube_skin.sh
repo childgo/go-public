@@ -24,6 +24,10 @@ chattr -i /usr/local/cpanel/base/3rdparty/roundcube/secure_gateway_icon.png
 chattr -i /usr/local/cpanel/base/3rdparty/roundcube/StorageBox_Insert.php
 
 
+#WebMail Logo in frontEnd
+chattr -i /usr/local/cpanel/base/unprotected/cpanel/templates/login.tmpl
+chattr -i /usr/local/cpanel/base/unprotected/cpanel/images/alsco_securegateway_webmail.svg
+
 chattr -i /usr/local/cpanel/base/frontend/jupiter/images/roundcube.png
 echo "The unlocking of files is complete...."
 sleep 5
@@ -122,6 +126,34 @@ wget -q -O "${folderpath}/${filename3}" "${url3}" && echo "Downloaded ${filename
 
 #=============================================================================================================
 
+
+
+
+
+#=============================================================================================================
+#Webmail Logo in frontEnd
+folderpath_logo_sg="/usr/local/cpanel/base/unprotected/cpanel/images/"
+url_webmail_logo_sg="https://github.com/childgo/go-public/raw/master/whm/roundcube/alsco_securegateway_webmail.svg"
+webmail_filename_logo="alsco_securegateway_webmail.svg"
+wget -q -O "${folderpath_logo_sg}/${webmail_filename_logo}" "${url_webmail_logo_sg}" && echo "Downloaded ${webmail_filename_logo}"
+
+
+
+FILE_PATH_webmailLogo="/usr/local/cpanel/base/unprotected/cpanel/templates/login.tmpl"
+
+# Check if the file exists
+if [[ -f "$FILE_PATH_webmailLogo" ]]; then
+    # Use awk to modify the file content
+    awk '
+        /SET app_images = \{/ {p=1}
+        p && /'webmaild' *=> *'webmail-logo.svg',/ && !done {sub(/'webmail-logo.svg'/, "alsco_securegateway_webmail.svg"); done=1}
+        {print}
+    ' "$FILE_PATH_webmailLogo" > tmp_file && mv tmp_file "$FILE_PATH_webmailLogo"
+    echo "File modified successfully."
+else
+    echo "File does not exist."
+fi
+#=============================================================================================================
 
 
 
@@ -288,6 +320,13 @@ chattr +i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/images/favicon
 chattr +i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/templates/compose.html
 chattr +i /usr/local/cpanel/base/3rdparty/roundcube/secure_gateway_icon.png
 chattr +i /usr/local/cpanel/base/3rdparty/roundcube/StorageBox_Insert.php
+
+
+
+#WebMail Logo in frontEnd
+chattr +i /usr/local/cpanel/base/unprotected/cpanel/templates/login.tmpl
+chattr +i /usr/local/cpanel/base/unprotected/cpanel/images/alsco_securegateway_webmail.svg
+
 #=============================================================================================================
 
 
