@@ -18,6 +18,9 @@ yum install nginx-module-geoip;sleep 2;
 yum install nginx-module-geoip2;sleep 2;
 yum install jq libmaxminddb-devel;sleep 2;
 
+#Linux9
+yum install oniguruma;sleep 2;
+
 
 
 
