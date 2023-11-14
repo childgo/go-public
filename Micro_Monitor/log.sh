@@ -553,6 +553,7 @@ curl -A "My User Agent" -X POST https://monitor.cdn-today.com/micro_report/api.p
   -d "cmd_hostnamectl=$cmd_hostnamectl" \
   -d "lsblk_command=$lsblk_command" \
   -d "disk_iowait_check=$disk_iowait_check" \
+  -d "lscpu=$lscpu" \
   -d "network_up_down=$Network_up_down"
 
 
