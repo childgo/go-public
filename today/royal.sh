@@ -3,7 +3,9 @@
 clear
 
 #royal_program_list='file,block,topic,article,menu,multimenu,headline,album,video,setting,theme,program,myaccount';
-royal_program_list='account,file,block,topic,article,page,multimenu,headline,album,video,ads,header,footer,structure,setting,program';
+#royal_program_list='account,file,block,topic,article,page,multimenu,headline,album,video,ads,header,footer,structure,setting,program';
+
+royal_program_list='account,file,block,topic,article,page,multimenu,headline,album,video,ads,header,footer,layers,setting,program';
 
 
 #============================================================================
