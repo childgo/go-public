@@ -153,6 +153,10 @@ if [[ -f "$FILE_PATH_webmailLogo" ]]; then
 else
     echo "File does not exist."
 fi
+
+#Chanage webmail logo in change password page, 
+mv /usr/local/cpanel/base/unprotected/cpanel/images/webmail-logo.svg /usr/local/cpanel/base/unprotected/cpanel/images/webmail-logo.svg1
+cp /usr/local/cpanel/base/unprotected/cpanel/images/alsco_securegateway_webmail.svg /usr/local/cpanel/base/unprotected/cpanel/images/webmail-logo.svg
 #=============================================================================================================
 
 
