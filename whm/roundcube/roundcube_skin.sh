@@ -28,6 +28,10 @@ chattr -i /usr/local/cpanel/base/3rdparty/roundcube/StorageBox_Insert.php
 chattr -i /usr/local/cpanel/base/unprotected/cpanel/templates/login.tmpl
 chattr -i /usr/local/cpanel/base/unprotected/cpanel/images/alsco_securegateway_webmail.svg
 chattr -i /usr/local/cpanel/base/frontend/jupiter/images/roundcube.png
+
+
+#change password webmail logo
+chattr -i /usr/local/cpanel/base/unprotected/cpanel/images/webmail-logo.svg
 echo "The unlocking of files is complete...."
 sleep 5
 #End Unlocking Files
@@ -324,6 +328,10 @@ chattr +i /usr/local/cpanel/base/unprotected/cpanel/templates/login.tmpl
 chattr +i /usr/local/cpanel/base/unprotected/cpanel/images/alsco_securegateway_webmail.svg
 chattr +i /usr/local/cpanel/base/frontend/jupiter/images/roundcube.png
 
+
+
+#change password webmail logo
+chattr +i /usr/local/cpanel/base/unprotected/cpanel/images/webmail-logo.svg
 #=============================================================================================================
 
 
