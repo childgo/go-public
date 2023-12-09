@@ -1,6 +1,6 @@
 clear
 
-#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/whm/roundcube/roundcube_skin.sh)
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/whm/email.sh)
 
 
 PS3='Please enter your choice: '
