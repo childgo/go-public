@@ -402,6 +402,9 @@ echo "Done"
 
 ########################################################
 "List All Domains And Folder Size 11")
+#dnf install bc
+#yum install bc
+
 clear
 # Function to calculate folder size in GB or MB
 get_folder_size() {
