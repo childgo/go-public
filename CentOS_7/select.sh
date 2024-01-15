@@ -776,6 +776,19 @@ echo -e "-----------------------------------------\n\n\n"
 
 
 
+#######################################################
+#Ask me if i want to contine 
+echo "Do you want to continue? [y/n]"
+read choice
+
+if [ "$choice" == "n" ]; then
+  echo "Exiting..."
+  exit 0
+else
+  echo "Continuing..."
+fi
+#######################################################
+
 
 
 
