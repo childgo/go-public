@@ -32,6 +32,8 @@ options=(
 "Update GEO-IP Database 27"
 "ALSCO Centos7 Repository Build 28"
 "Generate Cloudflare IP List for CSF 29"
+"Seucre Gateway Log Parsing  logs 30"
+
 
 "Quit")
 
@@ -731,6 +733,94 @@ done
 echo "real_ip_header     CF-Connecting-IP;"
 echo "#===End========================="
 ;;
+################################################################################################################
+
+
+
+
+################################################################################################################
+################################################################################################################
+
+"Seucre Gateway Log Parsing  logs 30")
+clear
+LOG_FILE="/var/log/nginx/full_alsco_access.log"
+
+
+echo -e "---------------------------------------------------------------------------"
+#Top Domain Request Counter
+echo -e "\e[1;31m Domain Request Counter\e[0m"
+awk -F'"' '/ALSCO_Domain/ {split($4, a, "\\["); split(a[2], b, "]"); print b[1]}' "$LOG_FILE" | sort | uniq -c | sort -nr
+echo -e "-----------------------------------------\n\n\n"
+
+
+
+echo -e "---------------------------------------------------------------------------"
+#Top IP Request Counter
+echo -e "\e[1;31m IP Request Counter\e[0m"
+echo "These are the top 30 IPs with the highest number of requests:" && \
+awk -F'"' '/ALSCO_IP/ {split($2, a, "\\["); split(a[2], b, "]"); print b[1]}' "$LOG_FILE" | sort | uniq -c | sort -nr | head -n 30
+echo -e "-----------------------------------------\n\n\n"
+
+
+
+echo -e "---------------------------------------------------------------------------"
+#Top Countries Request Counter
+echo -e "\e[1;31m Countries Request Counter\e[0m"
+echo "These are the top countries with the highest number of requests:" && \
+awk -F'"' '/ALSCO_Countryname/ {split($22, a, "\\]"); gsub(/.*\[/, "", a[1]); print a[1]}' "$LOG_FILE" | sort | uniq -c | sort -nr
+echo -e "-----------------------------------------\n\n\n"
+
+
+
+
+
+
+
+
+
+
+sleep 5
+
+
+# Count the occurrences of each domain and sort them in descending order
+awk -F'"' '/ALSCO_Domain/ {split($4, a, "\\["); split(a[2], b, "]"); print b[1]}' "$LOG_FILE" | \
+sort | uniq -c | sort -nr | \
+while read -r count domain; do
+
+    echo "====================================="
+    echo -e "\e[1;31mDomain: $domain (Requests: $count)\e[0m" # Domain name in bold red
+    
+    # Top 30 IPs for the domain
+    echo "Top 30 IPs for $domain:"
+    awk -F'"' -v domain="$domain" '$4 ~ domain {split($2, a, "\\["); split(a[2], b, "]"); print b[1]}' "$LOG_FILE" | \
+    sort | uniq -c | sort -nr | head -n 30
+
+
+    # Top 30 countries for the domain
+    echo "Top 30 countries for $domain:"
+    awk -F'"' -v domain="$domain" '$4 ~ domain {split($22, a, "\\["); split(a[2], b, "]"); print b[1]}' "$LOG_FILE" | \
+    sort | uniq -c | sort -nr | head -n 30
+
+
+    # Top 30 URLs for the domain
+    echo "Top 30 URLs for $domain:"
+    awk -F'"' -v domain="$domain" '$4 ~ domain {split($8, a, "\\["); split(a[2], b, "]"); print b[1]}' "$LOG_FILE" | \
+    sort | uniq -c | sort -nr | head -n 30
+
+
+
+    echo "=====================================\n\n\n"
+
+done
+
+
+#How this script works:
+#It first counts and lists each domain with the number of requests.
+#Then, for each domain, it lists the top 30 IP addresses and the top 30 countries based on the number of requests.
+echo "#===End========================="
+;;
+
+################################################################################################################
 ################################################################################################################
 
 
