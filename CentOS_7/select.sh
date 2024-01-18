@@ -33,6 +33,8 @@ options=(
 "ALSCO Centos7 Repository Build 28"
 "Generate Cloudflare IP List for CSF 29"
 "Seucre Gateway Log Parsing  logs 30"
+"Delete all Nginx Logs 31"
+
 
 
 "Quit")
@@ -832,6 +834,39 @@ done
 #Then, for each domain, it lists the top 30 IP addresses and the top 30 countries based on the number of requests.
 echo "#===End========================="
 ;;
+
+################################################################################################################
+################################################################################################################
+
+
+"Delete all Nginx Logs 31")
+
+
+#Ask me if i want to contine 
+echo "Do you want to continue and delete all Nginx Log in /var/log/nginx/? [y/n]"
+read choice
+
+if [ "$choice" == "n" ]; then
+  echo "Exiting..."
+  exit 0
+else
+  echo "Continuing..."
+fi
+
+
+echo "find /var/log/nginx/ -type f -exec rm {} \;"
+echo "nginx -t"
+echo "systemctl restart nginx"
+echo "nginx -t && systemctl restart nginx"
+
+nginx -t && systemctl restart nginx
+
+;;
+
+################################################################################################################
+################################################################################################################
+
+
 
 ################################################################################################################
 ################################################################################################################
