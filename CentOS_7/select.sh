@@ -174,6 +174,13 @@ pwd
 "disk space used and available 14")
 echo "command: df"
 df
+printf '\n\n\n'
+
+echo "command: df -h"
+df -h
+printf '\n\n\n'
+
+
 
 echo "----------------------------------------"
 echo "Check Ram"
