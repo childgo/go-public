@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/whm/files_count.sh)
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/whm/emails_files_count.sh)
 
 
 
