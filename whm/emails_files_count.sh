@@ -1,5 +1,10 @@
 #!/bin/bash
 clear
+
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/whm/files_count.sh)
+
+
+
 # Function to count files in a directory and print in same line
 count_files() {
     echo -n "Count in $1: "
