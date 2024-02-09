@@ -454,7 +454,7 @@ yellow='\033[1;33m'
 reset='\033[0m'
 
 # Print in yellow
-echo -e "${yellow}${output} GB${reset}"
+echo -e "${yellow}The full size is: ${output} GB${reset}"
 
 
 
