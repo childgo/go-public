@@ -2,9 +2,6 @@
 # ^ that line is important
 clear
 
-#royal_program_list='file,block,topic,article,menu,multimenu,headline,album,video,setting,theme,program,myaccount';
-#royal_program_list='account,file,block,topic,article,page,multimenu,headline,album,video,ads,header,footer,structure,setting,program';
-
 royal_program_list='account,file,block,topic,article,page,multimenu,headline,album,video,ads,header,footer,layers,setting,program';
 
 
@@ -231,49 +228,6 @@ echo "French Password:" $final_royal_french_password
 echo "=================================================================="
 
 
-
-
-
-#============================================================================
-# Start Sending E-mail
-#============================================================================
-receiver="a@gmail.com"
-body=" 
-Dear ALSC.
-New Royal Domain Created in the Server
-
-------------------------------------------
-New WebSite has been created successfully
-Domain Name: $DOM
-Domain User: $USR
-cPanel Pass: $final_cpanel_password
-------------------------------------------
-
-
-------------------------------------------
-Database has been created successfully
-Database Name: $DB_NAME_ROYAL
-Database User: $DB_USER_ROYAL
-Database Pass: $DB_PASS_ROYAL
-
-------------------------------------------
-
-Royal Arabic User: $final_royal_arabic_user
-Royal Arabic Password: $final_royal_arabic_password
-
-Royal English User: $final_royal_english_user
-Royal English Password: $final_royal_english_password
-
-Royal French User: $final_royal_french_user
-Royal French Password: $final_royal_french_password
-
-
-
-Regards
-ALSCO Software
-------------------------------------------"
-#command to send the email
-#echo "$body" | mail -s "Royal Domain Created [$DOM]" $receiver
 
 
 #============================================================================
