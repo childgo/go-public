@@ -217,6 +217,8 @@ echo "cPanel_User: "$USR
 echo "cPanel_Pass: "$final_cpanel_password
 echo "=================================================================="
 echo "=================================================================="
+echo "Control Panel"
+echo "http://$dom/rcp"
 echo "Arabic User:" $final_royal_arabic_user
 echo "Arabic Password:" $final_royal_arabic_password
 echo "=================================================================="
