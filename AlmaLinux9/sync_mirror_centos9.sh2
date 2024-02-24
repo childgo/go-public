@@ -35,7 +35,7 @@ fi
 
 LOCAL_REPOS="base extras updates centosplus"
 
-ALSCO_Path='/home/repolin/public_html/Linux/Centos7-Sync/'
+ALSCO_Path='/home/repolin/public_html/Linux/AlmaLinux9/AlmaLinux9_Sync_Repository/'
 
 
 
