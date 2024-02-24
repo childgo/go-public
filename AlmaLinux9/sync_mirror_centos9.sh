@@ -9,6 +9,28 @@ yum install rsync
 
 
 
+####################################################################################################################
+
+
+# Define the path
+DIR="/home/repolin/public_html/Linux/AlmaLinux9/AlmaLinux9_Sync_Repository/"
+
+# Check if the directory exists
+if [ -d "$DIR" ]; then
+    echo "The directory $DIR already exists."
+else
+    echo "The directory $DIR does not exist. Creating now."
+    mkdir -p $DIR
+    if [ $? -eq 0 ]; then
+        echo "The directory $DIR has been created."
+    else
+        echo "Failed to create the directory $DIR."
+    fi
+fi
+####################################################################################################################
+
+
+
 ##specify all local repositories in a single variable
 
 LOCAL_REPOS="base extras updates centosplus"
