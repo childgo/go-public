@@ -1,7 +1,11 @@
 #!/bin/bash
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/AlmaLinux9/sync_mirror_centos9.sh)
+
 
 #yum -y install epel-release createrepo yum-utils
-#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/AlmaLinux9/sync_mirror_centos9.sh)
+yum install createrepo
+yum install rsync
+
 
 
 
