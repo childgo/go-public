@@ -193,8 +193,9 @@ lsyncd
 
 #==============================================
 ##a loop to update repos one at a time
-for REPO in ${LOCAL_REPOS_Nginx}; do
-repotrack -a x86_64 -p /home/repolin/public_html/Linux/AlmaLinux9/Nginx_SecureGateway/Nginx/$REPO $REPO
+DESTDIR_Nginx=/home/repolin/public_html/Linux/AlmaLinux9/Nginx_SecureGateway/Tools
+for REPO in $LOCAL_REPOS_Nginx; do
+    dnf download --resolve --destdir=$DESTDIR_Nginx/$REPO $REPO
 done
 #==============================================
 
@@ -203,7 +204,8 @@ done
 
 #==============================================
 ##a loop to update repos one at a time
-for REPO in ${LOCAL_REPOS_Tools}; do
-repotrack -a x86_64 -p /home/repolin/public_html/Linux/AlmaLinux9/Nginx_SecureGateway/Tools/$REPO $REPO
+DESTDIR_Tools=/home/repolin/public_html/Linux/AlmaLinux9/Nginx_SecureGateway/Tools
+for REPO in $LOCAL_REPOS_Tools; do
+    dnf download --resolve --destdir=$DESTDIR_Tools/$REPO $REPO
 done
 #==============================================
