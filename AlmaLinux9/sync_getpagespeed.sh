@@ -194,7 +194,7 @@ lsyncd
 #==============================================
 ##a loop to update repos one at a time
 for REPO in ${LOCAL_REPOS_Nginx}; do
-repotrack -a x86_64 -p /home/final/Linux/AlmaLinux9/Nginx/$REPO $REPO
+repotrack -a x86_64 -p /home/final/Linux/AlmaLinux9/Nginx_SecureGateway/$REPO $REPO
 done
 #==============================================
 
