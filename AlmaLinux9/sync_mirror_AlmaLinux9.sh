@@ -8,6 +8,7 @@ dnf config-manager --set-enabled crb
 #yum install createrepo
 yum install rsync
 
+sudo dnf install dnf-plugins-core createrepo_c -y
 
 
 
@@ -32,12 +33,10 @@ fi
 ####################################################################################################################
 
 
-
-##specify all local repositories in a single variable
-# Define the repositories you wish to sync. Adjust these as necessary.
+# Specify all local repositories in a single variable
 LOCAL_REPOS="baseos appstream extras"
 
-# Specify the path where you want to sync the repositories
+# Update the path where you want to sync the repositories
 ALSCO_Path='/home/repolin/public_html/Linux/AlmaLinux9/AlmaLinux9_Sync_Repository/'
 
 # Loop to update each repository one at a time
