@@ -1,8 +1,6 @@
 #!/bin/bash
-
-#yum -y install epel-release createrepo yum-utils
 #bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/CentOS_7/sync_mirror_centos7.sh)
-
+sudo dnf install dnf-plugins-core createrepo_c -y
 
 
 ##specify all local repositories in a single variable
