@@ -65,5 +65,5 @@ echo "All specified repositories have been synced."
 #chown -R repolin *
 #chgrp -R repolin *
 
-$du -h $ALSCO_Path --max-depth=0
+#du -h $ALSCO_Path --max-depth=0
 #du -h /home/repolin/public_html/Linux/AlmaLinux9/AlmaLinux9_Sync_Repository/ --max-depth=0
