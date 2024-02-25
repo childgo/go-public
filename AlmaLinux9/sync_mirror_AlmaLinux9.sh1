@@ -32,31 +32,38 @@ fi
 
 
 ##specify all local repositories in a single variable
+# Define the repositories you wish to sync. Adjust these as necessary.
+LOCAL_REPOS="baseos appstream extras"
 
-LOCAL_REPOS="base extras updates centosplus"
-
+# Specify the path where you want to sync the repositories
 ALSCO_Path='/home/repolin/public_html/Linux/AlmaLinux9/AlmaLinux9_Sync_Repository/'
 
-## Loop to update repos one at a time
+# Loop to update each repository one at a time
 for REPO in ${LOCAL_REPOS}; do
+    echo "Syncing repository: $REPO"
+    
+    # Use dnf reposync to sync the repository
     dnf reposync --repo=$REPO --newest-only --download-metadata --download-path=$ALSCO_Path/ --delete
-
-    # Check if the repository is 'base' or 'epel' to handle comps.xml specifically
-    if [[ $REPO = 'base' || $REPO = 'epel' ]]; then
+    
+    # Check if the repository requires group metadata (e.g., comps.xml). This is common for 'baseos' and 'appstream'.
+    if [[ $REPO = 'baseos' || $REPO = 'appstream' ]]; then
+        # Assuming comps.xml is located at the root of the repository directory for 'baseos' and 'appstream'
         createrepo_c -g comps.xml $ALSCO_Path/$REPO/
     else
         createrepo_c $ALSCO_Path/$REPO/
     fi
 done
 
+echo "All specified repositories have been synced."
 
 
 
 
-$cd /home/repolin/public_html/
-$pwd
-$chown -R repolin *
-$chgrp -R repolin *
+
+#cd /home/repolin/public_html/
+#pwd
+#chown -R repolin *
+#chgrp -R repolin *
 
 $du -h $ALSCO_Path --max-depth=0
-du -h /home/repolin/public_html/Linux/AlmaLinux9/AlmaLinux9_Sync_Repository/ --max-depth=0
+#du -h /home/repolin/public_html/Linux/AlmaLinux9/AlmaLinux9_Sync_Repository/ --max-depth=0
