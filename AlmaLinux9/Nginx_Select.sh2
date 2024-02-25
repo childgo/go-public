@@ -632,9 +632,6 @@ echo ""
 "ALSCO AlmaLinux9 Repository Build 28")
 dnf clean all
 
-yum clean headers
-yum clean metadata
-yum clean packages
 
 cd /etc/yum.repos.d/
 pwd
