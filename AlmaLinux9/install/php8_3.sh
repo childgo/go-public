@@ -1,4 +1,4 @@
-#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/AlmaLinux9/install/php8_2.sh)
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/AlmaLinux9/install/php8_3.sh)
 
 
 dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm;sleep 3;
