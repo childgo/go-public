@@ -193,7 +193,7 @@ lsyncd
 
 #==============================================
 ##a loop to update repos one at a time
-DESTDIR_Nginx=/home/repolin/public_html/Linux/AlmaLinux9/Nginx_SecureGateway/Tools
+DESTDIR_Nginx=/home/repolin/public_html/Linux/AlmaLinux9/Nginx_SecureGateway/Nginx
 for REPO in $LOCAL_REPOS_Nginx; do
     dnf download --resolve --destdir=$DESTDIR_Nginx/$REPO $REPO
 done
