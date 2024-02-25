@@ -1,3 +1,5 @@
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/CentOS_7/select.sh)
+
 clear
 PS3='Please enter your choice: '
 
@@ -11,12 +13,12 @@ options=(
 "Reload Nginx 7" "nginx -t 8"
 "Tail Nginx error Log 9"
 "Tail Nginx access Log 10"
-"Restart PHP 11"
+"Restart PHP and Session Path  11"
 "Nginx conf Path 12"
 "Nginx Log Path 13"
 "disk space used and available 14"
-"pgrep -x inotify.alsco 15"
-"Enable SELinux + PHP + Apache to write/access php file 16"
+"Cookie List 15"
+"Inotify and Enable SELinux + PHP + Apache to write/access php 16"
 "check Nginx version 17"
 "Check ALSCO IP Firewall Setting 18"
 "CSF Firewall Setting 19"
@@ -30,6 +32,11 @@ options=(
 "Update GEO-IP Database 27"
 "ALSCO Centos7 Repository Build 28"
 "Generate Cloudflare IP List for CSF 29"
+"Seucre Gateway Log Parsing  logs 30"
+"Delete all Nginx Logs 31"
+"Free RAM Loop 32"
+
+
 
 "Quit")
 
@@ -80,6 +87,8 @@ clear;while x=0; do clear;date;echo "";echo "[Total Number]";echo "-------------
 "Lock Folder 3")
 echo "chattr -R +i /var/www/html/"
 chattr -R +i /var/www/html/
+chattr -R -i /var/www/html/alscocloud/upload/
+
 echo ""
 echo "Checking..."
 lsattr /var/www/html/
@@ -131,9 +140,24 @@ echo ""
 tail -f /var/log/nginx/access.log
 ;;
 ########################################################
-"Restart PHP 11")
+"Restart PHP and Session Path  11")
+
+echo -e "\n\n\n"
 echo "service php-fpm restart"
 service php-fpm restart
+
+
+echo -e "\n\n\n"
+session_path="/var/lib/php/session"
+echo -e "Php Session path is: $session_path/\n"
+
+
+echo -e "\n\n\n"
+echo "Verify that the change was successful. ...."
+grep -r "session.cookie_httponly" /etc/php.ini
+grep -r "session.cookie_samesite" /etc/php.ini
+echo -e "\n\n\n"
+
 ;;
 ########################################################
 "Nginx conf Path 12")
@@ -149,24 +173,147 @@ pwd
 ;;
 ########################################################
 "disk space used and available 14")
+
+
+echo "----------------------------------------"
 echo "command: df"
 df
+echo "----------------------------------------"
+printf '\n\n\n'
+
+
+echo "----------------------------------------"
+echo "command: df -h"
+df -h
+echo "----------------------------------------"
+
+printf '\n\n\n'
+
+
 
 echo "----------------------------------------"
 echo "Check Ram"
 echo "----------------------------------------"
 echo "free -m -h"
 free -m -h
+printf '\n\n\n'
+
 ;;
 ########################################################
-"pgrep -x inotify.alsco 15")
-echo "pgrep -x \"inotify.alsco\""
-echo "to kill process use, kill 1234"
-echo "================"
-pgrep -x "inotify.alsco"
+"Cookie List 15")
+
+while true; do
+    echo "Choose an option:"
+    echo "a) List all cookies"
+    echo "b) Delete all cookies"
+    echo "q) Quit"
+    read -p "Enter your choice (a/b/q): " choice
+
+    case $choice in
+        a)
+            # List all cookies
+
+
+
+
+
+
+
+
+#==========================================
+#Start Here
+current_date=$(date +%s)
+
+# Current date/time minus 8 hours
+current_date_decrease=$(date --date '-8 hours' +%s)
+
+# Function to calculate time difference in hours and minutes
+calculate_time_difference() {
+    local start_time=$1
+    local end_time=$2
+    local time_diff=$((end_time - start_time))
+    local hours=$((time_diff / 3600))
+    local minutes=$(( (time_diff % 3600) / 60 ))
+    echo "$hours:$minutes"
+}
+
+# Color codes for formatting
+RED='\033[0;31m'
+BLUE='\033[0;34m'
+ORANGE='\033[0;33m'
+NC='\033[0m' # No color
+
+# First loop to find all files that end in .map
+find /etc/nginx/conf.d/alsco_data_cookie_and_ip/ -type f -name '*.map' -print0 | 
+    while IFS= read -r -d '' filepath; do 
+        # Remove empty/blank lines from a file in Unix
+        ex -s +'v/\S/d' -cwq "$filepath"
+
+        # Read each line from the file
+        while read -r ONELINE; do
+            # Extract the timestamp enclosed in double quotes
+            cookie_time=$(echo "$ONELINE" | awk -F'-' '{print $2}' | tr -d '"')
+            real_cookie_alsco_time=$(date +'%Y-%m-%d %H:%M:%S' -d "@$cookie_time")
+            real_current_alsco_time=$(date +'%Y-%m-%d %H:%M:%S' -d "@$current_date")
+
+            # Extract the domain (last part of the file path)
+            domain=$(basename "$(dirname "$filepath")")
+
+            if [ "$current_date_decrease" -gt "$cookie_time" ]; then
+                # Calculate the time elapsed since deletion
+                time_deleted=$(calculate_time_difference "$cookie_time" "$current_date_decrease")
+                # Delete lines with the specified cookie_time
+                sed -i "/$cookie_time/d" "$filepath"
+                echo -e "${RED}Domain: $domain | ${BLUE}Deleted: $cookie_time $time_deleted${NC} | Current Time: $real_current_alsco_time | Cookie Time: $real_cookie_alsco_time"
+                echo ""
+
+            else
+                # Calculate the remaining time until deletion
+                remaining_time=$(calculate_time_difference "$current_date_decrease" "$cookie_time")
+                # Calculate how long ago the cookie was created
+                cookie_created_time=$(calculate_time_difference "$cookie_time" "$current_date")
+                # Format the message with domain, cookie created time in blue, and remaining time in orange
+                echo -e "${RED}Domain: $domain${NC} | Keep: $cookie_time | Current Time: $real_current_alsco_time | Cookie Time: $real_cookie_alsco_time | Remaining Time Until Delete: ${ORANGE}$remaining_time${NC} |Cookie Created Before: ${BLUE} $cookie_created_time${NC}"
+                echo ""
+            fi
+        done < "$filepath"
+    done
+
+
+#==========================================
+
+
+
+
+
+
+
+
+            
+            ;;
+        b)
+            # Delete all cookies
+            find /etc/nginx/conf.d/alsco_data_cookie_and_ip/ -type f -name '*.map' -exec cp /dev/null {} \;
+            echo "All cookies deleted."
+            ;;
+        q)
+            echo "Exiting the script."
+            exit 0
+            ;;
+        *)
+            echo "Invalid choice. Please select 'a', 'b', or 'q'."
+            ;;
+    esac
+done
+
+
+
+
+
+
 ;;
 ########################################################
-"Enable SELinux + PHP + Apache to write/access php file 16")
+"Inotify and Enable SELinux + PHP + Apache to write/access php 16")
 #echo ". /alscospider/setting-conf.alsco"
 
 #Enable Write On conf.d files
@@ -175,9 +322,15 @@ chown apache $(find /etc/nginx/conf.d/alsco_data_cookie_and_ip/ -type f  -name '
 chown apache $(find /etc/nginx/conf.d/alsco_data_cookie_and_ip/ -type f  -name '*.ip.alsco')
 chown apache $(find /etc/nginx/conf.d/alsco_data_cookie_and_ip/ -type f  -name '*.ipsetting.alsco')
 chown apache $(find /etc/nginx/conf.d/alsco_data_cookie_and_ip/ -type f  -name '*.ratelimit_tempIP_block.alsco')
-echo "Finish Write On conf.d"
+echo "Finish Write On conf.d......."
 echo "Done"
+echo ""
+echo ""
 
+echo "pgrep -x \"inotify.alsco\""
+echo "to kill process use, kill 1234"
+echo "================"
+pgrep -x "inotify.alsco"
 ;;
 ########################################################
 "check Nginx version 17")
@@ -496,22 +649,22 @@ ALSCO_Path="/etc/yum.repos.d/alsco_CentOS7.repo"
 cat <<EOF >>/etc/yum.repos.d/alsco_CentOS7.repo
 [ALSCO-local-base]
 name=CentOS Base
-baseurl=https://repo.alscoip.com/Linux/Centos7-Sync/base/
+baseurl=https://repo.alscoip.com/Linux/CentOS_7/Centos7_Sync_Repository/base/
 gpgcheck=0
 enabled=1
 [ALSCO-local-centosplus]
 name=CentOS CentOSPlus
-baseurl=https:/repo.alscoip.com/Linux/Centos7-Sync/centosplus/
+baseurl=https://repo.alscoip.com/Linux/CentOS_7/Centos7_Sync_Repository/centosplus/
 gpgcheck=0
 enabled=0
 [ALSCO-local-extras]
 name=CentOS Extras
-baseurl=https://repo.alscoip.com/Linux/Centos7-Sync/extras/
+baseurl=https://repo.alscoip.com/Linux/CentOS_7/Centos7_Sync_Repository/extras/
 gpgcheck=0
 enabled=1
 [ALSCO-local-updates]
 name=CentOS Updates
-baseurl=https://repo.alscoip.com/Linux/Centos7-Sync/updates/
+baseurl=https://repo.alscoip.com/Linux/CentOS_7/Centos7_Sync_Repository/updates/
 gpgcheck=0
 enabled=1
 EOF
@@ -522,9 +675,9 @@ EOF
 ALSCO_Path="/etc/yum.repos.d/ALSCO_Nginx.repo"
 
 cat <<EOF >>/etc/yum.repos.d/ALSCO_Nginx.repo
-[ALSCO-Nginx]
+[ALSCO-Nginx-SecureGateway]
 name=RHEL Apache
-baseurl=http://repo.alscoip.com/Linux/Nginx_Centos7/
+baseurl=https://repo.alscoip.com/Linux/CentOS_7/Nginx_SecureGateway/
 enabled=1
 gpgcheck=0
 EOF
@@ -600,6 +753,152 @@ done
 echo "real_ip_header     CF-Connecting-IP;"
 echo "#===End========================="
 ;;
+################################################################################################################
+
+
+
+
+################################################################################################################
+################################################################################################################
+
+"Seucre Gateway Log Parsing  logs 30")
+clear
+LOG_FILE="/var/log/nginx/full_alsco_access.log"
+
+
+echo -e "---------------------------------------------------------------------------"
+#Top Domain Request Counter
+echo -e "\e[1;31m Domain Request Counter\e[0m"
+awk -F'"' '/ALSCO_Domain/ {split($4, a, "\\["); split(a[2], b, "]"); print b[1]}' "$LOG_FILE" | sort | uniq -c | sort -nr
+echo -e "-----------------------------------------\n\n\n"
+
+
+
+echo -e "---------------------------------------------------------------------------"
+#Top IP Request Counter
+echo -e "\e[1;31m IP Request Counter\e[0m"
+echo "These are the top 30 IPs with the highest number of requests:" && \
+awk -F'"' '/ALSCO_IP/ {split($2, a, "\\["); split(a[2], b, "]"); print b[1]}' "$LOG_FILE" | sort | uniq -c | sort -nr | head -n 30
+echo -e "-----------------------------------------\n\n\n"
+
+
+
+echo -e "---------------------------------------------------------------------------"
+#Top Countries Request Counter
+echo -e "\e[1;31m Countries Request Counter\e[0m"
+echo "These are the top countries with the highest number of requests:" && \
+awk -F'"' '/ALSCO_Countryname/ {split($22, a, "\\]"); gsub(/.*\[/, "", a[1]); print a[1]}' "$LOG_FILE" | sort | uniq -c | sort -nr
+echo -e "-----------------------------------------\n\n\n"
+
+
+
+
+
+
+
+#######################################################
+#Ask me if i want to contine 
+echo "Do you want to continue? [y/n]"
+read choice
+
+if [ "$choice" == "n" ]; then
+  echo "Exiting..."
+  exit 0
+else
+  echo "Continuing..."
+fi
+#######################################################
+
+
+
+
+sleep 5
+
+
+# Count the occurrences of each domain and sort them in descending order
+awk -F'"' '/ALSCO_Domain/ {split($4, a, "\\["); split(a[2], b, "]"); print b[1]}' "$LOG_FILE" | \
+sort | uniq -c | sort -nr | \
+while read -r count domain; do
+
+    echo "====================================="
+    echo -e "\e[1;31mDomain: $domain (Requests: $count)\e[0m" # Domain name in bold red
+    
+    # Top 30 IPs for the domain
+    echo "Top 30 IPs for $domain:"
+    awk -F'"' -v domain="$domain" '$4 ~ domain {split($2, a, "\\["); split(a[2], b, "]"); print b[1]}' "$LOG_FILE" | \
+    sort | uniq -c | sort -nr | head -n 30
+
+
+    # Top 30 countries for the domain
+    echo "Top 30 countries for $domain:"
+    awk -F'"' -v domain="$domain" '$4 ~ domain {split($22, a, "\\["); split(a[2], b, "]"); print b[1]}' "$LOG_FILE" | \
+    sort | uniq -c | sort -nr | head -n 30
+
+
+    # Top 30 URLs for the domain
+    echo "Top 30 URLs for $domain:"
+    awk -F'"' -v domain="$domain" '$4 ~ domain {split($8, a, "\\["); split(a[2], b, "]"); print b[1]}' "$LOG_FILE" | \
+    sort | uniq -c | sort -nr | head -n 30
+
+
+
+    echo "=====================================\n\n\n"
+
+done
+
+
+#How this script works:
+#It first counts and lists each domain with the number of requests.
+#Then, for each domain, it lists the top 30 IP addresses and the top 30 countries based on the number of requests.
+echo "#===End========================="
+;;
+
+################################################################################################################
+################################################################################################################
+"Delete all Nginx Logs 31")
+
+
+#Ask me if i want to contine 
+echo "Do you want to continue and delete all Nginx Log in /var/log/nginx/? [y/n]"
+read choice
+
+if [ "$choice" == "n" ]; then
+  echo "Exiting..."
+  exit 0
+else
+  echo "Continuing..."
+fi
+
+
+echo "find /var/log/nginx/ -type f -exec rm {} \;"
+echo "nginx -t"
+echo "systemctl restart nginx"
+echo "nginx -t && systemctl restart nginx"
+
+#Start Delete
+find /var/log/nginx/ -type f -exec rm {} \;
+nginx -t && systemctl restart nginx
+
+;;
+################################################################################################################
+################################################################################################################
+
+
+
+
+################################################################################################################
+################################################################################################################
+"Free RAM Loop 32")
+while true; do free -m; sleep 3; clear; done
+;;
+
+################################################################################################################
+################################################################################################################
+
+
+
+
+################################################################################################################
 ################################################################################################################
 
 
