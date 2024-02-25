@@ -37,20 +37,18 @@ LOCAL_REPOS="base extras updates centosplus"
 
 ALSCO_Path='/home/repolin/public_html/Linux/AlmaLinux9/AlmaLinux9_Sync_Repository/'
 
-
-
-##a loop to update repos one at a time
+## Loop to update repos one at a time
 for REPO in ${LOCAL_REPOS}; do
+    dnf reposync --repo=$REPO --newest-only --download-metadata --download-path=$ALSCO_Path/ --delete
 
-reposync -g -l -d -m --repoid=$REPO --newest-only --download-metadata --download_path=$ALSCO_Path/
+    # Check if the repository is 'base' or 'epel' to handle comps.xml specifically
+    if [[ $REPO = 'base' || $REPO = 'epel' ]]; then
+        createrepo_c -g comps.xml $ALSCO_Path/$REPO/
+    else
+        createrepo_c $ALSCO_Path/$REPO/
+    fi
+done
 
-
-
-if [[ $REPO = 'base' || $REPO = 'epel' ]]; then
-        createrepo -g comps.xml $ALSCO_Path/$REPO/
-else
-        createrepo $ALSCO_Path/$REPO/
-fi
 
 
 
