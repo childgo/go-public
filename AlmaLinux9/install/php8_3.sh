@@ -5,7 +5,7 @@ dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.r
 dnf install https://rpms.remirepo.net/enterprise/remi-release-9.rpm;sleep 3;
 dnf module list php;sleep 3;
 
-dnf module install php:remi-8.2;sleep 3;
+dnf module install php:remi-8.3;sleep 3;
 dnf -y install php php-cli php-fpm php-mysqlnd php-zip php-devel php-gd php-mbstring php-curl php-xml php-pear php-bcmath php-json;sleep 3;
 
 
