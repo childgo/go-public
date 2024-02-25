@@ -643,28 +643,23 @@ ls -al
 
 
 
-#Start Install Centos7 Repo
-ALSCO_Path="/etc/yum.repos.d/alsco_CentOS7.repo"
+#Start Install AlmaLinux9 Repo
+ALSCO_Path="/etc/yum.repos.d/ALSCO_AlmaLinux9.repo"
 
-cat <<EOF >>/etc/yum.repos.d/alsco_CentOS7.repo
-[ALSCO-local-base]
+cat <<EOF >>/etc/yum.repos.d/ALSCO_AlmaLinux9.repo
+[ALSCO-local-appstream]
 name=CentOS Base
-baseurl=https://repo.alscoip.com/Linux/CentOS_7/Centos7_Sync_Repository/base/
+baseurl=https://repo.alscoip.com/Linux/AlmaLinux9/AlmaLinux9_Sync_Repository/appstream/
 gpgcheck=0
 enabled=1
-[ALSCO-local-centosplus]
+[ALSCO-local-baseos]
 name=CentOS CentOSPlus
-baseurl=https://repo.alscoip.com/Linux/CentOS_7/Centos7_Sync_Repository/centosplus/
+baseurl=https://repo.alscoip.com/Linux/AlmaLinux9/AlmaLinux9_Sync_Repository/baseos/
 gpgcheck=0
 enabled=0
 [ALSCO-local-extras]
 name=CentOS Extras
-baseurl=https://repo.alscoip.com/Linux/CentOS_7/Centos7_Sync_Repository/extras/
-gpgcheck=0
-enabled=1
-[ALSCO-local-updates]
-name=CentOS Updates
-baseurl=https://repo.alscoip.com/Linux/CentOS_7/Centos7_Sync_Repository/updates/
+baseurl=https://repo.alscoip.com/Linux/AlmaLinux9/AlmaLinux9_Sync_Repository/extras/
 gpgcheck=0
 enabled=1
 EOF
@@ -672,12 +667,12 @@ EOF
 
 
 #Start Install ALSCO_Nginx Repo
-ALSCO_Path="/etc/yum.repos.d/ALSCO_Nginx.repo"
+ALSCO_Path="/etc/yum.repos.d/ALSCO_SecureGateway_Nginx.repo"
 
-cat <<EOF >>/etc/yum.repos.d/ALSCO_Nginx.repo
+cat <<EOF >>/etc/yum.repos.d/ALSCO_SecureGateway_Nginx.repo
 [ALSCO-Nginx-SecureGateway]
 name=RHEL Apache
-baseurl=https://repo.alscoip.com/Linux/CentOS_7/Nginx_SecureGateway/
+baseurl=https://repo.alscoip.com/Linux/AlmaLinux9/Nginx_SecureGateway/
 enabled=1
 gpgcheck=0
 EOF
