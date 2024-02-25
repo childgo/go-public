@@ -1,7 +1,7 @@
 #!/bin/bash
 #bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/AlmaLinux9/php.sh)
 
-ALSCO_Path='/home/repolin/public_html/Linux/AlmaLinux9/AlmaLinux9_Sync_Repository/php83'
+ALSCO_Path='/home/repolin/public_html/Linux/AlmaLinux9/Nginx_SecureGateway/php8.3_install/'
 
 # Ensure the target directory exists
 mkdir -p $ALSCO_Path
