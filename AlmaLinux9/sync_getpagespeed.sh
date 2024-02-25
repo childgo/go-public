@@ -5,6 +5,7 @@
 
 ##specify all local repositories in a single variable
 
+
 yum -y update;sleep 3;
 yum install epel-release createrepo;sleep 3;
 yum-utils moreutils
