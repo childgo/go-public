@@ -2,8 +2,8 @@
 
 
 clear
-yum update;sleep 3;
-yum -y update;sleep 3;
+dnf clean all; sleep 3;
+dnf -y update; sleep 3;
 
 
 #------------------------------------------------------------------------------------------------------------------
@@ -12,8 +12,8 @@ yum -y update;sleep 3;
 repo_dir="/etc/yum.repos.d/"
 
 # Delete all .repo files except for the specified ones
-find "$repo_dir" -type f -name '*.repo' ! -name 'alsco_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
-yum clean all
+find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_AlmaLinux9.repo' ! -name 'ALSCO_SecureGateway_Nginx.repo' -exec rm -f {} \;
+dnf clean all; sleep 3;
 #------------------------------------------------------------------------------------------------------------------
 
 yum install wget nano inotify-tools rsync sshpass;sleep 3;
