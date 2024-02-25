@@ -30,7 +30,7 @@ options=(
 "IP Trace 25"
 "Broadcasting server IP 26"
 "Update GEO-IP Database 27"
-"ALSCO Centos7 Repository Build 28"
+"ALSCO AlmaLinux9 Repository Build 28"
 "Generate Cloudflare IP List for CSF 29"
 "Seucre Gateway Log Parsing  logs 30"
 "Delete all Nginx Logs 31"
@@ -629,7 +629,7 @@ echo ""
 ;;
 ################################################################################################################
 ################################################################################################################
-"ALSCO Centos7 Repository Build 28")
+"ALSCO AlmaLinux9 Repository Build 28")
 yum clean all
 yum clean headers
 yum clean metadata
