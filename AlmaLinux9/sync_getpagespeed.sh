@@ -3,14 +3,21 @@
 #bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/AlmaLinux9/sync_getpagespeed.sh)
 #rsync -avz  --delete --progress -e "ssh -p 111" /home/final/Linux/cento7/ root@50.50.50.50:/home/repolin/public_html/Linux/Nginx_Centos7/
 
-##specify all local repositories in a single variable
+# Update all packages
+dnf -y update;sleep 3
 
+# Install EPEL repository and createrepo package
+dnf -y install epel-release createrepo;sleep 3
 
-yum -y update;sleep 3;
-yum install epel-release createrepo;sleep 3;
-yum-utils moreutils
-yum -y install wget nano inotify-tools perl ipset unzip net-tools perl-libwww-perl;sleep 3;
-yum -y install perl-LWP-Protocol-https perl-GDGraph bind-utils;sleep 3;
+# Install yum-utils and moreutils packages
+dnf -y install yum-utils moreutils;sleep 3
+
+# Install additional packages
+dnf -y install wget nano inotify-tools perl ipset unzip net-tools perl-libwww-perl;sleep 3
+
+# Install further Perl modules and bind-utils
+dnf -y install perl-LWP-Protocol-https perl-GDGraph bind-utils;sleep 3
+
 
 
 
