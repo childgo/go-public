@@ -14,8 +14,12 @@ sudo systemctl enable php-fpm;sleep 3;
 service php-fpm restart;sleep 3;
 
 #yum remove httpd
-
 php -v;sleep 3;
+
+
+#Remove php
+#dnf list installed php*
+#sudo dnf remove php*
 
 
 
