@@ -126,6 +126,8 @@ nginx -t
 echo "tail -f /var/log/nginx/error.log"
 echo "tail -f /var/log/nginx/alsco_error.log"
 echo "tail -f /var/log/nginx/alsco_error.log | grep 50.253.239.118"
+echo "tail -f /var/log/nginx/alsco_error.log | grep grep 96.78.250.86"
+
 echo ""
 tail -f /var/log/nginx/alsco_error.log
 ;;
@@ -133,6 +135,8 @@ tail -f /var/log/nginx/alsco_error.log
 "Tail Nginx access Log 10")
 echo "tail -f /var/log/nginx/access.log"
 echo "tail -f /var/log/nginx/access.log | grep 50.253.239.118"
+echo "tail -f /var/log/nginx/access.log | grep 96.78.250.86"
+
 
 echo ""
 
@@ -495,6 +499,8 @@ echo "Done"
 ########################################################
 "Grepping Access_Log logs for IP 23")
 echo "tail -f /var/log/nginx/access.log | grep  --color  50.253.239.118"
+echo "tail -f /var/log/nginx/access.log | grep  --color  96.78.250.86"
+
 echo ""
 tail -f /var/log/nginx/access.log | grep --color '50.253.239.118'
 
@@ -502,6 +508,8 @@ tail -f /var/log/nginx/access.log | grep --color '50.253.239.118'
 ########################################################
 "Grepping Error_Log logs for IP 24")
 echo "tail -f /var/log/nginx/alsco_error.log | grep  --color '50.253.239.118'"
+echo "tail -f /var/log/nginx/alsco_error.log | grep  --color '96.78.250.86'"
+
 echo ""
 tail -f /var/log/nginx/alsco_error.log | grep --color '50.253.239.118'
 
