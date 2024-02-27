@@ -1,8 +1,8 @@
 #bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/AlmaLinux9/install/php8_3.sh)
 
 
-dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm;sleep 3;
-dnf install https://rpms.remirepo.net/enterprise/remi-release-9.rpm;sleep 3;
+#dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm;sleep 3;
+#dnf install https://rpms.remirepo.net/enterprise/remi-release-9.rpm;sleep 3;
 dnf module list php;sleep 3;
 
 dnf module install php:remi-8.3;sleep 3;
