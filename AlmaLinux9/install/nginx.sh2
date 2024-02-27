@@ -1,14 +1,10 @@
 #bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/AlmaLinux9/install/nginx.sh)
-
-
 clear
-dnf clean all; sleep 3;
-#dnf -y update; sleep 3;
+
 
 
 #------------------------------------------------------------------------------------------------------------------
 #Clean Repo
-
 repo_dir="/etc/yum.repos.d/"
 
 # Delete all .repo files except for the specified ones
@@ -46,5 +42,5 @@ dnf clean all
 
 
 
-reboot;sleep 3;
+#reboot;sleep 3;
 
