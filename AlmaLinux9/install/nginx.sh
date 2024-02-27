@@ -9,7 +9,9 @@ repo_dir="/etc/yum.repos.d/"
 
 # Delete all .repo files except for the specified ones
 find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_SecureGateway_Nginx.repo' ! -name 'ALSCO_AlmaLinux9.repo' -exec rm -f {} \;
-dnf clean all; sleep 3;
+sudo dnf clean all; sleep 1;
+sudo dnf makecache; sleep 1;
+
 #------------------------------------------------------------------------------------------------------------------
 
 dnf install -y wget nano inotify-tools rsync sshpass;sleep 3;
