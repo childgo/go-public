@@ -16,8 +16,6 @@ PHP_PACKAGES=(
     php-fpm
     php-mysqlnd
     php-zip
-    php-devel
-    php-gd
     php-mbstring
     php-curl
     php-xml
