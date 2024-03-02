@@ -6,7 +6,7 @@
 dnf -y --nogpgcheck module list php;sleep 3;
 
 dnf -y --nogpgcheck module install php:remi-8.3;sleep 3;
-dnf -y -y --nogpgcheck install php php-cli php-fpm php-mysqlnd php-zip php-mbstring php-curl php-xml php-pear php-bcmath php-json;sleep 3;
+dnf -y -y --nogpgcheck install php php-cli php-fpm php-mysqlnd php-zip php-mbstring php-curl php-pear php-bcmath php-json;sleep 3;
 
 
 sudo systemctl start php-fpm;sleep 3;
