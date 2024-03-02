@@ -14,9 +14,9 @@ repo_dir="/etc/yum.repos.d/"
 find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_SecureGateway_Nginx.repo' ! -name 'ALSCO_AlmaLinux9.repo' -exec rm -f {} \;
 #------------------------------------------------------------------------------------------------------------------
 
-dnf install -y wget nano inotify-tools rsync sshpass;sleep 3;
-dnf install -y epel-release;sleep 3;
-dnf install -y nginx;sleep 3;
+dnf install -y --nogpgcheck wget nano inotify-tools rsync sshpass;sleep 3;
+dnf install -y --nogpgcheck epel-release;sleep 3;
+dnf install -y --nogpgcheck nginx;sleep 3;
 
 
 systemctl start nginx;sleep 3;
