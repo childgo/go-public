@@ -5,7 +5,7 @@ clear
 
 
 #Install Nano
-yum install nano
+dnf install nano
 
 
 
