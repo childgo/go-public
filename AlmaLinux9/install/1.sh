@@ -11,8 +11,8 @@ sudo dnf install -y https://rpms.remirepo.net/enterprise/remi-release-9.rpm
 sudo dnf module enable -y php:remi-8.3
 
 # Create a directory to download packages
-mkdir -p ~/php83-packages
-cd ~/php83-packages
+mkdir -p /home/php83-packages
+cd /home/php83-packages
 
 # Define a list of base PHP packages and common extensions to download
 php_packages=(
