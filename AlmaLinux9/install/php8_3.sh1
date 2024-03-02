@@ -9,10 +9,10 @@
 
 dnf module reset php -y
 dnf module enable php:remi-8.3 -y
-dnf -y --nogpgcheck --nobest --skip-broken module install php:remi-8.3
+#dnf -y --nogpgcheck --nobest --skip-broken module install php:remi-8.3
 
-dnf -y -y --nogpgcheck install php php-cli php-fpm php-mysqlnd php-zip php-mbstring php-curl php-pear php-bcmath php-json;sleep 3;
-
+#dnf -y -y --nogpgcheck install php php-cli php-fpm php-mysqlnd php-zip php-mbstring php-curl php-pear php-bcmath php-json;sleep 3;
+sudo dnf -y --nogpgcheck install php-fpm php-mysqlnd php-gd php-cli php-curl php-mbstring php-bcmath php-zip php-opcache php-xml php-json php-intl;sleep 3;
 
 sudo systemctl start php-fpm;sleep 3;
 sudo systemctl enable php-fpm;sleep 3;
