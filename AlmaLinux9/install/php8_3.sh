@@ -3,7 +3,6 @@
 
 #dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm;sleep 3;
 #dnf install https://rpms.remirepo.net/enterprise/remi-release-9.rpm;sleep 3;
-dnf install https://rpms.remirepo.net/enterprise/remi-release-9.rpm
 
 dnf -y --nogpgcheck module list php;sleep 3;
 
