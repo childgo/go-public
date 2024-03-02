@@ -4,8 +4,11 @@
 #dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm;sleep 3;
 #dnf install -y https://rpms.remirepo.net/enterprise/remi-release-9.rpm;sleep 3;
 
-dnf -y --nogpgcheck module list php;sleep 3;
+#dnf -y --nogpgcheck module list php;sleep 3;
 
+
+dnf module reset php -y
+dnf module enable php:remi-8.3 -y
 dnf -y --nogpgcheck --nobest --skip-broken module install php:remi-8.3
 
 dnf -y -y --nogpgcheck install php php-cli php-fpm php-mysqlnd php-zip php-mbstring php-curl php-pear php-bcmath php-json;sleep 3;
