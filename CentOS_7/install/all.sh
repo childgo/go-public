@@ -31,6 +31,18 @@ case $opt in
 
 clear
 
+#------
+#Clean Repo
+
+repo_dir="/etc/yum.repos.d/"
+
+# Delete all .repo files except for the specified ones
+find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_AlmaLinux9.repo' ! -name 'ALSCO_SecureGateway_Nginx.repo' -exec rm -f {} \;
+yum clean all
+#------
+
+
+
 yum -y update;sleep 3;
 yum -y install wget nano inotify-tools rsync sshpass;sleep 3;
 yum -y install epel-release;sleep 3;
