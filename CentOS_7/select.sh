@@ -126,7 +126,7 @@ nginx -t
 echo "tail -f /var/log/nginx/error.log"
 echo "tail -f /var/log/nginx/alsco_error.log"
 echo "tail -f /var/log/nginx/alsco_error.log | grep 50.253.239.118"
-echo "tail -f /var/log/nginx/alsco_error.log | grep grep 96.78.250.86"
+echo "tail -f /var/log/nginx/alsco_error.log | grep  96.78.250.86"
 
 echo ""
 tail -f /var/log/nginx/alsco_error.log
