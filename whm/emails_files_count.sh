@@ -15,6 +15,7 @@ echo "1) Group1_53_62"
 echo "2) Group2_53_62"
 echo "3) Group3_53_16"
 echo "4) Group4_52.29"
+echo "5) Group5_101_62"
 read -p "Enter your choice (1/2/3/4): " group_choice
 
 case $group_choice in
@@ -42,7 +43,13 @@ case $group_choice in
         echo "User selected Group4_52.29 [00.00.52.29]"
         count_files "/home/mohgov"
         echo -e "\n\n\n\n"
-        echo "Part4 [00.00.52.29]"
+        ;;
+
+
+
+    5)
+        echo "User selected Group5_101_62 [00.00.101.62]"
+        echo "Part5 [00.00.101.62]"
         count_files "/home/bsroti"
         count_files "/home/fbsamail"
         count_files "/home/gfcoil"
