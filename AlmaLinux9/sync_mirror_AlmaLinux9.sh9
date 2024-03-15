@@ -1,16 +1,12 @@
 #!/bin/bash
 #bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/AlmaLinux9/sync_mirror_AlmaLinux9.sh)
 sudo dnf update -y
-sudo dnf install createrepo
+sudo dnf install -y yum-utils
+sudo dnf install -y createrepo
+sudo dnf install -y rsync
 dnf config-manager --set-enabled crb
 
 #yum -y install epel-release createrepo yum-utils
-#yum install createrepo
-yum install rsync
-
-sudo dnf install dnf-plugins-core createrepo_c -y
-
-
 
 ####################################################################################################################
 
