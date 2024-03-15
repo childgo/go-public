@@ -1,6 +1,13 @@
 #!/bin/bash
 #bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/AlmaLinux9/test_sync.sh)
 
+sudo dnf update -y
+sudo dnf install -y yum-utils
+sudo dnf install -y createrepo
+sudo dnf install -y rsync
+
+
+
 # Define the base directory where the repositories will be synced
 BASEDIR="/home/repolin/public_html/Linux/AlmaLinux9/AlmaLinux9_Sync_Repository"
 
