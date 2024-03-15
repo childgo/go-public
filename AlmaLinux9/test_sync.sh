@@ -1,4 +1,5 @@
 #!/bin/bash
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/AlmaLinux9/Nginx_Select.sh)
 
 # Define the base directory where the repositories will be synced
 BASEDIR="/home/repolin/public_html/Linux/AlmaLinux9/AlmaLinux9_Sync_Repository"
