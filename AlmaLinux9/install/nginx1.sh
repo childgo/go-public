@@ -11,7 +11,7 @@ sudo dnf makecache; sleep 1;
 repo_dir="/etc/yum.repos.d/"
 
 # Delete all .repo files except for the specified ones
-find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_SecureGateway_Nginx.repo' ! -name 'ALSCO_AlmaLinux9.repo' -exec rm -f {} \;
+#find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_SecureGateway_Nginx.repo' ! -name 'ALSCO_AlmaLinux9.repo' -exec rm -f {} \;
 #------------------------------------------------------------------------------------------------------------------
 
 dnf install -y --nogpgcheck wget nano inotify-tools rsync sshpass;sleep 3;
@@ -37,7 +37,7 @@ systemctl restart nginx;sleep 3;
 repo_dir="/etc/yum.repos.d/"
 
 # Delete all .repo files except for the specified ones
-find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_SecureGateway_Nginx.repo' ! -name 'ALSCO_AlmaLinux9.repo' -exec rm -f {} \;
+#find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_SecureGateway_Nginx.repo' ! -name 'ALSCO_AlmaLinux9.repo' -exec rm -f {} \;
 dnf clean all
 
 #------------------------------------------------------------------------------------------------------------------
