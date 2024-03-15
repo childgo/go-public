@@ -9,15 +9,15 @@ count_files() {
 
 # Prompt user for group selection
 echo "Select a group to print file counts for:"
-echo "1) Group1"
-echo "2) Group2"
-echo "3) Group3"
+echo "1) Group1_53_62"
+echo "2) Group2_53_62"
+echo "3) Group3_53_16"
 echo "4) Group4"
 read -p "Enter your choice (1/2/3/4): " group_choice
 
 case $group_choice in
     1)
-        echo "User selected Group1 [00.00.53.62]"
+        echo "User selected Group1_53_62 [00.00.53.62]"
         count_files "/home/soc"
         count_files "/home/gcans"
         count_files "/home/icaagov"
@@ -25,19 +25,19 @@ case $group_choice in
         count_files "/home/motgov"
         ;;
     2)
-        echo "User selected Group2 [00.00.53.63]"
+        echo "User selected Group2_53_63 [00.00.53.63]"
         count_files "/home/iraqair"
         count_files "/home/oilgov"
         count_files "/home/iqpost"
         ;;
     3)
-        echo "User selected Group3 [00.00.53.16]"
+        echo "User selected Group3_53_16 [00.00.53.16]"
         count_files "/home/emailmoelc"
         count_files "/home/moi"
         count_files "/home/resmoelc"
         ;;
     4)
-        echo "User selected Group4 [00.00.52.29]"
+        echo "User selected Group4_52.29 [00.00.52.29]"
         count_files "/home/mohgov"
         # Add additional directories for Group4 here if needed
         ;;
