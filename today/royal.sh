@@ -88,7 +88,8 @@ USR="$usr"
 
 
 #Set a PHP version for a vhost
-whmapi1 php_set_vhost_versions version=ea-php74 vhost=$DOM
+#whmapi1 php_set_vhost_versions version=ea-php74 vhost=$DOM
+whmapi1 php_set_vhost_versions version=ea-php81 vhost=$DOM
 
 
 #============================================================================
