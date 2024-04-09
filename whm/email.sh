@@ -16,6 +16,7 @@ options=("Monitor Webmail 2096 Port and Load 1"
 "Remove all Block ip in CSF 10"
 "List All Domains And Folder Size 11"
 "server disk space 12"
+"Reset Password for all emails account and save them to file 13"
 
 
 
@@ -490,8 +491,48 @@ free -m -h
 
 
 ########################################################
+"Reset Password for all emails account and save them to file 13")
 
-"Option 13")
+echo "Please Type Domain, followed by [ENTER]:"
+read alsco_get_domain
+
+# Get cPanel User from Domain
+alsco_get_user=$(/scripts/whoowns $alsco_get_domain)
+
+echo "Domain:" $alsco_get_domain
+echo "cPanel User:" $alsco_get_user
+
+# Define the output file based on the domain name
+output_file="/alscospider/${alsco_get_domain}_email_accounts.txt"
+> "$output_file" # This empties the file if it already exists or creates it if it doesn't
+
+while IFS= read -r email; do
+    password=$(cat /dev/urandom | tr -dc 'a-z' | fold -w 1 | head -n 1)$(cat /dev/urandom | tr -dc 'a-zA-Z' | fold -w 4 | head -n 1)$(cat /dev/urandom | tr -dc '0-9' | fold -w 2 | head -n 1)$(cat /dev/urandom | tr -dc '@#!' | fold -w 2 | head -n 1)$(cat /dev/urandom | tr -dc 'a-z' | fold -w 1 | head -n 1)
+
+    # Output the generated password
+    echo "Email: $email, Password: $password"
+
+    # Write the email and password to the output file
+    echo "Email: $email, Password: $password" >> "$output_file"
+
+    # Use the uapi command to change the password for the email
+    uapi --output=jsonpretty --user=$alsco_get_user Email passwd_pop email="$email" password="$password"
+
+    # Add any additional logic or commands here if needed for each email account
+done < <(uapi --user=$alsco_get_user Email list_pops domain=$alsco_get_domain | grep -o 'email: [^ ]*' | awk '{print $2}')
+
+echo "Process completed successfully!"
+echo "The email accounts and passwords have been saved to: $output_file"
+
+echo "Done"
+
+
+;;
+
+
+########################################################
+
+"Option 14")
 echo "Done"
 
 
