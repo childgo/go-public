@@ -17,6 +17,7 @@ options=("Monitor Webmail 2096 Port and Load 1"
 "List All Domains And Folder Size 11"
 "server disk space 12"
 "Reset Password for all emails account and save them to file 13"
+"Create a list of emails accounts under a domain"
 
 
 
@@ -539,10 +540,61 @@ echo "The email accounts and passwords have been saved to: $output_file"
 
 echo "Done"
 ;;
+########################################################
+
+
+#######################################################
+"Create a list of emails accounts under a domain 14")
+
+# Ask for the domain
+echo "Please Type Domain, followed by [ENTER]:"
+read alsco_get_domain
+
+# Get cPanel User from Domain
+alsco_get_user=$(/scripts/whoowns $alsco_get_domain)
+
+echo "Domain:" $alsco_get_domain
+echo "cPanel User:" $alsco_get_user
+
+# Confirm if the cPanel username is correct
+echo "Is the cPanel username correct? Type 'yes' to continue or 'no' to exit:"
+read confirmation
+
+if [ "$confirmation" != "yes" ]; then
+    echo "Exiting script."
+    exit 1
+fi
+
+# Assuming continuation if 'yes'
+PASSWORD="asaded@1ews" # Ideally, ask for this or generate dynamically for better security
+CPANEL_USER=$alsco_get_user
+
+# List of email prefixes with dots replaced by hyphens
+emails=(
+    deputy.mgnt
+    advisor.admin
+    tech.advisor
+    p.f.dep
+    financial.dep
+    ge.dsurvey
+)
+
+# Loop through the list and create each email account with 250 MB quota
+for email in "${emails[@]}"; do
+    email=${email//./-} # Correctly replace dots with hyphens in the email prefix
+    uapi --user=$CPANEL_USER Email add_pop email=$email domain=$alsco_get_domain password=$PASSWORD quota=250
+done
+
+echo "All emails have been created with 250 MB quota each."
+
+
+
+echo "Done"
+;;
+########################################################
 
 
 ########################################################
-
 "Option 14")
 echo "Done"
 
