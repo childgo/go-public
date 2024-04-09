@@ -493,6 +493,9 @@ free -m -h
 ########################################################
 "Reset Password for all emails account and save them to file 13")
 
+#!/bin/bash
+clear
+
 echo "Please Type Domain, followed by [ENTER]:"
 read alsco_get_domain
 
@@ -501,6 +504,15 @@ alsco_get_user=$(/scripts/whoowns $alsco_get_domain)
 
 echo "Domain:" $alsco_get_domain
 echo "cPanel User:" $alsco_get_user
+
+# Confirm if the cPanel username is correct
+echo "Is the cPanel username correct? Type 'yes' to continue or 'no' to exit:"
+read confirmation
+
+if [ "$confirmation" != "yes" ]; then
+    echo "Exiting script."
+    exit 1
+fi
 
 # Define the output file based on the domain name
 output_file="/alscospider/${alsco_get_domain}_email_accounts.txt"
@@ -524,9 +536,8 @@ done < <(uapi --user=$alsco_get_user Email list_pops domain=$alsco_get_domain | 
 echo "Process completed successfully!"
 echo "The email accounts and passwords have been saved to: $output_file"
 
+
 echo "Done"
-
-
 ;;
 
 
