@@ -546,6 +546,8 @@ echo "Done"
 #######################################################
 "Create a list of emails accounts under a domain 14")
 
+
+
 # Ask for the domain
 echo "Please Type Domain, followed by [ENTER]:"
 read alsco_get_domain
@@ -566,7 +568,7 @@ if [ "$confirmation" != "yes" ]; then
 fi
 
 # Assuming continuation if 'yes'
-PASSWORD="asaded@1ews" # Ideally, ask for this or generate dynamically for better security
+PASSWORD="asaded@1ews" # Prompt for this or generate dynamically for better security
 CPANEL_USER=$alsco_get_user
 
 # List of email prefixes with dots replaced by hyphens
@@ -579,17 +581,24 @@ emails=(
     ge.dsurvey
 )
 
-# Loop through the list and create each email account with 250 MB quota
+# Loop through the list and check if email exists before creating
 for email in "${emails[@]}"; do
-    email=${email//./-} # Correctly replace dots with hyphens in the email prefix
-    uapi --user=$CPANEL_USER Email add_pop email=$email domain=$alsco_get_domain password=$PASSWORD quota=250
+    email_prefix=${email//./-} # Correctly replace dots with hyphens in the email prefix
+    full_email="$email_prefix@$alsco_get_domain"
+
+    # Check if the email account already exists
+    if uapi --user=$CPANEL_USER Email list_pops | grep -q "$full_email"; then
+        echo "Error: The email $full_email already exists. Skipping creation."
+    else
+        # Email does not exist, proceed to create
+        uapi --user=$CPANEL_USER Email add_pop email=$email_prefix domain=$alsco_get_domain password=$PASSWORD quota=250
+        echo "Created $full_email with 250 MB quota."
+    fi
 done
 
-echo "All emails have been created with 250 MB quota each."
+echo "Process completed."
 
 
-
-echo "Done"
 ;;
 ########################################################
 
