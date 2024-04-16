@@ -133,9 +133,37 @@ tail -f /var/log/nginx/alsco_error.log
 ;;
 ########################################################
 "Tail Nginx access Log 10")
-echo "tail -f /var/log/nginx/access.log"
-echo "tail -f /var/log/nginx/access.log | grep 50.253.239.118"
-echo "tail -f /var/log/nginx/access.log | grep 96.78.250.86"
+echo "Select the log monitoring option:"
+options=("All Logs" "Filter for IP 96.78.250.86" "Filter for IP 50.253.239.118" "Quit")
+
+select opt in "${options[@]}"
+do
+    case $opt in
+        "All Logs")
+            cmd="tail -f /var/log/nginx/access.log"
+            echo "Executing: $cmd"
+            eval $cmd
+            break
+            ;;
+        "Filter for IP 96.78.250.86")
+            cmd="tail -f /var/log/nginx/access.log | grep 96.78.250.86"
+            echo "Executing: $cmd"
+            eval $cmd
+            break
+            ;;
+        "Filter for IP 50.253.239.118")
+            cmd="tail -f /var/log/nginx/access.log | grep 50.253.239.118"
+            echo "Executing: $cmd"
+            eval $cmd
+            break
+            ;;
+        "Quit")
+            echo "Exiting script."
+            break
+            ;;
+        *) echo "Invalid option $REPLY";;
+    esac
+done
 
 
 echo ""
