@@ -124,12 +124,42 @@ nginx -t
 ########################################################
 "Tail Nginx error Log 9")
 echo "tail -f /var/log/nginx/error.log"
-echo "tail -f /var/log/nginx/alsco_error.log"
-echo "tail -f /var/log/nginx/alsco_error.log | grep 50.253.239.118"
-echo "tail -f /var/log/nginx/alsco_error.log | grep  96.78.250.86"
+
+
+echo "Select the error log monitoring option:"
+options=("All Nginx Error Logs" "Filter Logs for IP 50.253.239.118" "Filter Logs for IP 96.78.250.86" "Quit")
+
+select opt in "${options[@]}"
+do
+    case $opt in
+        "All Nginx Error Logs")
+            cmd="tail -f /var/log/nginx/error.log"
+            echo "Executing: $cmd"
+            eval $cmd
+            break
+            ;;
+        
+        "Filter Logs for IP 50.253.239.118")
+            cmd="tail -f /var/log/nginx/alsco_error.log | grep 50.253.239.118"
+            echo "Executing: $cmd"
+            eval $cmd
+            break
+            ;;
+        "Filter Logs for IP 96.78.250.86")
+            cmd="tail -f /var/log/nginx/alsco_error.log | grep 96.78.250.86"
+            echo "Executing: $cmd"
+            eval $cmd
+            break
+            ;;
+        "Quit")
+            echo "Exiting script."
+            break
+            ;;
+        *) echo "Invalid option $REPLY";;
+    esac
+done
 
 echo ""
-tail -f /var/log/nginx/alsco_error.log
 ;;
 ########################################################
 "Tail Nginx access Log 10")
@@ -167,9 +197,6 @@ done
 
 
 echo ""
-
-
-tail -f /var/log/nginx/access.log
 ;;
 ########################################################
 "Restart PHP and Session Path  11")
