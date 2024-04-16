@@ -12,7 +12,7 @@ count_files() {
 # Prompt user for group selection
 echo "Select a group to print file counts for:"
 echo "1) Group1_53_62"
-echo "2) Group2_53_62"
+echo "2) Group2_53_63"
 echo "3) Group3_53_16"
 echo "4) Group4_52.29"
 echo "5) Group5_101_62"
