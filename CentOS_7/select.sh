@@ -140,13 +140,13 @@ do
             ;;
         
         "Filter Logs for IP 50.253.239.118")
-            cmd="tail -f /var/log/nginx/alsco_error.log | grep 50.253.239.118"
+            cmd="tail -f /var/log/nginx/alsco_error.log | grep --color 50.253.239.118"
             echo "Executing: $cmd"
             eval $cmd
             break
             ;;
         "Filter Logs for IP 96.78.250.86")
-            cmd="tail -f /var/log/nginx/alsco_error.log | grep 96.78.250.86"
+            cmd="tail -f /var/log/nginx/alsco_error.log | grep --color 96.78.250.86"
             echo "Executing: $cmd"
             eval $cmd
             break
@@ -176,13 +176,13 @@ do
             break
             ;;
         "Filter for IP 96.78.250.86")
-            cmd="tail -f /var/log/nginx/access.log | grep 96.78.250.86"
+            cmd="tail -f /var/log/nginx/access.log | grep --color 96.78.250.86"
             echo "Executing: $cmd"
             eval $cmd
             break
             ;;
         "Filter for IP 50.253.239.118")
-            cmd="tail -f /var/log/nginx/access.log | grep 50.253.239.118"
+            cmd="tail -f /var/log/nginx/access.log | grep --color 50.253.239.118"
             echo "Executing: $cmd"
             eval $cmd
             break
@@ -553,20 +553,12 @@ echo "Done"
 
 ########################################################
 "Grepping Access_Log logs for IP 23")
-echo "tail -f /var/log/nginx/access.log | grep  --color  50.253.239.118"
-echo "tail -f /var/log/nginx/access.log | grep  --color  96.78.250.86"
-
 echo ""
-tail -f /var/log/nginx/access.log | grep --color '50.253.239.118'
 
 ;;
 ########################################################
 "Grepping Error_Log logs for IP 24")
-echo "tail -f /var/log/nginx/alsco_error.log | grep  --color '50.253.239.118'"
-echo "tail -f /var/log/nginx/alsco_error.log | grep  --color '96.78.250.86'"
-
 echo ""
-tail -f /var/log/nginx/alsco_error.log | grep --color '50.253.239.118'
 
 ;;
 ########################################################
