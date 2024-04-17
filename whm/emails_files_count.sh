@@ -42,6 +42,10 @@ case $group_choice in
     4)
         echo "User selected Group4_52.29 [00.00.52.29]"
         count_files "/home/mohgov"
+        count_files "/home/tocoil"
+        count_files "/home/nrcoil"
+        count_files "/home/mowr"
+
         echo -e "\n\n\n\n"
         ;;
 
