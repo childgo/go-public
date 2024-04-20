@@ -1,5 +1,6 @@
 #!/bin/bash
 #bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/Install_Auth.sh)
+#ims.bobcares.com/key2
 
 echo -e "============================================================================================="
 #This is logo Print Part
