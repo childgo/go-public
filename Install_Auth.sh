@@ -22,7 +22,12 @@ EOF
 echo -e "${RESET}"
 echo -e "============================================================================================="
 
+
+####This Is for development
 SG_home_dir=$(cat /etc/passwd | grep ^$(whoami): | cut -d ":" -f 6);
+SG_ssh_key_dir=$SG_home_dir/.ssh
+SG_ssh_key_file=$SG_home_dir/.ssh/authorized_keys
+####This Is for development
 
 
 
