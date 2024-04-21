@@ -561,12 +561,30 @@ echo ""
 URL="https://ips.wedos.global/ips.txt"
 
 # Use curl to download the IP ranges, and format them using awk
-curl -s $URL | awk '{print "set_real_ip_from " $1 ";"}' > formatted_ips.txt
+curl -s $URL | awk '{print "set_real_ip_from " $1 ";"}'
 
 # Output the formatted IP ranges
 cat formatted_ips.txt
 
 
+
+echo "----------------------------------------"
+echo "This is for CSF port80"
+# Use curl to download the IP ranges, and format them using awk
+curl -s $URL | awk '{print "tcp|in|d=80|s=" $1 ";"}'
+
+# Output the formatted IP ranges
+cat formatted_ips.txt
+echo "----------------------------------------"
+
+
+
+
+echo "----------------------------------------"
+curl -s $URL | awk '{print "tcp|in|d=443|s=" $1 ";"}'
+# Output the formatted IP ranges
+cat formatted_ips.txt
+echo "----------------------------------------"
 
 ;;
 ########################################################
