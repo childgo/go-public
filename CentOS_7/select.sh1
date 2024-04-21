@@ -555,6 +555,19 @@ echo "Done"
 "Generate WeDos IP List for Nginx and csf 23")
 echo ""
 
+
+
+# URL containing the IP ranges
+URL="https://ips.wedos.global/ips.txt"
+
+# Use curl to download the IP ranges, and format them using awk
+curl -s $URL | awk '{print "set_real_ip_from " $1 ";"}' > formatted_ips.txt
+
+# Output the formatted IP ranges
+cat formatted_ips.txt
+
+
+
 ;;
 ########################################################
 "Grepping Error_Log logs for IP 24")
