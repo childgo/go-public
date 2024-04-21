@@ -25,8 +25,8 @@ options=(
 "Check Rate Limit  Excess 20"
 "clear the contents of ratelimit_tempIP_block 21"
 "check SELinux 22"
-"Grepping Access_Log logs for IP 23"
-"Grepping Error_Log logs for IP 24"
+"Generate WeDos IP List for Nginx and csf 23"
+"33333333 24"
 "IP Trace 25"
 "Broadcasting server IP 26"
 "Update GEO-IP Database 27"
@@ -552,7 +552,7 @@ echo "Done"
 ;;
 
 ########################################################
-"Grepping Access_Log logs for IP 23")
+"Generate WeDos IP List for Nginx and csf 23")
 echo ""
 
 ;;
