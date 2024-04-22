@@ -571,6 +571,23 @@ curl -A "My User Agent" -X POST https://monitor.cdn-today.com/micro_report/api.p
 echo ""
 echo "Version: 1"
 
+
+
+####Some Work
+#######==================================================================================
+# File paths
+sg1_file1="/path/to/your/first/file"
+sg2_file2="/path/to/your/second/file"
+
+# Maximum file size in bytes (3MB)
+sg_max_size=$((3*1024*1024))
+
+# Delete the file if it's larger than the maximum size
+[ -f "$sg1_file1" ] && [ $(stat -c %s "$sg1_file1") -gt $sg_max_size ] && rm "$sg1_file1"
+[ -f "$sg2_file2" ] && [ $(stat -c %s "$sg2_file2") -gt $sg_max_size ] && rm "$sg2_file2"
+#######==================================================================================
+
+
 exit
 
 
