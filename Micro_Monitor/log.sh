@@ -11,7 +11,6 @@ echo ""
 Server_IP=`hostname -I |  awk {'print $1'}`
 echo "Server_IP: $Server_IP"
 
-
 Hostname=$(hostname)
 echo "Hostname: $Hostname"
 echo -e "\n\n"
@@ -20,29 +19,11 @@ echo -e "\n\n"
 cmd_uptime=$(uptime)
 echo "uptime: $cmd_uptime"
 echo -e "\n\n"
-
-
-
-
 #cmd_hostnamectl=$(hostnamectl | tr -d "'")
 #cmd_hostnamectl=$(hostnamectl | tr -d "'" | sed ':a;N;$!ba;s/\n/<br>/g')
 cmd_hostnamectl=$(/usr/bin/hostnamectl | tr -d "'" | sed ':a;N;$!ba;s/\n/<br>/g')
-
-
-
-
-
-
 echo "cmd_hostnamectl: $cmd_hostnamectl"
-
-
-
-
-
-
 echo -e "\n\n"
-
-########################################################################
 #End,Working with Server Info
 ########################################################################
 
@@ -58,7 +39,6 @@ echo -e "\n\n"
 ########################################################################
 #Working with Concurrent Connections
 ########################################################################
-
 #Port_80_Connection=$(netstat -an | grep :80 | grep ESTABLISHED | wc -l)
 Port_80_Connection=$(netstat -an | grep :80 | wc -l)
 echo "Port_80_Connection: $Port_80_Connection"
@@ -78,24 +58,11 @@ echo "Port_3306_Connection: $Port_3306_Connection"
 #Port_80and443_Connection=$(netstat -an | grep -E '(:80|:443)' | grep ESTABLISHED | wc -l)
 Port_80and443_Connection=$(netstat -an | grep -E '(:80|:443)' | wc -l)
 echo "Port 80 and 443: $Port_80and443_Connection"
-
-
-
-
-########################################################################
+echo -e "\n\n"
 #End,Working with RAM
 ########################################################################
 
 
-
-
-
-
-
-
-echo ""
-echo ""
-echo ""
 
 
 
@@ -106,43 +73,27 @@ echo ""
 ########################################################################
 #here i am working with RAM [free -m]
 
-
 RAM_Full_Command=$(free -m)
 echo "$RAM_Full_Command"
-
-echo ""
-echo ""
-echo ""
-
-
+echo -e "\n\n"
 
 RAM_Mem_Total=$(free -m | awk '/^Mem:/ {print $2}')
 echo "RAM_Mem_Total: $RAM_Mem_Total"
 
-
 RAM_Mem_Used=$(free -m | awk '/^Mem:/ {print $3}')
 echo "RAM Mem Used: $RAM_Mem_Used"
-
 
 RAM_Mem_Free=$(free -m | awk '/^Mem:/ {print $4}')
 echo "RAM_Mem_Free: $RAM_Mem_Free"
 
-
 RAM_Mem_shared=$(free -m | awk '/^Mem:/ {print $5}')
 echo "RAM_Mem_shared: $RAM_Mem_shared"
-
-
 
 RAM_Mem_buff_cache=$(free -m | awk '/^Mem:/ {print $6}')
 echo "RAM_Mem_buff_cache: $RAM_Mem_buff_cache"
 
-
 RAM_Mem_available=$(free -m | awk '/^Mem:/ {print $7}')
 echo "RAM_Mem_available: $RAM_Mem_available"
-
-echo ""
-
-
 
 RAM_Swap_total=$(free -m | awk '/^Swap:/ {print $2}')
 echo "RAM_Swap_total: $RAM_Swap_total"
@@ -153,19 +104,14 @@ echo "RAM_Swap_used: $RAM_Swap_used"
 RAM_Swap_Free=$(free -m | awk '/^Swap:/ {print $4}')
 echo "RAM_Swap_Free: $RAM_Swap_Free"
 
-
 RAM_usage_percentage=$(free | awk '/Mem/{printf("%.2f"), $3/$2*100}')
 echo "RAM Usage Percentage: $RAM_usage_percentage"
-
-
-########################################################################
+echo -e "\n\n"
 #End,Working with RAM
 ########################################################################
 
 
-echo ""
-echo ""
-echo ""
+
 
 
 
@@ -188,20 +134,12 @@ echo ""
 ########################################################################
 #Working with CPU
 ########################################################################
-
-
 CPU_Total=$(lscpu | grep "^CPU(s):" | awk '{print $2}')
 echo "CPU_Total: $CPU_Total"
-
-
-
-
 CPU_load=$(cat /proc/loadavg | awk '{print $1}')
 echo "CPU_load: $CPU_load"
 
 echo -e "\n\n"
-
-########################################################################
 #End,Working with CPU
 ########################################################################
 
@@ -215,27 +153,19 @@ echo -e "\n\n"
 ########################################################################
 #Working with CSF
 ########################################################################
-
 CSF_firewall_status=$(/usr/sbin/csf -e)
 echo "CSF_firewall_status: $CSF_firewall_status"
-
-
 
 CSF_TCP4_IN=$(grep -r "TCP_IN =" /etc/csf/csf.conf)
 CSF_TCP4_OUT=$(grep -r "TCP_OUT =" /etc/csf/csf.conf)
 CSF_TCP4=$CSF_TCP4_IN"\n"$CSF_TCP4_OUT
 echo "CSF_TCP4: $CSF_TCP4"
 
-
-
-
 CSF_TCP6_IN=$(grep -r "TCP6_IN =" /etc/csf/csf.conf)
 CSF_TCP6_OUT=$(grep -r "TCP6_OUT =" /etc/csf/csf.conf)
 CSF_TCP6=$CSF_TCP6_IN"\n"$CSF_TCP6_OUT
 echo "CSF_TCP6: $CSF_TCP6"
-
-
-########################################################################
+echo -e "\n\n"
 #End,Working with CSF
 ########################################################################
 
@@ -246,20 +176,12 @@ echo "CSF_TCP6: $CSF_TCP6"
 ########################################################################
 
 grep --color=always -r "whostmgrd"  /etc/hosts.allow
-
-
 Hosts_Allow=$(cat /etc/hosts.allow)
-
 #escaped_change single quotes to the word {Single_Here_Quote}]
 Hosts_Allow=$(echo "$Hosts_Allow" | sed "s/'/{Single_Quote_Here}/g")
 
-
 echo "Hosts_Allow: $Hosts_Allow"
-
 echo -e "\n\n"
-
-
-
 ########################################################################
 #End,Working with hosts.allow
 ########################################################################
@@ -270,34 +192,36 @@ echo -e "\n\n"
 
 
 
-
-
-
-
-
 ########################################################################
 #Working with disk
 ########################################################################
-
 server_disk_usage=$(df -h)
 echo "server_disk_usage: $server_disk_usage"
-
+echo -e "\n\n"
+#Working with disk
+########################################################################
 
 
 
 
 
 ########################################################################
-#Working with disk
+#Working ssh_connnection
 ########################################################################
 ssh_connnection_ip=$(who)
 echo " "
 echo "SSH Connnection IP: $ssh_connnection_ip"
+#Working ssh_connnection
+########################################################################
+
+
+
 
 
 ########################################################################
 #Network is up or down
 Network_up_down="1"
+#End_Network is up or down
 ########################################################################
 
 
@@ -305,10 +229,6 @@ Network_up_down="1"
 
 ########################################################################
 #Start Get Port for each port
-echo ""
-echo ""
-
-
 Port_21_Connection=$(netstat -an | grep :21 | grep ESTABLISHED | wc -l)
 echo "Port_21_Connection: $Port_21_Connection"
 
@@ -389,9 +309,7 @@ Port_5432_Connection=$(netstat -an | grep :5432 | grep ESTABLISHED | wc -l)
 echo "Port_5432_Connection: $Port_5432_Connection"
 
 
-echo ""
-echo ""
-
+#End
 ########################################################################
 
 
@@ -572,10 +490,10 @@ echo ""
 echo "Version: 1"
 
 
-
-####Some Work
+#########################################################################################################################################################
+#Some Work
 #######==================================================================================
-# File paths
+#Clean Tmp files
 sg1_file1="/tmp/SG_Log_Response.log"
 sg2_file2="/tmp/SG_URL_Log.log"
 
