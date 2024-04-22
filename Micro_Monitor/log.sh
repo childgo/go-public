@@ -576,8 +576,8 @@ echo "Version: 1"
 ####Some Work
 #######==================================================================================
 # File paths
-sg1_file1="/path/to/your/first/file"
-sg2_file2="/path/to/your/second/file"
+sg1_file1="/tmp/SG_Log_Response.log"
+sg2_file2="/tmp/SG_URL_Log.log"
 
 # Maximum file size in bytes (3MB)
 sg_max_size=$((3*1024*1024))
