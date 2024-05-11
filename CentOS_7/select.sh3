@@ -69,6 +69,11 @@ while true; do
     ss -ant '( sport = :22 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn
     printf '\n\n\n'
 
+    echo "rrrrr"
+    echo "[Port: 22]"
+    ss -ant '( dport = :22 )' | awk 'NR>1 {print $5}' | cut -d':' -f1 | sort | uniq -c | sort -rn
+    printf '\n\n\n'
+
 
     
     echo "System Load Averages:"
