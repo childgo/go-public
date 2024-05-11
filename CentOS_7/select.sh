@@ -64,6 +64,12 @@ while true; do
     ss -ant '( sport = :3306 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn
     printf '\n\n\n'
 
+
+    echo "[Port: 22]"
+    ss -ant '( sport = :22 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn
+    printf '\n\n\n'
+
+
     
     echo "System Load Averages:"
     uptime | awk '{print "1-minute load average: "$10"\n5-minute load average: "$11"\n15-minute load average: "$12}'
