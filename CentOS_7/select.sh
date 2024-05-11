@@ -960,6 +960,8 @@ echo "nginx -t && systemctl restart nginx"
 #Start Delete
 find /var/log/nginx/ -type f -exec rm {} \;
 rm -rf /alscospider/log_split_mysql/http_custom_log/log/*
+rm -rf /alscospider/log_split_mysql/mod_sec_log/log/*
+
 
 nginx -t && systemctl restart nginx
 
