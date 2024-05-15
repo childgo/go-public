@@ -54,23 +54,23 @@ clear
 while true; do
     echo "[Port: 80]"
     ss -ant '( sport = :80 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn
-    echo "Total connections regardless of state:" $(netstat -an | grep :80 | wc -l)
+    echo "Total Port 80 connections regardless of state:" $(netstat -an | grep :80 | wc -l)
     printf '\n\n\n'
 
     echo "[Port: 443]"
     ss -ant '( sport = :443 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn
-    echo "Total connections regardless of state:" $(netstat -an | grep :443 | wc -l)
+    echo "Total  Port 443 connections regardless of state:" $(netstat -an | grep :443 | wc -l)
     printf '\n\n\n'
     
    echo "[Port: 3306]"
     ss -ant '( sport = :3306 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn
-    echo "Total connections regardless of state:" $(netstat -an | grep :3306 | wc -l)
+    echo "Total Port 3306 connections regardless of state:" $(netstat -an | grep :3306 | wc -l)
     printf '\n\n\n'
 
 
     echo "[Port: 22]"
     ss -ant '( sport = :22 )' | awk 'NR>1 {print $1}' | sort | uniq -c | sort -rn
-    echo "Total connections regardless of state:" $(netstat -an | grep :22 | wc -l)
+    echo "Total Port 22 connections regardless of state:" $(netstat -an | grep :22 | wc -l)
     printf '\n\n\n'
 
 
