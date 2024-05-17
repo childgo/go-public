@@ -663,7 +663,7 @@ echo "Done"
 
 
 ########################################################
-"Lisr All Emails Size Under Domain 16"
+"List All Emails Size Under Domain 166"
 clear
 
 echo "Please Type Domain, followed by [ENTER]:"
