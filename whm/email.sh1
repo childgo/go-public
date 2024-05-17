@@ -609,7 +609,7 @@ echo "Process completed."
 
 
 ########################################################
-"Option 15")
+"Update All Emails Quota Under Domain 15")
 clear
 echo "Please Type Domain, followed by [ENTER]:"
 read alsco_get_domain
