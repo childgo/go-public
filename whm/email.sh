@@ -19,7 +19,7 @@ options=("Monitor Webmail 2096 Port and Load 1"
 "Reset Password for all emails account and save them to file 13"
 "Create a list of emails accounts under a domain 14"
 "Update All Emails Quota Under Domain 15"
-
+"List All Emails Size Under Domain 16"
 
 
 
@@ -663,7 +663,70 @@ echo "Done"
 
 
 ########################################################
-"Option 16")
+"Lisr All Emails Size Under Domain 17"
+clear
+
+echo "Please Type Domain, followed by [ENTER]:"
+read alsco_get_domain
+
+# Get cPanel User from Domain
+alsco_get_user=$(/scripts/whoowns $alsco_get_domain)
+
+echo "Domain:" $alsco_get_domain
+echo "cPanel User:" $alsco_get_user
+
+# Confirm if the cPanel username is correct
+echo "Is the cPanel username correct? Type 'yes' to continue or 'no' to exit:"
+read confirmation
+
+if [ "$confirmation" != "yes" ]; then
+    echo "Exiting script."
+    exit 1
+fi
+
+# Function to convert human-readable sizes to a format for sorting
+convert_to_sortable() {
+    local size=$1
+    echo $size | awk '/G/ { printf "%.0f\n", $1 * 1024 * 1024 } /M/ { printf "%.0f\n", $1 * 1024 } /K/ { printf "%.0f\n", $1 } !/[GMK]/ { print $1 * 1024 }'
+}
+
+# Fetch email account sizes and store them in an array
+email_sizes=()
+while IFS= read -r line; do
+    email=$(echo $line | awk -F'email: ' '{print $2}' | awk '{print $1}')
+    usage=$(echo $line | awk -F'humandiskused: ' '{print $2}')
+    if [[ -n $usage && -n $email ]]; then
+        sortable_size=$(convert_to_sortable "$usage")
+        email_sizes+=("$sortable_size $usage $email")
+    fi
+done < <(/usr/local/cpanel/bin/uapi --user=$alsco_get_user Email list_pops_with_disk domain=$alsco_get_domain | grep -E 'email:|humandiskused:' | paste - -)
+
+# Sort the email accounts by size in descending order
+IFS=$'\n' sorted_email_sizes=($(sort -nr <<<"${email_sizes[*]}"))
+unset IFS
+
+# Output the sorted email account sizes
+echo -e "Email Account Sizes for Domain: $alsco_get_domain\n"
+echo -e "Disk Usage\t\tEmail Account"
+for entry in "${sorted_email_sizes[@]}"; do
+    usage=$(echo $entry | awk '{print $2 " " $3}')
+    email=$(echo $entry | awk '{print $4}')
+    printf "%-20s %s\n" "$usage" "$email"
+done
+
+echo -e "\nProcess completed successfully!"
+echo "All email accounts under $alsco_get_domain have been listed by disk space usage."
+
+echo "Done"
+
+
+;;
+########################################################
+
+
+
+########################################################
+"Option 17")
 echo "Done"
 
 
