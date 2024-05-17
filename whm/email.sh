@@ -18,6 +18,8 @@ options=("Monitor Webmail 2096 Port and Load 1"
 "server disk space 12"
 "Reset Password for all emails account and save them to file 13"
 "Create a list of emails accounts under a domain 14"
+"Update All Emails Quota Under Domain 15"
+
 
 
 
@@ -605,6 +607,61 @@ echo "Process completed."
 
 ########################################################
 "Option 15")
+echo "Done"
+
+
+;;
+########################################################
+
+
+########################################################
+"Option 16")
+#!/bin/bash
+clear
+
+echo "Please Type Domain, followed by [ENTER]:"
+read alsco_get_domain
+
+# Get cPanel User from Domain
+alsco_get_user=$(/scripts/whoowns $alsco_get_domain)
+
+echo "Domain:" $alsco_get_domain
+echo "cPanel User:" $alsco_get_user
+
+# Confirm if the cPanel username is correct
+echo "Is the cPanel username correct? Type 'yes' to continue or 'no' to exit:"
+read confirmation
+
+if [ "$confirmation" != "yes" ]; then
+    echo "Exiting script."
+    exit 1
+fi
+
+# Prompt for the new quota size
+echo "Please enter the new quota size in MB, followed by [ENTER]:"
+echo "Examples: 10240 = 10 GB, 20480 = 20 GB, 5120 = 5 GB"
+read new_quota
+
+# Validate the quota input
+if ! [[ "$new_quota" =~ ^[0-9]+$ ]]; then
+    echo "Invalid input. Please enter a valid number."
+    exit 1
+fi
+
+# Fetch email accounts and update quotas
+while IFS= read -r email; do
+    username=$(echo $email | cut -d'@' -f1)
+    # Use the uapi command to change the quota for the email
+    /usr/local/cpanel/bin/uapi --user=$alsco_get_user Email edit_pop_quota email=$username domain=$alsco_get_domain quota=$new_quota
+
+    # Output the email and updated quota
+    echo "Updated quota for $email to $((new_quota / 1024)) GB"
+
+done < <(uapi --user=$alsco_get_user Email list_pops domain=$alsco_get_domain | grep -o 'email: [^ ]*' | awk '{print $2}')
+
+echo "Process completed successfully!"
+echo "All email accounts under $alsco_get_domain have been updated to a quota of $((new_quota / 1024)) GB."
+
 echo "Done"
 
 
