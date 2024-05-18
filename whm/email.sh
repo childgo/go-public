@@ -661,7 +661,7 @@ echo "Done"
 
 
 ########################################################
-"List All Emails Size Under Domain 16"
+"List All Emails Size Under Domain 16")
 clear
 
 echo "Please Type Domain, followed by [ENTER]:"
