@@ -21,8 +21,6 @@ options=("Monitor Webmail 2096 Port and Load 1"
 "Update All Emails Quota Under Domain 15"
 "List All Emails Size Under Domain 16"
 
-
-
 "Quit")
 select opt in "${options[@]}"
 do
@@ -599,8 +597,6 @@ for email in "${emails[@]}"; do
 done
 
 echo "Process completed."
-
-
 ;;
 ########################################################
 
@@ -655,10 +651,12 @@ echo "Process completed successfully!"
 echo "All email accounts under $alsco_get_domain have been updated to a quota of $((new_quota / 1024)) GB."
 
 echo "Done"
-
-
 ;;
 ########################################################
+
+
+
+
 
 
 
@@ -716,10 +714,7 @@ done
 
 echo -e "\nProcess completed successfully!"
 echo "All email accounts under $alsco_get_domain have been listed by disk space usage."
-
 echo "Done"
-
-
 ;;
 ########################################################
 
