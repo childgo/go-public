@@ -737,7 +737,7 @@ if [[ "$new_value" != "Yes" && "$new_value" != "No" ]]; then
 fi
 
 # Use sed to change Auth_Working value to the user's choice
-sed -i "s/\$Auth_Working = \"Yes\";/\$Auth_Working = \"$new_value\";/; s/\$Auth_Working = \"No\";/\$Auth_Working = \"$new_value\";/;" "$PHP_FILE"
+sed -i "s/\$Auth_Working = \"Yes\";/\$Auth_Working = \"$new_value\";/; s/\$Auth_Working = \"No\";/\$Auth_Working = \"$new_value\";/;" "$Auth_PHP_FILE"
 
 echo "Auth_Working has been changed to $new_value in $PHP_FILE"
 
