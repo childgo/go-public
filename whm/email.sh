@@ -20,6 +20,7 @@ options=("Monitor Webmail 2096 Port and Load 1"
 "Create a list of emails accounts under a domain 14"
 "Update All Emails Quota Under Domain 15"
 "List All Emails Size Under Domain 16"
+"Enable or Disable Email 2Auth 17"
 
 "Quit")
 select opt in "${options[@]}"
@@ -720,8 +721,32 @@ echo "Done"
 
 
 
+
 ########################################################
-"Option 17")
+"Enable or Disable Email 2Auth 17")
+
+Auth_PHP_FILE="/usr/local/cpanel/base/3rdparty/roundcube/plugins/alsco_auth/.db_info.php"
+
+# Prompt user for the desired value
+read -p "Enter the new value for Auth_Working (Yes/No): " new_value
+
+# Validate input
+if [[ "$new_value" != "Yes" && "$new_value" != "No" ]]; then
+    echo "Invalid input. Please enter 'Yes' or 'No'."
+    exit 1
+fi
+
+# Use sed to change Auth_Working value to the user's choice
+sed -i "s/\$Auth_Working = \"Yes\";/\$Auth_Working = \"$new_value\";/; s/\$Auth_Working = \"No\";/\$Auth_Working = \"$new_value\";/;" "$PHP_FILE"
+
+echo "Auth_Working has been changed to $new_value in $PHP_FILE"
+
+;;
+########################################################
+
+
+########################################################
+"Option 18")
 echo "Done"
 
 
