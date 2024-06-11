@@ -727,6 +727,15 @@ echo "Done"
 
 Auth_PHP_FILE="/usr/local/cpanel/base/3rdparty/roundcube/plugins/alsco_auth/.db_info.php"
 
+
+
+# Get the current value of Auth_Working
+current_value=$(grep -oP '\$Auth_Working = "\K(Yes|No)' "$PHP_FILE")
+
+# Print the current value
+echo "Current value of Auth_Working is: $current_value"
+
+
 # Prompt user for the desired value
 read -p "Enter the new value for Auth_Working (Yes/No): " new_value
 
