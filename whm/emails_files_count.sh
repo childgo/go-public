@@ -45,6 +45,7 @@ case $group_choice in
         count_files "/home/nrcoil"
         count_files "/home/mowr"
         count_files "/home/industry"
+        count_files "/home/idcgov"
 
         echo -e "\n\n\n\n"
         ;;
