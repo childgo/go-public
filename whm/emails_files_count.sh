@@ -64,7 +64,6 @@ case $group_choice in
         count_files "/home/tocoil"
         count_files "/home/nanepedu"
         count_files "/home/heesco"
-        count_files "/home/idcgov"
         count_files "/home/mrcoil"
         count_files "/home/research"
         count_files "/home/fbsamail"
