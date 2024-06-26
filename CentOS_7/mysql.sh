@@ -1,5 +1,5 @@
 #!/bin/bash
-#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/CentOS_7/select.sh)
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/CentOS_7/mysql.sh)
 
 while true; do
   mysql -e "SHOW GLOBAL STATUS LIKE 'Queries';"
