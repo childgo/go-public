@@ -1,7 +1,6 @@
 #!/bin/bash
 #bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/CentOS_7/mysql.sh)
 
-
 while true; do
   echo "Timestamp: $(date)"
   echo "MySQL Queries:"
@@ -31,8 +30,9 @@ while true; do
   top -bn1 | grep "Cpu(s)" | awk '{print $2 + $4 "% CPU"}'
   echo "System Memory Usage:"
   free -m
-  echo "Disk Usage:"
-  df -h
+  echo "Slow Queries (last 10 entries):"
+  tail -n 10 /var/log/mysql/mysql-slow.log
   echo "-------------------------------"
   sleep 60
 done
+
