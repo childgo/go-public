@@ -8,4 +8,5 @@ while true; do
   mysql -e "SHOW GLOBAL STATUS LIKE 'Threads_running';"
   mysql -e "SHOW GLOBAL STATUS LIKE 'Slow_queries';"
   sleep 60
+  clear
 done
