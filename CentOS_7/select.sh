@@ -144,7 +144,7 @@ select opt in "${options[@]}"
 do
     case $opt in
         "All Nginx Error Logs")
-            cmd="tail -f /var/log/nginx/error.log"
+            cmd="tail -f /var/log/nginx/alsco_error.log"
             echo "Executing: $cmd"
             eval $cmd
             break
