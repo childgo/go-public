@@ -404,6 +404,8 @@ chcon -t httpd_sys_script_exec_t  /alscospider/gateway_rules/spamlist-id12.txt
 chcon -t httpd_sys_script_exec_t  /alscospider/gateway_rules/sql-Injection-11.txt
 chcon -t httpd_sys_script_exec_t  /alscospider/gateway_rules/url-english-id10.txt
 chcon -t httpd_sys_script_exec_t  /alscospider/gateway_rules/sql-Injection_Public-25.txt
+chcon -t httpd_sys_script_exec_t  /alscospider/gateway_rules/sql-Injection_Public-25.txt
+chcon -t httpd_sys_script_exec_t   /alscospider/gateway_rules/ExcludeIP_SG_DDoS_Mitigation-id58.txt
 
 
 # Change the permissions of all files ending in .alsco or .sh to 700
