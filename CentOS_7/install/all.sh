@@ -148,7 +148,7 @@ echo ""
 grep -r "TCP6_IN =" /etc/csf/csf.conf
 grep -r "TCP6_OUT =" /etc/csf/csf.conf
 grep -r "UDP6_IN =" /etc/csf/csf.conf
-grep -r "UDP6_OUTT =" /etc/csf/csf.conf
+grep -r "UDP6_OUT =" /etc/csf/csf.conf
 
 echo ""
 grep -r "LF_IPSET =" /etc/csf/csf.conf
