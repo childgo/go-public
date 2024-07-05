@@ -2,11 +2,11 @@
 
 clear
 
-dnf update; sleep 3;
-dnf -y update; sleep 3;
-dnf install wget nano inotify-tools rsync sshpass; sleep 3;
-dnf install epel-release; sleep 3;
-dnf install nginx; sleep 3;
+yum update; sleep 3;
+yum -y update; sleep 3;
+yum install wget nano inotify-tools rsync sshpass; sleep 3;
+yum install epel-release; sleep 3;
+yum install nginx; sleep 3;
 
 systemctl start nginx;sleep 3;
 systemctl enable nginx;sleep 3;
