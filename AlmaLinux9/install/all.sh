@@ -203,7 +203,7 @@ dnf clean all
 sudo dnf -y install epel-release yum-utils && sleep 3
 
 
-sudo dnf -yinstall php;
+sudo dnf -y install php;
 sudo dnf -y install php-cli;
 sudo dnf -y install php-fpm;
 sudo dnf -y install php-mysqlnd;
