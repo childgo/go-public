@@ -30,13 +30,13 @@ case $opt in
 "Install Nginx and Update 1")
 
 clear
-yum -y update;sleep 3;
+dnf -y update;sleep 3;
 
 #------Delete Unwanted .repo Files:
 repo_dir="/etc/yum.repos.d/"
 # Delete all .repo files except for the specified ones
 find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' ! -name 'ALSCO_PHP73.repo' -exec rm -f {} \;
-yum clean all
+dnf clean all
 #------End
 
 
@@ -63,7 +63,7 @@ systemctl restart nginx;sleep 3;
 repo_dir="/etc/yum.repos.d/"
 # Delete all .repo files except for the specified ones
 find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' ! -name 'ALSCO_PHP73.repo' -exec rm -f {} \;
-yum clean all
+dnf clean all
 #------End
 ;;
 ########################################################
@@ -81,13 +81,13 @@ clear
 repo_dir="/etc/yum.repos.d/"
 # Delete all .repo files except for the specified ones
 find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' ! -name 'ALSCO_PHP73.repo' -exec rm -f {} \;
-yum clean all
+dnf clean all
 #------End
 
 
 systemctl disable firewalld;sleep 3;
 systemctl stop firewalld;sleep 3;
-yum clean all;sleep 3;
+dnf clean all;sleep 3;
 dnf install -y update;sleep 3;
 dnf install -y install wget nano inotify-tools rsync sshpass iftop htop createrepo repotrack;sleep 3;
 dnf install -y install perl tar ipset unzip net-tools perl-libwww-perl;sleep 3;
@@ -183,7 +183,7 @@ perl /usr/local/csf/bin/csftest.pl
 repo_dir="/etc/yum.repos.d/"
 # Delete all .repo files except for the specified ones
 find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' ! -name 'ALSCO_PHP73.repo' -exec rm -f {} \;
-yum clean all
+dnf clean all
 #------End
 ;;
 ########################################################
@@ -194,7 +194,7 @@ clear
 repo_dir="/etc/yum.repos.d/"
 # Delete all .repo files except for the specified ones
 find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' ! -name 'ALSCO_PHP73.repo' -exec rm -f {} \;
-yum clean all
+dnf clean all
 #------End
 
 
@@ -202,7 +202,7 @@ yum clean all
 sudo yum -y install epel-release yum-utils;sleep 3;
 
 
-yum -y install php;
+dnf -y install php;
 yum -y install php-cli;
 yum -y install php-fpm;
 yum -y install php-mysqlnd;
