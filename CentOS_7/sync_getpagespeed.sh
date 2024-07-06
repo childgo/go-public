@@ -161,6 +161,7 @@ selinux-policy-targeted
 lua-cjson
 libmaxminddb-devel
 jq
+htop
 wget
 perl
 ipset
