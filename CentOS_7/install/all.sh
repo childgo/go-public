@@ -30,6 +30,7 @@ case $opt in
 "Install Nginx and Update 1")
 
 clear
+yum -y update;sleep 3;
 
 #------Delete Unwanted .repo Files:
 repo_dir="/etc/yum.repos.d/"
@@ -40,7 +41,7 @@ yum clean all
 
 
 
-yum -y update;sleep 3;
+
 yum -y install wget nano inotify-tools rsync sshpass;sleep 3;
 yum -y install epel-release;sleep 3;
 yum -y install nginx;sleep 3;
