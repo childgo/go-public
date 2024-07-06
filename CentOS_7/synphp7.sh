@@ -27,7 +27,7 @@ LOCAL_REPOS_PHP73_Tools="
 "
 
 # Create directory for downloaded tools if it doesn't exist
-download_dir="/home/final/php73"
+download_dir="/home/final/php73_final"
 mkdir -p "$download_dir"
 
 # Download the specified tools
