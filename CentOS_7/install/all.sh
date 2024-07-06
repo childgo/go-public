@@ -218,7 +218,7 @@ sudo systemctl start php-fpm;sleep 3;
 sudo systemctl enable php-fpm;sleep 3;
 
 #remove apache
-yum remove httpd
+sudo yum -y remove httpd
 
 
 #======================================================================
