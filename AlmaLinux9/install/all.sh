@@ -89,7 +89,7 @@ dnf clean all
 systemctl disable firewalld;sleep 3;
 systemctl stop firewalld;sleep 3;
 dnf clean all;sleep 3;
-dnf install -y update;sleep 3;
+dnf -y update;sleep 3;
 dnf install -y install wget nano inotify-tools rsync sshpass iftop htop createrepo repotrack;sleep 3;
 dnf install -y install perl tar ipset unzip net-tools perl-libwww-perl;sleep 3;
 dnf install -y install perl-LWP-Protocol-https perl-GDGraph bind-utils;sleep 3;
