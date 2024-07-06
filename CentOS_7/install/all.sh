@@ -31,15 +31,12 @@ case $opt in
 
 clear
 
-#------
-#Clean Repo
-
+#------Delete Unwanted .repo Files:
 repo_dir="/etc/yum.repos.d/"
-
 # Delete all .repo files except for the specified ones
-find "$repo_dir" -type f -name '*.repo' ! -name 'alsco_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
+find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
 yum clean all
-#------
+#------End
 
 
 
@@ -56,20 +53,15 @@ firewall-cmd --reload;sleep 3;
 systemctl reload nginx;sleep 3;
 systemctl restart nginx;sleep 3;
 
-
-#------------------------------------------------------------------------------------------------------------------
-#Clean Repo
-
-repo_dir="/etc/yum.repos.d/"
-
-# Delete all .repo files except for the specified ones
-find "$repo_dir" -type f -name '*.repo' ! -name 'alsco_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
-yum clean all
-#------------------------------------------------------------------------------------------------------------------
-
-
-
 #reboot;sleep 3;
+
+
+#------Delete Unwanted .repo Files:
+repo_dir="/etc/yum.repos.d/"
+# Delete all .repo files except for the specified ones
+find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
+yum clean all
+#------End
 ;;
 ########################################################
 
@@ -80,7 +72,15 @@ yum clean all
 "Install CSF Firewall 2")
 
 
+
 clear
+#------Delete Unwanted .repo Files:
+repo_dir="/etc/yum.repos.d/"
+# Delete all .repo files except for the specified ones
+find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
+yum clean all
+#------End
+
 
 systemctl disable firewalld;sleep 3;
 systemctl stop firewalld;sleep 3;
@@ -171,20 +171,26 @@ perl /usr/local/csf/bin/csftest.pl
 #Uninstall CSF Firewall
 #cd /etc/csf
 #sh uninstall.sh
+
+
+
+#------Delete Unwanted .repo Files:
+repo_dir="/etc/yum.repos.d/"
+# Delete all .repo files except for the specified ones
+find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
+yum clean all
+#------End
 ;;
 ########################################################
 "Install php73 3")
 
 clear
-#------------------------------------------------------------------------------------------------------------------
-#Clean Repo
-
+#------Delete Unwanted .repo Files:
 repo_dir="/etc/yum.repos.d/"
-
 # Delete all .repo files except for the specified ones
-find "$repo_dir" -type f -name '*.repo' ! -name 'alsco_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
+find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
 yum clean all
-#------------------------------------------------------------------------------------------------------------------
+#------End
 
 
 
@@ -221,31 +227,25 @@ grep -r "session.cookie_samesite" /etc/php.ini
 #remove php
 #yum -y remove php*
 
-#------------------------------------------------------------------------------------------------------------------
-#Clean Repo
 
+
+#------Delete Unwanted .repo Files:
 repo_dir="/etc/yum.repos.d/"
-
 # Delete all .repo files except for the specified ones
-find "$repo_dir" -type f -name '*.repo' ! -name 'alsco_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
+find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
 yum clean all
-#------------------------------------------------------------------------------------------------------------------
+#------End
 ;;
 ########################################################
 "Install MySql 4")
 
 
-#------------------------------------------------------------------------------------------------------------------
-#Clean Repo
-
+#------Delete Unwanted .repo Files:
 repo_dir="/etc/yum.repos.d/"
-
 # Delete all .repo files except for the specified ones
-find "$repo_dir" -type f -name '*.repo' ! -name 'alsco_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
+find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
 yum clean all
-#------------------------------------------------------------------------------------------------------------------
-
-
+#------End
 
 
 #Part1
@@ -269,9 +269,20 @@ getsebool -a | grep httpd_can_network_connect;sleep 3;
 #checking
 #systemctl status mariadb;sleep 3;
 #mysql;sleep 3;
+
+
+
+#------Delete Unwanted .repo Files:
+repo_dir="/etc/yum.repos.d/"
+# Delete all .repo files except for the specified ones
+find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
+yum clean all
+#------End
 ;;
 ########################################################
 "Install Nano Editor 5")
+
+
 
 
 #!/bin/bash
@@ -297,20 +308,16 @@ echo "Done"
 ########################################################
 "Install GEO_Maxmind 6")
 
-#----------------------------
-#Clean Repo
-
+clear
+#------Delete Unwanted .repo Files:
 repo_dir="/etc/yum.repos.d/"
-
 # Delete all .repo files except for the specified ones
-find "$repo_dir" -type f -name '*.repo' ! -name 'alsco_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
+find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
 yum clean all
-#----------------------------
+#------End
 
 
 #Install GEO AND Maxmind
-
-
 yum -y install nginx-module-geoip;sleep 2;
 yum -y install nginx-module-geoip2;sleep 2;
 yum -y install jq libmaxminddb-devel;sleep 2;
@@ -318,7 +325,6 @@ yum -y install jq libmaxminddb-devel;sleep 2;
 
 #Linux9
 yum install oniguruma;sleep 2;
-
 
 #Download DataBase
 cd /usr/share/GeoIP/
@@ -358,17 +364,12 @@ mmdblookup --file /usr/share/GeoIP/GeoLite2-ASN.mmdb --ip 66.111.53.5 | sed -e '
 mmdblookup --file /usr/share/GeoIP/GeoLite2-ASN.mmdb --ip 66.111.53.5 | sed -e ':a;N;$!ba;s/\n/ /g' |sed -e 's/ <[a-z0-9_]\+>/,/g' |sed -e 's/,\s\+}/}/g' | jq '(.autonomous_system_organization)' | sed -e 's/^"//' -e 's/"$//'
 mmdblookup --file /usr/share/GeoIP/GeoLite2-Country.mmdb --ip 66.111.53.5 country iso_code |awk -F'"' '{print $2}' | tr '\n' ' '
 
-#------------------------------------------------------------------------------------------------------------------
-#Clean Repo
-
+#------Delete Unwanted .repo Files:
 repo_dir="/etc/yum.repos.d/"
-
 # Delete all .repo files except for the specified ones
-find "$repo_dir" -type f -name '*.repo' ! -name 'alsco_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
+find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
 yum clean all
-#------------------------------------------------------------------------------------------------------------------
-
-
+#------End
 ;;
 
 
@@ -376,21 +377,16 @@ yum clean all
 ########################################################
 "Install ModSec and LUA 7")
 
-#----------------------------
-#Clean Repo
-
+clear
+#------Delete Unwanted .repo Files:
 repo_dir="/etc/yum.repos.d/"
-
 # Delete all .repo files except for the specified ones
-find "$repo_dir" -type f -name '*.repo' ! -name 'alsco_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
+find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
 yum clean all
-#----------------------------
-
-
+#------End
 
 yum -y install nginx-module-security
 yum -y install nginx-owasp-crs
-
 
 mkdir /alscogatewaytmp
 chmod 1777 /alscogatewaytmp
@@ -415,25 +411,17 @@ find /alscospider -type f \( -name "*.alsco" -o -name "*.sh" \) -exec chmod 0700
 find /alscospider -type f -name "*.py" -exec chmod 0755 {} \;
 
 
-
-
-
 #install lua
 sudo yum -y install nginx-module-lua
 
 
 
-#------------------------------------------------------------------------------------------------------------------
-#Clean Repo
-
+#------Delete Unwanted .repo Files:
 repo_dir="/etc/yum.repos.d/"
-
 # Delete all .repo files except for the specified ones
-find "$repo_dir" -type f -name '*.repo' ! -name 'alsco_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
+find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
 yum clean all
-#------------------------------------------------------------------------------------------------------------------
-
-
+#------End
 ;;
 ########################################################
 "Change Default  HomePage 8")
@@ -451,6 +439,16 @@ echo "....."
 echo "....."
 
 echo "Done....."
+
+
+#------Delete Unwanted .repo Files:
+repo_dir="/etc/yum.repos.d/"
+# Delete all .repo files except for the specified ones
+find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
+yum clean all
+#------End
+
+
 ;;
 ########################################################
 "Restart Nginx 9")
