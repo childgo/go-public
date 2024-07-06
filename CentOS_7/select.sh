@@ -737,9 +737,9 @@ ls -al
 
 
 #Start Install Centos7 Repo
-ALSCO_Path="/etc/yum.repos.d/alsco_CentOS7.repo"
+ALSCO_Path="/etc/yum.repos.d/ALSCO_CentOS7.repo"
 
-cat <<EOF >>/etc/yum.repos.d/alsco_CentOS7.repo
+cat <<EOF >>/etc/yum.repos.d/ALSCO_CentOS7.repo
 [ALSCO-local-base]
 name=CentOS Base
 baseurl=https://repo.alscoip.com/Linux/CentOS_7/Centos7_Sync_Repository/base/
