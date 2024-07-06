@@ -2,6 +2,7 @@
 #bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/CentOS_7/sync_php73.sh)
 clear
 
+sudo yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm;sleep 3;
 
 
 # Download specified tools
