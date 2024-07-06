@@ -48,7 +48,6 @@ dnf install -y nginx;sleep 3;
 
 systemctl start nginx;sleep 3;
 systemctl enable nginx;sleep 3;
-systemctl status nginx;sleep 3;
 
 firewall-cmd --zone=public --permanent --add-service=http;sleep 3;
 firewall-cmd --zone=public --permanent --add-service=https;sleep 3;
@@ -67,6 +66,8 @@ dnf clean all
 #------End
 ;;
 ########################################################
+
+systemctl status nginx;sleep 3;
 
 
 
