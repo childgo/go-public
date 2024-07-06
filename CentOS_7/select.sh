@@ -776,6 +776,18 @@ gpgcheck=0
 EOF
 
 
+
+#Start Install ALSCO_PHP73 Repo
+ALSCO_Path="/etc/yum.repos.d/ALSCO_PHP73.repo"
+cat <<EOF >>/etc/yum.repos.d/ALSCO_PHP73.repo
+[ALSCO-PHP-SecureGateway]
+name=RHEL Apache
+baseurl=https://repo.alscoip.com/Linux/CentOS_7_Final/Secure_Gateway_PHP73/
+enabled=1
+gpgcheck=0
+EOF
+
+
 echo "";
 echo "";
 echo "";
