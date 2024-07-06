@@ -1,11 +1,7 @@
 #!/bin/bash
-#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/CentOS_7/sync_php73.sh)
-clear
+set -e
 
-sudo yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm;sleep 3;
-
-
-# Download specified tools
+# Define PHP tools to download
 LOCAL_REPOS_PHP73_Tools="
     epel-release
     yum-utils
@@ -25,10 +21,10 @@ LOCAL_REPOS_PHP73_Tools="
 "
 
 # Create directory for downloaded tools if it doesn't exist
-download_dir="/home/final/php73"
+download_dir="/home/final/ok-php73"
 mkdir -p "$download_dir"
 
-# Download the specified tools
+# Download the specified tools using repotrack
 for REPO in ${LOCAL_REPOS_PHP73_Tools}; do
-    repotrack -a x86_64 -p "$download_dir" "$REPO"
+    sudo repotrack -a x86_64 -p "$download_dir" "$REPO"
 done
