@@ -136,10 +136,10 @@ sed -i 's/UDP6_OUT .*/UDP6_OUT =""/' /etc/csf/csf.conf
 #Enable IPSET [Change LF_IPSET from 0 to 1]
 echo "Change LF_IPSET from 0 to 1, becuase 1 mean enable"
 sed -i 's/^LF_IPSET =.*/LF_IPSET = "1"/' /etc/csf/csf.conf
-
-
-
+grep -r "LF_IPSET =" /etc/csf/csf.conf
 echo ""
+echo ""
+
 echo "Verify that the change was successful. ...."
 grep -r "TCP_IN =" /etc/csf/csf.conf
 grep -r "TCP_OUT =" /etc/csf/csf.conf
