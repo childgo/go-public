@@ -35,7 +35,7 @@ yum -y update;sleep 3;
 #------Delete Unwanted .repo Files:
 repo_dir="/etc/yum.repos.d/"
 # Delete all .repo files except for the specified ones
-find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
+find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' ! -name 'ALSCO_PHP73.repo' -exec rm -f {} \;
 yum clean all
 #------End
 
@@ -60,7 +60,7 @@ systemctl restart nginx;sleep 3;
 #------Delete Unwanted .repo Files:
 repo_dir="/etc/yum.repos.d/"
 # Delete all .repo files except for the specified ones
-find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
+find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' ! -name 'ALSCO_PHP73.repo' -exec rm -f {} \;
 yum clean all
 #------End
 ;;
@@ -78,7 +78,7 @@ clear
 #------Delete Unwanted .repo Files:
 repo_dir="/etc/yum.repos.d/"
 # Delete all .repo files except for the specified ones
-find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
+find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' ! -name 'ALSCO_PHP73.repo' -exec rm -f {} \;
 yum clean all
 #------End
 
@@ -178,7 +178,7 @@ perl /usr/local/csf/bin/csftest.pl
 #------Delete Unwanted .repo Files:
 repo_dir="/etc/yum.repos.d/"
 # Delete all .repo files except for the specified ones
-find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
+find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' ! -name 'ALSCO_PHP73.repo' -exec rm -f {} \;
 yum clean all
 #------End
 ;;
@@ -189,7 +189,7 @@ clear
 #------Delete Unwanted .repo Files:
 repo_dir="/etc/yum.repos.d/"
 # Delete all .repo files except for the specified ones
-find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
+find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' ! -name 'ALSCO_PHP73.repo' -exec rm -f {} \;
 yum clean all
 #------End
 
@@ -233,7 +233,7 @@ grep -r "session.cookie_samesite" /etc/php.ini
 #------Delete Unwanted .repo Files:
 repo_dir="/etc/yum.repos.d/"
 # Delete all .repo files except for the specified ones
-find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
+find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' ! -name 'ALSCO_PHP73.repo' -exec rm -f {} \;
 yum clean all
 #------End
 ;;
@@ -244,7 +244,7 @@ yum clean all
 #------Delete Unwanted .repo Files:
 repo_dir="/etc/yum.repos.d/"
 # Delete all .repo files except for the specified ones
-find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
+find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' ! -name 'ALSCO_PHP73.repo' -exec rm -f {} \;
 yum clean all
 #------End
 
@@ -276,7 +276,7 @@ getsebool -a | grep httpd_can_network_connect;sleep 3;
 #------Delete Unwanted .repo Files:
 repo_dir="/etc/yum.repos.d/"
 # Delete all .repo files except for the specified ones
-find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
+find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' ! -name 'ALSCO_PHP73.repo' -exec rm -f {} \;
 yum clean all
 #------End
 ;;
@@ -313,7 +313,7 @@ clear
 #------Delete Unwanted .repo Files:
 repo_dir="/etc/yum.repos.d/"
 # Delete all .repo files except for the specified ones
-find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
+find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' ! -name 'ALSCO_PHP73.repo' -exec rm -f {} \;
 yum clean all
 #------End
 
@@ -368,7 +368,7 @@ mmdblookup --file /usr/share/GeoIP/GeoLite2-Country.mmdb --ip 66.111.53.5 countr
 #------Delete Unwanted .repo Files:
 repo_dir="/etc/yum.repos.d/"
 # Delete all .repo files except for the specified ones
-find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
+find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' ! -name 'ALSCO_PHP73.repo' -exec rm -f {} \;
 yum clean all
 #------End
 ;;
@@ -382,7 +382,7 @@ clear
 #------Delete Unwanted .repo Files:
 repo_dir="/etc/yum.repos.d/"
 # Delete all .repo files except for the specified ones
-find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
+find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' ! -name 'ALSCO_PHP73.repo' -exec rm -f {} \;
 yum clean all
 #------End
 
@@ -420,7 +420,7 @@ sudo yum -y install nginx-module-lua
 #------Delete Unwanted .repo Files:
 repo_dir="/etc/yum.repos.d/"
 # Delete all .repo files except for the specified ones
-find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
+find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' ! -name 'ALSCO_PHP73.repo' -exec rm -f {} \;
 yum clean all
 #------End
 ;;
@@ -445,7 +445,7 @@ echo "Done....."
 #------Delete Unwanted .repo Files:
 repo_dir="/etc/yum.repos.d/"
 # Delete all .repo files except for the specified ones
-find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' -exec rm -f {} \;
+find "$repo_dir" -type f -name '*.repo' ! -name 'ALSCO_CentOS7.repo' ! -name 'ALSCO_Nginx.repo' ! -name 'ALSCO_PHP73.repo' -exec rm -f {} \;
 yum clean all
 #------End
 
