@@ -6,27 +6,19 @@ clear
 
 # Download specified tools
 LOCAL_REPOS_PHP73_Tools="
-mysqltuner-cron
-mysqltuner
-ngxtop
-remote_syslog2
-fail2ban
-closure-compiler
-policycoreutils-python
-setroubleshoot-server
-selinux-policy-doc
-attr
-maldet
-fcgiwrap
-conntrack-tools
-fds
-closure-compiler
-cloud-utils-growpart
-mutt
-zip
-epel-release
-yum-utils
-lsyncd
+    php
+    php-cli
+    php-fpm
+    php-mysqlnd
+    php-zip
+    php-devel
+    php-gd
+    php-mbstring
+    php-curl
+    php-xml
+    php-pear
+    php-bcmath
+    php-json
 "
 
 # Create directory for downloaded tools if it doesn't exist
