@@ -27,9 +27,3 @@ fi
 
 
 done
-cd /home/repolin/public_html/
-pwd
-chown -R repolin *
-chgrp -R repolin *
-
-du -h $ALSCO_Path --max-depth=0
