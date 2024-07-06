@@ -199,7 +199,7 @@ dnf clean all
 #------End
 
 
-#sudo yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm;sleep 3;
+#sudo dnf -y install https://rpms.remirepo.net/enterprise/remi-release-9.rpm
 sudo dnf -y install epel-release yum-utils && sleep 3
 
 
