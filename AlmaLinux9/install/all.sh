@@ -200,22 +200,22 @@ dnf clean all
 
 
 #sudo yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm;sleep 3;
-sudo yum -y install epel-release yum-utils;sleep 3;
+sudo dnf -y install epel-release yum-utils && sleep 3
 
 
-dnf -y install php;
-yum -y install php-cli;
-yum -y install php-fpm;
-yum -y install php-mysqlnd;
-yum -y install php-zip;
-yum -y install php-devel;
-yum -y install php-gd;
-yum -y install php-mbstring;
-yum -y install php-curl;
-yum -y install php-xml;
-yum -y install php-pear;
-yum -y install php-bcmath;
-yum -y install php-json;
+sudo dnf -yinstall php;
+sudo dnf -y install php-cli;
+sudo dnf -y install php-fpm;
+sudo dnf -y install php-mysqlnd;
+sudo dnf -y install php-zip;
+sudo dnf -y install php-devel;
+sudo dnf -y install php-gd;
+sudo dnf -y install php-mbstring;
+sudo dnf -y install php-curl;
+sudo dnf -y install php-xml;
+sudo dnf -y install php-pear;
+sudo dnf -y install php-bcmath;
+sudo dnf -y install php-json;
 
 #Start Services
 service php-fpm restart;sleep 3;
