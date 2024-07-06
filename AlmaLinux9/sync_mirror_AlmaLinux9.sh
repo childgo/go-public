@@ -1,4 +1,5 @@
 #!/bin/bash
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/AlmaLinux9/sync_mirror_AlmaLinux9.sh)
 
 # Update all packages
 sudo dnf update -y
