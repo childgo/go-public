@@ -6,6 +6,8 @@ clear
 
 # Download specified tools
 LOCAL_REPOS_PHP73_Tools="
+    epel-release
+    yum-utils
     php
     php-cli
     php-fpm
