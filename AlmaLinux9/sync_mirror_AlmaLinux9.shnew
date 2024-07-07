@@ -52,8 +52,13 @@ for REPO in ${LOCAL_REPOS}; do
     
     # Check if the repository requires group metadata (e.g., comps.xml). This is common for 'baseos' and 'appstream'.
     if [[ $REPO = 'baseos' || $REPO = 'appstream' ]]; then
-        # Assuming comps.xml is located at the root of the repository directory for 'baseos' and 'appstream'
-        sudo createrepo_c -g $ALSCO_Path/$REPO/comps.xml $ALSCO_Path/$REPO/
+        COMPS_FILE="$ALSCO_Path/$REPO/comps.xml"
+        if [ -f "$COMPS_FILE" ]; then
+            sudo createrepo_c -g "$COMPS_FILE" $ALSCO_Path/$REPO/
+        else
+            echo "Group file $COMPS_FILE doesn't exist, skipping group metadata creation."
+            sudo createrepo_c $ALSCO_Path/$REPO/
+        fi
     else
         sudo createrepo_c $ALSCO_Path/$REPO/
     fi
