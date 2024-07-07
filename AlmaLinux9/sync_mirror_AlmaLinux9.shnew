@@ -1,4 +1,6 @@
 #!/bin/bash
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/CentOS_7/install/all.sh)
+
 
 # Update all packages
 sudo dnf update -y
