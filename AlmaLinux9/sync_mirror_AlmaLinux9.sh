@@ -4,7 +4,6 @@
 #rsync -avz  --delete --progress -e "ssh -p 111" /home/repolin/public_html/Linux/AlmaLinux9/AlmaLinux9_Sync_Repository/ root@50.50.50.50:/home/repolin/public_html/Linux/AlmaLinux9/AlmaLinux9_Sync_Repository/
 
 # Exit immediately if a command exits with a non-zero status
-
 set -e
 
 # Log file
