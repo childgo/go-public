@@ -19,7 +19,7 @@ sudo dnf config-manager --set-enabled crb
 ####################################################################################################################
 
 # Define the path for the repository
-DIR="/home/repolin/public_html/Linux/AlmaLinux9/AlmaLinux9_Sync_Repository/"
+DIR="/home/php83"
 
 # Check if the directory exists, if not, create it
 if [ ! -d "$DIR" ]; then
@@ -41,7 +41,7 @@ fi
 LOCAL_REPOS="baseos appstream extras crb epel remi remi-modular"
 
 # Update the path where you want to sync the repositories
-ALSCO_Path='/home/repolin/public_html/Linux/AlmaLinux9/AlmaLinux9_Sync_Repository/'
+ALSCO_Path='/home/php83'
 
 # Enable and configure EPEL repository
 sudo dnf install -y /path/to/epel-release-latest-9.noarch.rpm
