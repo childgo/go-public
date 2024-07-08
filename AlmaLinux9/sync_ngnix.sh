@@ -14,7 +14,7 @@ sudo dnf update -y
 sudo dnf install -y yum-utils createrepo rsync
 
 # Define the path for the GetPageSpeed repositories for Enterprise Linux 9
-DIR="/home/repolin/public_html/Linux/AlmaLinux9/GetPageSpeed/"
+DIR="/home/repolin/public_html/Linux9/SecureGateway_Module/"
 
 # Check if the directory exists, if not, create it
 if [ ! -d "$DIR" ]; then
@@ -36,7 +36,7 @@ fi
 GETPAGESPEED_REPOS="getpagespeed-extras getpagespeed-extras-noarch getpagespeed-extras-varnish60 getpagespeed-extras-nginx-mod getpagespeed-extras-mainline getpagespeed-extras-cmake-latest getpagespeed-extras-tengine getpagespeed-extras-angie"
 
 # Path for GetPageSpeed repositories
-GETPAGESPEED_Path='/home/repolin/public_html/Linux/AlmaLinux9/GetPageSpeed/'
+GETPAGESPEED_Path='/home/repolin/public_html/Linux9/SecureGateway_Module/'
 
 # Loop to update each GetPageSpeed repository one at a time
 for REPO in ${GETPAGESPEED_REPOS}; do
