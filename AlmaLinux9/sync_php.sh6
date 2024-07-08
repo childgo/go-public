@@ -3,11 +3,20 @@
 ##rsync -avz  --delete --progress -e "ssh -p 1111" /home/php83/php-8.3/ root@66.66.66.66:/home/repolin/public_html/Linux/AlmaLinux9/Secure_Gateway_php83/
 
 
+
 # Exit immediately if a command exits with a non-zero status
 set -e
 
 # Install necessary packages
 sudo dnf install -y yum-utils createrepo rsync
+
+# Clear DNF cache and update metadata
+sudo dnf clean all
+sudo dnf makecache
+
+# Reset PHP module and enable PHP 8.3 from Remi repository
+sudo dnf module reset php -y
+sudo dnf module enable php:remi-8.3 -y
 
 # Define the path for the repository
 DIR="/home/php83"
@@ -26,14 +35,6 @@ else
     echo "The directory $DIR already exists."
 fi
 
-# Clear DNF cache and update metadata
-sudo dnf clean all
-sudo dnf makecache
-
-# Reset PHP module and enable PHP 8.3 from Remi repository
-sudo dnf module reset php -y
-sudo dnf module enable php:remi-8.3 -y
-
 # Sync only PHP 8.3 packages
 PHP_REPO_DIR=$DIR/php-8.3
 if [ ! -d "$PHP_REPO_DIR" ]; then
@@ -41,7 +42,7 @@ if [ ! -d "$PHP_REPO_DIR" ]; then
 fi
 
 # Sync PHP 8.3 repository
-sudo dnf reposync --repo=remi-php83 --newest-only --download-metadata --download-path=$PHP_REPO_DIR --delete
+sudo dnf reposync --repo=remi-modular --newest-only --download-metadata --download-path=$PHP_REPO_DIR --delete
 
 # Create repository metadata for PHP 8.3
 sudo createrepo_c $PHP_REPO_DIR/
