@@ -26,11 +26,6 @@ else
     echo "The directory $DIR already exists."
 fi
 
-# Copy provided Remi repository configuration files to the yum repository directory
-sudo cp /mnt/data/remi.repo /etc/yum.repos.d/
-sudo cp /mnt/data/remi-modular.repo /etc/yum.repos.d/
-sudo cp /mnt/data/remi-safe.repo /etc/yum.repos.d/
-
 # Clear DNF cache and update metadata
 sudo dnf clean all
 sudo dnf makecache
