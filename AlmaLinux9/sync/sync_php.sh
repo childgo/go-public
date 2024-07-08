@@ -1,6 +1,6 @@
 
 #!/bin/bash
-#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/AlmaLinux9/sync/sync_php.sh6)
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/AlmaLinux9/sync/sync_php.sh)
 ##rsync -avz  --delete --progress -e "ssh -p 1111" /home/php83/php-8.3/ root@66.66.66.66:/home/repolin/public_html/Linux/AlmaLinux9/Secure_Gateway_php83/
 
 
