@@ -1,5 +1,0 @@
-[ALSCO-SecureGateway-Module]
-name=ALSCO-SecureGateway-Module
-baseurl=https://repo.alscoip.com/Linux/AlmaLinux9/SecureGateway_Module/
-enabled=1
-gpgcheck=0
