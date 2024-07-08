@@ -205,6 +205,8 @@ sudo dnf -y install php-xml;sleep 3;
 sudo dnf -y install php-pear;sleep 3;
 sudo dnf -y install php-bcmath;sleep 3;
 sudo dnf -y install php-json;sleep 3;
+sudo dnf -y install php-ioncube-loader;sleep 3;
+
 
 #Start Services
 service php-fpm restart;sleep 3;
