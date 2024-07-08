@@ -187,9 +187,10 @@ dnf clean all
 #------End
 
 
-#sudo dnf -y install https://rpms.remirepo.net/enterprise/remi-release-9.rpm
-sudo dnf -y install epel-release yum-utils && sleep 3
 
+dnf -y install yum-utils
+dnf module reset php
+dnf module install php:remi-8.3
 
 sudo dnf -y install php;
 sudo dnf -y install php-cli;
