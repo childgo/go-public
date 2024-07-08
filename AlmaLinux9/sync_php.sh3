@@ -26,24 +26,27 @@ else
     echo "The directory $DIR already exists."
 fi
 
-# Enable and configure EPEL repository for AlmaLinux 9
-sudo dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+# Copy provided Remi repository configuration files to the yum repository directory
+sudo cp /mnt/data/remi.repo /etc/yum.repos.d/
+sudo cp /mnt/data/remi-modular.repo /etc/yum.repos.d/
+sudo cp /mnt/data/remi-safe.repo /etc/yum.repos.d/
 
-# Enable and configure Remi repository
-sudo dnf install -y https://rpms.remirepo.net/enterprise/remi-release-9.2.rpm
+# Clear DNF cache and update metadata
+sudo dnf clean all
+sudo dnf makecache
 
 # Reset PHP module and enable PHP 8.3 from Remi repository
 sudo dnf module reset php -y
 sudo dnf module enable php:remi-8.3 -y
 
-# Sync PHP 8.3 packages
+# Sync only PHP 8.3 packages
 PHP_REPO_DIR=$DIR/php-8.3
 if [ ! -d "$PHP_REPO_DIR" ]; then
     mkdir -p $PHP_REPO_DIR
 fi
 
 # Sync PHP 8.3 repository
-sudo dnf reposync --repo=remi --newest-only --download-metadata --download-path=$PHP_REPO_DIR --delete
+sudo dnf reposync --repo=remi-php83 --newest-only --download-metadata --download-path=$PHP_REPO_DIR --delete
 
 # Create repository metadata for PHP 8.3
 sudo createrepo_c $PHP_REPO_DIR/
