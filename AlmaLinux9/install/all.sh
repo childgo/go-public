@@ -189,8 +189,8 @@ dnf clean all
 
 
 dnf -y install yum-utils
-dnf module reset php;sleep 3;
-dnf module install php:remi-8.3;sleep 3;
+dnf -y module reset php; sleep 3;
+dnf -y module install php:remi-8.3; sleep 3;
 
 sudo dnf -y install php;sleep 3;
 sudo dnf -y install php-cli;sleep 3;
