@@ -1,0 +1,5 @@
+[ALSCO_Secure_Gateway_Tools]
+name=ALSCO_Secure_Gateway_Tools
+baseurl=https://repo.alscoip.com/Linux/AlmaLinux9/SecureGateway_Tools/
+enabled=1
+gpgcheck=0

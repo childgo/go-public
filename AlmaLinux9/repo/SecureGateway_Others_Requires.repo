@@ -1,0 +1,5 @@
+[ALSCO-Secure_Gateway_Others_Requires]
+name=ALSCO-Secure_Gateway_Others_Requires
+baseurl=https://repo.alscoip.com/Linux/AlmaLinux9/SecureGateway_Others_Requires/
+enabled=1
+gpgcheck=0

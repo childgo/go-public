@@ -1,0 +1,17 @@
+[ALSCO_Secure_Gateway_ModulesSpeed-extras]
+name=ALSCO_Secure_Gateway Modules extras for Enterprise
+baseurl=https://repo.alscoip.com/Linux/AlmaLinux9/SecureGateway_Module/getpagespeed-extras/
+enabled=1
+gpgcheck=0
+repo_gpgcheck=0
+module_hotfixes=1
+priority=9
+
+[ALSCO_Secure_Gateway_ModulesSpeed-noarch]
+name=ALSCO_Secure_Gateway Modules noarch for Enterprise
+baseurl=https://repo.alscoip.com/Linux/AlmaLinux9/SecureGateway_Module/getpagespeed-extras-noarch/
+enabled=1
+gpgcheck=0
+repo_gpgcheck=0
+module_hotfixes=1
+priority=9
