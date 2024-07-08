@@ -3,10 +3,6 @@
 # Exit immediately if a command exits with a non-zero status
 set -e
 
-# Log file
-LOGFILE="/var/log/php_repo_sync.log"
-exec > >(tee -a ${LOGFILE}) 2>&1
-
 # Update all packages
 sudo dnf update -y
 
@@ -37,47 +33,24 @@ fi
 
 ####################################################################################################################
 
-# Specify all local repositories in a single variable
-LOCAL_REPOS="baseos appstream extras crb epel remi remi-modular"
-
-# Update the path where you want to sync the repositories
+# Update the path where you want to sync the repository
 ALSCO_Path='/home/php83'
 
 # Enable and configure EPEL repository
-sudo dnf install -y /path/to/epel-release-latest-9.noarch.rpm
+sudo dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 
 # Enable and configure Remi repository
-sudo dnf install -y /path/to/remi-release-9.rpm
+sudo dnf install -y https://rpms.remirepo.net/enterprise/remi-release-9.2.rpm
 
-# Enable the Remi repository for PHP 8.3
-sudo dnf module enable php:remi-8.3 -y
+# Install yum-utils
+sudo dnf install -y yum-utils
 
-# Loop to update each repository one at a time
-for REPO in ${LOCAL_REPOS}; do
-    echo "Syncing repository: $REPO"
-    
-    # Create directory for the repository if it doesn't exist
-    REPO_DIR=$ALSCO_Path/$REPO
-    if [ ! -d "$REPO_DIR" ]; then
-        mkdir -p $REPO_DIR
-    fi
+# Reset PHP module and install PHP 8.3 from Remi repository
+sudo dnf module reset php -y
+sudo dnf module install php:remi-8.3 -y
 
-    # Use dnf reposync to sync the repository
-    sudo dnf reposync --repo=$REPO --newest-only --download-metadata --download-path=$REPO_DIR --delete
-    
-    # Check if the repository requires group metadata (e.g., comps.xml). This is common for 'baseos' and 'appstream'.
-    if [[ $REPO = 'baseos' || $REPO = 'appstream' ]]; then
-        COMPS_FILE="$REPO_DIR/comps.xml"
-        if [ -f "$COMPS_FILE" ]; then
-            sudo createrepo_c -g "$COMPS_FILE" $REPO_DIR/
-        else
-            echo "Group file $COMPS_FILE doesn't exist, skipping group metadata creation."
-            sudo createrepo_c $REPO_DIR/
-        fi
-    else
-        sudo createrepo_c $REPO_DIR/
-    fi
-done
+# Install PHP
+sudo dnf install -y php
 
 # Sync PHP 8.3 packages
 PHP_REPO_DIR=$ALSCO_Path/php-8.3
@@ -91,4 +64,4 @@ sudo dnf reposync --repo=remi --newest-only --download-metadata --download-path=
 # Create repository metadata for PHP 8.3
 sudo createrepo_c $PHP_REPO_DIR/
 
-echo "All specified repositories and PHP 8.3 have been synced."
+echo "PHP 8.3 repository has been synced."
