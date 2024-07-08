@@ -1,6 +1,6 @@
 
 #!/bin/bash
-#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/AlmaLinux9/sync_getpagespeed.sh)
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/AlmaLinux9/sync/sync_getpagespeed.sh)
 #rsync -avz  --delete --progress -e "ssh -p 1111" /home/repolin/public_html/Linux9/SecureGateway_Module/ root@66.66.66.66:/home/repolin/public_html/Linux/AlmaLinux9/SecureGateway_Module/
 
 
