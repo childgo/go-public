@@ -1,6 +1,8 @@
 #!/bin/bash
 #bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/AlmaLinux9/sync_getpagespeed.sh)
-#rsync -avz  --delete --progress -e "ssh -p 111" /home/final/Linux/cento7/ root@50.50.50.50:/home/repolin/public_html/Linux/Nginx_Centos7/
+#rsync -avz  --delete --progress -e "ssh -p 1111" /home/repolin/public_html/Linux9/SecureGateway_Module/ root@66.66.66.66:/home/repolin/public_html/Linux/AlmaLinux9/SecureGateway_Module/
+
+
 
 # Exit immediately if a command exits with a non-zero status
 set -e
