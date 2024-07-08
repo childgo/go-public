@@ -189,22 +189,22 @@ dnf clean all
 
 
 dnf -y install yum-utils
-dnf module reset php
-dnf module install php:remi-8.3
+dnf module reset php;sleep 3;
+dnf module install php:remi-8.3;sleep 3;
 
-sudo dnf -y install php;
-sudo dnf -y install php-cli;
-sudo dnf -y install php-fpm;
-sudo dnf -y install php-mysqlnd;
-sudo dnf -y install php-zip;
-sudo dnf -y install php-devel;
-sudo dnf -y install php-gd;
-sudo dnf -y install php-mbstring;
-sudo dnf -y install php-curl;
-sudo dnf -y install php-xml;
-sudo dnf -y install php-pear;
-sudo dnf -y install php-bcmath;
-sudo dnf -y install php-json;
+sudo dnf -y install php;sleep 3;
+sudo dnf -y install php-cli;sleep 3;
+sudo dnf -y install php-fpm;sleep 3;
+sudo dnf -y install php-mysqlnd;sleep 3;
+sudo dnf -y install php-zip;sleep 3;
+sudo dnf -y install php-devel;sleep 3;
+sudo dnf -y install php-gd;sleep 3;
+sudo dnf -y install php-mbstring;sleep 3;
+sudo dnf -y install php-curl;sleep 3;
+sudo dnf -y install php-xml;sleep 3;
+sudo dnf -y install php-pear;sleep 3;
+sudo dnf -y install php-bcmath;sleep 3;
+sudo dnf -y install php-json;sleep 3;
 
 #Start Services
 service php-fpm restart;sleep 3;
