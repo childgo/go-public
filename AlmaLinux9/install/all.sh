@@ -57,6 +57,83 @@ systemctl restart nginx;sleep 3;
 systemctl status nginx;sleep 3;
 
 
+
+
+
+
+
+
+
+
+
+#----Create Folders
+# Create /etc/nginx/modsec/
+if [ ! -d "/etc/nginx/modsec/" ]; then
+    mkdir -p "/etc/nginx/modsec/"
+    echo "Created directory: /etc/nginx/modsec/"
+else
+    echo "Directory already exists: /etc/nginx/modsec/"
+fi
+
+# Create /etc/nginx/conf.d/alsco_global_settings/
+if [ ! -d "/etc/nginx/conf.d/alsco_global_settings/" ]; then
+    mkdir -p "/etc/nginx/conf.d/alsco_global_settings/"
+    echo "Created directory: /etc/nginx/conf.d/alsco_global_settings/"
+else
+    echo "Directory already exists: /etc/nginx/conf.d/alsco_global_settings/"
+fi
+
+# Create /etc/nginx/conf.d/alsco_data_cookie_and_ip/
+if [ ! -d "/etc/nginx/conf.d/alsco_data_cookie_and_ip/" ]; then
+    mkdir -p "/etc/nginx/conf.d/alsco_data_cookie_and_ip/"
+    echo "Created directory: /etc/nginx/conf.d/alsco_data_cookie_and_ip/"
+else
+    echo "Directory already exists: /etc/nginx/conf.d/alsco_data_cookie_and_ip/"
+fi
+
+# Create /etc/nginx/conf.d/alsco_data_cookie_and_ip/ALSCO-Setting/
+if [ ! -d "/etc/nginx/conf.d/alsco_data_cookie_and_ip/ALSCO-Setting/" ]; then
+    mkdir -p "/etc/nginx/conf.d/alsco_data_cookie_and_ip/ALSCO-Setting/"
+    echo "Created directory: /etc/nginx/conf.d/alsco_data_cookie_and_ip/ALSCO-Setting/"
+else
+    echo "Directory already exists: /etc/nginx/conf.d/alsco_data_cookie_and_ip/ALSCO-Setting/"
+fi
+
+echo "All directories are created or already exist."
+#----End Create Folders
+
+
+
+
+
+#----Create Files
+# Create /etc/nginx/conf.d/0-setting.conf
+if [ ! -f "/etc/nginx/conf.d/0-setting.conf" ]; then
+    touch "/etc/nginx/conf.d/0-setting.conf"
+    echo "Created file: /etc/nginx/conf.d/0-setting.conf"
+else
+    echo "File already exists: /etc/nginx/conf.d/0-setting.conf"
+fi
+
+# Create /etc/nginx/conf.d/alsco_data_cookie_and_ip/ALSCO-Setting/.ratelimit_tempIP_block.alsco
+if [ ! -f "/etc/nginx/conf.d/alsco_data_cookie_and_ip/ALSCO-Setting/.ratelimit_tempIP_block.alsco" ]; then
+    mkdir -p "/etc/nginx/conf.d/alsco_data_cookie_and_ip/ALSCO-Setting/"
+    touch "/etc/nginx/conf.d/alsco_data_cookie_and_ip/ALSCO-Setting/.ratelimit_tempIP_block.alsco"
+    echo "Created file: /etc/nginx/conf.d/alsco_data_cookie_and_ip/ALSCO-Setting/.ratelimit_tempIP_block.alsco"
+else
+    echo "File already exists: /etc/nginx/conf.d/alsco_data_cookie_and_ip/ALSCO-Setting/.ratelimit_tempIP_block.alsco"
+fi
+
+echo "All files are created or already exist."
+#----End Create Files
+
+
+
+
+
+
+
+
 #------Delete Unwanted .repo Files:
 find "/etc/yum.repos.d/" -type f -name '*.repo' ! -name 'ALSCO_SecureGateway_AlmaLinux9.repo' ! -name 'ALSCO_SecureGateway_Module.repo' ! -name 'ALSCO_SecureGateway_Others_Requires.repo' ! -name 'ALSCO_SecureGateway_php83.repo' ! -name 'ALSCO_SecureGateway_Tools.repo' -exec rm -f {} \;
 dnf clean all
