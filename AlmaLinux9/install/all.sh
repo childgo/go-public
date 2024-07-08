@@ -149,7 +149,7 @@ grep -r "TCP6_OUT =" /etc/csf/csf.conf
 grep -r "UDP6_IN =" /etc/csf/csf.conf
 grep -r "UDP6_OUT =" /etc/csf/csf.conf
 
-echo ""
+echo "Change LF_IPSET from 0 to 1, becuase 1 mean enable"
 grep -r "LF_IPSET =" /etc/csf/csf.conf
 
 
