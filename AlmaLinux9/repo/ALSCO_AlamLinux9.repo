@@ -1,23 +1,23 @@
-[baseos]
-name=BaseOS
+[ALSCO-baseos]
+name=ALSCO-BaseOS
 baseurl=https://repo.alscoip.com/Linux/AlmaLinux9/AlmaLinux9_Sync_Repository/baseos/
 enabled=1
 gpgcheck=0
 
-[appstream]
-name=AppStream
+[ALSCO-appstream]
+name=ALSCO-AppStream
 baseurl=https://repo.alscoip.com/Linux/AlmaLinux9/AlmaLinux9_Sync_Repository/appstream/
 enabled=1
 gpgcheck=0
 
-[extras]
-name=Extras
+[ALSCO-extras]
+name=ALSCO-Extras
 baseurl=https://repo.alscoip.com/Linux/AlmaLinux9/AlmaLinux9_Sync_Repository/extras/
 enabled=1
 gpgcheck=0
 
-[crb]
-name=CRB
+[ALSCO-crb]
+name=ALSCO-CRB
 baseurl=https://repo.alscoip.com/Linux/AlmaLinux9/AlmaLinux9_Sync_Repository/crb/
 enabled=1
 gpgcheck=0
