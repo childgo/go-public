@@ -1,6 +1,0 @@
-[ALSCO-local-base]
-name=CentOS Base
-baseurl=https://repo.alscoip.com/Linux/AlmaLinux9/AlmaLinux9_Sync_Repository/
-gpgcheck=0
-enabled=1
-
