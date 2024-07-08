@@ -33,7 +33,7 @@ clear
 dnf -y update;sleep 3;
 
 #------Delete Unwanted .repo Files:
-find "/etc/yum.repos.d/" -type f -name '*.repo' ! -name 'ALSCO_AlmaLinux9.repo' ! -name 'ALSCO_SG_Module.repo' ! -name 'SecureGateway_Others_Requires.repo' ! -name 'SecureGateway_Tools.repo' -exec rm -f {} \;
+find "/etc/yum.repos.d/" -type f -name '*.repo' ! -name 'ALSCO_SecureGateway_AlmaLinux9.repo' ! -name 'ALSCO_SecureGateway_Module.repo' ! -name 'ALSCO_SecureGateway_Others_Requires.repo' ! -name 'ALSCO_SecureGateway_php83.repo' ! -name 'ALSCO_SecureGateway_Tools.repo' -exec rm -f {} \;
 dnf clean all
 #------End
 
@@ -58,7 +58,7 @@ systemctl status nginx;sleep 3;
 
 
 #------Delete Unwanted .repo Files:
-find "/etc/yum.repos.d/" -type f -name '*.repo' ! -name 'ALSCO_AlmaLinux9.repo' ! -name 'ALSCO_SG_Module.repo' ! -name 'SecureGateway_Others_Requires.repo' ! -name 'SecureGateway_Tools.repo' -exec rm -f {} \;
+find "/etc/yum.repos.d/" -type f -name '*.repo' ! -name 'ALSCO_SecureGateway_AlmaLinux9.repo' ! -name 'ALSCO_SecureGateway_Module.repo' ! -name 'ALSCO_SecureGateway_Others_Requires.repo' ! -name 'ALSCO_SecureGateway_php83.repo' ! -name 'ALSCO_SecureGateway_Tools.repo' -exec rm -f {} \;
 dnf clean all
 #------End
 ;;
@@ -72,7 +72,7 @@ dnf clean all
 
 clear
 #------Delete Unwanted .repo Files:
-find "/etc/yum.repos.d/" -type f -name '*.repo' ! -name 'ALSCO_AlmaLinux9.repo' ! -name 'ALSCO_SG_Module.repo' ! -name 'SecureGateway_Others_Requires.repo' ! -name 'SecureGateway_Tools.repo' -exec rm -f {} \;
+find "/etc/yum.repos.d/" -type f -name '*.repo' ! -name 'ALSCO_SecureGateway_AlmaLinux9.repo' ! -name 'ALSCO_SecureGateway_Module.repo' ! -name 'ALSCO_SecureGateway_Others_Requires.repo' ! -name 'ALSCO_SecureGateway_php83.repo' ! -name 'ALSCO_SecureGateway_Tools.repo' -exec rm -f {} \;
 dnf clean all
 #------End
 
@@ -173,7 +173,7 @@ perl /usr/local/csf/bin/csftest.pl
 
 
 #------Delete Unwanted .repo Files:
-find "/etc/yum.repos.d/" -type f -name '*.repo' ! -name 'ALSCO_AlmaLinux9.repo' ! -name 'ALSCO_SG_Module.repo' ! -name 'SecureGateway_Others_Requires.repo' ! -name 'SecureGateway_Tools.repo' -exec rm -f {} \;
+find "/etc/yum.repos.d/" -type f -name '*.repo' ! -name 'ALSCO_SecureGateway_AlmaLinux9.repo' ! -name 'ALSCO_SecureGateway_Module.repo' ! -name 'ALSCO_SecureGateway_Others_Requires.repo' ! -name 'ALSCO_SecureGateway_php83.repo' ! -name 'ALSCO_SecureGateway_Tools.repo' -exec rm -f {} \;
 dnf clean all
 #------End
 ;;
@@ -182,7 +182,7 @@ dnf clean all
 
 clear
 #------Delete Unwanted .repo Files:
-find "/etc/yum.repos.d/" -type f -name '*.repo' ! -name 'ALSCO_AlmaLinux9.repo' ! -name 'ALSCO_SG_Module.repo' ! -name 'SecureGateway_Others_Requires.repo' ! -name 'SecureGateway_Tools.repo' -exec rm -f {} \;
+find "/etc/yum.repos.d/" -type f -name '*.repo' ! -name 'ALSCO_SecureGateway_AlmaLinux9.repo' ! -name 'ALSCO_SecureGateway_Module.repo' ! -name 'ALSCO_SecureGateway_Others_Requires.repo' ! -name 'ALSCO_SecureGateway_php83.repo' ! -name 'ALSCO_SecureGateway_Tools.repo' -exec rm -f {} \;
 dnf clean all
 #------End
 
@@ -239,7 +239,7 @@ php -v;sleep 3;
 
 
 #------Delete Unwanted .repo Files:
-find "/etc/yum.repos.d/" -type f -name '*.repo' ! -name 'ALSCO_AlmaLinux9.repo' ! -name 'ALSCO_SG_Module.repo' ! -name 'SecureGateway_Others_Requires.repo' ! -name 'SecureGateway_Tools.repo' -exec rm -f {} \;
+find "/etc/yum.repos.d/" -type f -name '*.repo' ! -name 'ALSCO_SecureGateway_AlmaLinux9.repo' ! -name 'ALSCO_SecureGateway_Module.repo' ! -name 'ALSCO_SecureGateway_Others_Requires.repo' ! -name 'ALSCO_SecureGateway_php83.repo' ! -name 'ALSCO_SecureGateway_Tools.repo' -exec rm -f {} \;
 dnf clean all
 #------End
 ;;
@@ -248,7 +248,7 @@ dnf clean all
 
 
 #------Delete Unwanted .repo Files:
-find "/etc/yum.repos.d/" -type f -name '*.repo' ! -name 'ALSCO_AlmaLinux9.repo' ! -name 'ALSCO_SG_Module.repo' ! -name 'SecureGateway_Others_Requires.repo' ! -name 'SecureGateway_Tools.repo' -exec rm -f {} \;
+find "/etc/yum.repos.d/" -type f -name '*.repo' ! -name 'ALSCO_SecureGateway_AlmaLinux9.repo' ! -name 'ALSCO_SecureGateway_Module.repo' ! -name 'ALSCO_SecureGateway_Others_Requires.repo' ! -name 'ALSCO_SecureGateway_php83.repo' ! -name 'ALSCO_SecureGateway_Tools.repo' -exec rm -f {} \;
 dnf clean all
 #------End
 
@@ -278,7 +278,7 @@ getsebool -a | grep httpd_can_network_connect;sleep 3;
 
 
 #------Delete Unwanted .repo Files:
-find "/etc/yum.repos.d/" -type f -name '*.repo' ! -name 'ALSCO_AlmaLinux9.repo' ! -name 'ALSCO_SG_Module.repo' ! -name 'SecureGateway_Others_Requires.repo' ! -name 'SecureGateway_Tools.repo' -exec rm -f {} \;
+find "/etc/yum.repos.d/" -type f -name '*.repo' ! -name 'ALSCO_SecureGateway_AlmaLinux9.repo' ! -name 'ALSCO_SecureGateway_Module.repo' ! -name 'ALSCO_SecureGateway_Others_Requires.repo' ! -name 'ALSCO_SecureGateway_php83.repo' ! -name 'ALSCO_SecureGateway_Tools.repo' -exec rm -f {} \;
 dnf clean all
 #------End
 ;;
@@ -313,7 +313,7 @@ echo "Done"
 
 clear
 #------Delete Unwanted .repo Files:
-find "/etc/yum.repos.d/" -type f -name '*.repo' ! -name 'ALSCO_AlmaLinux9.repo' ! -name 'ALSCO_SG_Module.repo' ! -name 'SecureGateway_Others_Requires.repo' ! -name 'SecureGateway_Tools.repo' -exec rm -f {} \;
+find "/etc/yum.repos.d/" -type f -name '*.repo' ! -name 'ALSCO_SecureGateway_AlmaLinux9.repo' ! -name 'ALSCO_SecureGateway_Module.repo' ! -name 'ALSCO_SecureGateway_Others_Requires.repo' ! -name 'ALSCO_SecureGateway_php83.repo' ! -name 'ALSCO_SecureGateway_Tools.repo' -exec rm -f {} \;
 dnf clean all
 #------End
 
@@ -366,7 +366,7 @@ mmdblookup --file /usr/share/GeoIP/GeoLite2-ASN.mmdb --ip 66.111.53.5 | sed -e '
 mmdblookup --file /usr/share/GeoIP/GeoLite2-Country.mmdb --ip 66.111.53.5 country iso_code |awk -F'"' '{print $2}' | tr '\n' ' '
 
 #------Delete Unwanted .repo Files:
-find "/etc/yum.repos.d/" -type f -name '*.repo' ! -name 'ALSCO_AlmaLinux9.repo' ! -name 'ALSCO_SG_Module.repo' ! -name 'SecureGateway_Others_Requires.repo' ! -name 'SecureGateway_Tools.repo' -exec rm -f {} \;
+find "/etc/yum.repos.d/" -type f -name '*.repo' ! -name 'ALSCO_SecureGateway_AlmaLinux9.repo' ! -name 'ALSCO_SecureGateway_Module.repo' ! -name 'ALSCO_SecureGateway_Others_Requires.repo' ! -name 'ALSCO_SecureGateway_php83.repo' ! -name 'ALSCO_SecureGateway_Tools.repo' -exec rm -f {} \;
 dnf clean all
 #------End
 ;;
@@ -378,7 +378,7 @@ dnf clean all
 
 clear
 #------Delete Unwanted .repo Files:
-find "/etc/yum.repos.d/" -type f -name '*.repo' ! -name 'ALSCO_AlmaLinux9.repo' ! -name 'ALSCO_SG_Module.repo' ! -name 'SecureGateway_Others_Requires.repo' ! -name 'SecureGateway_Tools.repo' -exec rm -f {} \;
+find "/etc/yum.repos.d/" -type f -name '*.repo' ! -name 'ALSCO_SecureGateway_AlmaLinux9.repo' ! -name 'ALSCO_SecureGateway_Module.repo' ! -name 'ALSCO_SecureGateway_Others_Requires.repo' ! -name 'ALSCO_SecureGateway_php83.repo' ! -name 'ALSCO_SecureGateway_Tools.repo' -exec rm -f {} \;
 dnf clean all
 #------End
 
@@ -414,7 +414,7 @@ sudo yum -y install nginx-module-lua
 
 
 #------Delete Unwanted .repo Files:
-find "/etc/yum.repos.d/" -type f -name '*.repo' ! -name 'ALSCO_AlmaLinux9.repo' ! -name 'ALSCO_SG_Module.repo' ! -name 'SecureGateway_Others_Requires.repo' ! -name 'SecureGateway_Tools.repo' -exec rm -f {} \;
+find "/etc/yum.repos.d/" -type f -name '*.repo' ! -name 'ALSCO_SecureGateway_AlmaLinux9.repo' ! -name 'ALSCO_SecureGateway_Module.repo' ! -name 'ALSCO_SecureGateway_Others_Requires.repo' ! -name 'ALSCO_SecureGateway_php83.repo' ! -name 'ALSCO_SecureGateway_Tools.repo' -exec rm -f {} \;
 dnf clean all
 #------End
 ;;
@@ -437,7 +437,7 @@ echo "Done....."
 
 
 #------Delete Unwanted .repo Files:
-find "/etc/yum.repos.d/" -type f -name '*.repo' ! -name 'ALSCO_AlmaLinux9.repo' ! -name 'ALSCO_SG_Module.repo' ! -name 'SecureGateway_Others_Requires.repo' ! -name 'SecureGateway_Tools.repo' -exec rm -f {} \;
+find "/etc/yum.repos.d/" -type f -name '*.repo' ! -name 'ALSCO_SecureGateway_AlmaLinux9.repo' ! -name 'ALSCO_SecureGateway_Module.repo' ! -name 'ALSCO_SecureGateway_Others_Requires.repo' ! -name 'ALSCO_SecureGateway_php83.repo' ! -name 'ALSCO_SecureGateway_Tools.repo' -exec rm -f {} \;
 dnf clean all
 #------End
 
