@@ -1,5 +1,5 @@
-[ALSCO-Nginx-SecureGateway]
-name=ALSCO-Nginx-SecureGateway
+[ALSCO-SecureGateway-Module]
+name=ALSCO-SecureGateway-Module
 baseurl=https://repo.alscoip.com/Linux/AlmaLinux9/Nginx_SecureGateway/
 enabled=1
 gpgcheck=0
