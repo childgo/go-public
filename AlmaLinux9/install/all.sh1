@@ -54,6 +54,7 @@ systemctl reload nginx;sleep 3;
 systemctl restart nginx;sleep 3;
 
 #reboot;sleep 3;
+systemctl status nginx;sleep 3;
 
 
 #------Delete Unwanted .repo Files:
@@ -62,10 +63,6 @@ dnf clean all
 #------End
 ;;
 ########################################################
-
-systemctl status nginx;sleep 3;
-
-
 
 
 ########################################################
