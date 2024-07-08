@@ -1,7 +1,7 @@
 
 #!/bin/bash
 
-#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/AlmaLinux9/sync_mirror_AlmaLinux9.sh)
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/AlmaLinux9/sync/sync_mirror_AlmaLinux9.sh)
 #rsync -avz  --delete --progress -e "ssh -p 111" /home/repolin/public_html/Linux/AlmaLinux9/AlmaLinux9_Sync_Repository/ root@50.50.50.50:/home/repolin/public_html/Linux/AlmaLinux9/AlmaLinux9_Sync_Repository/
 
 
