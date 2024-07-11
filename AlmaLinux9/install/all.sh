@@ -467,6 +467,11 @@ yum -y install nginx-owasp-crs
 mkdir /alscogatewaytmp
 chmod 1777 /alscogatewaytmp
 
+#for securegateway spider python3 to work
+sudo dnf install -y python3-devel mysql-devel
+pip3 install mysqlclient
+
+
 
 chcon -t httpd_sys_rw_content_t /alscogatewaytmp -R
 chcon -t httpd_sys_script_exec_t  /alscospider/gateway_rules/antivirus/final/spider6.py
