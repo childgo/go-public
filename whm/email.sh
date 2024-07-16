@@ -196,6 +196,16 @@ exim -bp | awk '/^[0-9]/ {print $3}' | xargs -n 1 exim -Mrm
 
 #restart the Exim mail service
 service exim restart
+
+
+#this below step force delete
+#exim -bpc
+#systemctl stop exim
+#rm -rf /var/spool/exim/input/*
+#systemctl start exim
+#exim -bpc
+
+
 ;;
 ########################################################
 
