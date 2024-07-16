@@ -188,7 +188,11 @@ printf '\n\n\n'
 ########################################################
 "Clear All Mail In Queue 4")
 clear
-exim -bp | awk '/^ *[0-9]+[mhd]/{print "exim -Mrm " $3}' | bash
+#below is old
+#exim -bp | awk '/^ *[0-9]+[mhd]/{print "exim -Mrm " $3}' | bash
+
+#this is new
+exim -bp | awk '/^[0-9]/ {print $3}' | xargs -n 1 exim -Mrm
 
 #restart the Exim mail service
 service exim restart
