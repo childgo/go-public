@@ -406,6 +406,11 @@ yum -y install nginx-owasp-crs
 mkdir /alscogatewaytmp
 chmod 1777 /alscogatewaytmp
 
+#The following lines are necessary for Spider Virus Protect to function
+yum -y update mysql-community-release
+yum -y install mysql-connector-odbc
+yum -y install MySQL-python
+
 
 chcon -t httpd_sys_rw_content_t /alscogatewaytmp -R
 chcon -t httpd_sys_script_exec_t  /alscospider/gateway_rules/antivirus/final/spider6.py
