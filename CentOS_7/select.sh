@@ -228,6 +228,10 @@ echo -e "\n\n\n"
 echo "Verify that the change was successful. ...."
 grep -r "session.cookie_httponly" /etc/php.ini
 grep -r "session.cookie_samesite" /etc/php.ini
+grep -r "memory_limit" /etc/php.ini
+grep -r "post_max_size" /etc/php.ini
+grep -r "upload_max_filesize" /etc/php.ini
+
 echo -e "\n\n\n"
 
 ;;
