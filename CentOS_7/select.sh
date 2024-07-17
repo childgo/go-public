@@ -216,8 +216,9 @@ echo -e "\n\n\n"
 echo "service php-fpm restart"
 service php-fpm restart
 
-
+echo -e "\n\n\n"
 echo -e "php.ini path is in '/etc/php.ini'"
+
 
 echo -e "\n\n\n"
 session_path="/var/lib/php/session"
