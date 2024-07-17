@@ -220,6 +220,11 @@ echo -e "\n\n\n"
 echo -e "php.ini path is in '/etc/php.ini'"
 
 
+
+echo -e "\n\n\n"
+echo -e "php-fpm path is in '/var/log/php-fpm/error.log'"
+
+
 echo -e "\n\n\n"
 session_path="/var/lib/php/session"
 echo -e "Php Session path is: $session_path/\n"
