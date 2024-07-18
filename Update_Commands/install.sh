@@ -34,3 +34,12 @@ systemctl start SG_update.timer
 
 echo "SG_update.timer and SG_update.service have been created, enabled, and started."
 
+
+
+
+
+
+
+#list all active timers in the systemd 
+#systemctl list-timers --all
+
