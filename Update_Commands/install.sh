@@ -9,7 +9,7 @@ cat <<EOF > /etc/systemd/system/SG_update.service
 Description=Run SG update scripts
 
 [Service]
-ExecStart=/bin/bash -c "/etc/sg_update/setup.sh ; /etc/sg_update/update1.sh ; /etc/sg_update/update2.sh ; /etc/sg_update/update3.sh ; /etc/sg_update/update4.sh ; /etc/sg_update/update5.sh"
+ExecStart=/bin/bash -c "/etc/sg_update/setup.sh ; /etc/sg_update/update1.sh ; /etc/sg_update/update2.sh ; /etc/sg_update/update3.sh ; /etc/sg_update/update4.sh ; /etc/sg_update/update5.sh ; /etc/sg_update/update6.sh ; /etc/sg_update/update7.sh ; /etc/sg_update/update8.sh ; /etc/sg_update/update9.sh ; /etc/sg_update/update10.sh"
 EOF
 
 # Create the SG_update.timer file
