@@ -18,8 +18,9 @@ cat <<EOF > /etc/systemd/system/SG_update.timer
 Description=Run SG_update.service every minute
 
 [Timer]
-OnCalendar=*:0/1
+OnCalendar=*:0/2
 Unit=SG_update.service
+
 
 [Install]
 WantedBy=timers.target
