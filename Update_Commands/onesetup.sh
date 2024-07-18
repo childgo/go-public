@@ -1,5 +1,11 @@
 #!/bin/bash
 
+
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/Update_Commands/onesetup.sh)
+
+
+
+
 # Clear the screen
 clear
 
