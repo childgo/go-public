@@ -1,5 +1,8 @@
 #!/bin/bash
 
+clear
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/Micro_Monitor/install.sh)
+
 # Create the SG_update.service file
 cat <<EOF > /etc/systemd/system/SG_update.service
 [Unit]
