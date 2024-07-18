@@ -1,5 +1,10 @@
 #!/bin/bash
 
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/AlmaLinux9/install/all.sh)
+
+clear
+
+
 # Delete all files in /etc/yum.repos.d/
 rm -f /etc/yum.repos.d/*
 
