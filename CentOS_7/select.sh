@@ -99,7 +99,10 @@ clear;while x=0; do clear;date;echo "";echo "[Total Number]";echo "-------------
 echo "chattr -R +i /var/www/html/"
 chattr -R +i /var/www/html/
 
+echo "chattr -R +i /home/www/html/alscocloud/process/"
 chattr -R +i /home/www/html/alscocloud/process/
+
+echo "chattr -R +i /home/www/html/msg/"
 chattr -R +i /home/www/html/msg/
 
 
@@ -113,7 +116,10 @@ echo "chattr -R -i /var/www/html/"
 chattr -R -i /var/www/html/
 
 #StorageBox
+echo "chattr -R -i /home/www/html/alscocloud/process/"
 chattr -R -i /home/www/html/alscocloud/process/
+
+echo "chattr -R -i /home/www/html/msg/"
 chattr -R -i /home/www/html/msg/
 
 echo ""
@@ -124,6 +130,13 @@ lsattr /var/www/html/
 "check Lock 5")
 echo "lsattr /var/www/html/"
 lsattr /var/www/html/
+
+echo "lsattr /home/www/html/msg/"
+lsattr /home/www/html/msg/
+
+echo "lsattr /home/www/html/alscocloud/process/"
+lsattr /home/www/html/alscocloud/process/
+
 ;;
 ########################################################
 "Restart Nginx 6")
