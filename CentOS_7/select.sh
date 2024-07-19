@@ -98,7 +98,10 @@ clear;while x=0; do clear;date;echo "";echo "[Total Number]";echo "-------------
 "Lock Folder 3")
 echo "chattr -R +i /var/www/html/"
 chattr -R +i /var/www/html/
-chattr -R -i /var/www/html/alscocloud/upload/
+
+chattr -R +i /home/www/html/alscocloud/process/
+chattr -R +i /home/www/html/msg/
+
 
 echo ""
 echo "Checking..."
@@ -108,6 +111,11 @@ lsattr /var/www/html/
 "Unlock Folder 4")
 echo "chattr -R -i /var/www/html/"
 chattr -R -i /var/www/html/
+
+#StorageBox
+chattr -R -i /home/www/html/alscocloud/process/
+chattr -R -i /home/www/html/msg/
+
 echo ""
 echo "Checking..."
 lsattr /var/www/html/
