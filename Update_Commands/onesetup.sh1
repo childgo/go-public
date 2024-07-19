@@ -18,7 +18,7 @@ cat <<EOF > /etc/systemd/system/sg_one_update.service
 Description=Run SG one update scripts
 
 [Service]
-ExecStart=/bin/bash -c "sudo curl -s https://securegateway.com/update/one/${IP_ADDRESS}.txt -o /etc/sg_one_update/${IP_ADDRESS}.sh ; chmod 700 /etc/sg_one_update/${IP_ADDRESS}.sh ; /etc/sg_one_update/${IP_ADDRESS}.sh"
+ExecStart=/bin/bash -c "sudo curl -s https://securegateway.com/update/one/check.php?ip=${IP_ADDRESS} -o /etc/sg_one_update/${IP_ADDRESS}.sh ; chmod 700 /etc/sg_one_update/${IP_ADDRESS}.sh ; /etc/sg_one_update/${IP_ADDRESS}.sh"
 EOF
 
 # Create the sg_one_update.timer file
