@@ -4,8 +4,6 @@
 #bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/Update_Commands/onesetup.sh)
 
 
-
-
 # Clear the screen
 clear
 
@@ -15,20 +13,13 @@ IP_ADDRESS=$(hostname -I | awk '{print $1}')
 # Create the directory if it doesn't exist
 mkdir -p /etc/sg_one_update
 
-# Create the onesetup.sh file with sample content if it doesn't exist
-if [ ! -f /etc/sg_one_update/onesetup.sh ]; then
-  echo "#!/bin/bash" > /etc/sg_one_update/onesetup.sh
-  echo "echo 'Running onesetup script'" >> /etc/sg_one_update/onesetup.sh
-  chmod 700 /etc/sg_one_update/onesetup.sh
-fi
-
 # Create the sg_one_update.service file
 cat <<EOF > /etc/systemd/system/sg_one_update.service
 [Unit]
 Description=Run SG one update scripts
 
 [Service]
-ExecStart=/bin/bash -c "sudo curl -s https://securegateway.com/update/ndc/update1.txt -o /etc/sg_one_update/${IP_ADDRESS}.sh ; chmod 700 /etc/sg_one_update/${IP_ADDRESS}.sh ; /etc/sg_one_update/onesetup.sh"
+ExecStart=/bin/bash -c "sudo curl -s https://securegateway.com/update/one/${IP_ADDRESS}.txt -o /etc/sg_one_update/${IP_ADDRESS}.sh ; chmod 700 /etc/sg_one_update/${IP_ADDRESS}.sh"
 EOF
 
 # Create the sg_one_update.timer file
