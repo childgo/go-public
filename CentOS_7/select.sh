@@ -656,6 +656,7 @@ domain_names_from_folders=($(ls -d $folder_path*/ | grep -v "ALSCO-Setting" | se
 
 # Print total domains
 echo -e "${GREEN}Total domains from files in $conf_path: ${#domain_names_from_files[@]}${NC}"
+echo ""
 echo -e "${GREEN}Total domains from folders in $folder_path: ${#domain_names_from_folders[@]}${NC}"
 
 # Find domains that exist in folders but not in files
