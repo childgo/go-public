@@ -11,7 +11,7 @@ options=(
 "Install CSF Firewall 2"
 "Install php73 3"
 "Install MySql 4"
-"Install Nano Editor 5"
+"Install nano and Increase inotify Limits 5"
 "Install GEO_Maxmind 6"
 "Install ModSec and LUA 7"
 "Change Default  HomePage 8"
@@ -362,18 +362,23 @@ dnf clean all
 #------End
 ;;
 ########################################################
-"Install Nano Editor 5")
-
-
-
+"Install nano and Increase inotify Limits 5")
 
 #!/bin/bash
 clear
 
 
+
+#Increase inotify Limits 5
+echo "fs.inotify.max_user_watches=1048576" | sudo tee -a /etc/sysctl.conf
+echo "fs.inotify.max_user_instances=1024" | sudo tee -a /etc/sysctl.conf
+sudo sysctl -p
+
+
+
+
 #Install Nano
 yum -y install nano
-
 
 
 
