@@ -631,6 +631,7 @@ echo "----------------------------------------"
 "Check SG Domains Files Counts 24")
 echo ""
 clear
+
 # Paths
 conf_path="/etc/nginx/conf.d/"
 folder_path="/etc/nginx/conf.d/alsco_data_cookie_and_ip/"
@@ -643,9 +644,11 @@ NC='\033[0m' # No Color
 # Get list of domain names from conf files
 conf_files=$(ls $conf_path | grep ".conf$" | grep -vE "^(0-setting.conf|default.conf)$")
 domain_names_from_files=()
+full_file_names=()
 for file in $conf_files; do
   domain=$(echo $file | sed -e 's/^[0-9]*-//' -e 's/.conf$//')
   domain_names_from_files+=("$domain")
+  full_file_names+=("$file")
 done
 
 # Get list of domain names from folders, excluding 'ALSCO-Setting'
@@ -665,11 +668,12 @@ done
 
 # Find domains that exist in files but not in folders
 echo -e "${RED}Domains in files but not in folders:${NC}"
-for file_domain in "${domain_names_from_files[@]}"; do
-  if [[ ! " ${domain_names_from_folders[@]} " =~ " ${file_domain} " ]]; then
-    echo -e "${RED}$file_domain${NC}"
+for index in "${!domain_names_from_files[@]}"; do
+  if [[ ! " ${domain_names_from_folders[@]} " =~ " ${domain_names_from_files[$index]} " ]]; then
+    echo -e "${RED}${full_file_names[$index]}${NC}"
   fi
 done
+
 
 
 ;;
