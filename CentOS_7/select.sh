@@ -26,7 +26,7 @@ options=(
 "clear the contents of ratelimit_tempIP_block 21"
 "check SELinux 22"
 "Generate WeDos IP List for Nginx and csf 23"
-"33333333 24"
+"Check SG Domains Files Counts 24"
 "IP Trace 25"
 "Broadcasting server IP 26"
 "Update GEO-IP Database 27"
@@ -628,8 +628,49 @@ echo "----------------------------------------"
 
 ;;
 ########################################################
-"Grepping Error_Log logs for IP 24")
+"Check SG Domains Files Counts 24")
 echo ""
+clear
+# Paths
+conf_path="/etc/nginx/conf.d/"
+folder_path="/etc/nginx/conf.d/alsco_data_cookie_and_ip/"
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m' # No Color
+
+# Get list of domain names from conf files
+conf_files=$(ls $conf_path | grep ".conf$" | grep -vE "^(0-setting.conf|default.conf)$")
+domain_names_from_files=()
+for file in $conf_files; do
+  domain=$(echo $file | sed -e 's/^[0-9]*-//' -e 's/.conf$//')
+  domain_names_from_files+=("$domain")
+done
+
+# Get list of domain names from folders, excluding 'ALSCO-Setting'
+domain_names_from_folders=($(ls -d $folder_path*/ | grep -v "ALSCO-Setting" | sed -e "s|$folder_path||" -e 's|/||'))
+
+# Print total domains
+echo -e "${GREEN}Total domains from files in $conf_path: ${#domain_names_from_files[@]}${NC}"
+echo -e "${GREEN}Total domains from folders in $folder_path: ${#domain_names_from_folders[@]}${NC}"
+
+# Find domains that exist in folders but not in files
+echo -e "${RED}Domains in folders but not in files:${NC}"
+for folder_domain in "${domain_names_from_folders[@]}"; do
+  if [[ ! " ${domain_names_from_files[@]} " =~ " ${folder_domain} " ]]; then
+    echo -e "${RED}$folder_domain${NC}"
+  fi
+done
+
+# Find domains that exist in files but not in folders
+echo -e "${RED}Domains in files but not in folders:${NC}"
+for file_domain in "${domain_names_from_files[@]}"; do
+  if [[ ! " ${domain_names_from_folders[@]} " =~ " ${file_domain} " ]]; then
+    echo -e "${RED}$file_domain${NC}"
+  fi
+done
+
 
 ;;
 ########################################################
