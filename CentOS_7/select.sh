@@ -642,7 +642,7 @@ GREEN='\033[0;32m'
 NC='\033[0m' # No Color
 
 # Get list of domain names from conf files
-conf_files=$(ls $conf_path | grep ".conf$" | grep -vE "^(0-setting.conf|default.conf)$")
+conf_files=$(ls $conf_path | grep ".conf$" | grep -vE "^(0-setting.conf|default.conf|php-fpm.conf)$")
 domain_names_from_files=()
 full_file_names=()
 for file in $conf_files; do
