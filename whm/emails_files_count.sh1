@@ -1,12 +1,11 @@
 #!/bin/bash
-#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/whm/emails_files_count.sh)
-
 clear
 
-# Function to count files in a directory and print in same line
+# Function to count files in a directory and print in same line with comma formatting
 count_files() {
-    echo -n "Count in $1: "
-    find "$1" -type f | wc -l
+    count=$(find "$1" -type f | wc -l)
+    formatted_count=$(printf "%'d\n" "$count")
+    echo "Count in $1: $formatted_count"
 }
 
 # Prompt user for group selection
@@ -16,7 +15,7 @@ echo "2) Group2_53_63"
 echo "3) Group3_53_16"
 echo "4) Group4_52.29"
 echo "5) Group5_101_62"
-read -p "Enter your choice (1/2/3/4): " group_choice
+read -p "Enter your choice (1/2/3/4/5): " group_choice
 
 case $group_choice in
     1)
@@ -46,15 +45,10 @@ case $group_choice in
         count_files "/home/mowr"
         count_files "/home/industry"
         count_files "/home/idcgov"
-
         echo -e "\n\n\n\n"
         ;;
-
-
-
     5)
         echo "User selected Group5_101_62 [00.00.101.62]"
-        echo "Part5 [00.00.101.62]"
         count_files "/home/mod"
         count_files "/home/mcbpcgov"
         count_files "/home/oecoil"
@@ -79,12 +73,7 @@ case $group_choice in
         count_files "/home/motioil"
         count_files "/home/ismamo"
         count_files "/home/council"
-
-
-
-
         echo -e "\n\n\n\n"
-        # Add additional directories for Group4 here if needed
         ;;
     *)
         echo "Invalid choice. Exiting."
