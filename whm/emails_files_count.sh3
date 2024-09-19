@@ -4,7 +4,8 @@ clear
 # Function to count files in a directory and print in same line with comma formatting
 count_files() {
     count=$(find "$1" -type f | wc -l)
-    formatted_count=$(echo "$count" | awk '{ printf "%'\''d\n", $0 }')
+    # Use sed to add commas to the number
+    formatted_count=$(echo "$count" | sed ':a;s/\B[0-9]\{3\}\>/,&/;ta')
     echo "Count in $1: $formatted_count"
 }
 
