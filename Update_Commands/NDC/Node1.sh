@@ -1,13 +1,9 @@
 #!/bin/bash
 
-
 #bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/Update_Commands/onesetup.sh)
 
 # Clear the screen
 clear
-
-# Get the IP address
-IP_ADDRESS=$(hostname -I | awk '{print $1}')
 
 # Create the directory if it doesn't exist
 mkdir -p /etc/sg_one_update
@@ -18,7 +14,7 @@ cat <<EOF > /etc/systemd/system/sg_one_update.service
 Description=Run SG one update scripts
 
 [Service]
-ExecStart=/bin/bash -c "sudo curl -s https://securegateway.com/update/one/check.php?ip=${IP_ADDRESS} -o /etc/sg_one_update/${IP_ADDRESS}.sh ; chmod 700 /etc/sg_one_update/${IP_ADDRESS}.sh ; /etc/sg_one_update/${IP_ADDRESS}.sh"
+ExecStart=/bin/bash -c "curl -s https://securegateway.com/update/ndc/node1.txt -o /etc/sg_one_update/node1.sh ; chmod 700 /etc/sg_one_update/node1.sh ; /etc/sg_one_update/node1.sh"
 EOF
 
 # Create the sg_one_update.timer file
