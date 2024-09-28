@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/Update_Commands/onesetup.sh)
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/refs/heads/master/Update_Commands/NDC/Node1.sh)
 
 # Clear the screen
 clear
