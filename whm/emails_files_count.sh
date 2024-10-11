@@ -1,5 +1,6 @@
 #!/bin/bash
-#https://raw.githubusercontent.com/childgo/go-public/refs/heads/master/whm/emails_files_count.sh
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/refs/heads/master/whm/emails_files_count.sh)
+
 clear
 
 # Function to count files in a directory and print in same line with comma formatting
