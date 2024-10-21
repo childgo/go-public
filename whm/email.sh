@@ -21,6 +21,7 @@ options=("Monitor Webmail 2096 Port and Load 1"
 "Update All Emails Quota Under Domain 15"
 "List All Emails Size Under Domain 16"
 "Enable or Disable Email 2Auth 17"
+"Check and empty Email Log 18"
 
 "Quit")
 select opt in "${options[@]}"
@@ -773,7 +774,67 @@ echo "Auth_Working has been changed to $new_value in $PHP_FILE"
 
 
 ########################################################
-"Option 18")
+"Check and empty Email Log 18 18")
+clear
+
+# Define colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m' # No Color
+
+# List of files to check
+files=(
+    "/usr/local/cpanel/logs/cphulkd.log"
+    "/usr/local/cpanel/logs/login_log"
+    "/var/log/maillog"
+    "/usr/local/cpanel/logs/session_log"
+    "/var/log/exim_mainlog"
+)
+
+# Loop through each file and display its size in MB
+for file in "${files[@]}"
+do
+    if [ -f "$file" ]; then
+        size=$(du -m "$file" | cut -f1)
+        echo -e "${GREEN}Size of $file: ${RED}${size}MB${NC}"
+    else
+        echo -e "${RED}$file does not exist.${NC}"
+    fi
+done
+
+# Ask the user if they want to empty the files
+read -p "Do you want to empty all the files? (yes/no): " choice
+
+if [[ "$choice" == "yes" || "$choice" == "y" ]]; then
+    # Empty all files using sudo truncate
+    for file in "${files[@]}"
+    do
+        if [ -f "$file" ]; then
+            sudo truncate -s 0 "$file"
+            echo -e "${GREEN}$file has been emptied.${NC}"
+        fi
+    done
+
+    # Restart email-related services
+    echo -e "${GREEN}Restarting email-related services...${NC}"
+    
+    sudo systemctl restart exim         # Restart SMTP
+    sudo systemctl restart dovecot      # Restart IMAP and POP3
+    sudo systemctl restart cpanel       # Restart cPanel services if necessary
+    
+    echo -e "${GREEN}Email services have been restarted.${NC}"
+else
+    echo -e "${GREEN}Files have been kept unchanged.${NC}"
+fi
+
+
+
+;;
+########################################################
+
+
+########################################################
+"Option 19")
 echo "Done"
 
 
