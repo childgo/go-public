@@ -774,7 +774,7 @@ echo "Auth_Working has been changed to $new_value in $PHP_FILE"
 
 
 ########################################################
-"Check and empty Email Log 18 18")
+"Check and empty Email Log 18")
 clear
 
 # Define colors
