@@ -1,5 +1,5 @@
 
-#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/whm/install_csf_all.sh)
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/refs/heads/master/whm/install_csf_all.sh)
 clear
 
 #Install ALL
