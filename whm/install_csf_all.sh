@@ -31,6 +31,19 @@ echo "Verify that the change was successful. ...."
 grep -r "TESTING =" /etc/csf/csf.conf
 
 
+#Enable IPSET [Change LF_IPSET from 0 to 1]
+echo "Change LF_IPSET from 0 to 1, becuase 1 mean enable"
+sed -i 's/^LF_IPSET =.*/LF_IPSET = "1"/' /etc/csf/csf.conf
+grep -r "LF_IPSET =" /etc/csf/csf.conf
+echo ""
+
+sed -i 's/TCP6_IN =.*/TCP6_IN =""/' /etc/csf/csf.conf
+sed -i 's/TCP6_OUT =.*/TCP6_OUT =""/' /etc/csf/csf.conf
+sed -i 's/UDP6_IN =.*/UDP6_IN =""/' /etc/csf/csf.conf
+sed -i 's/UDP6_OUT .*/UDP6_OUT =""/' /etc/csf/csf.conf
+
+
+
 #Start CSF
 systemctl enable csf;sleep 3;
 systemctl enable lfd;sleep 3;
