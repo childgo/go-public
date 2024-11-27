@@ -24,6 +24,7 @@ options=("Monitor Webmail 2096 Port and Load 1"
 "Check and empty Email Log 18"
 "List all Emails Filters 19"
 "List all Emails Forwarder 20"
+"List all Default Address for Email Fail 21"
 
 "Quit")
 select opt in "${options[@]}"
@@ -857,7 +858,7 @@ clear;for file in /etc/vfilters/*; do [ -s "$file" ] && { echo -e "$(tput setaf 
 ########################################################
 "List all Emails Forwarder 20")
 echo "Start"
-clear;for file in /etc/valiases/*; do [ -s "$file" ] && echo -e "$(tput setaf 4)\nForwards for domain: $(basename $file)$(tput sgr0)\n$(tput setaf 2)-------------------------$(tput sgr0)" && grep -v "^#" "$file" | grep -vE "^:blackhole:|^:fail:" | awk -F: '{printf "\033[1;33mEmail:\033[0m %-30s \033[1;36mForwarded to:\033[0m %s\n", $1, $2}'; done
+#clear;for file in /etc/valiases/*; do [ -s "$file" ] && echo -e "$(tput setaf 4)\nForwards for domain: $(basename $file)$(tput sgr0)\n$(tput setaf 2)-------------------------$(tput sgr0)" && grep -v "^#" "$file" | grep -vE "^:blackhole:|^:fail:" | awk -F: '{printf "\033[1;33mEmail:\033[0m %-30s \033[1;36mForwarded to:\033[0m %s\n", $1, $2}'; done
 
 
 clear;for file in /etc/valiases/*; do valid_entries=$(grep -v "^#" "$file" | grep -vE "^:blackhole:|^:fail:" | awk -F: '$1 !~ /^[*]$/ && $1!="" && $2!=""'); if [[ ! -z "$valid_entries" ]]; then echo -e "$(tput setaf 4)\nForwards for domain: $(basename $file)$(tput sgr0)\n$(tput setaf 2)-------------------------$(tput sgr0)"; echo "$valid_entries" | awk -F: '{printf "\033[1;33mEmail:\033[0m %-30s \033[1;36mForwarded to:\033[0m %s\n", $1, $2}'; fi; done
@@ -867,6 +868,20 @@ clear;for file in /etc/valiases/*; do valid_entries=$(grep -v "^#" "$file" | gre
 ########################################################
 
 
+
+########################################################
+"List all Default Address for Email Fail 21")
+echo "Start"
+
+for domain in $(ls /etc/valiases); do config=$(cat /etc/valiases/$domain | tr '\n' ' '); if [[ $config == *":fail:"* ]]; then echo -e "\033[1;32mDomain:\033[0m $domain \033[1;32m| Default Email Option:\033[0m $config"; elif [[ $config == *":blackhole:"* ]]; then echo -e "\033[1;33mDomain:\033[0m $domain \033[1;33m| Default Email Option:\033[0m $config"; elif [[ $config == *"|/"* ]]; then echo -e "\033[1;36mDomain:\033[0m $domain \033[1;36m| Default Email Option:\033[0m $config"; elif [[ $config == *"@"* ]]; then echo -e "\033[1;35mDomain:\033[0m $domain \033[1;35m| Default Email Option:\033[0m $config"; else echo -e "\033[1;31mDomain:\033[0m $domain \033[1;31m| Default Email Option:\033[0m $config"; fi; done | sort -u
+
+;;
+########################################################
+
+
+
+
+########################################################
 
 "Quit")
 break
