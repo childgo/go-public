@@ -22,7 +22,7 @@ options=("Monitor Webmail 2096 Port and Load 1"
 "List All Emails Size Under Domain 16"
 "Enable or Disable Email 2Auth 17"
 "Check and empty Email Log 18"
-
+"List all Emails Filters 19"
 "Quit")
 select opt in "${options[@]}"
 do
@@ -833,8 +833,21 @@ fi
 ########################################################
 
 
+
 ########################################################
-"Option 19")
+"List all Emails Filters 19")
+
+echo "Start"
+for user in $(ls /var/cpanel/users); do echo "Filters for user: $user"; [ -d "/etc/vfilters" ] && for file in /etc/vfilters/*; do echo "Filters for domain $(basename $file):"; cat $file; done; done
+
+
+;;
+########################################################
+
+
+
+########################################################
+"Option 20")
 echo "Done"
 
 
