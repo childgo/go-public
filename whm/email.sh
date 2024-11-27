@@ -838,9 +838,11 @@ fi
 "List all Emails Filters 19")
 
 echo "Start"
-for user in $(ls /var/cpanel/users); do echo "Filters for user: $user"; [ -d "/etc/vfilters" ] && for file in /etc/vfilters/*; do echo "Filters for domain $(basename $file):"; cat $file; done; done
+#lists all accounts with filters
+#for user in $(ls /var/cpanel/users); do echo "Filters for user: $user"; [ -d "/etc/vfilters" ] && for file in /etc/vfilters/*; do echo "Filters for domain $(basename $file):"; cat $file; done; done
 
-
+#one-line command that only lists accounts with filters present
+for file in /etc/vfilters/*; do [ -s "$file" ] && echo "Filters for domain $(basename $file):" && cat "$file"; done
 ;;
 ########################################################
 
