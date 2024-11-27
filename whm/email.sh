@@ -25,6 +25,7 @@ options=("Monitor Webmail 2096 Port and Load 1"
 "List all Emails Filters 19"
 "List all Emails Forwarder 20"
 "List all Default Address for Email Fail 21"
+"Update all Default Address for All Domains 22"
 
 "Quit")
 select opt in "${options[@]}"
@@ -877,6 +878,29 @@ for domain in $(ls /etc/valiases); do config=$(cat /etc/valiases/$domain | tr '\
 
 ;;
 ########################################################
+
+
+
+
+
+
+########################################################
+"Update all Default Address for All Domains 22")
+echo "Start"
+
+cp -r /etc/valiases /etc/valiases_backup
+
+for domain in $(ls /etc/valiases); do echo "*: :fail: No Such User Here" > /etc/valiases/$domain; done
+systemctl restart exim
+
+grep -H '' /etc/valiases/*
+
+;;
+########################################################
+
+
+
+
 
 
 
