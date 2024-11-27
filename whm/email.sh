@@ -844,7 +844,11 @@ echo "Start"
 #for user in $(ls /var/cpanel/users); do echo "Filters for user: $user"; [ -d "/etc/vfilters" ] && for file in /etc/vfilters/*; do echo "Filters for domain $(basename $file):"; cat $file; done; done
 
 #one-line command that only lists accounts with filters present
-for file in /etc/vfilters/*; do [ -s "$file" ] && echo "Filters for domain $(basename $file):" && cat "$file"; done
+#for file in /etc/vfilters/*; do [ -s "$file" ] && echo "Filters for domain $(basename $file):" && cat "$file"; done
+
+clear;for file in /etc/vfilters/*; do [ -s "$file" ] && { echo -e "$(tput setaf 4)\nFilters for domain: $(basename $file)$(tput sgr0)\n$(tput setaf 2)-------------------------$(tput sgr0)"; awk '/^if|then|endif|contains|discard|save/ {printf "\033[1;33mCondition:\033[0m %-50s \033[1;36mAction:\033[0m %s\n", $1, substr($0, index($0, $2))}' "$file"; }; done
+
+
 ;;
 ########################################################
 
@@ -853,7 +857,10 @@ for file in /etc/vfilters/*; do [ -s "$file" ] && echo "Filters for domain $(bas
 ########################################################
 "List all Emails Forwarder 20")
 echo "Start"
-for file in /etc/valiases/*; do [ -s "$file" ] && echo "Forwards for domain $(basename $file):" && grep -v "^#" "$file" | grep -vE "^:blackhole:|^:fail:"; done
+clear;for file in /etc/valiases/*; do [ -s "$file" ] && echo -e "$(tput setaf 4)\nForwards for domain: $(basename $file)$(tput sgr0)\n$(tput setaf 2)-------------------------$(tput sgr0)" && grep -v "^#" "$file" | grep -vE "^:blackhole:|^:fail:" | awk -F: '{printf "\033[1;33mEmail:\033[0m %-30s \033[1;36mForwarded to:\033[0m %s\n", $1, $2}'; done
+
+
+clear;for file in /etc/valiases/*; do valid_entries=$(grep -v "^#" "$file" | grep -vE "^:blackhole:|^:fail:" | awk -F: '$1 !~ /^[*]$/ && $1!="" && $2!=""'); if [[ ! -z "$valid_entries" ]]; then echo -e "$(tput setaf 4)\nForwards for domain: $(basename $file)$(tput sgr0)\n$(tput setaf 2)-------------------------$(tput sgr0)"; echo "$valid_entries" | awk -F: '{printf "\033[1;33mEmail:\033[0m %-30s \033[1;36mForwarded to:\033[0m %s\n", $1, $2}'; fi; done
 
 
 ;;
