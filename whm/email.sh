@@ -23,6 +23,8 @@ options=("Monitor Webmail 2096 Port and Load 1"
 "Enable or Disable Email 2Auth 17"
 "Check and empty Email Log 18"
 "List all Emails Filters 19"
+"List all Emails Forwarder 20"
+
 "Quit")
 select opt in "${options[@]}"
 do
@@ -849,8 +851,9 @@ for file in /etc/vfilters/*; do [ -s "$file" ] && echo "Filters for domain $(bas
 
 
 ########################################################
-"Option 20")
-echo "Done"
+"List all Emails Forwarder 20")
+echo "Start"
+for file in /etc/valiases/*; do [ -s "$file" ] && echo "Forwards for domain $(basename $file):" && grep -v "^#" "$file" | grep -vE "^:blackhole:|^:fail:"; done
 
 
 ;;
