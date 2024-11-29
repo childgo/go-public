@@ -48,10 +48,6 @@ case $group_choice in
         count_files "/home/mowr"
         count_files "/home/industry"
         count_files "/home/idcgov"
-        echo -e "\n\n\n\n"
-        ;;
-    5)
-        echo "User selected Group5_101_62 [00.00.101.62]"
         count_files "/home/mod"
         count_files "/home/mcbpcgov"
         count_files "/home/oecoil"
@@ -76,6 +72,21 @@ case $group_choice in
         count_files "/home/motioil"
         count_files "/home/ismamo"
         count_files "/home/council"
+
+        count_files "/home/council"
+        count_files "/home/council"
+        count_files "/home/council"
+        count_files "/home/council"
+        count_files "/home/council"
+        count_files "/home/council"
+        count_files "/home/council"
+        count_files "/home/council"
+        count_files "/home/council"
+        echo -e "\n\n\n\n"
+        ;;
+    5)
+        echo "User selected Group5_101_62 [00.00.101.62]"
+        count_files "/home/cou3333ncil"
         echo -e "\n\n\n\n"
         ;;
     *)
