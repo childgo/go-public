@@ -73,15 +73,13 @@ case $group_choice in
         count_files "/home/ismamo"
         count_files "/home/council"
 
-        count_files "/home/council"
-        count_files "/home/council"
-        count_files "/home/council"
-        count_files "/home/council"
-        count_files "/home/council"
-        count_files "/home/council"
-        count_files "/home/council"
-        count_files "/home/council"
-        count_files "/home/council"
+        count_files "/home/icts"
+        count_files "/home/nocoil"
+        count_files "/home/kroil"
+        count_files "/home/damanmoh"
+        count_files "/home/scp"
+        count_files "/home/agricult"
+        count_files "/home/phdiq"
         echo -e "\n\n\n\n"
         ;;
     5)
