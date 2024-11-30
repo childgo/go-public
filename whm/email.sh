@@ -201,6 +201,10 @@ exim -bp | awk '/^ *[0-9]+[mhd]/{print "exim -Mrm " $3}' | bash
 #this is new
 exim -bp | awk '/^[0-9]/ {print $3}' | xargs -n 1 exim -Mrm
 
+#this is new
+for id in $(exim -bp | awk '/^[0-9]/ {print $3}'); do exim -Mrm "$id"; done
+
+
 #restart the Exim mail service
 service exim restart
 
