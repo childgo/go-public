@@ -26,6 +26,7 @@ options=("Monitor Webmail 2096 Port and Load 1"
 "List all Emails Forwarder 20"
 "List all Default Address for Email Fail 21"
 "Update all Default Address for All Domains 22"
+"Clean up retry Exim spool files and restart EXIM 23"
 
 "Quit")
 select opt in "${options[@]}"
@@ -904,6 +905,19 @@ grep -H '' /etc/valiases/*
 
 
 
+########################################################
+"Clean up retry Exim spool files and restart EXIM 23")
+echo "Start"
+
+cd /var/spool/exim/db
+rm -f wait-dkim_remote_smtp* retry* wait-remote_smtp*
+service exim restart
+
+echo "Finish"
+
+
+;;
+########################################################
 
 
 
