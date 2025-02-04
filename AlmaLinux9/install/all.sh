@@ -163,6 +163,9 @@ dnf -y install perl tar ipset tcpdump unzip net-tools perl-libwww-perl;sleep 3;
 dnf -y install perl-LWP-Protocol-https perl-GDGraph bind-utils;sleep 3;
 dnf -y install epel-release createrepo;sleep 3;
 dnf -y install bind-utils -y;sleep 3;
+dnf -y install nc -y;sleep 3;
+
+
 
 cd /opt;sleep 3;
 wget https://download.configserver.com/csf.tgz;sleep 3;
