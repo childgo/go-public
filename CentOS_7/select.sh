@@ -1073,10 +1073,9 @@ nginx -t && systemctl restart nginx
 
 
 
-
 ################################################################################################################
 ################################################################################################################
-"AlmaLinux9 Network Tools 33")
+"Free RAM Loop 32")
 while true; do free -m; sleep 3; clear; done
 ;;
 
@@ -1086,12 +1085,66 @@ while true; do free -m; sleep 3; clear; done
 
 
 
-
-
 ################################################################################################################
 ################################################################################################################
-"Free RAM Loop 32")
-while true; do free -m; sleep 3; clear; done
+"AlmaLinux9 Network Tools 33")
+
+
+
+while true; do
+    clear
+    echo "===================================="
+    echo "   Network Management Utility      "
+    echo "===================================="
+    echo "1) Reload Network Connections (nmcli connection reload)"
+    echo "2) Restart Network Manager (systemctl restart NetworkManager)"
+    echo "3) Open Network Manager (nmtui)"
+    echo "4) Test DNS with nslookup (nslookup gmail.com)"
+    echo "5) Test DNS with dig (dig google.com)"
+    echo "6) Test Local DNS Resolution (nslookup google.com @127.0.0.1)"
+    echo "7) Exit"
+    echo "===================================="
+    read -p "Select an option [1-7]: " choice
+
+    case $choice in
+        1)
+            echo "Executing: nmcli connection reload"
+            nmcli connection reload
+            ;;
+        2)
+            echo "Executing: systemctl restart NetworkManager"
+            systemctl restart NetworkManager
+            ;;
+        3)
+            echo "Executing: nmtui"
+            nmtui
+            ;;
+        4)
+            echo "Executing: nslookup gmail.com"
+            nslookup gmail.com
+            ;;
+        5)
+            echo "Executing: dig google.com"
+            dig google.com
+            ;;
+        6)
+            echo "Executing: nslookup google.com @127.0.0.1"
+            nslookup google.com @127.0.0.1
+            ;;
+        7)
+            echo "Exiting... Goodbye!"
+            exit 0
+            ;;
+        *)
+            echo "Invalid selection. Please choose a number between 1-7."
+            ;;
+    esac
+
+    read -p "Press Enter to continue..."
+done
+
+
+
 ;;
 
 ################################################################################################################
