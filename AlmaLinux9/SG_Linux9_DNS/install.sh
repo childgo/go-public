@@ -1,5 +1,7 @@
 #!/bin/bash
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/AlmaLinux9/install/InstallRepo.sh)
 clear
+
 # Define variables
 ALSCO_SecureGateway_DNS_Clusrer_SCRIPT_PATH="/opt/SecureGateway_DNS.py"
 ALSCO_SecureGateway_DNS_Clusrer_RESOLV_CONF="/etc/resolv.conf"
