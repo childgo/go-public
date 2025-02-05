@@ -1,4 +1,4 @@
-#curl -s -o Magic_SG.sh https://raw.githubusercontent.com/childgo/go-public/refs/heads/master/AlmaLinux9/SG_Linux9_DNS/Magic_SG.sh
+#curl -s -o Magic_SG.sh https://raw.githubusercontent.com/childgo/go-public/refs/heads/master/AlmaLinux9/SG_Linux9_DNS/Magic_SG.py
 
 
 
