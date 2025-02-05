@@ -2,6 +2,8 @@
 #bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/refs/heads/master/AlmaLinux9/SG_Linux9_DNS/auto_start.sh)
 clear
 
+#Uninstall
+chattr -i /etc/resolv.conf && systemctl restart NetworkManager
 
 # Define variables
 ALSCO_SecureGateway_DNS_Clusrer_SCRIPT_PATH="/opt/SecureGateway_DNS.py"
