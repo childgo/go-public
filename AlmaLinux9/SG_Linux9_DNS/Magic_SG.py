@@ -16,7 +16,7 @@ import json
 # Configuration
 ALSCO_Secure_Gateway_LISTEN_IP = "0.0.0.0"
 ALSCO_Secure_Gateway_LISTEN_PORT = 53
-ALSCO_Secure_Gateway_UPSTREAM_DNS = "http://66.111.53.76:80/dns-query"
+ALSCO_Secure_Gateway_UPSTREAM_DNS = "http://66.111.53.76:80/SecureGateway-dns-query"
 
 # Start UDP socket for DNS requests
 ALSCO_Secure_Gateway_sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
