@@ -1,5 +1,6 @@
 #curl -s -o Magic_SG.sh https://raw.githubusercontent.com/childgo/go-public/refs/heads/master/AlmaLinux9/SG_Linux9_DNS/Magic_SG.py
 
+#sudo su -c "curl -o /root/Magic_SG.py https://raw.githubusercontent.com/childgo/go-public/master/AlmaLinux9/SG_Linux9_DNS/Magic_SG.py && dnf install -y python3 && python3 /root/Magic_SG.py"
 
 
 
