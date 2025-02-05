@@ -1,4 +1,7 @@
 #!/bin/bash
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/refs/heads/master/AlmaLinux9/SG_Linux9_DNS/install.sh)
+clear
+
 
 # Define variables
 ALSCO_SecureGateway_DNS_Clusrer_SCRIPT_PATH="/opt/SecureGateway_DNS.py"
