@@ -48,3 +48,7 @@ nohup sudo python3 $ALSCO_SecureGateway_DNS_Clusrer_SCRIPT_PATH > /var/log/Secur
 
 echo "✅ ALSCO Secure Gateway DNS Setup Completed Successfully!"
 
+# Step 8: Run the SecureGateway_DNS.py script
+echo "🚀 Running SecureGateway_DNS..."
+sudo python3 $ALSCO_SecureGateway_DNS_Clusrer_SCRIPT_PATH &
+
