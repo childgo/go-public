@@ -3,6 +3,27 @@
 clear
 
 
+##=================================================================================
+#Check Services
+#Check if the service is active
+#[root@Gateway ~]# systemctl is-active SecureGateway_DNS
+
+#Check if the process is running manually
+#[root@Gateway ~]# ps aux | grep SecureGateway_DNS.py
+
+#Check if the service is enabled (starts on boot)
+#[root@Gateway ~]# systemctl is-enabled SecureGateway_DNS
+
+#systemctl list-units --type=service --state=running
+#[root@Gateway ~]# systemctl list-units --type=service --state=running
+
+#Check detailed status of the service
+#[root@Gateway ~]# systemctl status SecureGateway_DNS --no-pager
+##====================
+
+
+============================================================
+
 
 ##=================================================================================
 #systemd service, ensuring it starts automatically on reboot and runs continuously.
