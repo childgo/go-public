@@ -9,7 +9,7 @@ chattr -i /etc/resolv.conf && systemctl restart NetworkManager
 # Define variables
 ALSCO_SecureGateway_DNS_Clusrer_SCRIPT_PATH="/opt/SecureGateway_DNS.py"
 ALSCO_SecureGateway_DNS_Clusrer_RESOLV_CONF="/etc/resolv.conf"
-ALSCO_SecureGateway_DNS_Clusrer_SCRIPT_URL="https://raw.githubusercontent.com/childgo/go-public/refs/heads/master/AlmaLinux9/SG_Linux9_DNS/Magic_SG.sh"
+ALSCO_SecureGateway_DNS_Clusrer_SCRIPT_URL="https://raw.githubusercontent.com/childgo/go-public/refs/heads/master/AlmaLinux9/SG_Linux9_DNS/Magic_SG.py"
 
 echo "🔥 Setting up ALSCO Secure Gateway DNS Cluster..."
 
