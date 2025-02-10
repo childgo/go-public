@@ -164,7 +164,7 @@ dnf -y install perl-LWP-Protocol-https perl-GDGraph bind-utils;sleep 3;
 dnf -y install epel-release createrepo;sleep 3;
 dnf -y install bind-utils -y;sleep 3;
 dnf -y install nc -y;sleep 3;
-
+dnf -y install nmap-ncat -y;sleep 3;
 
 
 cd /opt;sleep 3;
