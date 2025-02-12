@@ -7,6 +7,7 @@
 #--------------------------------------------------------------------------------
 #Start Install
 #--------------------------------------------------------------------------------
+from __future__ import print_function
 
 import socket
 import struct
@@ -14,11 +15,17 @@ import subprocess
 import json
 import sys
 import ipaddress
+import re
 
 
-
-if sys.version_info.major == 3 and hasattr(sys.stdout, "reconfigure"):
-    sys.stdout.reconfigure(encoding='utf-8')
+if sys.version_info.major == 3:
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+    except AttributeError:
+        pass  # Ignore if running on Python <3.7
+elif sys.version_info.major == 2:
+    import codecs
+    sys.stdout = codecs.getwriter('utf-8')(sys.stdout)
 
 
 
@@ -33,39 +40,75 @@ try:
     ALSCO_Secure_Gateway_sock.bind((ALSCO_Secure_Gateway_LISTEN_IP, ALSCO_Secure_Gateway_LISTEN_PORT))
 except OSError as e:
     if "Address already in use" in str(e):
-        print(f"\u26A0 Sorry, you need to close any service using port 53 before running this script.\n")
-        print(f"\u26A0 Error: {e}\n")
+        print(u"\u26A0 Sorry, you need to close any service using port 53 before running this script.\n".format())
+
+        print(u"\u26A0 Error: {}\n".format(e))
+
 
 
         print("To Check, Try: sudo netstat -tulnp | grep :53 , sudo lsof -i :53 , sudo ss -tulnp | grep :53 ")
-        print("For PowerDNS, Try: sudo systemctl stop pdns")
-        print("For PowerDNS, Try: sudo systemctl disable pdns")
+        print("For PowerDNS, Try: sudo systemctl stop pdns.\n".format())
+        print("For PowerDNS, Try: sudo systemctl disable pdns.\n".format())
 
 
-        print("For BindDNS, Try: sudo systemctl stop named")
-        print("For BindDNS, Try: sudo systemctl disable named")
+        print("For BindDNS, Try: sudo systemctl stop named.\n".format())
+        print("For BindDNS, Try: sudo systemctl disable named.\n".format())
 
-        print("For dnsmasqDNS, Try: sudo systemctl stop dnsmasq")
-        print("For dnsmasqDNS, Try: sudo systemctl disable dnsmasq")
+        print("For dnsmasqDNS, Try: sudo systemctl stop dnsmasq.\n".format())
+        print("For dnsmasqDNS, Try: sudo systemctl disable dnsmasq.\n".format())
 
     else:
-        print(f"\n? Error: {e}\n")
+        print(u"\n? Error: {}\n".format(e))
+
     sys.exit(1)
 
-print(f"\U0001F525 Secure Gateway by ALSCO DNS running on {ALSCO_Secure_Gateway_LISTEN_IP}:{ALSCO_Secure_Gateway_LISTEN_PORT}")
+#print(f"\U0001F525 Secure Gateway by ALSCO DNS running on {ALSCO_Secure_Gateway_LISTEN_IP}:{ALSCO_Secure_Gateway_LISTEN_PORT}")
+print(u"\U0001F525 Secure Gateway by ALSCO DNS running on {}:{}".format(ALSCO_Secure_Gateway_LISTEN_IP, ALSCO_Secure_Gateway_LISTEN_PORT))
+
+
+# Function to extract domain name from raw DNS query
+
+
+
+
+
+
 
 # Function to extract domain name from raw DNS query
 def ALSCO_Secure_Gateway_extract_domain(ALSCO_Secure_Gateway_data):
     ALSCO_Secure_Gateway_domain = []
     ALSCO_Secure_Gateway_idx = 12  # DNS query name starts at byte 12
+
+    # Ensure ALSCO_Secure_Gateway_length is an integer in both Python 2 & 3
     ALSCO_Secure_Gateway_length = ALSCO_Secure_Gateway_data[ALSCO_Secure_Gateway_idx]
+    if isinstance(ALSCO_Secure_Gateway_length, str):  # Python 2
+        ALSCO_Secure_Gateway_length = ord(ALSCO_Secure_Gateway_length)
 
     while ALSCO_Secure_Gateway_length:
-        ALSCO_Secure_Gateway_domain.append(ALSCO_Secure_Gateway_data[ALSCO_Secure_Gateway_idx+1:ALSCO_Secure_Gateway_idx+1+ALSCO_Secure_Gateway_length].decode("utf-8"))
+        domain_part = ALSCO_Secure_Gateway_data[ALSCO_Secure_Gateway_idx+1:ALSCO_Secure_Gateway_idx+1+ALSCO_Secure_Gateway_length]
+        
+        # Ensure decoding only in Python 3
+        if isinstance(domain_part, bytes):
+            domain_part = domain_part.decode("utf-8")
+        
+        ALSCO_Secure_Gateway_domain.append(domain_part)
+        
         ALSCO_Secure_Gateway_idx += ALSCO_Secure_Gateway_length + 1
         ALSCO_Secure_Gateway_length = ALSCO_Secure_Gateway_data[ALSCO_Secure_Gateway_idx]
+        if isinstance(ALSCO_Secure_Gateway_length, str):  # Python 2
+            ALSCO_Secure_Gateway_length = ord(ALSCO_Secure_Gateway_length)
 
     return ".".join(ALSCO_Secure_Gateway_domain)
+
+
+
+# Function to validate IPv4 addresses
+def is_valid_ipv4(ip):
+    ipv4_pattern = re.compile(r"^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$")
+    return bool(ipv4_pattern.match(ip))
+
+
+
 
 # Function to build a proper DNS response
 def ALSCO_Secure_Gateway_build_dns_response(ALSCO_Secure_Gateway_query, ALSCO_Secure_Gateway_ip_address):
@@ -83,7 +126,9 @@ def ALSCO_Secure_Gateway_build_dns_response(ALSCO_Secure_Gateway_query, ALSCO_Se
     ALSCO_Secure_Gateway_type_class = struct.pack("!H", 1) + struct.pack("!H", 1)  # Type A, Class IN
     ALSCO_Secure_Gateway_ttl = struct.pack("!I", 300)  # TTL of 300 seconds
     ALSCO_Secure_Gateway_rdlength = struct.pack("!H", 4)  # IPv4 address is 4 bytes
-    ALSCO_Secure_Gateway_rdata = socket.inet_aton(ALSCO_Secure_Gateway_ip_address)  # Convert IP string to bytes
+    #ALSCO_Secure_Gateway_rdata = socket.inet_aton(ALSCO_Secure_Gateway_ip_address)  # Convert IP string to bytes
+    ALSCO_Secure_Gateway_rdata = socket.inet_aton("0.0.0.0" if not is_valid_ipv4(ALSCO_Secure_Gateway_ip_address) else ALSCO_Secure_Gateway_ip_address)
+
 
     ALSCO_Secure_Gateway_response = (
         ALSCO_Secure_Gateway_transaction_id + ALSCO_Secure_Gateway_flags + ALSCO_Secure_Gateway_qdcount +
@@ -98,14 +143,26 @@ while True:
     ALSCO_Secure_Gateway_data, ALSCO_Secure_Gateway_addr = ALSCO_Secure_Gateway_sock.recvfrom(512)  # Receive DNS request
     ALSCO_Secure_Gateway_domain = ALSCO_Secure_Gateway_extract_domain(ALSCO_Secure_Gateway_data)
 
-    print(f"\U0001F50D ALSCO Secure Gateway DNS Query: {ALSCO_Secure_Gateway_domain}")
+    #print(f"\U0001F50D ALSCO Secure Gateway DNS Query: {ALSCO_Secure_Gateway_domain}")
+    print(u"\U0001F50D ALSCO Secure Gateway DNS Query: {}".format(ALSCO_Secure_Gateway_domain))
+
 
     # Forward the query to the upstream DNS server via HTTP
-    ALSCO_Secure_Gateway_response = subprocess.run(
-        ["curl", "-s", f"{ALSCO_Secure_Gateway_UPSTREAM_DNS}?name={ALSCO_Secure_Gateway_domain}&type=A"],
-        capture_output=True,
-        text=True
-    ).stdout
+
+
+    if sys.version_info.major == 3:
+        proc = subprocess.Popen(
+            ["curl", "-s", "{}?name={}&type=A".format(ALSCO_Secure_Gateway_UPSTREAM_DNS, ALSCO_Secure_Gateway_domain)],
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE
+        )
+        ALSCO_Secure_Gateway_response, _ = proc.communicate()
+        ALSCO_Secure_Gateway_response = ALSCO_Secure_Gateway_response.decode('utf-8') if isinstance(ALSCO_Secure_Gateway_response, bytes) else ALSCO_Secure_Gateway_response
+    else:
+        proc = subprocess.Popen(
+            ["curl", "-s", "{}?name={}&type=A".format(ALSCO_Secure_Gateway_UPSTREAM_DNS, ALSCO_Secure_Gateway_domain)],
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE
+        )
+        ALSCO_Secure_Gateway_response, _ = proc.communicate()
 
 
 
@@ -116,28 +173,30 @@ while True:
         
         # Ensure "Answer" key exists and is not empty
 
-#        if "Answer" in ALSCO_Secure_Gateway_dns_data and ALSCO_Secure_Gateway_dns_data["Answer"]:
-#            ALSCO_Secure_Gateway_ip_address = ALSCO_Secure_Gateway_dns_data["Answer"][0]["data"]
-#        else:
-#            ALSCO_Secure_Gateway_ip_address = "0.0.0.0"  # Default to blank response if no valid answer found
-#            print(f"\u26A0 No valid DNS record found for {ALSCO_Secure_Gateway_domain}")
 
 
 
         ALSCO_Secure_Gateway_ip_address = ALSCO_Secure_Gateway_dns_data.get("Answer", [{}])[0].get("data", "0.0.0.0")
         if ALSCO_Secure_Gateway_ip_address == "0.0.0.0":
-            print(f"\u26A0 No valid DNS record found for {ALSCO_Secure_Gateway_domain}")
+            #print(u"\u26A0 No valid DNS record found for {}".format(ALSCO_Secure_Gateway_domain))
+            print(u"\u26A0 No valid DNS record found for {}".format(ALSCO_Secure_Gateway_domain))
+
+
 
 
 
 
     except (json.JSONDecodeError, KeyError, IndexError, ValueError) as e:
         ALSCO_Secure_Gateway_ip_address = "0.0.0.0"
-        print(f"\U0001F6A8 JSON Parsing Error: {e}")
+        #print(f"\U0001F6A8 JSON Parsing Error: {e}")
+        print(u"\U0001F6A8 JSON Parsing Error: {}".format(e))
 
 
 
-    print(f"\u2705 {ALSCO_Secure_Gateway_domain} -> {ALSCO_Secure_Gateway_ip_address}")
+
+    #print(f"\u2705 {ALSCO_Secure_Gateway_domain} -> {ALSCO_Secure_Gateway_ip_address}")
+    print(u"\u2705 {} -> {}".format(ALSCO_Secure_Gateway_domain, ALSCO_Secure_Gateway_ip_address))
+
 
 
 
