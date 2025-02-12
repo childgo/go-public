@@ -12,15 +12,45 @@ import socket
 import struct
 import subprocess
 import json
+import sys
+import ipaddress
+
+
+
+if sys.version_info.major == 3 and hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding='utf-8')
+
+
 
 # Configuration
 ALSCO_Secure_Gateway_LISTEN_IP = "0.0.0.0"
 ALSCO_Secure_Gateway_LISTEN_PORT = 53
-ALSCO_Secure_Gateway_UPSTREAM_DNS = "http://66.111.53.76:80/SecureGateway-dns-query"
+ALSCO_Secure_Gateway_UPSTREAM_DNS = "http://66.111.53.72:80/SecureGateway-dns-query"
 
 # Start UDP socket for DNS requests
-ALSCO_Secure_Gateway_sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-ALSCO_Secure_Gateway_sock.bind((ALSCO_Secure_Gateway_LISTEN_IP, ALSCO_Secure_Gateway_LISTEN_PORT))
+try:
+    ALSCO_Secure_Gateway_sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    ALSCO_Secure_Gateway_sock.bind((ALSCO_Secure_Gateway_LISTEN_IP, ALSCO_Secure_Gateway_LISTEN_PORT))
+except OSError as e:
+    if "Address already in use" in str(e):
+        print(f"\u26A0 Sorry, you need to close any service using port 53 before running this script.\n")
+        print(f"\u26A0 Error: {e}\n")
+
+
+        print("To Check, Try: sudo netstat -tulnp | grep :53 , sudo lsof -i :53 , sudo ss -tulnp | grep :53 ")
+        print("For PowerDNS, Try: sudo systemctl stop pdns")
+        print("For PowerDNS, Try: sudo systemctl disable pdns")
+
+
+        print("For BindDNS, Try: sudo systemctl stop named")
+        print("For BindDNS, Try: sudo systemctl disable named")
+
+        print("For dnsmasqDNS, Try: sudo systemctl stop dnsmasq")
+        print("For dnsmasqDNS, Try: sudo systemctl disable dnsmasq")
+
+    else:
+        print(f"\n? Error: {e}\n")
+    sys.exit(1)
 
 print(f"\U0001F525 Secure Gateway by ALSCO DNS running on {ALSCO_Secure_Gateway_LISTEN_IP}:{ALSCO_Secure_Gateway_LISTEN_PORT}")
 
@@ -77,14 +107,46 @@ while True:
         text=True
     ).stdout
 
+
+
+
     # Parse the JSON response
     try:
         ALSCO_Secure_Gateway_dns_data = json.loads(ALSCO_Secure_Gateway_response)
-        ALSCO_Secure_Gateway_ip_address = ALSCO_Secure_Gateway_dns_data["Answer"][0]["data"]  # Get the first A record
-    except (KeyError, IndexError, json.JSONDecodeError):
-        ALSCO_Secure_Gateway_ip_address = "0.0.0.0"  # Return a blank response if no record found
+        
+        # Ensure "Answer" key exists and is not empty
+
+#        if "Answer" in ALSCO_Secure_Gateway_dns_data and ALSCO_Secure_Gateway_dns_data["Answer"]:
+#            ALSCO_Secure_Gateway_ip_address = ALSCO_Secure_Gateway_dns_data["Answer"][0]["data"]
+#        else:
+#            ALSCO_Secure_Gateway_ip_address = "0.0.0.0"  # Default to blank response if no valid answer found
+#            print(f"\u26A0 No valid DNS record found for {ALSCO_Secure_Gateway_domain}")
+
+
+
+        ALSCO_Secure_Gateway_ip_address = ALSCO_Secure_Gateway_dns_data.get("Answer", [{}])[0].get("data", "0.0.0.0")
+        if ALSCO_Secure_Gateway_ip_address == "0.0.0.0":
+            print(f"\u26A0 No valid DNS record found for {ALSCO_Secure_Gateway_domain}")
+
+
+
+
+    except (json.JSONDecodeError, KeyError, IndexError, ValueError) as e:
+        ALSCO_Secure_Gateway_ip_address = "0.0.0.0"
+        print(f"\U0001F6A8 JSON Parsing Error: {e}")
+
+
 
     print(f"\u2705 {ALSCO_Secure_Gateway_domain} -> {ALSCO_Secure_Gateway_ip_address}")
+
+
+
+
+
+
+
+
+
 
     # Send valid DNS response
     ALSCO_Secure_Gateway_dns_response = ALSCO_Secure_Gateway_build_dns_response(ALSCO_Secure_Gateway_data, ALSCO_Secure_Gateway_ip_address)
