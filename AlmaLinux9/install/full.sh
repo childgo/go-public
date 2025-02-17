@@ -4,6 +4,27 @@
 #bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/refs/heads/master/AlmaLinux9/install/full.sh)
 
 clear
+
+# ANSI color code for green
+GREEN="\e[32m"
+# ANSI color code for reset
+RESET="\e[0m"
+
+# Print the ASCII art in green
+echo -e "${GREEN}"
+cat << "EOF"
+ ____                              ____       _                           
+/ ___|  ___  ___ _   _ _ __ ___   / ___| __ _| |_ _____      ____ _ _   _ 
+\___ \ / _ \/ __| | | | '__/ _ \ | |  _ / _` | __/ _ \ \ /\ / / _` | | | |
+ ___) |  __/ (__| |_| | | |  __/ | |_| | (_| | ||  __/\ V  V / (_| | |_| |
+|____/ \___|\___|\__,_|_|  \___|  \____|\__,_|\__\___| \_/\_/ \__,_|\__, |
+                                                                    |___/ 
+EOF
+echo -e "${RESET}"
+
+
+
+
 PS3='Please enter your choice: '
 
 options=(
