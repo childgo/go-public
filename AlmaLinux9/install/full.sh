@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/AlmaLinux9/install/all.sh)
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/refs/heads/master/AlmaLinux9/install/full.sh)
 
 clear
 PS3='Please enter your choice: '
