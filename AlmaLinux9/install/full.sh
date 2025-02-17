@@ -7,16 +7,17 @@ clear
 PS3='Please enter your choice: '
 
 options=(
-"Install Nginx and Update 1"
-"Install CSF Firewall 2"
-"Install php73 3"
-"Install MySql 4"
-"Install nano and Increase inotify Limits 5"
-"Install GEO_Maxmind 6"
-"Install ModSec and LUA 7"
-"Change Default  HomePage 8"
-"Restart Nginx 9"
-"nginx -t 10"
+"Install ALSCO Repo 1"
+"Install Nginx and Update 2"
+"Install CSF Firewall 3"
+"Install php73 4"
+"Install MySql 5"
+"Install nano and Increase inotify Limits 6"
+"Install GEO_Maxmind 7"
+"Install ModSec and LUA 8"
+"Change Default  HomePage 9"
+"Restart Nginx 10"
+"nginx -t 11"
 
 
 "Quit")
@@ -26,8 +27,26 @@ select opt in "${options[@]}"
 do
 case $opt in
 
+
+
+
+
+
 ########################################################
-"Install Nginx and Update 1")
+"Install ALSCO Repo 1")
+
+echo "nginx -t"
+nginx -t
+
+;;
+########################################################
+
+
+
+
+
+########################################################
+"Install Nginx and Update 2")
 
 clear
 dnf -y update;sleep 3;
@@ -143,7 +162,7 @@ dnf clean all
 
 
 ########################################################
-"Install CSF Firewall 2")
+"Install CSF Firewall 3")
 
 
 
@@ -259,7 +278,7 @@ dnf clean all
 #------End
 ;;
 ########################################################
-"Install php73 3")
+"Install php73 4")
 
 clear
 #------Delete Unwanted .repo Files:
@@ -327,7 +346,7 @@ dnf clean all
 #------End
 ;;
 ########################################################
-"Install MySql 4")
+"Install MySql 5")
 
 
 #------Delete Unwanted .repo Files:
@@ -366,7 +385,7 @@ dnf clean all
 #------End
 ;;
 ########################################################
-"Install nano and Increase inotify Limits 5")
+"Install nano and Increase inotify Limits 6")
 
 #!/bin/bash
 clear
@@ -397,7 +416,7 @@ exit 0
 echo "Done"
 ;;
 ########################################################
-"Install GEO_Maxmind 6")
+"Install GEO_Maxmind 7")
 
 clear
 #------Delete Unwanted .repo Files:
@@ -462,7 +481,7 @@ dnf clean all
 
 
 ########################################################
-"Install ModSec and LUA 7")
+"Install ModSec and LUA 8")
 
 clear
 #------Delete Unwanted .repo Files:
@@ -516,7 +535,7 @@ dnf clean all
 #------End
 ;;
 ########################################################
-"Change Default  HomePage 8")
+"Change Default  HomePage 9")
 
 clear
   
@@ -541,14 +560,14 @@ dnf clean all
 
 ;;
 ########################################################
-"Restart Nginx 9")
+"Restart Nginx 10")
 
 echo "systemctl restart nginx"
 systemctl restart nginx
 
 ;;
 ########################################################
-"nginx -t 10")
+"nginx -t 11")
 
 echo "nginx -t"
 nginx -t
