@@ -227,6 +227,114 @@ service exim restart
 "Report How Many Emails Sent From Server 5")
 clear
 perl <(curl -s https://raw.githubusercontent.com/cPanelTechs/SSE/master/sse.pl) -s
+echo "---------------------------"
+echo "Email Secure Gateway Check"
+
+#yum install jq -y
+#yum install oniguruma -y  # CentOS/RHEL
+
+# Define the Exim log file location
+LOG_FILE="/var/log/exim_mainlog"
+GEO_CITY_DB="/usr/share/GeoIP/GeoLite2-City.mmdb"
+GEO_ASN_DB="/usr/share/GeoIP/GeoLite2-ASN.mmdb"
+GEO_COUNTRY_DB="/usr/share/GeoIP/GeoLite2-Country.mmdb"
+
+# Check if the log file exists
+if [ ! -f "$LOG_FILE" ]; then
+    echo "Error: Exim log file not found at $LOG_FILE"
+    exit 1
+fi
+
+echo "============================================"
+echo "  Exim Email Analysis Report - $(date)  "
+echo "============================================"
+
+# Extract the top 20 IPs sending emails and include geo lookup
+echo -e "\n?? Top 20 IPs sending emails (with Geo Info):"
+echo "----------------------------------------------------------"
+echo -e "Count      IP Address         Country (ISO)    ASN Org"
+
+TOP_IPS=$(awk '/A=dovecot_login|A=local_user|A=mail/ {print $0}' "$LOG_FILE" | \
+    grep -oE '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' | sort | uniq -c | sort -nr | head -20)
+
+while read -r count ip; do
+    if [[ -z "$ip" ]]; then continue; fi
+
+    # Get country name
+    COUNTRY=$(mmdblookup --file "$GEO_CITY_DB" --ip "$ip" country names en | awk -F'"' '{print $2}' | tr '\n' ' ')
+    [[ -z "$COUNTRY" ]] && COUNTRY="Unknown"
+
+    # Get ASN Organization
+    ASN_ORG=$(mmdblookup --file "$GEO_ASN_DB" --ip "$ip" | sed -e ':a;N;$!ba;s/\n/ /g' | sed -e 's/ <[a-z0-9_]\+>/,/g' | sed -e 's/,\s\+}/}/g' | jq '(.autonomous_system_organization)' | sed -e 's/^"//' -e 's/"$//')
+    [[ -z "$ASN_ORG" ]] && ASN_ORG="Unknown"
+
+    # Get ISO Country Code
+    ISO_CODE=$(mmdblookup --file "$GEO_COUNTRY_DB" --ip "$ip" country iso_code | awk -F'"' '{print $2}' | tr '\n' ' ')
+    [[ -z "$ISO_CODE" ]] && ISO_CODE="Unknown"
+
+    printf "%-10s %-18s %-15s %-25s\n" "$count" "$ip" "$COUNTRY ($ISO_CODE)" "$ASN_ORG"
+done <<< "$TOP_IPS"
+
+# Extract the top 10 authenticated email accounts
+echo -e "\n?? Top 10 authenticated email accounts:"
+echo "----------------------------------------"
+grep "A=dovecot_login" "$LOG_FILE" | awk '{for(i=1;i<=NF;i++) if($i ~ /A=dovecot_login:/) print $i}' | awk -F':' '{print $2}' | sort | uniq -c | sort -nr | head -10
+
+# Extract the top 10 recipient email addresses
+echo -e "\n?? Top 10 recipient email addresses:"
+echo "----------------------------------------"
+grep -oP "(?<= for )[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+" "$LOG_FILE" | sort | uniq -c | sort -nr | head -10
+
+# Check for emails sent via PHP scripts (potential abuse)
+echo -e "\n?? PHP mail() abuse check (top 10 directories sending emails):"
+echo "----------------------------------------"
+grep "cwd=" "$LOG_FILE" | grep -v "/var/spool" | awk -F'cwd=' '{print $2}' | awk '{print $1}' | sort | uniq -c | sort -nr | head -10
+
+# Find the most active sending domains
+echo -e "\n?? Top 10 sending domains:"
+echo "----------------------------------------"
+grep -oP "(?<=<= )[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+" "$LOG_FILE" | awk -F '@' '{print $2}' | sort | uniq -c | sort -nr | head -10
+
+# Extract the top 10 email subjects being sent
+echo -e "\n?? Top 10 email subjects:"
+echo "----------------------------------------"
+grep 'T="' "$LOG_FILE" | awk -F 'T="' '{print $2}' | awk -F '"' '{print $1}' | sort | uniq -c | sort -nr | head -10
+
+# Check for spam-like behavior - Large email sizes
+echo -e "\n?? Checking for large email sizes (over 100 KB):"
+echo "----------------------------------------"
+awk '/S=[0-9]{5,}/ {print $0}' "$LOG_FILE" | awk '{print $3, $4, $5, $6, $7, $8, $9, $10}' | head -10
+
+# List IPs attempting to authenticate frequently (brute-force attempts)
+echo -e "\n?? Possible brute-force SMTP authentication attempts:"
+echo "----------------------------------------"
+grep "LOGIN authentication failed" "$LOG_FILE" | awk '{print $(NF-3)}' | sort | uniq -c | sort -nr | head -10
+
+echo -e "\n============================================"
+echo "  End of Exim Email Analysis Report  "
+echo "============================================"
+
+
+# Prompt user to block each top sending IP
+# Prompt user to block each top sending IP
+TOP_IPS=$(awk '/A=dovecot_login|A=local_user|A=mail/ {print $0}' "$LOG_FILE" | \
+    grep -oE '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' | sort | uniq -c | sort -nr | head -5 | awk '{print $2}')
+
+echo -e "\n🔹 **IP Blocking Options**"
+echo "----------------------------------------"
+for ip in $TOP_IPS; do
+    read -p "Do you want to block IP $ip? (yes/no): " block_choice
+    if [[ "$block_choice" == "yes" ]]; then
+        echo "Blocking IP: $ip"
+        csf -d "$ip" "Blocked for excessive email sending"
+    else
+        echo "Skipping IP: $ip"
+    fi
+done
+
+echo "IP blocking process completed."
+echo "---------------------------"
+
 ;;
 ########################################################
 
