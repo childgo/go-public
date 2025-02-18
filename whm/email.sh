@@ -326,7 +326,7 @@ for ip in $TOP_IPS; do
     read -p "Do you want to block IP $ip? (yes/no): " block_choice
     if [[ "$block_choice" == "yes" ]]; then
         echo "Blocking IP: $ip"
-        csf -d "$ip" "Blocked for excessive email sending"
+        csf -d "$ip" "ALSCO-Email Secure Gateway Blocked for excessive email sending"
     else
         echo "Skipping IP: $ip"
     fi
