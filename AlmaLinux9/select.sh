@@ -1,5 +1,4 @@
-
-#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/AlmaLinux9/select.sh)
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/CentOS_7/select.sh)
 
 clear
 PS3='Please enter your choice: '
@@ -27,7 +26,7 @@ options=(
 "clear the contents of ratelimit_tempIP_block 21"
 "check SELinux 22"
 "Generate WeDos IP List for Nginx and csf 23"
-"33333333 24"
+"Check SG Domains Files Counts 24"
 "IP Trace 25"
 "Broadcasting server IP 26"
 "Update GEO-IP Database 27"
@@ -36,7 +35,7 @@ options=(
 "Seucre Gateway Log Parsing  logs 30"
 "Delete all Nginx Logs 31"
 "Free RAM Loop 32"
-
+"AlmaLinux9 Network Tools 33"
 
 
 "Quit")
@@ -99,7 +98,13 @@ clear;while x=0; do clear;date;echo "";echo "[Total Number]";echo "-------------
 "Lock Folder 3")
 echo "chattr -R +i /var/www/html/"
 chattr -R +i /var/www/html/
-chattr -R -i /var/www/html/alscocloud/upload/
+
+echo "chattr -R +i /home/www/html/alscocloud/process/"
+chattr -R +i /home/www/html/alscocloud/process/
+
+echo "chattr -R +i /home/www/html/msg/"
+chattr -R +i /home/www/html/msg/
+
 
 echo ""
 echo "Checking..."
@@ -109,6 +114,14 @@ lsattr /var/www/html/
 "Unlock Folder 4")
 echo "chattr -R -i /var/www/html/"
 chattr -R -i /var/www/html/
+
+#StorageBox
+echo "chattr -R -i /home/www/html/alscocloud/process/"
+chattr -R -i /home/www/html/alscocloud/process/
+
+echo "chattr -R -i /home/www/html/msg/"
+chattr -R -i /home/www/html/msg/
+
 echo ""
 echo "Checking..."
 lsattr /var/www/html/
@@ -117,6 +130,13 @@ lsattr /var/www/html/
 "check Lock 5")
 echo "lsattr /var/www/html/"
 lsattr /var/www/html/
+
+echo "lsattr /home/www/html/msg/"
+lsattr /home/www/html/msg/
+
+echo "lsattr /home/www/html/alscocloud/process/"
+lsattr /home/www/html/alscocloud/process/
+
 ;;
 ########################################################
 "Restart Nginx 6")
@@ -217,6 +237,14 @@ echo -e "\n\n\n"
 echo "service php-fpm restart"
 service php-fpm restart
 
+echo -e "\n\n\n"
+echo -e "php.ini path is in '/etc/php.ini'"
+
+
+
+echo -e "\n\n\n"
+echo -e "php-fpm path is in '/var/log/php-fpm/error.log'"
+
 
 echo -e "\n\n\n"
 session_path="/var/lib/php/session"
@@ -227,6 +255,10 @@ echo -e "\n\n\n"
 echo "Verify that the change was successful. ...."
 grep -r "session.cookie_httponly" /etc/php.ini
 grep -r "session.cookie_samesite" /etc/php.ini
+grep -r "memory_limit" /etc/php.ini
+grep -r "post_max_size" /etc/php.ini
+grep -r "upload_max_filesize" /etc/php.ini
+
 echo -e "\n\n\n"
 
 ;;
@@ -268,6 +300,12 @@ echo "----------------------------------------"
 echo "free -m -h"
 free -m -h
 printf '\n\n\n'
+
+echo "----------------------------------------"
+echo "Check inode"
+df -i
+echo "----------------------------------------"
+
 
 ;;
 ########################################################
@@ -596,8 +634,54 @@ echo "----------------------------------------"
 
 ;;
 ########################################################
-"Grepping Error_Log logs for IP 24")
+"Check SG Domains Files Counts 24")
 echo ""
+clear
+
+# Paths
+conf_path="/etc/nginx/conf.d/"
+folder_path="/etc/nginx/conf.d/alsco_data_cookie_and_ip/"
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m' # No Color
+
+# Get list of domain names from conf files
+conf_files=$(ls $conf_path | grep ".conf$" | grep -vE "^(0-setting.conf|default.conf|php-fpm.conf)$")
+domain_names_from_files=()
+full_file_names=()
+for file in $conf_files; do
+  domain=$(echo $file | sed -e 's/^[0-9]*-//' -e 's/.conf$//')
+  domain_names_from_files+=("$domain")
+  full_file_names+=("$file")
+done
+
+# Get list of domain names from folders, excluding 'ALSCO-Setting'
+domain_names_from_folders=($(ls -d $folder_path*/ | grep -v "ALSCO-Setting" | sed -e "s|$folder_path||" -e 's|/||'))
+
+# Print total domains
+echo -e "${GREEN}Total domains from files in $conf_path: ${#domain_names_from_files[@]}${NC}"
+echo ""
+echo -e "${GREEN}Total domains from folders in $folder_path: ${#domain_names_from_folders[@]}${NC}"
+
+# Find domains that exist in folders but not in files
+echo -e "${RED}Domains in folders but not in files:${NC}"
+for folder_domain in "${domain_names_from_folders[@]}"; do
+  if [[ ! " ${domain_names_from_files[@]} " =~ " ${folder_domain} " ]]; then
+    echo -e "${RED}$folder_domain${NC}"
+  fi
+done
+
+# Find domains that exist in files but not in folders
+echo -e "${RED}Domains in files but not in folders:${NC}"
+for index in "${!domain_names_from_files[@]}"; do
+  if [[ ! " ${domain_names_from_folders[@]} " =~ " ${domain_names_from_files[$index]} " ]]; then
+    echo -e "${RED}${full_file_names[$index]}${NC}"
+  fi
+done
+
+
 
 ;;
 ########################################################
@@ -995,11 +1079,78 @@ nginx -t && systemctl restart nginx
 
 
 
-
 ################################################################################################################
 ################################################################################################################
 "Free RAM Loop 32")
 while true; do free -m; sleep 3; clear; done
+;;
+
+################################################################################################################
+################################################################################################################
+
+
+
+
+################################################################################################################
+################################################################################################################
+"AlmaLinux9 Network Tools 33")
+
+
+
+while true; do
+    clear
+    echo "===================================="
+    echo "   Network Management Utility      "
+    echo "===================================="
+    echo "1) Reload Network Connections (nmcli connection reload)"
+    echo "2) Restart Network Manager (systemctl restart NetworkManager)"
+    echo "3) Open Network Manager (nmtui)"
+    echo "4) Test DNS with nslookup (nslookup gmail.com)"
+    echo "5) Test DNS with dig (dig google.com)"
+    echo "6) Test Local DNS Resolution (nslookup google.com @127.0.0.1)"
+    echo "7) Exit"
+    echo "===================================="
+    read -p "Select an option [1-7]: " choice
+
+    case $choice in
+        1)
+            echo "Executing: nmcli connection reload"
+            nmcli connection reload
+            ;;
+        2)
+            echo "Executing: systemctl restart NetworkManager"
+            systemctl restart NetworkManager
+            ;;
+        3)
+            echo "Executing: nmtui"
+            nmtui
+            ;;
+        4)
+            echo "Executing: nslookup gmail.com"
+            nslookup gmail.com
+            ;;
+        5)
+            echo "Executing: dig google.com"
+            dig google.com
+            ;;
+        6)
+            echo "Executing: nslookup google.com @127.0.0.1"
+            nslookup google.com @127.0.0.1
+            ;;
+        7)
+            echo "Exiting... Goodbye!"
+            exit 0
+            ;;
+        *)
+            echo "Invalid selection. Please choose a number between 1-7."
+            ;;
+    esac
+
+    read -p "Press Enter to continue..."
+done
+
+
+
 ;;
 
 ################################################################################################################
