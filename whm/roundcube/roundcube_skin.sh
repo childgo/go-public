@@ -68,6 +68,8 @@ sed -i "/\$config\['skins_allowed'\]/d" $filepath
 #Add New config['skins_allowed']
 sed -i "/\$config = \[\];/a \$config\['skins_allowed'\] = \['elastic'\];" $filepath
 
+#Set identities_level to [3] to prevent add more identities to emaails
+sed -i "s/\$config\['identities_level'\].*/\$config['identities_level'] = 3;/" /usr/local/cpanel/base/3rdparty/roundcube/config/config.inc.php
 
 
 
