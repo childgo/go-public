@@ -1,5 +1,5 @@
 #!/bin/bash
-#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/master/Install_Auth.sh)
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/refs/heads/master/itpc.sh)
 #curl -L ims.bobcares.com/key2 | bash
 
 
