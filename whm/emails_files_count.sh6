@@ -130,7 +130,7 @@ case $group_choice in
                /home/phdiq)
         ;;
     5)
-        echo "User selected Group5_101_62 [00.00.101.62]"
+        echo "User selected Group5_101_62 [00.00.53.47]"
         users=(/home/motgov)
         ;;
     *)
