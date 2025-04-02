@@ -78,7 +78,7 @@ case $group_choice in
         echo "User selected Group1_53_62 [00.00.53.62]"
         users=(/home/soc
                /home/gcans
-               /home/icaagov
+               /home/icaagov)
         ;;
     2)
         echo "User selected Group2_53_63 [00.00.53.63]"
@@ -90,7 +90,7 @@ case $group_choice in
         echo "User selected Group3_53_16 [00.00.53.16]"
         users=(/home/emailmoelc
                /home/moi
-               /home/resmoelc
+               /home/resmoelc)
               )
         ;;
     4)
@@ -139,7 +139,7 @@ case $group_choice in
                /home/scrtiin
                /home/sgcoil
                /home/tocoil
-               /home/trafficmoi
+               /home/trafficmoi)
         ;;
     5)
         echo "User selected Group5_101_62 [00.00.53.47]"
