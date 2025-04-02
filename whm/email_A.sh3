@@ -27,7 +27,7 @@ count_files() {
 count_user_internal_dirs() {
     echo -e "\n${CYAN}Now counting www, etc, mail folders inside user homes:${NC}"
 
-    subdirs=("www" "etc" "mail")
+    subdirs=("public_html" "etc" "mail")
 
     for user_dir in "$@"; do
         if [ ! -d "$user_dir" ]; then
