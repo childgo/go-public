@@ -140,9 +140,9 @@ case $group_choice in
 esac
 
 # Count files in base home folders
-for user in "${users[@]}"; do
-    count_files "$user"
-done
+#for user in "${users[@]}"; do
+    #count_files "$user"
+#done
 
 # Count files in www, etc, mail
 count_user_internal_dirs "${users[@]}"
