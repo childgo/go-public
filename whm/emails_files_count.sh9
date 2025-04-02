@@ -1,6 +1,11 @@
 #!/bin/bash
 #bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/refs/heads/master/whm/emails_files_count.sh)
 
+
+#Lists all cPanel account home paths
+#awk -F: '$3 >= 1000 && $1 != "nobody" { print "/home/" $1 }' /etc/passwd | sort | awk '{ print; count++ } END { print "\nTotal accounts: " count }'
+
+
 clear
 
 # Color codes
@@ -74,7 +79,6 @@ case $group_choice in
         users=(/home/soc
                /home/gcans
                /home/icaagov
-               /home/motgov)
         ;;
     2)
         echo "User selected Group2_53_63 [00.00.53.63]"
@@ -91,43 +95,51 @@ case $group_choice in
         ;;
     4)
         echo "User selected Group4_52.29 [00.00.52.29]"
-        users=(/home/mohgov
-               /home/tocoil
-               /home/nrcoil
-               /home/mowr
-               /home/industry
-               /home/idcgov
-               /home/mod
-               /home/mcbpcgov
-               /home/oecoil
-               /home/ifargov
+        users=(/home/agricult
                /home/bsroti
-               /home/oilprdc
-               /home/nanepedu
-               /home/heesco
-               /home/mrcoil
-               /home/research
-               /home/fbsamail
-               /home/sgcoil
-               /home/ngcoil
-               /home/mdocoil
-               /home/gfcoil
-               /home/opdcoil
-               /home/iotcoil
-               /home/rafidain
-               /home/otibaiji
-               /home/opcoil
-               /home/kotioil
-               /home/motioil
-               /home/ismamo
                /home/council
-               /home/icts
-               /home/nocoil
-               /home/kroil
+               /home/cust0mzm
                /home/damanmoh
+               /home/fbsamail
+               /home/gcpi
+               /home/gfcoil
+               /home/heesco
+               /home/icts
+               /home/idcgov
+               /home/ifargov
+               /home/industry
+               /home/iotcoil
+               /home/ismamo
+               /home/ismamot
+               /home/kotioil
+               /home/kroil
+               /home/mcbpcgov
+               /home/mdocoil
+               /home/mocoil
+               /home/mod
+               /home/mohgov
+               /home/motioil
+               /home/mowr
+               /home/mrcoil
+               /home/najafmoh
+               /home/nanepedu
+               /home/ngcoil
+               /home/nocoil
+               /home/nrcoil
+               /home/oecoil
+               /home/officesupport
+               /home/oilprdc
+               /home/opcoil
+               /home/opdcoil
+               /home/otibaiji
+               /home/phdiq
+               /home/planmoh
+               /home/research
                /home/scp
-               /home/agricult
-               /home/phdiq)
+               /home/scrtiin
+               /home/sgcoil
+               /home/tocoil
+               /home/trafficmoi
         ;;
     5)
         echo "User selected Group5_101_62 [00.00.53.47]"
