@@ -65,17 +65,22 @@ echo "1) Group1_53_62"
 echo "2) Group2_53_63"
 echo "3) Group3_53_16"
 echo "4) Group4_52.29"
-echo "5) Group5_101_62"
+echo "5) Group5_53.47"
 read -p "Enter your choice (1/2/3/4/5): " group_choice
 
 case $group_choice in
     1)
         echo "User selected Group1_53_62 [00.00.53.62]"
-        users=(/home/soc /home/gcans /home/icaagov /home/motgov)
+        users=(/home/soc
+               /home/gcans
+               /home/icaagov
+               /home/motgov)
         ;;
     2)
         echo "User selected Group2_53_63 [00.00.53.63]"
-        users=(/home/iraqair /home/oilgov /home/iqpost)
+        users=(/home/iraqair
+               /home/oilgov
+               /home/iqpost)
         ;;
     3)
         echo "User selected Group3_53_16 [00.00.53.16]"
@@ -86,11 +91,47 @@ case $group_choice in
         ;;
     4)
         echo "User selected Group4_52.29 [00.00.52.29]"
-        users=(/home/mohgov /home/tocoil /home/nrcoil /home/mowr /home/industry /home/idcgov /home/mod /home/mcbpcgov /home/oecoil /home/ifargov /home/bsroti /home/oilprdc /home/nanepedu /home/heesco /home/mrcoil /home/research /home/fbsamail /home/sgcoil /home/ngcoil /home/mdocoil /home/gfcoil /home/opdcoil /home/iotcoil /home/rafidain /home/otibaiji /home/opcoil /home/kotioil /home/motioil /home/ismamo /home/council /home/icts /home/nocoil /home/kroil /home/damanmoh /home/scp /home/agricult /home/phdiq)
+        users=(/home/mohgov
+               /home/tocoil
+               /home/nrcoil
+               /home/mowr
+               /home/industry
+               /home/idcgov
+               /home/mod
+               /home/mcbpcgov
+               /home/oecoil
+               /home/ifargov
+               /home/bsroti
+               /home/oilprdc
+               /home/nanepedu
+               /home/heesco
+               /home/mrcoil
+               /home/research
+               /home/fbsamail
+               /home/sgcoil
+               /home/ngcoil
+               /home/mdocoil
+               /home/gfcoil
+               /home/opdcoil
+               /home/iotcoil
+               /home/rafidain
+               /home/otibaiji
+               /home/opcoil
+               /home/kotioil
+               /home/motioil
+               /home/ismamo
+               /home/council
+               /home/icts
+               /home/nocoil
+               /home/kroil
+               /home/damanmoh
+               /home/scp
+               /home/agricult
+               /home/phdiq)
         ;;
     5)
         echo "User selected Group5_101_62 [00.00.101.62]"
-        users=(/home/cou3333ncil)
+        users=(/home/motgov)
         ;;
     *)
         echo "Invalid choice. Exiting."
