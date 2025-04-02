@@ -79,7 +79,10 @@ case $group_choice in
         ;;
     3)
         echo "User selected Group3_53_16 [00.00.53.16]"
-        users=(/home/emailmoelc /home/moi /home/resmoelc)
+        users=(/home/emailmoelc
+               /home/moi
+               /home/resmoelc
+              )
         ;;
     4)
         echo "User selected Group4_52.29 [00.00.52.29]"
