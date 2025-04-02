@@ -23,29 +23,41 @@ count_files() {
 }
 
 # Count files in www, etc, mail inside user dirs
+# Count www, etc, mail inside user dirs and group by user
 count_user_internal_dirs() {
     echo -e "\n${CYAN}Now counting www, etc, mail folders inside user homes:${NC}"
 
     subdirs=("www" "etc" "mail")
-    total=0
 
     for user_dir in "$@"; do
+        if [ ! -d "$user_dir" ]; then
+            echo -e "${RED}User dir $user_dir not found. Skipping.${NC}"
+            continue
+        fi
+
+        username=$(basename "$user_dir")
+        domain="${username}.gov.iq"  # adjust this logic if domain differs per user
+
+        echo -e "\n${CYAN}User: $username | Domain: $domain${NC}"
+
+        user_total=0
         for sub in "${subdirs[@]}"; do
             full_path="$user_dir/$sub"
             if [ -d "$full_path" ]; then
                 count=$(find "$full_path" -type f 2>/dev/null | wc -l)
-                total=$((total + count))
+                user_total=$((user_total + count))
                 formatted=$(format_number "$count")
                 echo -e "${YELLOW}Files in $full_path:${NC} ${GREEN}$formatted${NC}"
             else
                 echo -e "${RED}Directory $full_path does not exist.${NC}"
             fi
         done
-    done
 
-    formatted_total=$(format_number "$total")
-    echo -e "\n${CYAN}Total files in all user www, etc, mail folders:${NC} ${GREEN}$formatted_total${NC}\n"
+        formatted_total=$(format_number "$user_total")
+        echo -e "${CYAN}Total is:${NC} ${GREEN}$formatted_total${NC}"
+    done
 }
+
 
 # Prompt user for group selection
 echo "Select a group to print file counts for:"
