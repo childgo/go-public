@@ -91,7 +91,7 @@ case $group_choice in
         users=(/home/emailmoelc
                /home/moi
                /home/resmoelc)
-              )
+              
         ;;
     4)
         echo "User selected Group4_52.29 [00.00.52.29]"
