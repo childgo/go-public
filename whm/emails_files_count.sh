@@ -6,6 +6,7 @@
 #awk -F: '$3 >= 1000 && $1 != "nobody" { print "/home/" $1 }' /etc/passwd | sort | awk '{ print; count++ } END { print "\nTotal accounts: " count }'
 
 
+
 clear
 
 # Color codes
