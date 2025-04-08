@@ -36,6 +36,7 @@ options=(
 "Delete all Nginx Logs 31"
 "Free RAM Loop 32"
 "AlmaLinux9 Network Tools 33"
+"Change Root Password 34"
 
 
 "Quit")
@@ -1152,6 +1153,22 @@ done
 
 
 ;;
+
+
+
+
+"Change Root Password 34")
+echo "Command to be executed: sudo passwd root"
+read -p "Do you want to change the root password? (yes/no): " answer
+
+if [[ "$answer" =~ ^[Yy][Ee]?[Ss]?$ ]]; then
+    echo "Changing root password..."
+    sudo passwd root
+else
+    echo "Password change skipped."
+fi
+;;
+
 
 ################################################################################################################
 ################################################################################################################
