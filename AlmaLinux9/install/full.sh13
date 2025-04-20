@@ -723,7 +723,7 @@ nginx -t
 
 
 ########################################################
-"What should I check to ensure everything is working properly? 12"
+"What should I check to ensure everything is working properly? 12")
 
 clear
 echo -e "\e[32m✅ Secure Gateway® Post-Installation Checklist\e[0m"
