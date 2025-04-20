@@ -19,7 +19,7 @@ options=(
 "disk space used and available 14"
 "Cookie List 15"
 "Inotify and Enable SELinux + PHP + Apache to write/access php 16"
-"check Nginx version 17"
+"check Linux and Nginx version 17"
 "Check ALSCO IP Firewall Setting 18"
 "CSF Firewall Setting 19"
 "Check Rate Limit  Excess 20"
@@ -443,7 +443,7 @@ echo "================"
 pgrep -x "inotify.alsco"
 ;;
 ########################################################
-"check Nginx version 17")
+"check Linux and Nginx version 17")
 
 echo "============================================="
 echo "Check Linux Verstion  [cat /etc/almalinux-release]"
