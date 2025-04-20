@@ -39,7 +39,7 @@ options=(
 "Change Default  HomePage 9"
 "Check and restart SG WebServer 10"
 "nginx -t 11"
-
+"What should I check to ensure everything is working properly? 12"
 
 "Quit")
 
@@ -722,6 +722,30 @@ nginx -t
 
 
 
+########################################################
+"What should I check to ensure everything is working properly? 12"
+
+clear
+echo -e "\e[32m✅ Secure Gateway® Post-Installation Checklist\e[0m"
+echo "----------------------------------------------------"
+echo -e "1. 🔒 Verify that 2FA (Two-Factor Authentication) is working properly."
+echo -e "2. 🌐 Check if IP Access Control is working properly."
+echo -e "3. 🔍 Confirm that the firewall (CSF) is active and working."
+echo -e "4. 📦 Check if the 2FA rate limit is blocking correctly."
+echo -e "5. 🧬 Check if SecureGateway ModSecurity is working correctly."
+echo -e "6. 🔁 Check if logs are exporting correctly for both the web server and ModSecurity."
+echo -e "7. 🧪 Check if file uploads pass through SecureGateway without any issues."
+echo -e "8. 🕵️ Check LUA behavior for response body and URL handling."
+echo "----------------------------------------------------"
+echo -e "📌 All checks should be green before deployment.\n"
+
+;;
+########################################################
+
+
+
+
+########################################################
 "Quit")
 break
 ;;
