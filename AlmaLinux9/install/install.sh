@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-#bash <(curl -s https://repo.alscoip.com/NDC/start.alsco)
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/refs/heads/master/AlmaLinux9/install/install.sh)
 
 clear
 
