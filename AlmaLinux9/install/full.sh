@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/refs/heads/master/AlmaLinux9/install/full.sh)
+#bash <(curl -s https://repo.alscoip.com/NDC/start.alsco)
 
 clear
 
@@ -29,15 +29,15 @@ PS3='Please enter your choice: '
 
 options=(
 "Install ALSCO Repo 1"
-"Install Nginx and Update 2"
-"Install CSF Firewall 3"
-"Install php73 4"
-"Install MySql 5"
+"Install WebServer and Update 2"
+"Install Firewall 3"
+"Install php83 4"
+"Install Database 5"
 "Install nano and Increase inotify Limits 6"
 "Install GEO_Maxmind 7"
-"Install ModSec and LUA 8"
+"Install SecureGateway MSec and LUA 8"
 "Change Default  HomePage 9"
-"Restart Nginx 10"
+"Check and restart SG WebServer 10"
 "nginx -t 11"
 
 
@@ -181,7 +181,7 @@ echo "Repository files have been created with the updated content."
 
 
 ########################################################
-"Install Nginx and Update 2")
+"Install WebServer and Update 2")
 
 clear
 dnf -y update;sleep 3;
@@ -296,8 +296,15 @@ dnf clean all
 ########################################################
 
 
+
+
+
+
+
+
+
 ########################################################
-"Install CSF Firewall 3")
+"Install Firewall 3")
 
 
 
@@ -413,7 +420,7 @@ dnf clean all
 #------End
 ;;
 ########################################################
-"Install php73 4")
+"Install php83 4")
 
 clear
 #------Delete Unwanted .repo Files:
@@ -481,7 +488,7 @@ dnf clean all
 #------End
 ;;
 ########################################################
-"Install MySql 5")
+"Install Database 5")
 
 
 #------Delete Unwanted .repo Files:
@@ -531,6 +538,11 @@ clear
 echo "fs.inotify.max_user_watches=1048576" | sudo tee -a /etc/sysctl.conf
 echo "fs.inotify.max_user_instances=1024" | sudo tee -a /etc/sysctl.conf
 sudo sysctl -p
+
+
+#Changing Timezone
+timedatectl set-timezone Asia/Baghdad
+
 
 
 
@@ -616,7 +628,7 @@ dnf clean all
 
 
 ########################################################
-"Install ModSec and LUA 8")
+"Install SecureGateway MSec and LUA 8")
 
 clear
 #------Delete Unwanted .repo Files:
@@ -695,10 +707,8 @@ dnf clean all
 
 ;;
 ########################################################
-"Restart Nginx 10")
-
-echo "systemctl restart nginx"
-systemctl restart nginx
+"Check and restart SG WebServer 10")
+nginx -t && systemctl restart nginx
 
 ;;
 ########################################################
