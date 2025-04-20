@@ -444,7 +444,20 @@ pgrep -x "inotify.alsco"
 ;;
 ########################################################
 "check Nginx version 17")
-echo "nginx -v"
+
+echo "============================================="
+echo "Check Linux Verstion  [cat /etc/almalinux-release]"
+cat /etc/almalinux-release
+echo "============================================="
+
+echo ""
+echo "============================================="
+echo "View system info (like OS, kernel, architecture): [hostnamectl]"
+hostnamectl
+echo ""
+echo "============================================="
+
+echo "View Nginx info [nginx -v]"
 nginx -v
 echo ""
 echo "============================================="
