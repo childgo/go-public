@@ -28,19 +28,17 @@ echo -e "${RESET}"
 PS3='Please enter your choice: '
 
 options=(
-"Install ALSCO Repo 1"
-"Install WebServer and Update 2"
-"Install Firewall 3"
-"Install php83 4"
-"Install Database 5"
-"Install nano and Increase inotify Limits 6"
-"Install GEO_Maxmind 7"
-"Install SecureGateway MSec and LUA 8"
-"Change Default  HomePage 9"
-"Check and restart SG WebServer 10"
-"nginx -t 11"
-"What should I check to ensure everything is working properly? 12"
-
+"Install [ALSCO Repo] 1"
+"Install [WebServer and Update] 2"
+"Install [Firewall] 3"
+"Install [php83] 4"
+"Install [Database] 5"
+"Install [nano and Increase inotify Limits] 6"
+"Install GEO_Maxmind] 7"
+"Install [SecureGateway MSec and LUA] 8"
+"Change [Default HomePage] 9"
+"Check [syntax and restart SG WebServer] 10"
+"What [should I check to ensure everything is working properly?] 11"
 "Quit")
 
 
@@ -54,7 +52,7 @@ case $opt in
 
 
 ########################################################
-"Install ALSCO Repo 1")
+"Install [ALSCO Repo] 1")
 
 cat <<EOF > /etc/yum.repos.d/ALSCO_SecureGateway_AlmaLinux9.repo
 # Content from ALSCO_SecureGateway_AlmaLinux9.repo
@@ -181,7 +179,7 @@ echo "Repository files have been created with the updated content."
 
 
 ########################################################
-"Install WebServer and Update 2")
+"Install [WebServer and Update] 2")
 
 clear
 dnf -y update;sleep 3;
@@ -304,7 +302,7 @@ dnf clean all
 
 
 ########################################################
-"Install Firewall 3")
+"Install [Firewall] 3")
 
 
 
@@ -420,7 +418,7 @@ dnf clean all
 #------End
 ;;
 ########################################################
-"Install php83 4")
+"Install [php83] 4")
 
 clear
 #------Delete Unwanted .repo Files:
@@ -488,7 +486,7 @@ dnf clean all
 #------End
 ;;
 ########################################################
-"Install Database 5")
+"Install [Database] 5")
 
 
 #------Delete Unwanted .repo Files:
@@ -527,7 +525,7 @@ dnf clean all
 #------End
 ;;
 ########################################################
-"Install nano and Increase inotify Limits 6")
+"Install [nano and Increase inotify Limits] 6")
 
 #!/bin/bash
 clear
@@ -565,7 +563,7 @@ exit 0
 echo "Done"
 ;;
 ########################################################
-"Install GEO_Maxmind 7")
+"Install GEO_Maxmind] 7")
 
 clear
 #------Delete Unwanted .repo Files:
@@ -630,7 +628,7 @@ dnf clean all
 
 
 ########################################################
-"Install SecureGateway MSec and LUA 8")
+"Install [SecureGateway MSec and LUA] 8")
 
 clear
 #------Delete Unwanted .repo Files:
@@ -684,7 +682,7 @@ dnf clean all
 #------End
 ;;
 ########################################################
-"Change Default  HomePage 9")
+"Change [Default HomePage] 9")
 
 clear
   
@@ -709,23 +707,15 @@ dnf clean all
 
 ;;
 ########################################################
-"Check and restart SG WebServer 10")
+"Check [syntax and restart SG WebServer] 10")
 nginx -t && systemctl restart nginx
 
 ;;
 ########################################################
-"nginx -t 11")
-
-echo "nginx -t"
-nginx -t
-
-;;
-########################################################
-
 
 
 ########################################################
-"What should I check to ensure everything is working properly? 12")
+"What [should I check to ensure everything is working properly?] 11")
 
 clear
 echo -e "\e[32m✅ Secure Gateway® Post-Installation Checklist\e[0m"
