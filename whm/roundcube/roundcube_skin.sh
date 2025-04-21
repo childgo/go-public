@@ -189,7 +189,20 @@ footer_new_content=$(cat <<'END'
 <script src="/deps/bootstrap.bundle.min.js"></script>
 <script src="/ui.js"></script>
 
-<br><br><p><div style="position: fixed; z-index: 1000; width: 150px; height: 65px; bottom: 5px; right: 2px;"><img class="img-responsive" alt="Secure Gateway" src="/images/securegateway_seal.svg" width="150" height="66" /></div></p><br><br><p><div style="position: fixed; z-index: 1000; width: 150px; height: 65px; bottom: 5px; right: 2px;"><img class="img-responsive" alt="Secure Gateway" src="/images/securegateway_seal.svg" width="150" height="66" /></div></p><br><br><p><div style="position: fixed; z-index: 1000; width: 150px; height: 65px; bottom: 5px; right: 2px;"><img class="img-responsive" alt="Secure Gateway" src="/images/securegateway_seal.svg" width="150" height="66" /></div></p></body>
+
+
+<br><br><br>
+<style>
+@media (max-width: 768px) {
+  #securegateway-seal {
+    display: none !important;
+  }
+}
+</style>
+<div id="securegateway-seal" style="position: fixed; z-index: 1000; width: 150px; height: 65px; bottom: 5px; right: 2px;">
+  <img class="img-responsive" alt="Secure Gateway" src="/images/securegateway_seal.svg" width="150" height="66" />
+</div>
+</body>
 </html>
 END
 )
