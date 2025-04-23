@@ -35,7 +35,7 @@ options=("Total IP connected to Server 1"
 "Fix Quotas 33"
 "Change Email Password 34"
 "Find cPanel User for Domain 35"
-"Mysqltuner Monitor Performance 36"
+"MySqltuner Monitor Performance 36"
 "Option 37"
 "Quit")
 select opt in "${options[@]}"
@@ -414,10 +414,12 @@ echo "User are:  $result_user"
 
 
 ########################################################
-"Mysqltuner Monitor Performance 36")
-echo "test"
+"MySqltuner Monitor Performance 36")
+echo "yum install perl -y"
+echo "curl -sL https://raw.githubusercontent.com/major/MySQLTuner-perl/master/mysqltuner.pl | perl"
+echo ""
 
-yum install perl -y
+#yum install perl -y
 curl -sL https://raw.githubusercontent.com/major/MySQLTuner-perl/master/mysqltuner.pl | perl
 ;;
 ########################################################
