@@ -1192,6 +1192,9 @@ fi
 "Clear All SSH History 35")
 echo "Clearing all SSH and bash history..."
 
+history -c && > ~/.bash_history && unset HISTFILE && export HISTSIZE=0 && export HISTFILESIZE=0 && find /root /home -name ".bash_history" -exec rm -f {} \;
+
+
 # Check root permission
 if [ "$EUID" -ne 0 ]; then
   echo "❌ Please run this script as root."
