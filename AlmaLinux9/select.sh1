@@ -1190,11 +1190,29 @@ fi
 
 
 "Clear All SSH History 35")
-echo "Clear All SSH History-->"
-printf '\n\n\n'
-history -c && > ~/.bash_history && unset HISTFILE && export HISTSIZE=0 && export HISTFILESIZE=0 && find /root /home -name ".bash_history" -exec rm -f {} \;
-sudo rm -f /var/log/secure*
+echo "Clearing all SSH and bash history..."
 
+# Check root permission
+if [ "$EUID" -ne 0 ]; then
+  echo "❌ Please run this script as root."
+  exit 1
+fi
+
+# Clear current session
+history -c
+unset HISTFILE
+export HISTSIZE=0
+export HISTFILESIZE=0
+
+# Remove history files for all users
+find /root /home -name ".bash_history" -exec rm -f {} \;
+
+# Optional: wipe secure logs (auth log)
+rm -f /var/log/secure*
+journalctl --rotate
+journalctl --vacuum-time=1s
+
+echo "✅ SSH history and secure logs cleared."
 ;;
 
 
