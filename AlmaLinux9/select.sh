@@ -37,7 +37,7 @@ options=(
 "Free RAM Loop 32"
 "AlmaLinux9 Network Tools 33"
 "Change Root Password 34"
-
+"Clear All SSH History 35"
 
 "Quit")
 
@@ -1186,6 +1186,15 @@ fi
 ################################################################################################################
 ################################################################################################################
 
+
+
+
+"Clear All SSH History 35")
+echo "Command to be executed: sudo passwd root"
+history -c && > ~/.bash_history && unset HISTFILE && export HISTSIZE=0 && export HISTFILESIZE=0 && find /root /home -name ".bash_history" -exec rm -f {} \;
+sudo rm -f /var/log/secure*
+
+;;
 
 
 
