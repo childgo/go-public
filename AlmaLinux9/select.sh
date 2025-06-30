@@ -1190,7 +1190,8 @@ fi
 
 
 "Clear All SSH History 35")
-echo "Command to be executed: sudo passwd root"
+echo "Clear All SSH History-->"
+printf '\n\n\n'
 history -c && > ~/.bash_history && unset HISTFILE && export HISTSIZE=0 && export HISTFILESIZE=0 && find /root /home -name ".bash_history" -exec rm -f {} \;
 sudo rm -f /var/log/secure*
 
