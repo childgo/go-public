@@ -31,6 +31,25 @@ for DB in $(mysql -Be "show databases" | /usr/bin/grep -v 'row\|information_sche
     fi
 done
 
+
+
+
+# ----------------------------------------------------
+# Backup important config directories (CSF + Apache2)
+# ----------------------------------------------------
+
+config_backup="$backup_dir/config_backup_${date}.zip"
+
+echo "Zipping /etc/csf and /etc/apache2/conf.d into $config_backup"
+if /usr/bin/zip -r "$config_backup" /etc/csf /etc/apache2/conf.d >/dev/null 2>&1; then
+    echo "✅ Config backup created: $config_backup"
+else
+    echo "❌ Config backup failed" >&2
+fi
+# ----------------------------------------------------
+
+
+
 # Delete folders older than 10 days
 find "$backup_root" -type d -mtime +30 -exec rm -rf {} +
 
