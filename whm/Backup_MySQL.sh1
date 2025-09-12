@@ -38,11 +38,12 @@ done
 # Backup important config directories (CSF + Apache2)
 # ----------------------------------------------------
 
+# Config backups (CSF + Apache conf.d + /alscospider)
 config_backup="$backup_dir/config_backup_${date}.zip"
 
-echo "Zipping /etc/csf and /etc/apache2/conf.d into $config_backup"
-if /usr/bin/zip -r "$config_backup" /etc/csf /etc/apache2/conf.d >/dev/null 2>&1; then
-    echo "✅ Config backup created: $config_backup"
+echo "Zipping /etc/csf, /etc/apache2/conf.d, and /alscospider into $config_backup"
+if /usr/bin/zip -r "$config_backup" /etc/csf /etc/apache2/conf.d /alscospider >/dev/null 2>&1; then
+    echo "✅ Config backup created."
 else
     echo "❌ Config backup failed" >&2
 fi
