@@ -13,10 +13,12 @@ clear
 #Start Unlocking Files...
 chattr -i /usr/local/cpanel/base/3rdparty/roundcube/config/config.inc.php
 chattr -i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/templates/includes/footer.html
+chattr -i /usr/local/cpanel/base/3rdparty/roundcube/skins/larry/includes/footer.html
 chattr -i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/templates/about.html
 chattr -i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/images/securegateway_seal.svg
 chattr -i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/images/logo.svg
 chattr -i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/images/favicon.ico
+
 
 #storageBox
 chattr -i /usr/local/cpanel/base/3rdparty/roundcube/skins/elastic/templates/compose.html
