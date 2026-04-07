@@ -19,12 +19,19 @@ declare -A ETRADE_BOTS=(
     [3]="Etrade_PLTR|Etrade|PLTR|PLTR"
     [4]="Etrade_QQQ|Etrade|QQQ|QQQ"
     [5]="Etrade_MSFT|Etrade|MSFT|MSFT"
+    [6]="Etrade_AMD|Etrade|AMD|AMD"
+
 )
 
 # ── Alpaca bots ──────────────────────────────
 declare -A ALPACA_BOTS=(
     [1]="Alpaca_SPY|Alpaca|SPY|SPY"
     [2]="Alpaca_QQQ|Alpaca|QQQ|QQQ"
+    [3]="Alpaca_NVDA|Alpaca|NVDA|NVDA"
+    [4]="Alpaca_MSFT|Alpaca|MSFT|MSFT"
+    [5]="Alpaca_PLTR|Alpaca|PLTR|PLTR"
+    [6]="Alpaca_AMD|Alpaca|AMD|AMD"
+
 )
 
 SCRIPT="/home/alscolive/public_html/python/trigger_allPY/Bot.py"
@@ -105,7 +112,7 @@ menu_etrade() {
         read -p "  Choose: " choice
 
         case $choice in
-            [1-5])
+            [1-6])
                 entry="${ETRADE_BOTS[$choice]}"
                 if [ -n "$entry" ]; then
                     start_bot "$entry"
@@ -151,7 +158,7 @@ menu_alpaca() {
         read -p "  Choose: " choice
 
         case $choice in
-            [1-2])
+            [1-6])
                 entry="${ALPACA_BOTS[$choice]}"
                 if [ -n "$entry" ]; then
                     start_bot "$entry"
@@ -194,7 +201,7 @@ menu_kill_etrade() {
     read -p "  Choose: " choice
 
     case $choice in
-        [1-5])
+        [1-6])
             entry="${ETRADE_BOTS[$choice]}"
             if [ -n "$entry" ]; then
                 name=$(echo $entry | cut -d'|' -f1)
@@ -228,7 +235,7 @@ menu_kill_alpaca() {
     read -p "  Choose: " choice
 
     case $choice in
-        [1-2])
+        [1-6])
             entry="${ALPACA_BOTS[$choice]}"
             if [ -n "$entry" ]; then
                 name=$(echo $entry | cut -d'|' -f1)
