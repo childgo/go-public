@@ -600,6 +600,11 @@ menu_cheatsheet() {
     echo -e "  ${GREEN}clear;python3 /home/alscolive/public_html/python/trigger_allPY/Alpaca_Executing_Buy_Sell.py NVDA 1 0.01${NC}"
     echo ""
 
+
+    echo -e "${CYAN}${BOLD}  # MarketPower${NC}"
+    echo -e "  ${GREEN}clear;python3 /home/alscolive/public_html/python/MarketPower/MarketPower.py${NC}"
+    echo ""
+
     echo "  ──────────────────────────────────────"
     read -p "  Press Enter to go back..."
 }
