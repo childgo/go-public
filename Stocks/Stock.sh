@@ -262,12 +262,20 @@ menu_kill_all() {
 
     ALL_NAMES=()
     idx=1
+
+    # ── Etrade Bots ──────────────────────────
+    echo -e "  ${CYAN}${BOLD}  📈  ETRADE BOTS${NC}"
     for key in $(echo "${!ETRADE_BOTS[@]}" | tr ' ' '\n' | sort -n); do
         name=$(echo "${ETRADE_BOTS[$key]}" | cut -d'|' -f1)
         ALL_NAMES+=("$name")
         echo -e "  ${BOLD}[$idx]${NC} $name  $(status_icon $name)"
         ((idx++))
     done
+
+    echo ""
+
+    # ── Alpaca Bots ──────────────────────────
+    echo -e "  ${CYAN}${BOLD}  🦙  ALPACA BOTS${NC}"
     for key in $(echo "${!ALPACA_BOTS[@]}" | tr ' ' '\n' | sort -n); do
         name=$(echo "${ALPACA_BOTS[$key]}" | cut -d'|' -f1)
         ALL_NAMES+=("$name")
