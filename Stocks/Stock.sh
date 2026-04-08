@@ -607,6 +607,71 @@ menu_cheatsheet() {
 
 
 
+
+# ─────────────────────────────────────────────
+#  menu_marketpower
+# ─────────────────────────────────────────────
+menu_marketpower() {
+    print_header
+    echo -e "${BOLD}  ⚡  MARKET POWER${NC}"
+    echo "  ──────────────────────────────────────"
+    echo ""
+    SCRIPT_MP="/home/alscolive/public_html/python/MarketPower/MarketPower.py"
+
+    if pgrep -f "MarketPower.py" > /dev/null; then
+        echo -e "  Status: ${GREEN}[RUNNING]${NC}"
+    else
+        echo -e "  Status: ${RED}[STOPPED]${NC}"
+    fi
+
+    echo ""
+    echo -e "  ${BOLD}[1]${NC} ▶  Start MarketPower"
+    echo -e "  ${BOLD}[2]${NC} 🔴  Stop MarketPower"
+    echo -e "  ${BOLD}[0]${NC} Back to main menu"
+    echo ""
+    read -p "  Choose: " choice
+
+    case $choice in
+        1)
+            if pgrep -f "MarketPower.py" > /dev/null; then
+                echo -e "${YELLOW}⚠  MarketPower is already running!${NC}"
+            else
+                screen -dmS MarketPower bash -c "clear; python3 $SCRIPT_MP"
+                sleep 0.5
+                if pgrep -f "MarketPower.py" > /dev/null; then
+                    echo -e "${GREEN}✔  MarketPower started successfully!${NC}"
+                else
+                    echo -e "${RED}✘  Failed to start MarketPower.${NC}"
+                fi
+            fi
+            read -p "  Press Enter to continue..."
+            menu_marketpower
+            ;;
+        2)
+            if pgrep -f "MarketPower.py" > /dev/null; then
+                screen -S MarketPower -X quit 2>/dev/null
+                pkill -f "MarketPower.py" 2>/dev/null
+                sleep 0.3
+                echo -e "${RED}✘  MarketPower stopped.${NC}"
+            else
+                echo -e "${YELLOW}⚠  MarketPower is not running.${NC}"
+            fi
+            read -p "  Press Enter to continue..."
+            menu_marketpower
+            ;;
+        0) return ;;
+        *)
+            echo -e "${RED}  Invalid option.${NC}"
+            sleep 1
+            menu_marketpower
+            ;;
+    esac
+}
+
+#─────────────────────────────────────────────
+
+
+
 # ─────────────────────────────────────────────
 #  MAIN MENU
 # ─────────────────────────────────────────────
@@ -619,6 +684,7 @@ while true; do
     echo -e "  ${BOLD}[5]${NC} 💻  Server_Resources"
     echo -e "  ${BOLD}[6]${NC} 🔄  Restart_Services"
     echo -e "  ${BOLD}[7]${NC} 📋  Cheatsheet"
+    echo -e "  ${BOLD}[8]${NC} ⚡  Market_Power"
     echo -e "  ${BOLD}[0]${NC} 🚪  Exit"
     echo ""
     read -p "  Choose: " main_choice
@@ -631,6 +697,7 @@ while true; do
         5) menu_resources ;;
         6) menu_restart ;;
         7) menu_cheatsheet ;;
+        8) menu_marketpower ;;
         0)
             echo -e "${CYAN}  Bye!${NC}"
             exit 0
