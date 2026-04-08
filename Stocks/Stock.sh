@@ -534,6 +534,79 @@ menu_restart() {
     done
 }
 
+
+
+
+
+
+
+# ─────────────────────────────────────────────
+# ─────────────────────────────────────────────
+#  cheatsheet
+# ─────────────────────────────────────────────
+menu_cheatsheet() {
+    print_header
+    echo -e "${BOLD}  📋  QUICK REFERENCE / CHEATSHEET${NC}"
+    echo "  ──────────────────────────────────────"
+
+    echo -e "${CYAN}${BOLD}  # Verify Sessions${NC}"
+    echo -e "  ${GREEN}clear;screen -ls${NC}"
+    echo -e "  ${GREEN}clear;ps aux | grep python${NC}"
+    echo -e "  ${GREEN}ps aux | grep python${NC}"
+    echo ""
+
+    echo -e "${CYAN}${BOLD}  # Open / Re-open a Screen${NC}"
+    echo -e "  ${GREEN}screen -S SPY -dm python3 /home/alscolive/public_html/python/trigger_allPY/SPY.py${NC}"
+    echo -e "  ${GREEN}screen -r NVDA${NC}"
+    echo ""
+
+    echo -e "${CYAN}${BOLD}  # Screen Keyboard Shortcuts${NC}"
+    echo -e "  ${CYAN}Ctrl+A  then  D${NC}   → To detach (bot keeps running):"
+    echo -e "  ${YELLOW}    Step 1:${NC} Hold Ctrl + press A, release everything"
+    echo -e "  ${YELLOW}    Step 2:${NC} Press D alone"
+    echo ""
+    echo -e "  ${CYAN}Ctrl+A  then  K${NC}   → To kill session from inside:"
+    echo -e "  ${YELLOW}    Step 1:${NC} Hold Ctrl + press A, release everything"
+    echo -e "  ${YELLOW}    Step 2:${NC} Press K alone, then press Y to confirm"
+    echo ""
+
+    echo -e "${CYAN}${BOLD}  # Kill All Screens${NC}"
+    echo -e "  ${GREEN}pkill screen${NC}"
+    echo ""
+
+    echo -e "${CYAN}${BOLD}  # Etrade (direct, no screen)${NC}"
+    echo -e "  ${GREEN}clear;python3 $SCRIPT Broker[Etrade] Monitor[NVDA] Buy[NVDA]${NC}"
+    echo -e "  ${GREEN}clear;python3 $SCRIPT Broker[Etrade] Monitor[NVDA,AMD] Buy[NVDA,AMD]${NC}"
+    echo ""
+
+    echo -e "${CYAN}${BOLD}  # Alpaca (direct, no screen)${NC}"
+    echo -e "  ${GREEN}clear;python3 $SCRIPT Broker[Alpaca] Monitor[NVDA] Buy[NVDA]${NC}"
+    echo -e "  ${GREEN}clear;python3 $SCRIPT Broker[Alpaca] Monitor[NVDA,AMD] Buy[NVDA,AMD]${NC}"
+    echo ""
+
+    echo -e "${CYAN}${BOLD}  # Open One Screen (Etrade example)${NC}"
+    echo -e "  ${GREEN}screen -dmS Etrade_NVDA bash -c 'clear; python3 $SCRIPT Broker[Etrade] Monitor[NVDA] Buy[NVDA]'${NC}"
+    echo ""
+
+    echo -e "${CYAN}${BOLD}  # Check Telegram Notification${NC}"
+    echo -e "  ${GREEN}python3 /home/alscolive/public_html/python/trigger_allPY/Telegram_Notificatin_Live.py NVDA 5 0.03 \"Simulator\" \"134.50 | 134.52 | 134.55\" \"134.40 | 134.42 | 134.44 | 134.46 | 134.48 | 134.50 | 134.52\" \"+65.0%\" \"2025-05-28\" '\$134.80' '\$133.90' \"+1.25%\"${NC}"
+    echo ""
+
+    echo -e "${CYAN}${BOLD}  # Etrade Execute Buy/Sell${NC}"
+    echo -e "  ${GREEN}clear;python3 /home/alscolive/public_html/python/trigger_allPY/Etrade_Executing_Buy_Sell.py NVDA 1 0.01${NC}"
+    echo ""
+
+    echo -e "${CYAN}${BOLD}  # Alpaca Execute Buy/Sell${NC}"
+    echo -e "  ${GREEN}clear;python3 /home/alscolive/public_html/python/trigger_allPY/Alpaca_Executing_Buy_Sell.py NVDA 1 0.01${NC}"
+    echo ""
+
+    echo "  ──────────────────────────────────────"
+    read -p "  Press Enter to go back..."
+}
+# ─────────────────────────────────────────────
+
+
+
 # ─────────────────────────────────────────────
 #  MAIN MENU
 # ─────────────────────────────────────────────
@@ -545,6 +618,7 @@ while true; do
     echo -e "  ${BOLD}[4]${NC} 🔗  Attach_Screen"
     echo -e "  ${BOLD}[5]${NC} 💻  Server_Resources"
     echo -e "  ${BOLD}[6]${NC} 🔄  Restart_Services"
+    echo -e "  ${BOLD}[7]${NC} 📋  Cheatsheet"
     echo -e "  ${BOLD}[0]${NC} 🚪  Exit"
     echo ""
     read -p "  Choose: " main_choice
@@ -556,6 +630,7 @@ while true; do
         4) menu_attach ;;
         5) menu_resources ;;
         6) menu_restart ;;
+        7) menu_cheatsheet ;;
         0)
             echo -e "${CYAN}  Bye!${NC}"
             exit 0
