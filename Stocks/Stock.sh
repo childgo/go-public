@@ -630,8 +630,9 @@ menu_marketpower() {
     fi
 
     echo ""
-    echo -e "  ${BOLD}[1]${NC} ▶  Start MarketPower"
+    echo -e "  ${BOLD}[1]${NC} ▶  Start MarketPower (background screen)"
     echo -e "  ${BOLD}[2]${NC} 🔴  Stop MarketPower"
+    echo -e "  ${BOLD}[3]${NC} 🖥️  Run directly in this terminal"
     echo -e "  ${BOLD}[0]${NC} Back to main menu"
     echo ""
     read -p "  Choose: " choice
@@ -664,6 +665,18 @@ menu_marketpower() {
             read -p "  Press Enter to continue..."
             menu_marketpower
             ;;
+        3)
+            echo ""
+            echo -e "  ${YELLOW}▶ Running:${NC} ${CYAN}python3 $SCRIPT_MP${NC}"
+            echo -e "  ${YELLOW}  Press Ctrl+C to stop and return to menu${NC}"
+            echo ""
+            sleep 1
+            clear
+            python3 $SCRIPT_MP
+            echo ""
+            read -p "  MarketPower ended. Press Enter to continue..."
+            menu_marketpower
+            ;;
         0) return ;;
         *)
             echo -e "${RED}  Invalid option.${NC}"
@@ -672,8 +685,85 @@ menu_marketpower() {
             ;;
     esac
 }
-
 #─────────────────────────────────────────────
+
+
+
+# ─────────────────────────────────────────────
+#  menu_simulation
+# ─────────────────────────────────────────────
+# ─────────────────────────────────────────────
+menu_simulation() {
+    print_header
+    echo -e "${BOLD}  🧪  SIMULATION - REAL DATA${NC}"
+    echo "  ──────────────────────────────────────"
+    echo ""
+    SCRIPT_SIM="/home/alscolive/public_html/python/simulation_RealData.py"
+
+    if pgrep -f "simulation_RealData.py" > /dev/null; then
+        echo -e "  Status: ${GREEN}[RUNNING]${NC}"
+    else
+        echo -e "  Status: ${RED}[STOPPED]${NC}"
+    fi
+
+    echo ""
+    echo -e "  ${BOLD}[1]${NC} ▶  Start Simulation (background screen)"
+    echo -e "  ${BOLD}[2]${NC} 🔴  Stop Simulation"
+    echo -e "  ${BOLD}[3]${NC} 🖥️  Run directly in this terminal"
+    echo -e "  ${BOLD}[0]${NC} Back to main menu"
+    echo ""
+    read -p "  Choose: " choice
+
+    case $choice in
+        1)
+            if pgrep -f "simulation_RealData.py" > /dev/null; then
+                echo -e "${YELLOW}⚠  Simulation is already running!${NC}"
+            else
+                screen -dmS Simulation bash -c "clear; python3 $SCRIPT_SIM"
+                sleep 0.5
+                if pgrep -f "simulation_RealData.py" > /dev/null; then
+                    echo -e "${GREEN}✔  Simulation started successfully!${NC}"
+                else
+                    echo -e "${RED}✘  Failed to start Simulation.${NC}"
+                fi
+            fi
+            read -p "  Press Enter to continue..."
+            menu_simulation
+            ;;
+        2)
+            if pgrep -f "simulation_RealData.py" > /dev/null; then
+                screen -S Simulation -X quit 2>/dev/null
+                pkill -f "simulation_RealData.py" 2>/dev/null
+                sleep 0.3
+                echo -e "${RED}✘  Simulation stopped.${NC}"
+            else
+                echo -e "${YELLOW}⚠  Simulation is not running.${NC}"
+            fi
+            read -p "  Press Enter to continue..."
+            menu_simulation
+            ;;
+        3)
+            echo ""
+            echo -e "  ${YELLOW}▶ Running:${NC} ${CYAN}python3 $SCRIPT_SIM${NC}"
+            echo -e "  ${YELLOW}  Press Ctrl+C to stop and return to menu${NC}"
+            echo ""
+            sleep 1
+            clear
+            python3 $SCRIPT_SIM
+            echo ""
+            read -p "  Simulation ended. Press Enter to continue..."
+            menu_simulation
+            ;;
+        0) return ;;
+        *)
+            echo -e "${RED}  Invalid option.${NC}"
+            sleep 1
+            menu_simulation
+            ;;
+    esac
+}
+#─────────────────────────────────────────────#─────────────────────────────────────────────
+
 
 
 
@@ -690,6 +780,7 @@ while true; do
     echo -e "  ${BOLD}[6]${NC} 🔄  Restart_Services"
     echo -e "  ${BOLD}[7]${NC} 📋  Cheatsheet"
     echo -e "  ${BOLD}[8]${NC} ⚡  Market_Power"
+    echo -e "  ${BOLD}[9]${NC} 🧪  Data Simulation"
     echo -e "  ${BOLD}[0]${NC} 🚪  Exit"
     echo ""
     read -p "  Choose: " main_choice
@@ -703,6 +794,7 @@ while true; do
         6) menu_restart ;;
         7) menu_cheatsheet ;;
         8) menu_marketpower ;;
+        9) menu_simulation ;;
         0)
             echo -e "${CYAN}  Bye!${NC}"
             exit 0
