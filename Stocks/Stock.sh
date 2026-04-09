@@ -780,8 +780,9 @@ menu_simulation() {
     echo "  ──────────────────────────────────────"
     echo ""
     SCRIPT_SIM="/home/alscolive/public_html/python/simulation_RealData.py"
+    SIM_NAME="Simulation"
 
-    if pgrep -f "simulation_RealData.py" > /dev/null; then
+    if screen -list | grep -q "$SIM_NAME"; then
         echo -e "  Status: ${GREEN}[RUNNING]${NC}"
     else
         echo -e "  Status: ${RED}[STOPPED]${NC}"
@@ -797,12 +798,12 @@ menu_simulation() {
 
     case $choice in
         1)
-            if pgrep -f "simulation_RealData.py" > /dev/null; then
+            if screen -list | grep -q "$SIM_NAME"; then
                 echo -e "${YELLOW}⚠  Simulation is already running!${NC}"
             else
-                screen -dmS Simulation bash -c "clear; python3 $SCRIPT_SIM"
+                screen -dmS "$SIM_NAME" bash -c "clear; python3 $SCRIPT_SIM AutoSelectDB_No"
                 sleep 0.5
-                if pgrep -f "simulation_RealData.py" > /dev/null; then
+                if screen -list | grep -q "$SIM_NAME"; then
                     echo -e "${GREEN}✔  Simulation started successfully!${NC}"
                 else
                     echo -e "${RED}✘  Failed to start Simulation.${NC}"
@@ -812,9 +813,8 @@ menu_simulation() {
             menu_simulation
             ;;
         2)
-            if pgrep -f "simulation_RealData.py" > /dev/null; then
-                screen -S Simulation -X quit 2>/dev/null
-                pkill -f "simulation_RealData.py" 2>/dev/null
+            if screen -list | grep -q "$SIM_NAME"; then
+                screen -S "$SIM_NAME" -X quit 2>/dev/null
                 sleep 0.3
                 echo -e "${RED}✘  Simulation stopped.${NC}"
             else
@@ -825,12 +825,12 @@ menu_simulation() {
             ;;
         3)
             echo ""
-            echo -e "  ${YELLOW}▶ Running:${NC} ${CYAN}python3 $SCRIPT_SIM${NC}"
+            echo -e "  ${YELLOW}▶ Running:${NC} ${CYAN}python3 $SCRIPT_SIM AutoSelectDB_Yes${NC}"
             echo -e "  ${YELLOW}  Press Ctrl+C to stop and return to menu${NC}"
             echo ""
             sleep 1
             clear
-            python3 $SCRIPT_SIM
+            python3 $SCRIPT_SIM AutoSelectDB_Yes
             echo ""
             read -p "  Simulation ended. Press Enter to continue..."
             menu_simulation
@@ -843,6 +843,7 @@ menu_simulation() {
             ;;
     esac
 }
+
 #─────────────────────────────────────────────#─────────────────────────────────────────────
 
 
