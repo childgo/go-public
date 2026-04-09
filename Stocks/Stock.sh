@@ -284,7 +284,9 @@ menu_kill_all() {
     done
 
     echo ""
-    echo -e "  ${BOLD}[A]${NC} Kill ALL bots"
+    echo -e "  ${BOLD}[E]${NC} 📈  Kill ALL Etrade bots"
+    echo -e "  ${BOLD}[P]${NC} 🦙  Kill ALL Alpaca bots"
+    echo -e "  ${BOLD}[A]${NC} 💀  Kill ALL bots"
     echo -e "  ${BOLD}[0]${NC} Back to main menu"
     echo ""
     read -p "  Choose: " choice
@@ -294,11 +296,30 @@ menu_kill_all() {
             kill_bot "$name"
         done
         read -p "  Press Enter to continue..."
+
+    elif [[ "$choice" == "E" || "$choice" == "e" ]]; then
+        echo -e "${CYAN}  Killing all Etrade bots...${NC}"
+        for key in $(echo "${!ETRADE_BOTS[@]}" | tr ' ' '\n' | sort -n); do
+            name=$(echo "${ETRADE_BOTS[$key]}" | cut -d'|' -f1)
+            kill_bot "$name"
+        done
+        read -p "  Press Enter to continue..."
+
+    elif [[ "$choice" == "P" || "$choice" == "p" ]]; then
+        echo -e "${CYAN}  Killing all Alpaca bots...${NC}"
+        for key in $(echo "${!ALPACA_BOTS[@]}" | tr ' ' '\n' | sort -n); do
+            name=$(echo "${ALPACA_BOTS[$key]}" | cut -d'|' -f1)
+            kill_bot "$name"
+        done
+        read -p "  Press Enter to continue..."
+
     elif [[ "$choice" =~ ^[0-9]+$ ]] && [ "$choice" -ge 1 ] && [ "$choice" -lt "$idx" ]; then
         kill_bot "${ALL_NAMES[$((choice-1))]}"
         read -p "  Press Enter to continue..."
+
     elif [[ "$choice" == "0" ]]; then
         return
+
     else
         echo -e "${RED}  Invalid option.${NC}"
         sleep 1
