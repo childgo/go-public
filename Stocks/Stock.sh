@@ -322,12 +322,7 @@ menu_attach() {
     echo -e "  ${CYAN}    Step 1:${NC} Hold Ctrl + press A, release everything"
     echo -e "  ${CYAN}    Step 2:${NC} Press K alone, then press Y to confirm"
     echo "  ──────────────────────────────────────"
-    echo -e "  ${BOLD}📋 Active screen sessions:${NC}"
-    screen -ls | grep -E '\.' | while read line; do
-        echo -e "  ${CYAN}  $line${NC}"
-    done
-    echo "  ──────────────────────────────────────"
-    echo ""
+
 
     mapfile -t SESSIONS < <(screen -ls | grep -oP '\d+\.\S+' | sed 's/^[0-9]*\.//')
 
@@ -338,13 +333,71 @@ menu_attach() {
         return
     fi
 
-    local idx=1
+    # ── Separate into groups ──────────────────
+    ETRADE_SESSIONS=()
+    ALPACA_SESSIONS=()
+    OTHER_SESSIONS=()
+
     for session in "${SESSIONS[@]}"; do
-        echo -e "  ${BOLD}[$idx]${NC} $session  ${GREEN}[RUNNING]${NC}"
-        ((idx++))
+        if [[ "$session" == Etrade_* ]]; then
+            ETRADE_SESSIONS+=("$session")
+        elif [[ "$session" == Alpaca_* ]]; then
+            ALPACA_SESSIONS+=("$session")
+        else
+            OTHER_SESSIONS+=("$session")
+        fi
     done
 
-    echo ""
+    # ── Build numbered list ───────────────────
+    ALL_ORDERED=()
+    local idx=1
+
+    if [ ${#ETRADE_SESSIONS[@]} -gt 0 ]; then
+        echo -e "  ${CYAN}${BOLD}  📈  ETRADE BOTS${NC}"
+        for session in "${ETRADE_SESSIONS[@]}"; do
+            ALL_ORDERED+=("$session")
+            STATUS=$(screen -ls | grep "$session" | grep -oP '(Attached|Detached)')
+            [ "$STATUS" = "Attached" ] && ST_COLOR=$GREEN || ST_COLOR=$YELLOW
+            PID=$(screen -ls | grep "$session" | grep -oP '^\s*\K[0-9]+')
+            echo -e "  ${BOLD}[$idx]${NC} $session  ${GREEN}[RUNNING]${NC}  ${ST_COLOR}($STATUS)${NC}  ${CYAN}pid:$PID${NC}"
+
+            ((idx++))
+        done
+        echo ""
+    fi
+
+    if [ ${#ALPACA_SESSIONS[@]} -gt 0 ]; then
+        echo -e "  ${CYAN}${BOLD}  🦙  ALPACA BOTS${NC}"
+        for session in "${ALPACA_SESSIONS[@]}"; do
+            ALL_ORDERED+=("$session")
+            STATUS=$(screen -ls | grep "$session" | grep -oP '(Attached|Detached)')
+            [ "$STATUS" = "Attached" ] && ST_COLOR=$GREEN || ST_COLOR=$YELLOW
+            PID=$(screen -ls | grep "$session" | grep -oP '^\s*\K[0-9]+')
+            echo -e "  ${BOLD}[$idx]${NC} $session  ${GREEN}[RUNNING]${NC}  ${ST_COLOR}($STATUS)${NC}  ${CYAN}pid:$PID${NC}"
+
+            ((idx++))
+        done
+        echo ""
+    fi
+
+    if [ ${#OTHER_SESSIONS[@]} -gt 0 ]; then
+        echo -e "  ${CYAN}${BOLD}  ⚙️  OTHER${NC}"
+        for session in "${OTHER_SESSIONS[@]}"; do
+            ALL_ORDERED+=("$session")
+            STATUS=$(screen -ls | grep "$session" | grep -oP '(Attached|Detached)')
+            [ "$STATUS" = "Attached" ] && ST_COLOR=$GREEN || ST_COLOR=$YELLOW
+            PID=$(screen -ls | grep "$session" | grep -oP '^\s*\K[0-9]+')
+            echo -e "  ${BOLD}[$idx]${NC} $session  ${GREEN}[RUNNING]${NC}  ${ST_COLOR}($STATUS)${NC}  ${CYAN}pid:$PID${NC}"
+
+            ((idx++))
+        done
+        echo ""
+    fi
+
+
+
+
+
     echo -e "  ${BOLD}[0]${NC} Back to main menu"
     echo ""
     read -p "  Choose: " choice
@@ -352,21 +405,20 @@ menu_attach() {
     if [[ "$choice" == "0" ]]; then
         return
     elif [[ "$choice" =~ ^[0-9]+$ ]] && [ "$choice" -ge 1 ] && [ "$choice" -lt "$idx" ]; then
-        local selected="${SESSIONS[$((choice-1))]}"
+        local selected="${ALL_ORDERED[$((choice-1))]}"
         echo ""
-        echo -e "  ${YELLOW}▶ Running:${NC} ${CYAN}screen -r $selected${NC}"
+        echo -e "  ${YELLOW}▶ Running:${NC} ${CYAN}screen -x $selected${NC}"
         echo ""
         echo -e "  ${YELLOW}  To detach (bot keeps running):${NC}"
         echo -e "  ${CYAN}    Step 1:${NC} Hold Ctrl + press A, release everything"
         echo -e "  ${CYAN}    Step 2:${NC} Press D alone"
         sleep 2
-        screen -r "$selected"
+        screen -x "$selected"
     else
         echo -e "${RED}  Invalid option.${NC}"
         sleep 1
     fi
 }
-
 # ─────────────────────────────────────────────
 menu_resources() {
     print_header
