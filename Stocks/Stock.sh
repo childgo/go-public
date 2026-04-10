@@ -624,73 +624,102 @@ menu_restart() {
 # ─────────────────────────────────────────────
 # ─────────────────────────────────────────────
 #  cheatsheet
-# ─────────────────────────────────────────────
 menu_cheatsheet() {
-    print_header
-    echo -e "${BOLD}  📋  QUICK REFERENCE / CHEATSHEET${NC}"
-    echo "  ──────────────────────────────────────"
+    while true; do
+        print_header
+        echo -e "${BOLD}  📋  QUICK REFERENCE / CHEATSHEET${NC}"
+        echo "  ──────────────────────────────────────"
 
-    echo -e "${CYAN}${BOLD}  # Verify Sessions${NC}"
-    echo -e "  ${GREEN}clear;screen -ls${NC}"
-    echo -e "  ${GREEN}clear;ps aux | grep python${NC}"
-    echo -e "  ${GREEN}ps aux | grep python${NC}"
-    echo ""
+        echo -e "${CYAN}${BOLD}  # Verify Sessions${NC}"
+        echo -e "  ${YELLOW}[1]${NC} ${GREEN}clear;screen -ls${NC}"
+        echo -e "  ${YELLOW}[2]${NC} ${GREEN}clear;ps aux | grep python${NC}"
+        echo ""
 
-    echo -e "${CYAN}${BOLD}  # Open / Re-open a Screen${NC}"
-    echo -e "  ${GREEN}screen -S SPY -dm python3 /home/alscolive/public_html/python/trigger_allPY/SPY.py${NC}"
-    echo -e "  ${GREEN}screen -r NVDA${NC}"
-    echo ""
+        echo -e "${CYAN}${BOLD}  # Open / Re-open a Screen${NC}"
+        echo -e "  ${YELLOW}[3]${NC} ${GREEN}screen -S SPY -dm python3 /home/alscolive/public_html/python/trigger_allPY/SPY.py${NC}"
+        echo -e "  ${YELLOW}[4]${NC} ${GREEN}screen -r NVDA${NC}"
+        echo ""
 
-    echo -e "${CYAN}${BOLD}  # Screen Keyboard Shortcuts${NC}"
-    echo -e "  ${CYAN}Ctrl+A  then  D${NC}   → To detach (bot keeps running):"
-    echo -e "  ${YELLOW}    Step 1:${NC} Hold Ctrl + press A, release everything"
-    echo -e "  ${YELLOW}    Step 2:${NC} Press D alone"
-    echo ""
-    echo -e "  ${CYAN}Ctrl+A  then  K${NC}   → To kill session from inside:"
-    echo -e "  ${YELLOW}    Step 1:${NC} Hold Ctrl + press A, release everything"
-    echo -e "  ${YELLOW}    Step 2:${NC} Press K alone, then press Y to confirm"
-    echo ""
+        echo -e "${CYAN}${BOLD}  # Screen Keyboard Shortcuts${NC}"
+        echo -e "  ${CYAN}Ctrl+A  then  D${NC}   → To detach (bot keeps running):"
+        echo -e "  ${YELLOW}    Step 1:${NC} Hold Ctrl + press A, release everything"
+        echo -e "  ${YELLOW}    Step 2:${NC} Press D alone"
+        echo ""
+        echo -e "  ${CYAN}Ctrl+A  then  K${NC}   → To kill session from inside:"
+        echo -e "  ${YELLOW}    Step 1:${NC} Hold Ctrl + press A, release everything"
+        echo -e "  ${YELLOW}    Step 2:${NC} Press K alone, then press Y to confirm"
+        echo ""
 
-    echo -e "${CYAN}${BOLD}  # Kill All Screens${NC}"
-    echo -e "  ${GREEN}pkill screen${NC}"
-    echo ""
+        echo -e "${CYAN}${BOLD}  # Kill All Screens${NC}"
+        echo -e "  ${YELLOW}[5]${NC} ${GREEN}pkill screen${NC}"
+        echo ""
 
-    echo -e "${CYAN}${BOLD}  # Etrade (direct, no screen)${NC}"
-    echo -e "  ${GREEN}clear;python3 $SCRIPT Broker[Etrade] Monitor[NVDA] Buy[NVDA]${NC}"
-    echo -e "  ${GREEN}clear;python3 $SCRIPT Broker[Etrade] Monitor[NVDA,AMD] Buy[NVDA,AMD]${NC}"
-    echo ""
+        echo -e "${CYAN}${BOLD}  # Etrade (direct, no screen)${NC}"
+        echo -e "  ${YELLOW}[6]${NC} ${GREEN}clear;python3 $SCRIPT Broker[Etrade] Monitor[NVDA] Buy[NVDA]${NC}"
+        echo -e "  ${YELLOW}[7]${NC} ${GREEN}clear;python3 $SCRIPT Broker[Etrade] Monitor[NVDA,AMD] Buy[NVDA,AMD]${NC}"
+        echo ""
 
-    echo -e "${CYAN}${BOLD}  # Alpaca (direct, no screen)${NC}"
-    echo -e "  ${GREEN}clear;python3 $SCRIPT Broker[Alpaca] Monitor[NVDA] Buy[NVDA]${NC}"
-    echo -e "  ${GREEN}clear;python3 $SCRIPT Broker[Alpaca] Monitor[NVDA,AMD] Buy[NVDA,AMD]${NC}"
-    echo ""
+        echo -e "${CYAN}${BOLD}  # Alpaca (direct, no screen)${NC}"
+        echo -e "  ${YELLOW}[8]${NC} ${GREEN}clear;python3 $SCRIPT Broker[Alpaca] Monitor[NVDA] Buy[NVDA]${NC}"
+        echo -e "  ${YELLOW}[9]${NC} ${GREEN}clear;python3 $SCRIPT Broker[Alpaca] Monitor[NVDA,AMD] Buy[NVDA,AMD]${NC}"
+        echo ""
 
-    echo -e "${CYAN}${BOLD}  # Open One Screen (Etrade example)${NC}"
-    echo -e "  ${GREEN}screen -dmS Etrade_NVDA bash -c 'clear; python3 $SCRIPT Broker[Etrade] Monitor[NVDA] Buy[NVDA]'${NC}"
-    echo ""
+        echo -e "${CYAN}${BOLD}  # Open One Screen (Etrade example)${NC}"
+        echo -e "  ${YELLOW}[10]${NC} ${GREEN}screen -dmS Etrade_NVDA bash -c 'clear; python3 $SCRIPT Broker[Etrade] Monitor[NVDA] Buy[NVDA]'${NC}"
+        echo ""
 
-    echo -e "${CYAN}${BOLD}  # Check Telegram Notification${NC}"
-    echo -e "  ${GREEN}python3 /home/alscolive/public_html/python/trigger_allPY/Telegram_Notificatin_Live.py NVDA 5 0.03 \"Simulator\" \"134.50 | 134.52 | 134.55\" \"134.40 | 134.42 | 134.44 | 134.46 | 134.48 | 134.50 | 134.52\" \"+65.0%\" \"2025-05-28\" '\$134.80' '\$133.90' \"+1.25%\"${NC}"
-    echo ""
+        echo -e "${CYAN}${BOLD}  # Check Telegram Notification${NC}"
+        echo -e "  ${YELLOW}[11]${NC} ${GREEN}python3 /home/alscolive/public_html/python/trigger_allPY/Telegram_Notificatin_Live.py NVDA 5 0.03 \"Simulator\" \"134.50 | 134.52 | 134.55\" \"134.40 | 134.42 | 134.44 | 134.46 | 134.48 | 134.50 | 134.52\" \"+65.0%\" \"2025-05-28\" '\$134.80' '\$133.90' \"+1.25%\"${NC}"
+        echo ""
 
-    echo -e "${CYAN}${BOLD}  # Etrade Execute Buy/Sell${NC}"
-    echo -e "  ${GREEN}clear;python3 /home/alscolive/public_html/python/trigger_allPY/Etrade_Executing_Buy_Sell.py NVDA 1 0.01${NC}"
-    echo ""
+        echo -e "${CYAN}${BOLD}  # Etrade Execute Buy/Sell${NC}"
+        echo -e "  ${YELLOW}[12]${NC} ${GREEN}clear;python3 /home/alscolive/public_html/python/trigger_allPY/Etrade_Executing_Buy_Sell.py NVDA 1 0.01${NC}"
+        echo ""
 
-    echo -e "${CYAN}${BOLD}  # Alpaca Execute Buy/Sell${NC}"
-    echo -e "  ${GREEN}clear;python3 /home/alscolive/public_html/python/trigger_allPY/Alpaca_Executing_Buy_Sell.py NVDA 1 0.01${NC}"
-    echo ""
+        echo -e "${CYAN}${BOLD}  # Alpaca Execute Buy/Sell${NC}"
+        echo -e "  ${YELLOW}[13]${NC} ${GREEN}clear;python3 /home/alscolive/public_html/python/trigger_allPY/Alpaca_Executing_Buy_Sell.py NVDA 1 0.01${NC}"
+        echo ""
 
+        echo -e "${CYAN}${BOLD}  # MarketPower${NC}"
+        echo -e "  ${YELLOW}[14]${NC} ${GREEN}clear;python3 /home/alscolive/public_html/python/MarketPower/MarketPower.py${NC}"
+        echo ""
 
-    echo -e "${CYAN}${BOLD}  # MarketPower${NC}"
-    echo -e "  ${GREEN}clear;python3 /home/alscolive/public_html/python/MarketPower/MarketPower.py${NC}"
-    echo ""
+        echo -e "${CYAN}${BOLD}  # ListStock And Balance${NC}"
+        echo -e "  ${YELLOW}[15]${NC} ${GREEN}clear;python3 /home/alscolive/public_html/python/Stock_Monitor/ListStock.py${NC}"
+        echo ""
 
-    echo "  ──────────────────────────────────────"
-    read -p "  Press Enter to go back..."
+        echo "  ──────────────────────────────────────"
+        echo -e "  ${BOLD}[0]${NC} Back to main menu"
+        echo ""
+        read -p "  Choose (0 to go back): " choice
+
+        case $choice in
+            1)  clear; screen -ls ;;
+            2)  clear; ps aux | grep python ;;
+            3)  screen -S SPY -dm python3 /home/alscolive/public_html/python/trigger_allPY/SPY.py
+                echo -e "${GREEN}✔  screen SPY started.${NC}" ;;
+            4)  screen -r NVDA ;;
+            5)  pkill screen && echo -e "${RED}✘  All screens killed.${NC}" ;;
+            6)  clear; python3 $SCRIPT Broker[Etrade] Monitor[NVDA] Buy[NVDA] ;;
+            7)  clear; python3 $SCRIPT Broker[Etrade] Monitor[NVDA,AMD] Buy[NVDA,AMD] ;;
+            8)  clear; python3 $SCRIPT Broker[Alpaca] Monitor[NVDA] Buy[NVDA] ;;
+            9)  clear; python3 $SCRIPT Broker[Alpaca] Monitor[NVDA,AMD] Buy[NVDA,AMD] ;;
+            10) screen -dmS Etrade_NVDA bash -c "clear; python3 $SCRIPT Broker[Etrade] Monitor[NVDA] Buy[NVDA]"
+                echo -e "${GREEN}✔  screen Etrade_NVDA started.${NC}" ;;
+            11) python3 /home/alscolive/public_html/python/trigger_allPY/Telegram_Notificatin_Live.py NVDA 5 0.03 "Simulator" "134.50 | 134.52 | 134.55" "134.40 | 134.42 | 134.44 | 134.46 | 134.48 | 134.50 | 134.52" "+65.0%" "2025-05-28" '$134.80' '$133.90' "+1.25%" ;;
+            12) clear; python3 /home/alscolive/public_html/python/trigger_allPY/Etrade_Executing_Buy_Sell.py NVDA 1 0.01 ;;
+            13) clear; python3 /home/alscolive/public_html/python/trigger_allPY/Alpaca_Executing_Buy_Sell.py NVDA 1 0.01 ;;
+            14) clear; python3 /home/alscolive/public_html/python/MarketPower/MarketPower.py ;;
+            15) clear; python3 /home/alscolive/public_html/python/Stock_Monitor/ListStock.py ;;
+            0)  return ;;
+            *)  echo -e "${RED}  Invalid option.${NC}"; sleep 1; continue ;;
+        esac
+
+        # After running a command, pause before re-showing the menu
+        echo ""
+        read -p "  Press Enter to return to cheatsheet..."
+    done
 }
-# ─────────────────────────────────────────────
-
 
 
 
