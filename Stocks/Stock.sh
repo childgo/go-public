@@ -732,8 +732,9 @@ menu_marketpower() {
     echo "  ──────────────────────────────────────"
     echo ""
     SCRIPT_MP="/home/alscolive/public_html/python/MarketPower/MarketPower.py"
+    MP_NAME="MarketPower"
 
-    if pgrep -f "MarketPower.py" > /dev/null; then
+    if screen -list | grep -q "$MP_NAME"; then
         echo -e "  Status: ${GREEN}[RUNNING]${NC}"
     else
         echo -e "  Status: ${RED}[STOPPED]${NC}"
@@ -743,18 +744,19 @@ menu_marketpower() {
     echo -e "  ${BOLD}[1]${NC} ▶  Start MarketPower (background screen)"
     echo -e "  ${BOLD}[2]${NC} 🔴  Stop MarketPower"
     echo -e "  ${BOLD}[3]${NC} 🖥️  Run directly in this terminal"
+    echo -e "  ${BOLD}[4]${NC} 🔗  Attach to MarketPower screen"
     echo -e "  ${BOLD}[0]${NC} Back to main menu"
     echo ""
     read -p "  Choose: " choice
 
     case $choice in
         1)
-            if pgrep -f "MarketPower.py" > /dev/null; then
+            if screen -list | grep -q "$MP_NAME"; then
                 echo -e "${YELLOW}⚠  MarketPower is already running!${NC}"
             else
-                screen -dmS MarketPower bash -c "clear; python3 $SCRIPT_MP"
+                screen -dmS "$MP_NAME" bash -c "clear; python3 $SCRIPT_MP"
                 sleep 0.5
-                if pgrep -f "MarketPower.py" > /dev/null; then
+                if screen -list | grep -q "$MP_NAME"; then
                     echo -e "${GREEN}✔  MarketPower started successfully!${NC}"
                 else
                     echo -e "${RED}✘  Failed to start MarketPower.${NC}"
@@ -764,8 +766,8 @@ menu_marketpower() {
             menu_marketpower
             ;;
         2)
-            if pgrep -f "MarketPower.py" > /dev/null; then
-                screen -S MarketPower -X quit 2>/dev/null
+            if screen -list | grep -q "$MP_NAME"; then
+                screen -S "$MP_NAME" -X quit 2>/dev/null
                 pkill -f "MarketPower.py" 2>/dev/null
                 sleep 0.3
                 echo -e "${RED}✘  MarketPower stopped.${NC}"
@@ -786,6 +788,20 @@ menu_marketpower() {
             echo ""
             read -p "  MarketPower ended. Press Enter to continue..."
             menu_marketpower
+            ;;
+        4)
+            if screen -list | grep -q "$MP_NAME"; then
+                echo ""
+                echo -e "  ${YELLOW}▶ Attaching to:${NC} ${CYAN}screen -x $MP_NAME${NC}"
+                echo -e "  ${YELLOW}  To detach (keeps running): Ctrl+A then D${NC}"
+                sleep 2
+                screen -x "$MP_NAME"
+                menu_marketpower
+            else
+                echo -e "${YELLOW}⚠  MarketPower is not running.${NC}"
+                read -p "  Press Enter to continue..."
+                menu_marketpower
+            fi
             ;;
         0) return ;;
         *)
