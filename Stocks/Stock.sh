@@ -12,6 +12,11 @@ CYAN='\033[0;36m'
 BOLD='\033[1m'
 NC='\033[0m' # No Color
 
+
+
+
+
+
 # ── Etrade-Daily bots ────────────────────────
 declare -A ETRADE_Daily_BOTS=(
     [1]="Etrade_NVDA|Etrade-Daily|NVDA|NVDA"
@@ -40,14 +45,29 @@ declare -A ETRADE_SPY_BOTS=(
 SCRIPT="/home/alscolive/public_html/python/trigger_allPY/Bot.py"
 
 # ─────────────────────────────────────────────
+
+
+
+
 print_header() {
     clear
+    echo -e "${GREEN}"
+cat << "EOF"
+    _    _     ____   ____ ___        _    ___   _____              _ _             
+   / \  | |   / ___| / ___/ _ \      / \  |_ _| |_   _| __ __ _  __| (_)_ __   __ _ 
+  / _ \ | |   \___ \| |  | | | |    / _ \  | |    | || '__/ _` |/ _` | | '_ \ / _` |
+ / ___ \| |___ ___) | |__| |_| |   / ___ \ | |    | || | | (_| | (_| | | | | | (_| |
+/_/   \_\_____|____/ \____\___/   /_/   \_\___|   |_||_|  \__,_|\__,_|_|_| |_|\__, |
+                                                                                |___/ 
+EOF
+    echo -e "${NC}"
     echo -e "${CYAN}${BOLD}"
     echo "  ╔══════════════════════════════════════╗"
     echo "  ║        TRADING BOT MANAGER           ║"
     echo "  ╚══════════════════════════════════════╝"
     echo -e "${NC}"
 }
+
 
 is_running() {
     local name=$1
@@ -520,7 +540,7 @@ menu_attach() {
     fi
 
     if [ ${#ALPACA_SESSIONS[@]} -gt 0 ]; then
-        echo -e "  ${CYAN}${BOLD}  🦙  ALPACA-DAILY BOTS${NC}"
+        echo -e "  ${CYAN}${BOLD}      ALPACA-DAILY BOTS${NC}"
         for session in "${ALPACA_SESSIONS[@]}"; do
             ALL_ORDERED+=("$session")
             STATUS=$(screen -ls | grep "$session" | grep -oP '(Attached|Detached)')
