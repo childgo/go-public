@@ -12,26 +12,29 @@ CYAN='\033[0;36m'
 BOLD='\033[1m'
 NC='\033[0m' # No Color
 
-# ── Etrade bots ──────────────────────────────
-declare -A ETRADE_BOTS=(
-    [1]="Etrade_NVDA|Etrade|NVDA|NVDA"
-    [2]="Etrade_SPY|Etrade|SPY|SPY"
-    [3]="Etrade_PLTR|Etrade|PLTR|PLTR"
-    [4]="Etrade_QQQ|Etrade|QQQ|QQQ"
-    [5]="Etrade_MSFT|Etrade|MSFT|MSFT"
-    [6]="Etrade_AMD|Etrade|AMD|AMD"
-
+# ── Etrade-Daily bots ────────────────────────
+declare -A ETRADE_Daily_BOTS=(
+    [1]="Etrade_NVDA|Etrade-Daily|NVDA|NVDA"
+    [2]="Etrade_SPY|Etrade-Daily|SPY|SPY"
+    [3]="Etrade_PLTR|Etrade-Daily|PLTR|PLTR"
+    [4]="Etrade_QQQ|Etrade-Daily|QQQ|QQQ"
+    [5]="Etrade_MSFT|Etrade-Daily|MSFT|MSFT"
+    [6]="Etrade_AMD|Etrade-Daily|AMD|AMD"
 )
 
-# ── Alpaca bots ──────────────────────────────
-declare -A ALPACA_BOTS=(
-    [1]="Alpaca_SPY|Alpaca|SPY|SPY"
-    [2]="Alpaca_QQQ|Alpaca|QQQ|QQQ"
-    [3]="Alpaca_NVDA|Alpaca|NVDA|NVDA"
-    [4]="Alpaca_MSFT|Alpaca|MSFT|MSFT"
-    [5]="Alpaca_PLTR|Alpaca|PLTR|PLTR"
-    [6]="Alpaca_AMD|Alpaca|AMD|AMD"
+# ── Alpaca-Daily bots ────────────────────────
+declare -A ALPACA_Daily_BOTS=(
+    [1]="Alpaca_SPY|Alpaca-Daily|SPY|SPY"
+    [2]="Alpaca_QQQ|Alpaca-Daily|QQQ|QQQ"
+    [3]="Alpaca_NVDA|Alpaca-Daily|NVDA|NVDA"
+    [4]="Alpaca_MSFT|Alpaca-Daily|MSFT|MSFT"
+    [5]="Alpaca_PLTR|Alpaca-Daily|PLTR|PLTR"
+    [6]="Alpaca_AMD|Alpaca-Daily|AMD|AMD"
+)
 
+# ── Etrade-SPY bots ──────────────────────────
+declare -A ETRADE_SPY_BOTS=(
+    [1]="EtradeSPY_Bot|Etrade-SPY|SPY|SPY"
 )
 
 SCRIPT="/home/alscolive/public_html/python/trigger_allPY/Bot.py"
@@ -70,7 +73,8 @@ start_bot() {
     if is_running "$name"; then
         echo -e "${YELLOW}⚠  $name is already running!${NC}"
     else
-        screen -dmS "$name" bash -c "clear; python3 $SCRIPT Broker[$broker] Monitor[$monitor] Buy[$buy]"
+        screen -dmS "$name" bash -c "clear; python3 $SCRIPT Broker[\"$broker\"] Monitor[\"$monitor\"] Buy[\"$buy\"]"
+
         sleep 0.5
         if is_running "$name"; then
             echo -e "${GREEN}✔  $name started successfully!${NC}"
@@ -93,19 +97,19 @@ kill_bot() {
 }
 
 # ─────────────────────────────────────────────
-menu_etrade() {
+menu_etrade_daily() {
     while true; do
         print_header
-        echo -e "${BOLD}  📈  ETRADE BOTS${NC}"
+        echo -e "${BOLD}  📈  ETRADE-DAILY BOTS${NC}"
         echo "  ──────────────────────────────────────"
-        for key in $(echo "${!ETRADE_BOTS[@]}" | tr ' ' '\n' | sort -n); do
-            local entry="${ETRADE_BOTS[$key]}"
+        for key in $(echo "${!ETRADE_Daily_BOTS[@]}" | tr ' ' '\n' | sort -n); do
+            local entry="${ETRADE_Daily_BOTS[$key]}"
             local name=$(echo $entry | cut -d'|' -f1)
             local monitor=$(echo $entry | cut -d'|' -f3)
             echo -e "  ${BOLD}[$key]${NC} $name  $(status_icon $name)"
         done
         echo ""
-        echo -e "  ${BOLD}[A]${NC} Start ALL Etrade bots"
+        echo -e "  ${BOLD}[A]${NC} Start ALL Etrade-Daily bots"
         echo -e "  ${BOLD}[K]${NC} Kill a specific bot"
         echo -e "  ${BOLD}[0]${NC} Back to main menu"
         echo ""
@@ -113,20 +117,20 @@ menu_etrade() {
 
         case $choice in
             [1-6])
-                entry="${ETRADE_BOTS[$choice]}"
+                entry="${ETRADE_Daily_BOTS[$choice]}"
                 if [ -n "$entry" ]; then
                     start_bot "$entry"
                     read -p "  Press Enter to continue..."
                 fi
                 ;;
             A|a)
-                for key in $(echo "${!ETRADE_BOTS[@]}" | tr ' ' '\n' | sort -n); do
-                    start_bot "${ETRADE_BOTS[$key]}"
+                for key in $(echo "${!ETRADE_Daily_BOTS[@]}" | tr ' ' '\n' | sort -n); do
+                    start_bot "${ETRADE_Daily_BOTS[$key]}"
                 done
                 read -p "  Press Enter to continue..."
                 ;;
             K|k)
-                menu_kill_etrade
+                menu_kill_etrade_daily
                 ;;
             0)
                 break
@@ -140,13 +144,13 @@ menu_etrade() {
 }
 
 # ─────────────────────────────────────────────
-menu_alpaca() {
+menu_alpaca_daily() {
     while true; do
         print_header
-        echo -e "${BOLD}  🦙  ALPACA BOTS${NC}"
+        echo -e "${BOLD}  🦙  ALPACA-DAILY BOTS${NC}"
         echo "  ──────────────────────────────────────"
-        for key in $(echo "${!ALPACA_BOTS[@]}" | tr ' ' '\n' | sort -n); do
-            local entry="${ALPACA_BOTS[$key]}"
+        for key in $(echo "${!ALPACA_Daily_BOTS[@]}" | tr ' ' '\n' | sort -n); do
+            local entry="${ALPACA_Daily_BOTS[$key]}"
             local name=$(echo $entry | cut -d'|' -f1)
             echo -e "  ${BOLD}[$key]${NC} $name  $(status_icon $name)"
         done
@@ -159,20 +163,20 @@ menu_alpaca() {
 
         case $choice in
             [1-6])
-                entry="${ALPACA_BOTS[$choice]}"
+                entry="${ALPACA_Daily_BOTS[$choice]}"
                 if [ -n "$entry" ]; then
                     start_bot "$entry"
                     read -p "  Press Enter to continue..."
                 fi
                 ;;
             A|a)
-                for key in $(echo "${!ALPACA_BOTS[@]}" | tr ' ' '\n' | sort -n); do
-                    start_bot "${ALPACA_BOTS[$key]}"
+                for key in $(echo "${!ALPACA_Daily_BOTS[@]}" | tr ' ' '\n' | sort -n); do
+                    start_bot "${ALPACA_Daily_BOTS[$key]}"
                 done
                 read -p "  Press Enter to continue..."
                 ;;
             K|k)
-                menu_kill_alpaca
+                menu_kill_alpaca_daily
                 ;;
             0)
                 break
@@ -186,12 +190,12 @@ menu_alpaca() {
 }
 
 # ─────────────────────────────────────────────
-menu_kill_etrade() {
+menu_kill_etrade_daily() {
     print_header
     echo -e "${BOLD}  🔴  KILL ETRADE BOT${NC}"
     echo "  ──────────────────────────────────────"
-    for key in $(echo "${!ETRADE_BOTS[@]}" | tr ' ' '\n' | sort -n); do
-        local entry="${ETRADE_BOTS[$key]}"
+    for key in $(echo "${!ETRADE_Daily_BOTS[@]}" | tr ' ' '\n' | sort -n); do
+        local entry="${ETRADE_Daily_BOTS[$key]}"
         local name=$(echo $entry | cut -d'|' -f1)
         echo -e "  ${BOLD}[$key]${NC} $name  $(status_icon $name)"
     done
@@ -202,7 +206,7 @@ menu_kill_etrade() {
 
     case $choice in
         [1-6])
-            entry="${ETRADE_BOTS[$choice]}"
+            entry="${ETRADE_Daily_BOTS[$choice]}"
             if [ -n "$entry" ]; then
                 name=$(echo $entry | cut -d'|' -f1)
                 kill_bot "$name"
@@ -210,8 +214,8 @@ menu_kill_etrade() {
             fi
             ;;
         A|a)
-            for key in $(echo "${!ETRADE_BOTS[@]}" | tr ' ' '\n' | sort -n); do
-                name=$(echo "${ETRADE_BOTS[$key]}" | cut -d'|' -f1)
+            for key in $(echo "${!ETRADE_Daily_BOTS[@]}" | tr ' ' '\n' | sort -n); do
+                name=$(echo "${ETRADE_Daily_BOTS[$key]}" | cut -d'|' -f1)
                 kill_bot "$name"
             done
             read -p "  Press Enter to continue..."
@@ -220,12 +224,94 @@ menu_kill_etrade() {
     esac
 }
 
-menu_kill_alpaca() {
+
+
+# ─────────────────────────────────────────────
+menu_etrade_spy() {
+    while true; do
+        print_header
+        echo -e "${BOLD}  📊  ETRADE-SPY BOTS${NC}"
+        echo "  ──────────────────────────────────────"
+        for key in $(echo "${!ETRADE_SPY_BOTS[@]}" | tr ' ' '\n' | sort -n); do
+            local entry="${ETRADE_SPY_BOTS[$key]}"
+            local name=$(echo $entry | cut -d'|' -f1)
+            echo -e "  ${BOLD}[$key]${NC} $name  $(status_icon $name)"
+        done
+        echo ""
+        echo -e "  ${BOLD}[A]${NC} Start ALL Etrade-SPY bots"
+        echo -e "  ${BOLD}[K]${NC} Kill a specific bot"
+        echo -e "  ${BOLD}[0]${NC} Back to main menu"
+        echo ""
+        read -p "  Choose: " choice
+
+        case $choice in
+            [1-9])
+                entry="${ETRADE_SPY_BOTS[$choice]}"
+                if [ -n "$entry" ]; then
+                    start_bot "$entry"
+                    read -p "  Press Enter to continue..."
+                fi
+                ;;
+            A|a)
+                for key in $(echo "${!ETRADE_SPY_BOTS[@]}" | tr ' ' '\n' | sort -n); do
+                    start_bot "${ETRADE_SPY_BOTS[$key]}"
+                done
+                read -p "  Press Enter to continue..."
+                ;;
+            K|k)
+                menu_kill_etrade_spy
+                ;;
+            0)
+                break
+                ;;
+            *)
+                echo -e "${RED}  Invalid option.${NC}"
+                sleep 1
+                ;;
+        esac
+    done
+}
+
+menu_kill_etrade_spy() {
     print_header
-    echo -e "${BOLD}  🔴  KILL ALPACA BOT${NC}"
+    echo -e "${BOLD}  🔴  KILL ETRADE-SPY BOT${NC}"
     echo "  ──────────────────────────────────────"
-    for key in $(echo "${!ALPACA_BOTS[@]}" | tr ' ' '\n' | sort -n); do
-        local entry="${ALPACA_BOTS[$key]}"
+    for key in $(echo "${!ETRADE_SPY_BOTS[@]}" | tr ' ' '\n' | sort -n); do
+        local entry="${ETRADE_SPY_BOTS[$key]}"
+        local name=$(echo $entry | cut -d'|' -f1)
+        echo -e "  ${BOLD}[$key]${NC} $name  $(status_icon $name)"
+    done
+    echo -e "  ${BOLD}[A]${NC} Kill ALL Etrade-SPY bots"
+    echo -e "  ${BOLD}[0]${NC} Back"
+    echo ""
+    read -p "  Choose: " choice
+
+    case $choice in
+        [1-9])
+            entry="${ETRADE_SPY_BOTS[$choice]}"
+            if [ -n "$entry" ]; then
+                name=$(echo $entry | cut -d'|' -f1)
+                kill_bot "$name"
+                read -p "  Press Enter to continue..."
+            fi
+            ;;
+        A|a)
+            for key in $(echo "${!ETRADE_SPY_BOTS[@]}" | tr ' ' '\n' | sort -n); do
+                name=$(echo "${ETRADE_SPY_BOTS[$key]}" | cut -d'|' -f1)
+                kill_bot "$name"
+            done
+            read -p "  Press Enter to continue..."
+            ;;
+        0) return ;;
+    esac
+}
+
+menu_kill_alpaca_daily() {
+    print_header
+    echo -e "${BOLD}  🔴  KILL ALPACA-DAILY BOT${NC}"
+    echo "  ──────────────────────────────────────"
+    for key in $(echo "${!ALPACA_Daily_BOTS[@]}" | tr ' ' '\n' | sort -n); do
+        local entry="${ALPACA_Daily_BOTS[$key]}"
         local name=$(echo $entry | cut -d'|' -f1)
         echo -e "  ${BOLD}[$key]${NC} $name  $(status_icon $name)"
     done
@@ -236,7 +322,7 @@ menu_kill_alpaca() {
 
     case $choice in
         [1-6])
-            entry="${ALPACA_BOTS[$choice]}"
+            entry="${ALPACA_Daily_BOTS[$choice]}"
             if [ -n "$entry" ]; then
                 name=$(echo $entry | cut -d'|' -f1)
                 kill_bot "$name"
@@ -244,8 +330,8 @@ menu_kill_alpaca() {
             fi
             ;;
         A|a)
-            for key in $(echo "${!ALPACA_BOTS[@]}" | tr ' ' '\n' | sort -n); do
-                name=$(echo "${ALPACA_BOTS[$key]}" | cut -d'|' -f1)
+            for key in $(echo "${!ALPACA_Daily_BOTS[@]}" | tr ' ' '\n' | sort -n); do
+                name=$(echo "${ALPACA_Daily_BOTS[$key]}" | cut -d'|' -f1)
                 kill_bot "$name"
             done
             read -p "  Press Enter to continue..."
@@ -263,10 +349,10 @@ menu_kill_all() {
     ALL_NAMES=()
     idx=1
 
-    # ── Etrade Bots ──────────────────────────
-    echo -e "  ${CYAN}${BOLD}  📈  ETRADE BOTS${NC}"
-    for key in $(echo "${!ETRADE_BOTS[@]}" | tr ' ' '\n' | sort -n); do
-        name=$(echo "${ETRADE_BOTS[$key]}" | cut -d'|' -f1)
+    # ── ETRADE-DAILY Bots ──────────────────────────
+    echo -e "  ${CYAN}${BOLD}  📈  ETRADE-DAILY BOTS${NC}"
+    for key in $(echo "${!ETRADE_Daily_BOTS[@]}" | tr ' ' '\n' | sort -n); do
+        name=$(echo "${ETRADE_Daily_BOTS[$key]}" | cut -d'|' -f1)
         ALL_NAMES+=("$name")
         echo -e "  ${BOLD}[$idx]${NC} $name  $(status_icon $name)"
         ((idx++))
@@ -274,18 +360,32 @@ menu_kill_all() {
 
     echo ""
 
-    # ── Alpaca Bots ──────────────────────────
-    echo -e "  ${CYAN}${BOLD}  🦙  ALPACA BOTS${NC}"
-    for key in $(echo "${!ALPACA_BOTS[@]}" | tr ' ' '\n' | sort -n); do
-        name=$(echo "${ALPACA_BOTS[$key]}" | cut -d'|' -f1)
+    # ── ALPACA-DAILY Bota ──────────────────────────
+    echo -e "  ${CYAN}${BOLD}  🦙  ALPACA-DAILY BOTS${NC}"
+    for key in $(echo "${!ALPACA_Daily_BOTS[@]}" | tr ' ' '\n' | sort -n); do
+        name=$(echo "${ALPACA_Daily_BOTS[$key]}" | cut -d'|' -f1)
         ALL_NAMES+=("$name")
         echo -e "  ${BOLD}[$idx]${NC} $name  $(status_icon $name)"
         ((idx++))
     done
 
+
+
     echo ""
-    echo -e "  ${BOLD}[E]${NC} 📈  Kill ALL Etrade bots"
-    echo -e "  ${BOLD}[P]${NC} 🦙  Kill ALL Alpaca bots"
+    echo -e "  ${CYAN}${BOLD}  📊  ETRADE-SPY BOTS${NC}"
+    for key in $(echo "${!ETRADE_SPY_BOTS[@]}" | tr ' ' '\n' | sort -n); do
+        name=$(echo "${ETRADE_SPY_BOTS[$key]}" | cut -d'|' -f1)
+        ALL_NAMES+=("$name")
+        echo -e "  ${BOLD}[$idx]${NC} $name  $(status_icon $name)"
+        ((idx++))
+    done
+
+
+
+    echo ""
+    echo -e "  ${BOLD}[E]${NC} 📈  Kill ALL Etrade-Daily bots"
+    echo -e "  ${BOLD}[P]${NC} 🦙  Kill ALL Alpaca-Daily bots"
+    echo -e "  ${BOLD}[S]${NC} 📊  Kill ALL Etrade-SPY bots"
     echo -e "  ${BOLD}[A]${NC} 💀  Kill ALL bots"
     echo -e "  ${BOLD}[0]${NC} Back to main menu"
     echo ""
@@ -299,16 +399,25 @@ menu_kill_all() {
 
     elif [[ "$choice" == "E" || "$choice" == "e" ]]; then
         echo -e "${CYAN}  Killing all Etrade bots...${NC}"
-        for key in $(echo "${!ETRADE_BOTS[@]}" | tr ' ' '\n' | sort -n); do
-            name=$(echo "${ETRADE_BOTS[$key]}" | cut -d'|' -f1)
+        for key in $(echo "${!ETRADE_Daily_BOTS[@]}" | tr ' ' '\n' | sort -n); do
+            name=$(echo "${ETRADE_Daily_BOTS[$key]}" | cut -d'|' -f1)
             kill_bot "$name"
         done
         read -p "  Press Enter to continue..."
 
     elif [[ "$choice" == "P" || "$choice" == "p" ]]; then
         echo -e "${CYAN}  Killing all Alpaca bots...${NC}"
-        for key in $(echo "${!ALPACA_BOTS[@]}" | tr ' ' '\n' | sort -n); do
-            name=$(echo "${ALPACA_BOTS[$key]}" | cut -d'|' -f1)
+        for key in $(echo "${!ALPACA_Daily_BOTS[@]}" | tr ' ' '\n' | sort -n); do
+            name=$(echo "${ALPACA_Daily_BOTS[$key]}" | cut -d'|' -f1)
+            kill_bot "$name"
+        done
+        read -p "  Press Enter to continue..."
+
+    # TO (S must come BEFORE the number check):
+    elif [[ "$choice" == "S" || "$choice" == "s" ]]; then
+        echo -e "${CYAN}  Killing all Etrade-SPY bots...${NC}"
+        for key in $(echo "${!ETRADE_SPY_BOTS[@]}" | tr ' ' '\n' | sort -n); do
+            name=$(echo "${ETRADE_SPY_BOTS[$key]}" | cut -d'|' -f1)
             kill_bot "$name"
         done
         read -p "  Press Enter to continue..."
@@ -316,6 +425,11 @@ menu_kill_all() {
     elif [[ "$choice" =~ ^[0-9]+$ ]] && [ "$choice" -ge 1 ] && [ "$choice" -lt "$idx" ]; then
         kill_bot "${ALL_NAMES[$((choice-1))]}"
         read -p "  Press Enter to continue..."
+
+
+
+
+
 
     elif [[ "$choice" == "0" ]]; then
         return
@@ -355,13 +469,17 @@ menu_attach() {
     fi
 
     # ── Separate into groups ──────────────────
-    ETRADE_SESSIONS=()
+
+    ETRADE_DAILY_SESSIONS=()
+    ETRADE_SPY_SESSIONS=()
     ALPACA_SESSIONS=()
     OTHER_SESSIONS=()
 
     for session in "${SESSIONS[@]}"; do
-        if [[ "$session" == Etrade_* ]]; then
-            ETRADE_SESSIONS+=("$session")
+        if [[ "$session" == EtradeSPY_* ]]; then
+            ETRADE_SPY_SESSIONS+=("$session")
+        elif [[ "$session" == Etrade_* ]]; then
+            ETRADE_DAILY_SESSIONS+=("$session")
         elif [[ "$session" == Alpaca_* ]]; then
             ALPACA_SESSIONS+=("$session")
         else
@@ -369,33 +487,46 @@ menu_attach() {
         fi
     done
 
+
+
     # ── Build numbered list ───────────────────
     ALL_ORDERED=()
     local idx=1
 
-    if [ ${#ETRADE_SESSIONS[@]} -gt 0 ]; then
-        echo -e "  ${CYAN}${BOLD}  📈  ETRADE BOTS${NC}"
-        for session in "${ETRADE_SESSIONS[@]}"; do
+    if [ ${#ETRADE_DAILY_SESSIONS[@]} -gt 0 ]; then
+        echo -e "  ${CYAN}${BOLD}  📈  ETRADE-DAILY BOTS${NC}"
+        for session in "${ETRADE_DAILY_SESSIONS[@]}"; do
             ALL_ORDERED+=("$session")
             STATUS=$(screen -ls | grep "$session" | grep -oP '(Attached|Detached)')
             [ "$STATUS" = "Attached" ] && ST_COLOR=$GREEN || ST_COLOR=$YELLOW
             PID=$(screen -ls | grep "$session" | grep -oP '^\s*\K[0-9]+')
             echo -e "  ${BOLD}[$idx]${NC} $session  ${GREEN}[RUNNING]${NC}  ${ST_COLOR}($STATUS)${NC}  ${CYAN}pid:$PID${NC}"
+            ((idx++))
+        done
+        echo ""
+    fi
 
+    if [ ${#ETRADE_SPY_SESSIONS[@]} -gt 0 ]; then
+        echo -e "  ${CYAN}${BOLD}  📊  ETRADE-SPY BOTS${NC}"
+        for session in "${ETRADE_SPY_SESSIONS[@]}"; do
+            ALL_ORDERED+=("$session")
+            STATUS=$(screen -ls | grep "$session" | grep -oP '(Attached|Detached)')
+            [ "$STATUS" = "Attached" ] && ST_COLOR=$GREEN || ST_COLOR=$YELLOW
+            PID=$(screen -ls | grep "$session" | grep -oP '^\s*\K[0-9]+')
+            echo -e "  ${BOLD}[$idx]${NC} $session  ${GREEN}[RUNNING]${NC}  ${ST_COLOR}($STATUS)${NC}  ${CYAN}pid:$PID${NC}"
             ((idx++))
         done
         echo ""
     fi
 
     if [ ${#ALPACA_SESSIONS[@]} -gt 0 ]; then
-        echo -e "  ${CYAN}${BOLD}  🦙  ALPACA BOTS${NC}"
+        echo -e "  ${CYAN}${BOLD}  🦙  ALPACA-DAILY BOTS${NC}"
         for session in "${ALPACA_SESSIONS[@]}"; do
             ALL_ORDERED+=("$session")
             STATUS=$(screen -ls | grep "$session" | grep -oP '(Attached|Detached)')
             [ "$STATUS" = "Attached" ] && ST_COLOR=$GREEN || ST_COLOR=$YELLOW
             PID=$(screen -ls | grep "$session" | grep -oP '^\s*\K[0-9]+')
             echo -e "  ${BOLD}[$idx]${NC} $session  ${GREEN}[RUNNING]${NC}  ${ST_COLOR}($STATUS)${NC}  ${CYAN}pid:$PID${NC}"
-
             ((idx++))
         done
         echo ""
@@ -409,12 +540,10 @@ menu_attach() {
             [ "$STATUS" = "Attached" ] && ST_COLOR=$GREEN || ST_COLOR=$YELLOW
             PID=$(screen -ls | grep "$session" | grep -oP '^\s*\K[0-9]+')
             echo -e "  ${BOLD}[$idx]${NC} $session  ${GREEN}[RUNNING]${NC}  ${ST_COLOR}($STATUS)${NC}  ${CYAN}pid:$PID${NC}"
-
             ((idx++))
         done
         echo ""
     fi
-
 
 
 
@@ -655,29 +784,15 @@ menu_cheatsheet() {
         echo ""
 
         echo -e "${CYAN}${BOLD}  # Etrade (direct, no screen)${NC}"
-        echo -e "  ${YELLOW}[6]${NC} ${GREEN}clear;python3 $SCRIPT Broker[Etrade] Monitor[NVDA] Buy[NVDA]${NC}"
-        echo -e "  ${YELLOW}[7]${NC} ${GREEN}clear;python3 $SCRIPT Broker[Etrade] Monitor[NVDA,AMD] Buy[NVDA,AMD]${NC}"
-        echo ""
 
-        echo -e "${CYAN}${BOLD}  # Alpaca (direct, no screen)${NC}"
-        echo -e "  ${YELLOW}[8]${NC} ${GREEN}clear;python3 $SCRIPT Broker[Alpaca] Monitor[NVDA] Buy[NVDA]${NC}"
-        echo -e "  ${YELLOW}[9]${NC} ${GREEN}clear;python3 $SCRIPT Broker[Alpaca] Monitor[NVDA,AMD] Buy[NVDA,AMD]${NC}"
-        echo ""
+        echo -e "  ${YELLOW}[6]${NC} ${GREEN}clear;python3 $SCRIPT Broker[\"Etrade-Daily\"] Monitor[NVDA] Buy[NVDA]${NC}"
+        echo -e "  ${YELLOW}[7]${NC} ${GREEN}clear;python3 $SCRIPT Broker[\"Etrade-Daily\"] Monitor[NVDA,AMD] Buy[NVDA,AMD]${NC}"
+        echo -e "  ${YELLOW}[8]${NC} ${GREEN}clear;python3 $SCRIPT Broker[\"Alpaca-Daily\"] Monitor[NVDA] Buy[NVDA]${NC}"
+        echo -e "  ${YELLOW}[9]${NC} ${GREEN}clear;python3 $SCRIPT Broker[\"Alpaca-Daily\"] Monitor[NVDA,AMD] Buy[NVDA,AMD]${NC}"
+        echo -e "  ${YELLOW}[10]${NC} ${GREEN}screen -dmS Etrade_NVDA bash -c 'clear; python3 $SCRIPT Broker[\"Etrade-Daily\"] Monitor[NVDA] Buy[NVDA]'${NC}"
+        echo -e "  ${YELLOW}[12]${NC} ${GREEN}clear;python3 /home/alscolive/public_html/python/trigger_allPY/Executing_Etrade_Daily_MarketBuy.py NVDA 1 0.01${NC}"
+        echo -e "  ${YELLOW}[13]${NC} ${GREEN}clear;python3 /home/alscolive/public_html/python/trigger_allPY/Executing_Alpaca_Daily_MarketBuy.py NVDA 1 0.01${NC}"
 
-        echo -e "${CYAN}${BOLD}  # Open One Screen (Etrade example)${NC}"
-        echo -e "  ${YELLOW}[10]${NC} ${GREEN}screen -dmS Etrade_NVDA bash -c 'clear; python3 $SCRIPT Broker[Etrade] Monitor[NVDA] Buy[NVDA]'${NC}"
-        echo ""
-
-        echo -e "${CYAN}${BOLD}  # Check Telegram Notification${NC}"
-        echo -e "  ${YELLOW}[11]${NC} ${GREEN}python3 /home/alscolive/public_html/python/trigger_allPY/Telegram_Notificatin_Live.py NVDA 5 0.03 \"Simulator\" \"134.50 | 134.52 | 134.55\" \"134.40 | 134.42 | 134.44 | 134.46 | 134.48 | 134.50 | 134.52\" \"+65.0%\" \"2025-05-28\" '\$134.80' '\$133.90' \"+1.25%\"${NC}"
-        echo ""
-
-        echo -e "${CYAN}${BOLD}  # Etrade Execute Buy/Sell${NC}"
-        echo -e "  ${YELLOW}[12]${NC} ${GREEN}clear;python3 /home/alscolive/public_html/python/trigger_allPY/Etrade_Executing_Buy_Sell.py NVDA 1 0.01${NC}"
-        echo ""
-
-        echo -e "${CYAN}${BOLD}  # Alpaca Execute Buy/Sell${NC}"
-        echo -e "  ${YELLOW}[13]${NC} ${GREEN}clear;python3 /home/alscolive/public_html/python/trigger_allPY/Alpaca_Executing_Buy_Sell.py NVDA 1 0.01${NC}"
         echo ""
 
         echo -e "${CYAN}${BOLD}  # MarketPower${NC}"
@@ -700,16 +815,14 @@ menu_cheatsheet() {
                 echo -e "${GREEN}✔  screen SPY started.${NC}" ;;
             4)  screen -r NVDA ;;
             5)  pkill screen && echo -e "${RED}✘  All screens killed.${NC}" ;;
-            6)  clear; python3 $SCRIPT Broker[Etrade] Monitor[NVDA] Buy[NVDA] ;;
-            7)  clear; python3 $SCRIPT Broker[Etrade] Monitor[NVDA,AMD] Buy[NVDA,AMD] ;;
-            8)  clear; python3 $SCRIPT Broker[Alpaca] Monitor[NVDA] Buy[NVDA] ;;
-            9)  clear; python3 $SCRIPT Broker[Alpaca] Monitor[NVDA,AMD] Buy[NVDA,AMD] ;;
-            10) screen -dmS Etrade_NVDA bash -c "clear; python3 $SCRIPT Broker[Etrade] Monitor[NVDA] Buy[NVDA]"
-                echo -e "${GREEN}✔  screen Etrade_NVDA started.${NC}" ;;
-            11) python3 /home/alscolive/public_html/python/trigger_allPY/Telegram_Notificatin_Live.py NVDA 5 0.03 "Simulator" "134.50 | 134.52 | 134.55" "134.40 | 134.42 | 134.44 | 134.46 | 134.48 | 134.50 | 134.52" "+65.0%" "2025-05-28" '$134.80' '$133.90' "+1.25%" ;;
-            12) clear; python3 /home/alscolive/public_html/python/trigger_allPY/Etrade_Executing_Buy_Sell.py NVDA 1 0.01 ;;
-            13) clear; python3 /home/alscolive/public_html/python/trigger_allPY/Alpaca_Executing_Buy_Sell.py NVDA 1 0.01 ;;
-            14) clear; python3 /home/alscolive/public_html/python/MarketPower/MarketPower.py ;;
+            6)  clear; python3 $SCRIPT 'Broker["Etrade-Daily"]' 'Monitor["NVDA"]' 'Buy["NVDA"]' ;;
+            7)  clear; python3 $SCRIPT 'Broker["Etrade-Daily"]' 'Monitor["NVDA,AMD"]' 'Buy["NVDA,AMD"]' ;;
+            8)  clear; python3 $SCRIPT 'Broker["Alpaca-Daily"]' 'Monitor["NVDA"]' 'Buy["NVDA"]' ;;
+            9)  clear; python3 $SCRIPT 'Broker["Alpaca-Daily"]' 'Monitor["NVDA,AMD"]' 'Buy["NVDA,AMD"]' ;;
+            10) screen -dmS Etrade_NVDA bash -c "clear; python3 $SCRIPT 'Broker[\"Etrade-Daily\"]' 'Monitor[\"NVDA\"]' 'Buy[\"NVDA\"]'" ;;
+            12) clear; python3 /home/alscolive/public_html/python/trigger_allPY/Executing_Etrade_Daily_MarketBuy.py NVDA 1 0.01 ;;
+            13) clear; python3 /home/alscolive/public_html/python/trigger_allPY/Executing_Alpaca_Daily_MarketBuy.py NVDA 1 0.01 ;; 
+           14) clear; python3 /home/alscolive/public_html/python/MarketPower/MarketPower.py ;;
             15) clear; python3 /home/alscolive/public_html/python/Stock_Monitor/ListStock.py ;;
             0)  return ;;
             *)  echo -e "${RED}  Invalid option.${NC}"; sleep 1; continue ;;
@@ -899,33 +1012,37 @@ menu_simulation() {
 # ─────────────────────────────────────────────
 while true; do
     print_header
-    echo -e "  ${BOLD}[1]${NC} 📈  Start_Etrade_Bot"
-    echo -e "  ${BOLD}[2]${NC} 🦙  Start_Alpaca_Bot"
-    echo -e "  ${BOLD}[3]${NC} 🔴  Kill_Bots"
-    echo -e "  ${BOLD}[4]${NC} 🔗  Attach_Screen"
-    echo -e "  ${BOLD}[5]${NC} 💻  Server_Resources"
-    echo -e "  ${BOLD}[6]${NC} 🔄  Restart_Services"
-    echo -e "  ${BOLD}[7]${NC} 📋  Cheatsheet"
-    echo -e "  ${BOLD}[8]${NC} ⚡  Market_Power"
-    echo -e "  ${BOLD}[9]${NC} 🧪  Data Simulation"
+    echo -e "  ${BOLD}[1]${NC} 📈  Start_Etrade-Daily_Bot"
+    echo -e "  ${BOLD}[2]${NC} 🦙  Start_Alpaca-Daily_Bot"
+    echo -e "  ${BOLD}[3]${NC} 📊  Start_Etrade-SPY_Bot"
+    echo -e "  ${BOLD}[4]${NC} 🔴  Kill_Bots"
+    echo -e "  ${BOLD}[5]${NC} 🔗  Attach_Screen"
+    echo -e "  ${BOLD}[6]${NC} 💻  Server_Resources"
+    echo -e "  ${BOLD}[7]${NC} 🔄  Restart_Services"
+    echo -e "  ${BOLD}[8]${NC} 📋  Cheatsheet"
+    echo -e "  ${BOLD}[9]${NC} ⚡  Market_Power"
+    echo -e "  ${BOLD}[10]${NC} 🧪  Data Simulation"
     echo -e "  ${BOLD}[0]${NC} 🚪  Exit"
     echo ""
     read -p "  Choose: " main_choice
 
     case $main_choice in
-        1) menu_etrade ;;
-        2) menu_alpaca ;;
-        3) menu_kill_all ;;
-        4) menu_attach ;;
-        5) menu_resources ;;
-        6) menu_restart ;;
-        7) menu_cheatsheet ;;
-        8) menu_marketpower ;;
-        9) menu_simulation ;;
+        1) menu_etrade_daily ;;
+        2) menu_alpaca_daily ;;
+        3) menu_etrade_spy ;;
+        4) menu_kill_all ;;
+        5) menu_attach ;;
+        6) menu_resources ;;
+        7) menu_restart ;;
+        8) menu_cheatsheet ;;
+        9) menu_marketpower ;;
+        10) menu_simulation ;;
         0)
-            echo -e "${CYAN}  Bye!${NC}"
-            exit 0
-            ;;
+        echo -e "${CYAN}  Bye!${NC}"
+        exit 0
+        ;;
+
+
         *)
             echo -e "${RED}  Invalid option.${NC}"
             sleep 1
