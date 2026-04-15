@@ -18,6 +18,11 @@ CYAN='\033[0;36m'
 BOLD='\033[1m'
 NC='\033[0m'
 
+
+TTYD_SCREEN="ttyd_SSH_Monitor"
+TTYD_CMD="/alscospider/SSH_Monitor/ttyd -W -p 7681 -i 0.0.0.0 bash"
+
+
 # ───────────────────────────────────────────────────────────────
 #  SECTION 2 — PATHS
 # ───────────────────────────────────────────────────────────────
@@ -783,6 +788,80 @@ _tool_menu() {
     esac
 }
 
+
+
+# ───────────────────────────────────────────────────────────────
+#  SECTION 15 — TTYD WEB TERMINAL
+# ───────────────────────────────────────────────────────────────
+
+menu_ttyd() {
+    while true; do
+        print_header
+        echo -e "${BOLD}  🌐  TTYD — WEB TERMINAL${NC}"
+        echo "  ──────────────────────────────────────"
+
+        if is_running "$TTYD_SCREEN"; then
+            local PID PORT
+            PID=$(screen -ls | grep "$TTYD_SCREEN" | grep -oP '^\s*\K[0-9]+')
+            PORT=$(echo "$TTYD_CMD" | grep -oP '(?<=-p )\d+')
+            echo -e "  Status : ${GREEN}[RUNNING]${NC}"
+            echo -e "  Screen : ${CYAN}$TTYD_SCREEN${NC}  (pid: $PID)"
+            echo -e "  URL    : ${YELLOW}http://$(hostname -I | awk '{print $1}'):${PORT}${NC}"
+        else
+            echo -e "  Status : ${RED}[STOPPED]${NC}"
+        fi
+
+        echo ""
+        echo -e "  ${BOLD}[1]${NC} ▶  Start  (background screen)"
+        echo -e "  ${BOLD}[2]${NC} 🔴  Stop"
+        echo -e "  ${BOLD}[3]${NC} 🔗  Attach to screen"
+        echo -e "  ${BOLD}[0]${NC} Back to main menu"
+        echo ""
+        read -p "  Choose: " choice
+
+        case $choice in
+            1)
+                if is_running "$TTYD_SCREEN"; then
+                    echo -e "${YELLOW}⚠  ttyd is already running!${NC}"
+                else
+                    screen -dmS "$TTYD_SCREEN" bash -c "$TTYD_CMD"
+                    sleep 0.8
+                    if is_running "$TTYD_SCREEN"; then
+                        echo -e "${GREEN}✔  ttyd started on port 7681!${NC}"
+                    else
+                        echo -e "${RED}✘  Failed to start ttyd. Check the path.${NC}"
+                    fi
+                fi
+                read -p "  Press Enter to continue..."
+                ;;
+            2)
+                if is_running "$TTYD_SCREEN"; then
+                    screen -S "$TTYD_SCREEN" -X quit
+                    sleep 0.3
+                    echo -e "${RED}✘  ttyd stopped.${NC}"
+                else
+                    echo -e "${YELLOW}⚠  ttyd is not running.${NC}"
+                fi
+                read -p "  Press Enter to continue..."
+                ;;
+            3)
+                if is_running "$TTYD_SCREEN"; then
+                    echo -e "\n  ${YELLOW}▶ Attaching to ${CYAN}$TTYD_SCREEN${NC}  (Ctrl+A then D to detach)"
+                    sleep 1
+                    screen -x "$TTYD_SCREEN"
+                else
+                    echo -e "${YELLOW}⚠  ttyd is not running.${NC}"
+                    read -p "  Press Enter to continue..."
+                fi
+                ;;
+            0) return ;;
+            *) echo -e "${RED}  Invalid option.${NC}"; sleep 1 ;;
+        esac
+    done
+}
+
+
+
 # ───────────────────────────────────────────────────────────────
 #  SECTION 14 — MAIN MENU
 # ───────────────────────────────────────────────────────────────
@@ -811,6 +890,7 @@ while true; do
     # ── Tools ───────────────────────────────────────────────────
     echo -e "  ${BOLD}[12]${NC} ⚡  Market Power"
     echo -e "  ${BOLD}[13]${NC} 🧪  Data Simulation"
+    echo -e "  ${BOLD}[14]${NC} 🌐  ttyd Web Terminal"   # ← ADD THIS
     echo "  ──────────────────────────────────────"
     echo -e "  ${BOLD}[0]${NC} 🚪  Exit"
     echo ""
@@ -830,6 +910,7 @@ while true; do
         11) menu_cheatsheet ;;
         12) _tool_menu "MarketPower" "$SCRIPT_MP"  "⚡  MARKET POWER" ;;
         13) _tool_menu "Simulation"  "$SCRIPT_SIM" "🧪  SIMULATION - REAL DATA" "AutoSelectDB_No" ;;
+        14) menu_ttyd ;;   # ← ADD THIS
         0)  echo -e "${CYAN}  Bye!${NC}"; exit 0 ;;
         *)  echo -e "${RED}  Invalid option.${NC}"; sleep 1 ;;
     esac
