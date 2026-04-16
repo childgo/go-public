@@ -1,4 +1,5 @@
 #https://raw.githubusercontent.com/childgo/go-public/refs/heads/master/Stocks/StockList/List-blackrock.sh
+#https://www.slickcharts.com/blackrock
 [
   {
     "symbol": "NVDA",
