@@ -130,10 +130,9 @@ bot_field() { echo "$1" | cut -d'|' -f"$2"; }
 
 # Sorted keys for any associative array passed by name
 sorted_keys() {
-    local -n _arr=$1
-    echo "${!_arr[@]}" | tr ' ' '\n' | sort -n
+    local -n arr_ref=$1
+    echo "${!arr_ref[@]}" | tr ' ' '\n' | sort -n
 }
-
 # ───────────────────────────────────────────────────────────────
 #  SECTION 5 — BOT ACTIONS  (start / kill)
 # ───────────────────────────────────────────────────────────────
@@ -173,20 +172,19 @@ kill_bot() {
 
 # Start all bots in a given associative array (by name-ref)
 start_all_bots() {
-    local -n _bots=$1
-    for key in $(sorted_keys _bots); do
-        start_bot "${_bots[$key]}"
+    local -n bots_ref=$1
+    for key in $(sorted_keys bots_ref); do
+        start_bot "${bots_ref[$key]}"
     done
 }
 
 # Kill all bots in a given associative array (by name-ref)
 kill_all_bots() {
-    local -n _bots=$1
-    for key in $(sorted_keys _bots); do
-        kill_bot "$(bot_field "${_bots[$key]}" 1)"
+    local -n bots_ref=$1
+    for key in $(sorted_keys bots_ref); do
+        kill_bot "$(bot_field "${bots_ref[$key]}" 1)"
     done
 }
-
 # ───────────────────────────────────────────────────────────────
 #  SECTION 6 — GENERIC BOT GROUP MENU
 #  Reusable function — avoids copy-pasting the same menu 6 times
@@ -230,7 +228,7 @@ bot_group_menu() {
                     read -p "  Press Enter to continue..."
                 fi
                 ;;
-            A|a) start_all_bots _bots; read -p "  Press Enter to continue..." ;;
+            A|a) start_all_bots "$arr_name"; read -p "  Press Enter to continue..." ;;
             K|k) bot_kill_menu "$arr_name" "$label" ;;
             0)   break ;;
             *)   echo -e "${RED}  Invalid option.${NC}"; sleep 1 ;;
