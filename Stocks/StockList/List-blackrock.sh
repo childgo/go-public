@@ -1,3 +1,4 @@
+https://raw.githubusercontent.com/childgo/go-public/refs/heads/master/Stocks/StockList/List-spy500.sh
 [
   {
     "symbol": "NVDA",
