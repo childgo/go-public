@@ -1,4 +1,7 @@
 #!/bin/bash
+
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/refs/heads/master/whm/ioc_checksessions_files.sh)
+
 # Scan for compromised cPanel/WHM session files.
 #
 # Each check function inspects a single session file and, if the IOC
