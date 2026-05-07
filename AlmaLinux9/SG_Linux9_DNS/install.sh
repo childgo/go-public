@@ -5,6 +5,8 @@ clear
 systemctl stop pdns
 systemctl disable pdns
 systemctl mask pdns
+pkill -f pdns_server
+
 
 #Uninstall
 chattr -i /etc/resolv.conf && systemctl restart NetworkManager
