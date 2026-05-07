@@ -2,6 +2,9 @@
 #bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/refs/heads/master/AlmaLinux9/SG_Linux9_DNS/install.sh)
 clear
 
+#Test
+#curl -s "http://66.111.53.72:80/SecureGateway-dns-query?name=gmail.com&type=A" | jq
+
 systemctl stop pdns
 systemctl disable pdns
 systemctl mask pdns
