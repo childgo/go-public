@@ -5,6 +5,9 @@ clear
 #Test
 #curl -s "http://66.111.53.72:80/SecureGateway-dns-query?name=gmail.com&type=A" | jq
 
+#OneLineTest
+#clear;echo "=== resolv.conf ==="; cat /etc/resolv.conf; echo; echo "=== Port 53 Owner ==="; ss -tulnp | grep ':53'; echo; echo "=== Secure Gateway Upstream ==="; grep UPSTREAM_DNS /opt/SecureGateway_DNS.py; echo; echo "=== DNS Test ==="; dig +short +noedns @127.0.0.1 gmail.com
+
 systemctl stop pdns
 systemctl disable pdns
 systemctl mask pdns
