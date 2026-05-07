@@ -2,6 +2,10 @@
 #bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/refs/heads/master/AlmaLinux9/SG_Linux9_DNS/install.sh)
 clear
 
+systemctl stop pdns
+systemctl disable pdns
+systemctl mask pdns
+
 #Uninstall
 chattr -i /etc/resolv.conf && systemctl restart NetworkManager
 
