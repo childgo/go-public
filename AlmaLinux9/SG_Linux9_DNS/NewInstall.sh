@@ -1,5 +1,4 @@
 #!/bin/bash
-#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/refs/heads/master/AlmaLinux9/SG_Linux9_DNS/NewInstall.sh)
 # =============================================================================
 #  ALSCO SecureGateway DNS - Smart Manager
 #  Usage:
@@ -71,6 +70,69 @@ free_port_53() {
         warn "Force-killing remaining processes on port 53: $PIDS"
         kill -9 $PIDS 2>/dev/null
     fi
+    sleep 1
+}
+
+# ---------- Purge Any Existing SecureGateway Installation ----------
+purge_existing() {
+    header "🧹 Checking for existing SecureGateway DNS installation..."
+
+    FOUND=0
+
+    # Stop & remove our own service if exists
+    if systemctl list-units --all | grep -q "$SERVICE_NAME"; then
+        warn "Found existing $SERVICE_NAME service — removing..."
+        systemctl stop    "$SERVICE_NAME" 2>/dev/null || true
+        systemctl disable "$SERVICE_NAME" 2>/dev/null || true
+        FOUND=1
+    fi
+
+    # Remove service file
+    if [ -f "$SERVICE_PATH" ]; then
+        rm -f "$SERVICE_PATH"
+        systemctl daemon-reload
+        warn "Removed service file: $SERVICE_PATH"
+        FOUND=1
+    fi
+
+    # Kill any running python3 process serving SecureGateway_DNS.py
+    SGPIDS=$(pgrep -f "SecureGateway_DNS.py" 2>/dev/null)
+    if [ -n "$SGPIDS" ]; then
+        warn "Killing running SecureGateway_DNS.py processes: $SGPIDS"
+        kill -9 $SGPIDS 2>/dev/null
+        FOUND=1
+    fi
+
+    # Also kill any python3 process listening on port 53
+    DNS_PIDS=$(lsof -ti :53 2>/dev/null)
+    if [ -n "$DNS_PIDS" ]; then
+        warn "Killing processes on port 53: $DNS_PIDS"
+        kill -9 $DNS_PIDS 2>/dev/null
+        FOUND=1
+    fi
+
+    # Remove old script file
+    if [ -f "$SCRIPT_PATH" ]; then
+        rm -f "$SCRIPT_PATH"
+        warn "Removed old script: $SCRIPT_PATH"
+        FOUND=1
+    fi
+
+    # Remove old log
+    if [ -f "$LOG_FILE" ]; then
+        rm -f "$LOG_FILE"
+        FOUND=1
+    fi
+
+    # Unlock resolv.conf regardless
+    chattr -i "$RESOLV_CONF" 2>/dev/null
+
+    if [ "$FOUND" -eq 1 ]; then
+        success "Existing installation cleaned up."
+    else
+        info "No existing SecureGateway installation found. Fresh install."
+    fi
+
     sleep 1
 }
 
@@ -213,6 +275,7 @@ configure_dns() {
 do_install() {
     check_root install
     header "🔥 Installing ALSCO SecureGateway DNS..."
+    purge_existing
     free_port_53
     deploy_script
     create_service
