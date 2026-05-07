@@ -1,6 +1,6 @@
 #!/bin/bash
 # ALSCO Secure Gateway DNS Manager for AlmaLinux 9
-#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/refs/heads/master/AlmaLinux9/SG_Linux9_DNS/install.sh)
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/refs/heads/master/AlmaLinux9/SG_Linux9_DNS/UnInstall.sh)
 
 set -u
 
