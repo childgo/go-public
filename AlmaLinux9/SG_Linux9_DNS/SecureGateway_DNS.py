@@ -14,6 +14,7 @@ QTYPE_MAP = {
     1: "A",
     2: "NS",
     5: "CNAME",
+    6: "SOA",
     15: "MX",
     16: "TXT",
     28: "AAAA",
@@ -28,6 +29,7 @@ def parse_query(data):
 
     while True:
         length = data[idx]
+
         if length == 0:
             idx += 1
             break
@@ -46,6 +48,9 @@ def encode_domain(name):
     name = str(name).rstrip(".")
     result = b""
 
+    if not name:
+        return b"\x00"
+
     for part in name.split("."):
         b = part.encode("utf-8")
         result += struct.pack("!B", len(b)) + b
@@ -59,7 +64,7 @@ def upstream_query(domain, qtype_name):
         "type": qtype_name
     })
 
-    req = Request(url, headers={"User-Agent": "SecureGateway-DNS/3.0"})
+    req = Request(url, headers={"User-Agent": "SecureGateway-DNS/4.0"})
     raw = urlopen(req, timeout=10).read().decode("utf-8", "ignore")
 
     return json.loads(raw)
@@ -85,6 +90,7 @@ def make_rdata(record_type, data):
 
     if record_type == "MX":
         parts = data.split()
+
         if len(parts) >= 2 and parts[0].isdigit():
             priority = int(parts[0])
             host = parts[1]
@@ -96,9 +102,36 @@ def make_rdata(record_type, data):
 
     if record_type == "TXT":
         text = data.encode("utf-8")
+
         if len(text) > 255:
             text = text[:255]
+
         return struct.pack("!B", len(text)) + text
+
+    if record_type == "SOA":
+        # Expected format:
+        # ns1.example.com. hostmaster.example.com. 2026051001 3600 1800 1209600 300
+        parts = data.split()
+
+        if len(parts) < 7:
+            return None
+
+        try:
+            mname = parts[0]
+            rname = parts[1]
+            serial = int(parts[2])
+            refresh = int(parts[3])
+            retry = int(parts[4])
+            expire = int(parts[5])
+            minimum = int(parts[6])
+
+            return (
+                encode_domain(mname) +
+                encode_domain(rname) +
+                struct.pack("!IIIII", serial, refresh, retry, expire, minimum)
+            )
+        except Exception:
+            return None
 
     return None
 
@@ -107,7 +140,11 @@ def convert_answers(dns_json, requested_type):
     answers = []
 
     for item in dns_json.get("Answer", []):
-        item_type_num = int(item.get("type", 0))
+        try:
+            item_type_num = int(item.get("type", 0))
+        except Exception:
+            continue
+
         item_type = QTYPE_MAP.get(item_type_num)
 
         if not item_type:
@@ -121,9 +158,14 @@ def convert_answers(dns_json, requested_type):
         if not rdata:
             continue
 
+        try:
+            ttl = int(item.get("TTL", TTL_DEFAULT))
+        except Exception:
+            ttl = TTL_DEFAULT
+
         answers.append({
             "type": item_type,
-            "ttl": int(item.get("TTL", TTL_DEFAULT)),
+            "ttl": ttl,
             "rdata": rdata
         })
 
@@ -133,6 +175,7 @@ def convert_answers(dns_json, requested_type):
 def build_response(query, question, answers, rcode=0):
     transaction_id = query[:2]
 
+    # 0x8180 = standard DNS response, recursion available, no error
     flags = 0x8180 | rcode
 
     response = (
@@ -160,27 +203,34 @@ def main():
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.bind((LISTEN_IP, LISTEN_PORT))
 
-    print(f"Secure Gateway DNS running on {LISTEN_IP}:{LISTEN_PORT}")
+    print("Secure Gateway DNS running on {}:{}".format(LISTEN_IP, LISTEN_PORT), flush=True)
 
     while True:
         data, addr = sock.recvfrom(4096)
 
         try:
             domain, qtype_num, qclass, question = parse_query(data)
-            qtype_name = QTYPE_MAP.get(qtype_num, "A")
+            qtype_name = QTYPE_MAP.get(qtype_num)
 
-            print(f"Query: {domain} type={qtype_name}")
+            if not qtype_name:
+                print("Unsupported query type {} for {}".format(qtype_num, domain), flush=True)
+                response = build_response(data, question, [], rcode=4)
+                sock.sendto(response, addr)
+                continue
+
+            print("Query: {} type={}".format(domain, qtype_name), flush=True)
 
             dns_json = upstream_query(domain, qtype_name)
             answers = convert_answers(dns_json, qtype_name)
 
-            print(f"Answer count: {len(answers)}")
+            print("Answer count: {}".format(len(answers)), flush=True)
 
             response = build_response(data, question, answers, rcode=0)
             sock.sendto(response, addr)
 
         except Exception as e:
-            print(f"ERROR: {e}")
+            print("ERROR: {}".format(e), flush=True)
+
             try:
                 response = build_response(data, data[12:], [], rcode=2)
                 sock.sendto(response, addr)
