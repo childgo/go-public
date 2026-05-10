@@ -1,4 +1,8 @@
 #!/bin/bash
+
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/refs/heads/master/AlmaLinux9/SG_Linux9_DNS/install.sh)
+clear
+
 set -e
 
 SCRIPT_PATH="/opt/SecureGateway_DNS.py"
