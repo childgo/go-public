@@ -1,33 +1,29 @@
 #!/bin/bash
-#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/refs/heads/master/AlmaLinux9/SG_Linux9_DNS/install.sh)
-clear
-
 set -e
 
 SCRIPT_PATH="/opt/SecureGateway_DNS.py"
 SERVICE_PATH="/etc/systemd/system/SecureGateway_DNS.service"
-SCRIPT_URL="https://raw.githubusercontent.com/childgo/go-public/refs/heads/master/AlmaLinux9/SG_Linux9_DNS/SecureGateway_DNS.py"
 RESOLV_CONF="/etc/resolv.conf"
+SCRIPT_URL="https://raw.githubusercontent.com/childgo/go-public/refs/heads/master/AlmaLinux9/SG_Linux9_DNS/SecureGateway_DNS.py"
 
+clear
 echo "Setting up ALSCO Secure Gateway DNS..."
 
-echo "Stopping DNS services that may use port 53..."
-systemctl stop SecureGateway_DNS.service 2>/dev/null || true
-systemctl disable SecureGateway_DNS.service 2>/dev/null || true
-pkill -f SecureGateway_DNS.py 2>/dev/null || true
-
+echo "Stopping PowerDNS..."
 systemctl stop pdns 2>/dev/null || true
 systemctl disable pdns 2>/dev/null || true
 systemctl mask pdns 2>/dev/null || true
 pkill -f pdns_server 2>/dev/null || true
 
-echo "Installing required packages..."
-dnf install -y python3 curl bind-utils
+echo "Stopping old SecureGateway DNS..."
+systemctl stop SecureGateway_DNS.service 2>/dev/null || true
+systemctl disable SecureGateway_DNS.service 2>/dev/null || true
+pkill -f SecureGateway_DNS.py 2>/dev/null || true
 
-echo "Unlocking resolv.conf if locked..."
+echo "Unlocking resolv.conf..."
 chattr -i "$RESOLV_CONF" 2>/dev/null || true
 
-echo "Downloading SecureGateway_DNS.py..."
+echo "Downloading Python DNS script..."
 curl -fsSL -o "$SCRIPT_PATH" "$SCRIPT_URL"
 chmod 755 "$SCRIPT_PATH"
 
@@ -61,7 +57,7 @@ systemctl restart SecureGateway_DNS.service
 
 sleep 2
 
-echo "Configuring local resolver..."
+echo "Setting resolver to local DNS..."
 cat > "$RESOLV_CONF" <<EOF
 nameserver 127.0.0.1
 options timeout:2 attempts:2
@@ -72,6 +68,9 @@ chattr +i "$RESOLV_CONF"
 echo "Testing DNS..."
 dig +short +noedns @127.0.0.1 gmail.com A || true
 dig +short +noedns @127.0.0.1 gmail.com NS || true
+
+echo "Checking port 53..."
+ss -tulnp | grep ':53' || true
 
 echo "Service status:"
 systemctl status SecureGateway_DNS.service --no-pager
