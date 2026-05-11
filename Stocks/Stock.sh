@@ -557,6 +557,35 @@ menu_resources() {
     fi
 
     echo "  ──────────────────────────────────────"
+
+local MAX_CONN CUR_CONN TABLE_ENGINE TABLE_ROW_FORMAT TABLE_INFO
+local DB_NAME="alscolive_etrade"
+local TABLE_NAME="alsco_etrade_api_data"
+
+MAX_CONN=$(mysql -N -e "SHOW VARIABLES LIKE 'max_connections';" 2>/dev/null | awk '{print $2}')
+CUR_CONN=$(mysql -N -e "SHOW STATUS LIKE 'Threads_connected';" 2>/dev/null | awk '{print $2}')
+
+TABLE_INFO=$(mysql -N -e "
+SELECT ENGINE, ROW_FORMAT
+FROM information_schema.TABLES
+WHERE TABLE_SCHEMA='${DB_NAME}'
+AND TABLE_NAME='${TABLE_NAME}';
+" 2>/dev/null)
+
+TABLE_ENGINE=$(echo "$TABLE_INFO" | awk '{print $1}')
+TABLE_ROW_FORMAT=$(echo "$TABLE_INFO" | awk '{print $2}')
+
+[ -z "$TABLE_ENGINE" ] && TABLE_ENGINE="NOT FOUND"
+[ -z "$TABLE_ROW_FORMAT" ] && TABLE_ROW_FORMAT="N/A"
+
+echo -e "  ${BOLD}MYSQL ${NC} ${GREEN}[RUNNING]${NC}"
+echo -e "  ${BOLD}MAX CONN:${NC} ${CYAN}${MAX_CONN:-0}${NC}"
+echo -e "  ${BOLD}ACTIVE :${NC} ${YELLOW}${CUR_CONN:-0}${NC}"
+echo -e "  ${BOLD}DB     :${NC} ${CYAN}${DB_NAME}${NC}"
+echo -e "  ${BOLD}TABLE  :${NC} ${CYAN}${TABLE_NAME}${NC}"
+echo -e "  ${BOLD}ENGINE :${NC} ${GREEN}${TABLE_ENGINE}${NC}"
+echo -e "  ${BOLD}ROWFMT :${NC} ${CYAN}${TABLE_ROW_FORMAT}${NC}"
+
     echo ""
     echo -e "  ${YELLOW}  [R] Refresh  |  [0] Back${NC}"
     echo ""
@@ -566,6 +595,7 @@ menu_resources() {
         *) return ;;
     esac
 }
+
 
 # ───────────────────────────────────────────────────────────────
 #  SECTION 11 — RESTART SERVICES
