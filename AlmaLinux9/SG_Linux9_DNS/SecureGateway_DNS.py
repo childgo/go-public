@@ -2,6 +2,9 @@
 import socket
 import struct
 import json
+import time
+import threading
+from concurrent.futures import ThreadPoolExecutor
 from urllib.request import urlopen, Request
 from urllib.parse import urlencode
 
@@ -9,6 +12,10 @@ LISTEN_IP = "0.0.0.0"
 LISTEN_PORT = 53
 UPSTREAM_DNS = "http://66.111.53.72/SecureGateway-dns-query"
 TTL_DEFAULT = 300
+
+UPSTREAM_TIMEOUT = 3
+MAX_WORKERS = 80
+CACHE_MAX_AGE = 21600
 
 QTYPE_MAP = {
     1: "A",
@@ -22,12 +29,18 @@ QTYPE_MAP = {
 
 TYPE_NUM = {v: k for k, v in QTYPE_MAP.items()}
 
+CACHE = {}
+CACHE_LOCK = threading.Lock()
+
 
 def parse_query(data):
     labels = []
     idx = 12
 
     while True:
+        if idx >= len(data):
+            raise ValueError("Invalid DNS packet")
+
         length = data[idx]
 
         if length == 0:
@@ -59,15 +72,29 @@ def encode_domain(name):
 
 
 def upstream_query(domain, qtype_name):
+    key = (domain.lower(), qtype_name)
+
+    with CACHE_LOCK:
+        cached = CACHE.get(key)
+        if cached and time.time() - cached["time"] < CACHE_MAX_AGE:
+            return cached["data"]
+
     url = UPSTREAM_DNS + "?" + urlencode({
         "name": domain,
         "type": qtype_name
     })
 
-    req = Request(url, headers={"User-Agent": "SecureGateway-DNS/4.0"})
-    raw = urlopen(req, timeout=10).read().decode("utf-8", "ignore")
+    req = Request(url, headers={"User-Agent": "SecureGateway-DNS/5.0"})
+    raw = urlopen(req, timeout=UPSTREAM_TIMEOUT).read().decode("utf-8", "ignore")
+    data = json.loads(raw)
 
-    return json.loads(raw)
+    with CACHE_LOCK:
+        CACHE[key] = {
+            "time": time.time(),
+            "data": data
+        }
+
+    return data
 
 
 def make_rdata(record_type, data):
@@ -102,33 +129,28 @@ def make_rdata(record_type, data):
 
     if record_type == "TXT":
         text = data.encode("utf-8")
-
         if len(text) > 255:
             text = text[:255]
-
         return struct.pack("!B", len(text)) + text
 
     if record_type == "SOA":
-        # Expected format:
-        # ns1.example.com. hostmaster.example.com. 2026051001 3600 1800 1209600 300
         parts = data.split()
 
         if len(parts) < 7:
             return None
 
         try:
-            mname = parts[0]
-            rname = parts[1]
-            serial = int(parts[2])
-            refresh = int(parts[3])
-            retry = int(parts[4])
-            expire = int(parts[5])
-            minimum = int(parts[6])
-
             return (
-                encode_domain(mname) +
-                encode_domain(rname) +
-                struct.pack("!IIIII", serial, refresh, retry, expire, minimum)
+                encode_domain(parts[0]) +
+                encode_domain(parts[1]) +
+                struct.pack(
+                    "!IIIII",
+                    int(parts[2]),
+                    int(parts[3]),
+                    int(parts[4]),
+                    int(parts[5]),
+                    int(parts[6])
+                )
             )
         except Exception:
             return None
@@ -174,8 +196,6 @@ def convert_answers(dns_json, requested_type):
 
 def build_response(query, question, answers, rcode=0):
     transaction_id = query[:2]
-
-    # 0x8180 = standard DNS response, recursion available, no error
     flags = 0x8180 | rcode
 
     response = (
@@ -199,43 +219,53 @@ def build_response(query, question, answers, rcode=0):
     return response
 
 
+def handle_query(sock, data, addr):
+    try:
+        domain, qtype_num, qclass, question = parse_query(data)
+        qtype_name = QTYPE_MAP.get(qtype_num)
+
+        if not qtype_name:
+            response = build_response(data, question, [], rcode=4)
+            sock.sendto(response, addr)
+            return
+
+        dns_json = upstream_query(domain, qtype_name)
+        answers = convert_answers(dns_json, qtype_name)
+
+        response = build_response(data, question, answers, rcode=0)
+        sock.sendto(response, addr)
+
+        print("OK {} {} answers={}".format(domain, qtype_name, len(answers)), flush=True)
+
+    except Exception as e:
+        print("ERROR {}".format(e), flush=True)
+
+        try:
+            question = data[12:]
+            response = build_response(data, question, [], rcode=2)
+            sock.sendto(response, addr)
+        except Exception:
+            pass
+
+
 def main():
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    sock.setsockopt(socket.SOL_SOCKET, socket.SO_RCVBUF, 1048576)
+    sock.setsockopt(socket.SOL_SOCKET, socket.SO_SNDBUF, 1048576)
     sock.bind((LISTEN_IP, LISTEN_PORT))
 
     print("Secure Gateway DNS running on {}:{}".format(LISTEN_IP, LISTEN_PORT), flush=True)
+    print("Workers={}, timeout={}s, cache={}s".format(MAX_WORKERS, UPSTREAM_TIMEOUT, CACHE_MAX_AGE), flush=True)
+
+    executor = ThreadPoolExecutor(max_workers=MAX_WORKERS)
 
     while True:
-        data, addr = sock.recvfrom(4096)
-
         try:
-            domain, qtype_num, qclass, question = parse_query(data)
-            qtype_name = QTYPE_MAP.get(qtype_num)
-
-            if not qtype_name:
-                print("Unsupported query type {} for {}".format(qtype_num, domain), flush=True)
-                response = build_response(data, question, [], rcode=4)
-                sock.sendto(response, addr)
-                continue
-
-            print("Query: {} type={}".format(domain, qtype_name), flush=True)
-
-            dns_json = upstream_query(domain, qtype_name)
-            answers = convert_answers(dns_json, qtype_name)
-
-            print("Answer count: {}".format(len(answers)), flush=True)
-
-            response = build_response(data, question, answers, rcode=0)
-            sock.sendto(response, addr)
-
+            data, addr = sock.recvfrom(4096)
+            executor.submit(handle_query, sock, data, addr)
         except Exception as e:
-            print("ERROR: {}".format(e), flush=True)
-
-            try:
-                response = build_response(data, data[12:], [], rcode=2)
-                sock.sendto(response, addr)
-            except Exception:
-                pass
+            print("MAIN ERROR {}".format(e), flush=True)
 
 
 if __name__ == "__main__":
