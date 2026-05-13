@@ -890,6 +890,50 @@ menu_ttyd() {
 
 
 
+
+
+
+menu_clear_logs() {
+
+    LOG_DIR="/home/alscolive/public_html/python/trigger_allPY/Error_Log"
+
+    while true; do
+        print_header
+
+        echo -e "${BOLD}  🧹  CLEAR LOG FILES${NC}"
+        echo "  ──────────────────────────────────────"
+
+        echo -e "  ${BOLD}[1]${NC} Clear Alpaca_Daily_LimitBuy.txt"
+        echo -e "  ${BOLD}[2]${NC} Clear Alpaca_Daily_MarketBuy.txt"
+        echo -e "  ${BOLD}[3]${NC} Clear Etrade_Daily_LimitBuy.txt"
+        echo -e "  ${BOLD}[4]${NC} Clear Etrade_Daily_MarketBuy.txt"
+        echo -e "  ${BOLD}[5]${NC} Clear Etrade_SPY_LimitBuy.txt"
+        echo -e "  ${BOLD}[6]${NC} Clear Etrade_SPY_MarketBuy.txt"
+        echo ""
+        echo -e "  ${BOLD}[A]${NC} Clear ALL txt logs"
+        echo -e "  ${BOLD}[0]${NC} Back"
+        echo ""
+        read -p "  Choose: " choice
+
+        case "${choice^^}" in
+            1) truncate -s 0 "$LOG_DIR/Alpaca_Daily_LimitBuy.txt" ;;
+            2) truncate -s 0 "$LOG_DIR/Alpaca_Daily_MarketBuy.txt" ;;
+            3) truncate -s 0 "$LOG_DIR/Etrade_Daily_LimitBuy.txt" ;;
+            4) truncate -s 0 "$LOG_DIR/Etrade_Daily_MarketBuy.txt" ;;
+            5) truncate -s 0 "$LOG_DIR/Etrade_SPY_LimitBuy.txt" ;;
+            6) truncate -s 0 "$LOG_DIR/Etrade_SPY_MarketBuy.txt" ;;
+            A) truncate -s 0 "$LOG_DIR"/*.txt ;;
+            0) return ;;
+            *) echo -e "${RED}Invalid option${NC}"; sleep 1; continue ;;
+        esac
+
+        echo -e "${GREEN}✔ Log file cleared successfully.${NC}"
+        echo ""
+        read -p "Press Enter to continue..."
+    done
+}
+
+
 # ───────────────────────────────────────────────────────────────
 #  SECTION 14 — MAIN MENU
 # ───────────────────────────────────────────────────────────────
@@ -919,6 +963,7 @@ while true; do
     echo -e "  ${BOLD}[12]${NC} ⚡  Market Power"
     echo -e "  ${BOLD}[13]${NC} 🧪  Data Simulation"
     echo -e "  ${BOLD}[14]${NC} 🌐  ttyd Web Terminal"   # ← ADD THIS
+    echo -e "  ${BOLD}[15]${NC} 🧹  Clear Log Files"
     echo "  ──────────────────────────────────────"
     echo -e "  ${BOLD}[0]${NC} 🚪  Exit"
     echo ""
@@ -939,6 +984,7 @@ while true; do
         12) _tool_menu "MarketPower" "$SCRIPT_MP"  "⚡  MARKET POWER" ;;
         13) _tool_menu "Simulation"  "$SCRIPT_SIM" "🧪  SIMULATION - REAL DATA" "AutoSelectDB_No" ;;
         14) menu_ttyd ;;   # ← ADD THIS
+        15) menu_clear_logs ;;
         0)  echo -e "${CYAN}  Bye!${NC}"; exit 0 ;;
         *)  echo -e "${RED}  Invalid option.${NC}"; sleep 1 ;;
     esac
