@@ -57,6 +57,13 @@ declare -A ETRADE_Daily_LimitBuy_BOTS=(
     [4]="Etrade_Daily_LimitBuy_QQQ|Etrade-Daily-LimitBuy|QQQ|QQQ"
     [5]="Etrade_Daily_LimitBuy_MSFT|Etrade-Daily-LimitBuy|MSFT|MSFT"
     [6]="Etrade_Daily_LimitBuy_AMD|Etrade-Daily-LimitBuy|AMD|AMD"
+
+    [7]="Etrade_Daily_LimitBuy_DXYZ|Etrade-Daily-LimitBuy|DXYZ|DXYZ"
+    [8]="Etrade_Daily_LimitBuy_SCHD|Etrade-Daily-LimitBuy|SCHD|SCHD"
+    [9]="Etrade_Daily_LimitBuy_VYM|Etrade-Daily-LimitBuy|VYM|VYM"
+    [10]="Etrade_Daily_LimitBuy_VOO|Etrade-Daily-LimitBuy|VOO|VOO"
+    [11]="Etrade_Daily_LimitBuy_WMT|Etrade-Daily-LimitBuy|WMT|WMT"
+    [12]="Etrade_Daily_LimitBuy_CRWV|Etrade-Daily-LimitBuy|CRWV|CRWV"
 )
 
 # ── Etrade SPY MarketBuy ───────────────────────────────────────
