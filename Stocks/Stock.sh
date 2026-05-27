@@ -228,7 +228,7 @@ bot_group_menu() {
         read -p "  Choose: " choice
 
         case $choice in
-            [1-9])
+            [0-9]*)
                 local entry="${_bots[$choice]}"
                 if [ -n "$entry" ]; then
                     start_bot "$entry"
