@@ -64,6 +64,10 @@ declare -A ETRADE_Daily_LimitBuy_BOTS=(
     [10]="Etrade_Daily_LimitBuy_VOO|Etrade-Daily-LimitBuy|VOO|VOO"
     [11]="Etrade_Daily_LimitBuy_WMT|Etrade-Daily-LimitBuy|WMT|WMT"
     [12]="Etrade_Daily_LimitBuy_CRWV|Etrade-Daily-LimitBuy|CRWV|CRWV"
+    [13]="Etrade_Daily_LimitBuy_DIS|Etrade-Daily-LimitBuy|DIS|DIS"
+    [14]="Etrade_Daily_LimitBuy_KO|Etrade-Daily-LimitBuy|KO|KO"
+
+    
 )
 
 # ── Etrade SPY MarketBuy ───────────────────────────────────────
@@ -73,7 +77,9 @@ declare -A ETRADE_SPY_MarketBuy_BOTS=(
 
 # ── Etrade SPY LimitBuy ────────────────────────────────────────
 declare -A ETRADE_SPY_LimitBuy_BOTS=(
-    [1]="Etrade_SPY_LimitBuy_Bot|Etrade-SPY-LimitBuy|SPY|SPY"
+    [1]="Etrade_SPY_LimitBuy_SPY|Etrade-SPY-LimitBuy|SPY|SPY"
+    [2]="Etrade_SPY_LimitBuy_VOO|Etrade-SPY-LimitBuy|VOO|VOO"
+    [3]="Etrade_SPY_LimitBuy_QQQ|Etrade-SPY-LimitBuy|QQQ|QQQ"
 )
 
 # ── Alpaca Daily MarketBuy ─────────────────────────────────────
@@ -94,6 +100,8 @@ declare -A ALPACA_Daily_LimitBuy_BOTS=(
     [4]="Alpaca_Daily_LimitBuy_MSFT|Alpaca-Daily-LimitBuy|MSFT|MSFT"
     [5]="Alpaca_Daily_LimitBuy_PLTR|Alpaca-Daily-LimitBuy|PLTR|PLTR"
     [6]="Alpaca_Daily_LimitBuy_AMD|Alpaca-Daily-LimitBuy|AMD|AMD"
+    [7]="Alpaca_Daily_LimitBuy_DIS|Alpaca-Daily-LimitBuy|DIS|DIS"
+    [8]="Alpaca_Daily_LimitBuy_KO|Alpaca-Daily-LimitBuy|KO|KO"
 )
 
 # ───────────────────────────────────────────────────────────────
