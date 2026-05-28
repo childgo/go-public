@@ -67,6 +67,17 @@ declare -A ETRADE_Daily_LimitBuy_BOTS=(
     [13]="Etrade_Daily_LimitBuy_DIS|Etrade-Daily-LimitBuy|DIS|DIS"
     [14]="Etrade_Daily_LimitBuy_KO|Etrade-Daily-LimitBuy|KO|KO"
 
+    [15]="Etrade_Daily_LimitBuy_VTI|Etrade-Daily-LimitBuy|VTI|VTI"
+    [16]="Etrade_Daily_LimitBuy_SPMO|Etrade-Daily-LimitBuy|SPMO|SPMO"
+    [17]="Etrade_Daily_LimitBuy_VXUS|Etrade-Daily-LimitBuy|VXUS|VXUS"
+    [18]="Etrade_Daily_LimitBuy_IEFA|Etrade-Daily-LimitBuy|IEFA|IEFA"
+    [19]="Etrade_Daily_LimitBuy_VUG|Etrade-Daily-LimitBuy|VUG|VUG"
+    [20]="Etrade_Daily_LimitBuy_VEA|Etrade-Daily-LimitBuy|VEA|VEA"
+    [21]="Etrade_Daily_LimitBuy_VTV|Etrade-Daily-LimitBuy|VTV|VTV"
+    [22]="Etrade_Daily_LimitBuy_IJR|Etrade-Daily-LimitBuy|IJR|IJR"
+    [23]="Etrade_Daily_LimitBuy_IWF|Etrade-Daily-LimitBuy|IWF|IWF"
+    [24]="Etrade_Daily_LimitBuy_RSP|Etrade-Daily-LimitBuy|RSP|RSP"
+
     
 )
 
