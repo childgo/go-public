@@ -77,7 +77,8 @@ declare -A ETRADE_Daily_LimitBuy_BOTS=(
     [22]="Etrade_Daily_LimitBuy_IJR|Etrade-Daily-LimitBuy|IJR|IJR"
     [23]="Etrade_Daily_LimitBuy_IWF|Etrade-Daily-LimitBuy|IWF|IWF"
     [24]="Etrade_Daily_LimitBuy_RSP|Etrade-Daily-LimitBuy|RSP|RSP"
-
+    [25]="Etrade_Daily_LimitBuy_JEPQ|Etrade-Daily-LimitBuy|JEPQ|JEPQ"
+    [26]="Etrade_Daily_LimitBuy_JEPI|Etrade-Daily-LimitBuy|JEPI|JEPI"
     
 )
 
