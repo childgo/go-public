@@ -83,6 +83,7 @@ declare -A ETRADE_Daily_LimitBuy_BOTS=(
     [28]="Etrade_Daily_LimitBuy_JETS|Etrade-Daily-LimitBuy|JETS|JETS"
     [29]="Etrade_Daily_LimitBuy_XLE|Etrade-Daily-LimitBuy|XLE|XLE"
     [30]="Etrade_Daily_LimitBuy_XLF|Etrade-Daily-LimitBuy|XLF|XLF"
+    [31]="Etrade_Daily_LimitBuy_DGRO|Etrade-Daily-LimitBuy|DGRO|DGRO"
 
     
 )
