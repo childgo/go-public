@@ -79,6 +79,11 @@ declare -A ETRADE_Daily_LimitBuy_BOTS=(
     [24]="Etrade_Daily_LimitBuy_RSP|Etrade-Daily-LimitBuy|RSP|RSP"
     [25]="Etrade_Daily_LimitBuy_JEPQ|Etrade-Daily-LimitBuy|JEPQ|JEPQ"
     [26]="Etrade_Daily_LimitBuy_JEPI|Etrade-Daily-LimitBuy|JEPI|JEPI"
+    [27]="Etrade_Daily_LimitBuy_VWO|Etrade-Daily-LimitBuy|VWO|VWO"
+    [28]="Etrade_Daily_LimitBuy_JETS|Etrade-Daily-LimitBuy|JETS|JETS"
+    [29]="Etrade_Daily_LimitBuy_XLE|Etrade-Daily-LimitBuy|XLE|XLE"
+    [30]="Etrade_Daily_LimitBuy_XLF|Etrade-Daily-LimitBuy|XLF|XLF"
+
     
 )
 
@@ -1001,7 +1006,7 @@ while true; do
         1)  bot_group_menu ETRADE_Daily_MarketBuy_BOTS "📈  ETRADE-DAILY-MARKETBUY BOTS" ;;
         2)  bot_group_menu ALPACA_Daily_MarketBuy_BOTS "🦙  ALPACA-DAILY-MARKETBUY BOTS" ;;
         3)  bot_group_menu ETRADE_SPY_MarketBuy_BOTS   "📊  ETRADE-SPY-MARKETBUY BOTS"   ;;
-        4)  bot_group_menu ETRADE_Daily_LimitBuy_BOTS  "📈  ETRADE-DAILY-LIMITBUY BOTS"  ;;
+        4)  bot_group_menu ETRADE_Daily_LimitBuy_BOTS  "📈  igr"  ;;
         5)  bot_group_menu ALPACA_Daily_LimitBuy_BOTS  "🦙  ALPACA-DAILY-LIMITBUY BOTS"  ;;
         6)  bot_group_menu ETRADE_SPY_LimitBuy_BOTS    "📊  ETRADE-SPY-LIMITBUY BOTS"    ;;
         7)  menu_kill_all ;;
