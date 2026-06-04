@@ -263,7 +263,7 @@ bot_group_menu() {
                 ;;
             A|a) start_all_bots "$arr_name"; read -p "  Press Enter to continue..." ;;
             K|k) bot_kill_menu "$arr_name" "$label" ;;
-            0)   break ;;
+            
             *)   echo -e "${RED}  Invalid option.${NC}"; sleep 1 ;;
         esac
     done
@@ -1006,7 +1006,7 @@ while true; do
         1)  bot_group_menu ETRADE_Daily_MarketBuy_BOTS "📈  ETRADE-DAILY-MARKETBUY BOTS" ;;
         2)  bot_group_menu ALPACA_Daily_MarketBuy_BOTS "🦙  ALPACA-DAILY-MARKETBUY BOTS" ;;
         3)  bot_group_menu ETRADE_SPY_MarketBuy_BOTS   "📊  ETRADE-SPY-MARKETBUY BOTS"   ;;
-        4)  bot_group_menu ETRADE_Daily_LimitBuy_BOTS  "📈  igr"  ;;
+        4)  bot_group_menu ETRADE_Daily_LimitBuy_BOTS  "📈  ETRADE-DAILY-LIMITBUY BOTS"  ;;
         5)  bot_group_menu ALPACA_Daily_LimitBuy_BOTS  "🦙  ALPACA-DAILY-LIMITBUY BOTS"  ;;
         6)  bot_group_menu ETRADE_SPY_LimitBuy_BOTS    "📊  ETRADE-SPY-LIMITBUY BOTS"    ;;
         7)  menu_kill_all ;;
