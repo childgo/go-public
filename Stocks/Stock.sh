@@ -94,7 +94,8 @@ declare -A ETRADE_Daily_LimitBuy_BOTS=(
     [37]="Etrade_Daily_LimitBuy_NDAQ|Etrade-Daily-LimitBuy|NDAQ|NDAQ"
     [38]="Etrade_Daily_LimitBuy_MARS|Etrade-Daily-LimitBuy|MARS|MARS"
     [39]="Etrade_Daily_LimitBuy_NASA|Etrade-Daily-LimitBuy|NASA|NASA"
-    
+    [40]="Etrade_Daily_LimitBuy_MAGS|Etrade-Daily-LimitBuy|MAGS|MAGS"
+
 )
 
 # ── Etrade SPY MarketBuy ───────────────────────────────────────
@@ -107,6 +108,10 @@ declare -A ETRADE_SPY_LimitBuy_BOTS=(
     [1]="Etrade_SPY_LimitBuy_SPY|Etrade-SPY-LimitBuy|SPY|SPY"
     [2]="Etrade_SPY_LimitBuy_VOO|Etrade-SPY-LimitBuy|VOO|VOO"
     [3]="Etrade_SPY_LimitBuy_QQQ|Etrade-SPY-LimitBuy|QQQ|QQQ"
+    [4]="Etrade_SPY_LimitBuy_MAGS|Etrade-SPY-LimitBuy|MAGS|MAGS"
+    [5]="Etrade_SPY_LimitBuy_VTI|Etrade-SPY-LimitBuy|VTI|VTI"
+    [6]="Etrade_SPY_LimitBuy_XLE|Etrade-SPY-LimitBuy|XLE|XLE"
+    [7]="Etrade_SPY_LimitBuy_XLF|Etrade-SPY-LimitBuy|XLF|XLF"
 )
 
 # ── Alpaca Daily MarketBuy ─────────────────────────────────────
@@ -129,6 +134,9 @@ declare -A ALPACA_Daily_LimitBuy_BOTS=(
     [6]="Alpaca_Daily_LimitBuy_AMD|Alpaca-Daily-LimitBuy|AMD|AMD"
     [7]="Alpaca_Daily_LimitBuy_DIS|Alpaca-Daily-LimitBuy|DIS|DIS"
     [8]="Alpaca_Daily_LimitBuy_KO|Alpaca-Daily-LimitBuy|KO|KO"
+    [9]="Alpaca_Daily_LimitBuy_MAGS|Alpaca-Daily-LimitBuy|MAGS|MAGS"
+    [10]="Alpaca_Daily_LimitBuy_JEPQ|Alpaca-Daily-LimitBuy|JEPQ|JEPQ"
+    [11]="Alpaca_Daily_LimitBuy_JEPI|Alpaca-Daily-LimitBuy|JEPI|JEPI"
 )
 
 # ───────────────────────────────────────────────────────────────
