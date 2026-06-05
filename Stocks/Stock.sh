@@ -90,6 +90,10 @@ declare -A ETRADE_Daily_LimitBuy_BOTS=(
     [34]="Etrade_Daily_LimitBuy_PEMX|Etrade-Daily-LimitBuy|PEMX|PEMX"
     [35]="Etrade_Daily_LimitBuy_QTUM|Etrade-Daily-LimitBuy|QTUM|QTUM"
     [36]="Etrade_Daily_LimitBuy_JPHY|Etrade-Daily-LimitBuy|JPHY|JPHY"
+
+    [37]="Etrade_Daily_LimitBuy_NDAQ|Etrade-Daily-LimitBuy|NDAQ|NDAQ"
+    [38]="Etrade_Daily_LimitBuy_MARS|Etrade-Daily-LimitBuy|MARS|MARS"
+    [39]="Etrade_Daily_LimitBuy_NASA|Etrade-Daily-LimitBuy|NASA|NASA"
     
 )
 
