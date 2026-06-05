@@ -85,6 +85,11 @@ declare -A ETRADE_Daily_LimitBuy_BOTS=(
     [30]="Etrade_Daily_LimitBuy_XLF|Etrade-Daily-LimitBuy|XLF|XLF"
     [31]="Etrade_Daily_LimitBuy_DGRO|Etrade-Daily-LimitBuy|DGRO|DGRO"
 
+    [32]="Etrade_Daily_LimitBuy_EWJ|Etrade-Daily-LimitBuy|EWJ|EWJ"
+    [33]="Etrade_Daily_LimitBuy_HACK|Etrade-Daily-LimitBuy|HACK|HACK"
+    [34]="Etrade_Daily_LimitBuy_PEMX|Etrade-Daily-LimitBuy|PEMX|PEMX"
+    [35]="Etrade_Daily_LimitBuy_QTUM|Etrade-Daily-LimitBuy|QTUM|QTUM"
+    [36]="Etrade_Daily_LimitBuy_JPHY|Etrade-Daily-LimitBuy|JPHY|JPHY"
     
 )
 
