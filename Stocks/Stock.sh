@@ -35,8 +35,6 @@ ETRADE_DAILY_LIMITBUY_ETFS=(
     QTUM
     JPHY
     MAGS
-    GLD
-    IBIT
 )
 
 # ───────────────────────────────────────────────────────────────
