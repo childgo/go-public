@@ -8,7 +8,9 @@
 clear
 ETRADE_DAILY_LIMITBUY_ETFS=(
     SPY
+    SPYM
     QQQ
+    QQQM
     SCHD
     VYM
     VOO
@@ -135,9 +137,11 @@ declare -A ETRADE_Daily_LimitBuy_BOTS=(
     [44]="Etrade_Daily_LimitBuy_MARS|Etrade-Daily-LimitBuy|MARS|MARS"
     [45]="Etrade_Daily_LimitBuy_NASA|Etrade-Daily-LimitBuy|NASA|NASA"
     [46]="Etrade_Daily_LimitBuy_MAGS|Etrade-Daily-LimitBuy|MAGS|MAGS"
-    
-    [47]="Etrade_Daily_LimitBuy_GLD|Etrade-Daily-LimitBuy|GLD|GLD"
-    [48]="Etrade_Daily_LimitBuy_IBIT|Etrade-Daily-LimitBuy|IBIT|IBIT"
+    [47]="Etrade_Daily_LimitBuy_SPYM|Etrade-Daily-LimitBuy|SPYM|SPYM"
+    [48]="Etrade_Daily_LimitBuy_QQQM|Etrade-Daily-LimitBuy|QQQM|QQQM"
+
+    [49]="Etrade_Daily_LimitBuy_GLD|Etrade-Daily-LimitBuy|GLD|GLD"
+    [50]="Etrade_Daily_LimitBuy_IBIT|Etrade-Daily-LimitBuy|IBIT|IBIT"
 
 
 )
