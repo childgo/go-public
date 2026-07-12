@@ -6,7 +6,38 @@
 # ═══════════════════════════════════════════════════════════════
 
 clear
-
+ETRADE_DAILY_LIMITBUY_ETFS=(
+    SPY
+    QQQ
+    SCHD
+    VYM
+    VOO
+    VTI
+    SPMO
+    VXUS
+    IEFA
+    VUG
+    VEA
+    VTV
+    IJR
+    IWF
+    RSP
+    JEPQ
+    JEPI
+    VWO
+    JETS
+    XLE
+    XLF
+    DGRO
+    EWJ
+    HACK
+    PEMX
+    QTUM
+    JPHY
+    MAGS
+    GLD
+    IBIT
+)
 
 # ───────────────────────────────────────────────────────────────
 #  SECTION 1 — TERMINAL COLORS
@@ -243,6 +274,42 @@ start_all_bots() {
     done
 }
 
+
+start_selected_tickers() {
+    local bots_array_name=$1
+    local ticker_array_name=$2
+
+    local -n bots_ref=$bots_array_name
+    local -n tickers_ref=$ticker_array_name
+
+    local ticker
+    local key
+    local entry
+    local buy_stock
+    local found
+
+    for ticker in "${tickers_ref[@]}"; do
+        found=false
+
+        for key in $(sorted_keys "$bots_array_name"); do
+            entry="${bots_ref[$key]}"
+            buy_stock=$(bot_field "$entry" 4)
+
+            if [[ "$buy_stock" == "$ticker" ]]; then
+                start_bot "$entry"
+                found=true
+                break
+            fi
+        done
+
+        if [[ "$found" == false ]]; then
+            echo -e "${YELLOW}⚠  ETF ticker $ticker was not found in $bots_array_name.${NC}"
+        fi
+    done
+}
+
+
+
 # Kill all bots in a given associative array (by name-ref)
 kill_all_bots() {
     local -n bots_ref=$1
@@ -280,8 +347,14 @@ bot_group_menu() {
 
         echo ""
         echo -e "  ${BOLD}[A]${NC} Start ALL"
+
+        if [[ "$arr_name" == "ETRADE_Daily_LimitBuy_BOTS" ]]; then
+            echo -e "  ${BOLD}[E]${NC} Start ETF bots only"
+        fi
+
         echo -e "  ${BOLD}[K]${NC} Kill a specific bot"
         echo -e "  ${BOLD}[0]${NC} Back to main menu"
+
         echo ""
         read -p "  Choose: " choice
 
@@ -294,8 +367,29 @@ bot_group_menu() {
                     read -p "  Press Enter to continue..."
                 fi
                 ;;
-            A|a) start_all_bots "$arr_name"; read -p "  Press Enter to continue..." ;;
-            K|k) bot_kill_menu "$arr_name" "$label" ;;
+            A|a)
+                start_all_bots "$arr_name"
+                read -p "  Press Enter to continue..."
+                ;;
+
+            E|e)
+                if [[ "$arr_name" == "ETRADE_Daily_LimitBuy_BOTS" ]]; then
+                    start_selected_tickers \
+                        ETRADE_Daily_LimitBuy_BOTS \
+                        ETRADE_DAILY_LIMITBUY_ETFS
+
+                    read -p "  Press Enter to continue..."
+                else
+                    echo -e "${RED}  Invalid option.${NC}"
+                    sleep 1
+                fi
+                ;;
+
+            K|k)
+                bot_kill_menu "$arr_name" "$label"
+                ;;
+
+    
             
             *)   echo -e "${RED}  Invalid option.${NC}"; sleep 1 ;;
         esac
