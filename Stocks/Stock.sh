@@ -211,7 +211,8 @@ EOF
 }
 
 is_running() {
-    screen -list | grep -q "$1"
+    # Exact match on session name — prevents SPY matching SPYM, QQQ matching QQQM
+    screen -list | grep -qE "[0-9]+\.${1}[[:space:]]"
 }
 
 status_icon() {
@@ -258,15 +259,32 @@ start_bot() {
 
 kill_bot() {
     local name=$1
-    if is_running "$name"; then
-        echo -e "  ${YELLOW}▶ Running:${NC} ${CYAN}screen -S $name -X quit${NC}"
-        screen -S "$name" -X quit
+    local sess
+
+    sess=$(screen -list | grep -oE "[0-9]+\.${name}[[:space:]]" | head -1 | tr -d '[:space:]')
+
+    if [ -n "$sess" ]; then
+        echo -e "  ${YELLOW}▶ Running:${NC} ${CYAN}screen -S $sess -X quit${NC}"
+        screen -S "$sess" -X quit
         sleep 0.3
-        echo -e "${RED}✘  $name killed.${NC}"
+        if is_running "$name"; then
+            echo -e "${RED}✘  $name did not die — retrying with SIGTERM...${NC}"
+            local pid="${sess%%.*}"
+            kill "$pid" 2>/dev/null
+            sleep 0.3
+        fi
+        if is_running "$name"; then
+            echo -e "${RED}✘  $name still running after retry.${NC}"
+        else
+            echo -e "${RED}✘  $name killed.${NC}"
+        fi
     else
         echo -e "${YELLOW}⚠  $name is not running.${NC}"
     fi
 }
+
+
+
 
 # Start all bots in a given associative array (by name-ref)
 start_all_bots() {
