@@ -327,7 +327,7 @@ dnf -y install nmap-ncat -y;sleep 3;
 
 
 cd /opt;sleep 3;
-wget https://download.configserver.com/csf.tgz;sleep 3;
+wget https://repo.alscoip.com/Linux/3rd-software/csf/csf.tgz;sleep 3;
 tar -xzf csf.tgz;sleep 3;
 cd csf;sleep 3;
 sh install.sh;sleep 3;
