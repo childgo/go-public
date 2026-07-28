@@ -160,6 +160,8 @@ declare -A ETRADE_SPY_LimitBuy_BOTS=(
     [5]="Etrade_SPY_LimitBuy_VTI|Etrade-SPY-LimitBuy|VTI|VTI"
     [6]="Etrade_SPY_LimitBuy_XLE|Etrade-SPY-LimitBuy|XLE|XLE"
     [7]="Etrade_SPY_LimitBuy_XLF|Etrade-SPY-LimitBuy|XLF|XLF"
+    [8]="Etrade_SPY_LimitBuy_SPYM|Etrade-SPY-LimitBuy|SPYM|SPYM"
+    [9]="Etrade_SPY_LimitBuy_QQQM|Etrade-SPY-LimitBuy|QQQM|QQQM"
 )
 
 # ── Alpaca Daily MarketBuy ─────────────────────────────────────
