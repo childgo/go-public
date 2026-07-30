@@ -187,6 +187,10 @@ declare -A ALPACA_Daily_LimitBuy_BOTS=(
     [9]="Alpaca_Daily_LimitBuy_MAGS|Alpaca-Daily-LimitBuy|MAGS|MAGS"
     [10]="Alpaca_Daily_LimitBuy_JEPQ|Alpaca-Daily-LimitBuy|JEPQ|JEPQ"
     [11]="Alpaca_Daily_LimitBuy_JEPI|Alpaca-Daily-LimitBuy|JEPI|JEPI"
+    [12]="Alpaca_Daily_LimitBuy_SPYM|Alpaca-Daily-LimitBuy|SPYM|SPYM"
+    [13]="Alpaca_Daily_LimitBuy_QQQM|Alpaca-Daily-LimitBuy|QQQM|QQQM"
+    [14]="Alpaca_Daily_LimitBuy_SMCI|Alpaca-Daily-LimitBuy|SMCI|SMCI"
+
 )
 
 # ───────────────────────────────────────────────────────────────
