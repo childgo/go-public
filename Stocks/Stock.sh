@@ -154,14 +154,9 @@ declare -A ETRADE_SPY_MarketBuy_BOTS=(
 # ── Etrade SPY LimitBuy ────────────────────────────────────────
 declare -A ETRADE_SPY_LimitBuy_BOTS=(
     [1]="Etrade_SPY_LimitBuy_SPY|Etrade-SPY-LimitBuy|SPY|SPY"
-    [2]="Etrade_SPY_LimitBuy_VOO|Etrade-SPY-LimitBuy|VOO|VOO"
-    [3]="Etrade_SPY_LimitBuy_QQQ|Etrade-SPY-LimitBuy|QQQ|QQQ"
-    [4]="Etrade_SPY_LimitBuy_MAGS|Etrade-SPY-LimitBuy|MAGS|MAGS"
-    [5]="Etrade_SPY_LimitBuy_VTI|Etrade-SPY-LimitBuy|VTI|VTI"
-    [6]="Etrade_SPY_LimitBuy_XLE|Etrade-SPY-LimitBuy|XLE|XLE"
-    [7]="Etrade_SPY_LimitBuy_XLF|Etrade-SPY-LimitBuy|XLF|XLF"
-    [8]="Etrade_SPY_LimitBuy_SPYM|Etrade-SPY-LimitBuy|SPYM|SPYM"
-    [9]="Etrade_SPY_LimitBuy_QQQM|Etrade-SPY-LimitBuy|QQQM|QQQM"
+    [2]="Etrade_SPY_LimitBuy_QQQ|Etrade-SPY-LimitBuy|QQQ|QQQ"
+    [3]="Etrade_SPY_LimitBuy_SPYM|Etrade-SPY-LimitBuy|SPYM|SPYM"
+    [4]="Etrade_SPY_LimitBuy_QQQM|Etrade-SPY-LimitBuy|QQQM|QQQM"
 )
 
 # ── Alpaca Daily MarketBuy ─────────────────────────────────────
