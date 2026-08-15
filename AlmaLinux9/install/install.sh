@@ -357,7 +357,7 @@ grep -r "TESTING =" /etc/csf/csf.conf
 echo "Start changing  protocal...."
 
 sed -i 's/TCP_IN =.*/TCP_IN =""/' /etc/csf/csf.conf
-sed -i 's/TCP_OUT =.*/TCP_OUT ="80,443,53"/' /etc/csf/csf.conf
+sed -i 's/TCP_OUT =.*/TCP_OUT ="80,443,53,587"/' /etc/csf/csf.conf
 sed -i 's/UDP_IN =.*/UDP_IN ="53"/' /etc/csf/csf.conf
 sed -i 's/UDP_OUT =.*/UDP_OUT ="53"/' /etc/csf/csf.conf
 
