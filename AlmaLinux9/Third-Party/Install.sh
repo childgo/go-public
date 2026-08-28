@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/refs/heads/master/AlmaLinux9/Third-Party/Install_New.sh)
+#bash <(curl -s https://raw.githubusercontent.com/childgo/go-public/refs/heads/master/AlmaLinux9/Third-Party/Install.sh)
 
 
 
