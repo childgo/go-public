@@ -39,6 +39,7 @@ options=(
 "Change Root Password 34"
 "Clear All SSH History 35"
 "Check Internet Speed 36"
+"Open Custom Ports in policycoreutils 37"
 
 "Quit")
 
@@ -1244,6 +1245,36 @@ curl -4 -L -o /dev/null -w $'\nDownloaded: %{size_download} bytes\nSpeed: %{spee
 ################################################################################################################
 
 
+################################################################################################################
+################################################################################################################
+
+
+"Open Custom Ports in policycoreutils 37")
+echo "Open Custom Ports in policycoreutils..."
+
+echo "Installing SELinux policy management tools..."
+echo "yum install policycoreutils-python"
+echo "----------------------------------------------"
+
+echo "Open Custom Ports in policycoreutils..."
+echo "semanage port -a -t http_port_t -p tcp 3389"
+echo "----------------------------------------------"
+
+
+echo "----------------------------------------------"
+
+echo "Checking Nginx network connection SELinux policy..."
+echo "semanage port -l | grep http_port_t"
+echo "----------------------------------------------"
+
+
+
+;;
+
+
+
+################################################################################################################
+################################################################################################################
 
 
 "Quit")
