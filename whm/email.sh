@@ -27,6 +27,7 @@ options=("Monitor Webmail 2096 Port and Load 1"
 "List all Default Address for Email Fail 21"
 "Update all Default Address for All Domains 22"
 "Clean up retry Exim spool files and restart EXIM 23"
+"ALSCO Full Email Report 24"
 
 "Quit")
 select opt in "${options[@]}"
@@ -1032,6 +1033,100 @@ echo "Finish"
 
 ;;
 ########################################################
+
+
+
+
+
+
+
+########################################################
+"ALSCO Full Email Report 24")
+clear
+
+RED=$'\e[0;31m'
+GREEN=$'\e[0;32m'
+YELLOW=$'\e[1;33m'
+NC=$'\e[0m'
+
+LOG_FILE="/var/log/exim_mainlog"
+TODAY=$(date '+%Y-%m-%d')
+
+echo "Please Type Hour in 24h format for hourly breakdown (e.g. 10), or press [ENTER] to skip:"
+read report_hour
+
+if [ ! -f "$LOG_FILE" ]; then
+    echo "Error: Exim log file not found at $LOG_FILE"
+else
+
+echo -e "${YELLOW}============================================${NC}"
+echo -e "${YELLOW}  ALSCO Full Email Report - All Domains - $(date)  ${NC}"
+echo -e "${YELLOW}============================================${NC}"
+
+# ---- Hourly authenticated account ranking (optional, all domains) ----
+if [ -n "$report_hour" ]; then
+    printf -v HOUR2 "%02d" "$report_hour"
+    echo -e "\n${GREEN}Top authenticated accounts (all domains) during $TODAY $HOUR2:xx${NC}"
+    echo "----------------------------------------------------------"
+    grep "^$TODAY $HOUR2:" "$LOG_FILE" \
+        | grep -oE 'A=dovecot_(login|plain):[^ ]+@[A-Za-z0-9.-]+' \
+        | sed -E 's/^A=dovecot_(login|plain)://' \
+        | sort | uniq -c | sort -nr | head -30
+
+    echo -e "\n${GREEN}Source IPs used for authenticated outbound mail during $TODAY $HOUR2:xx${NC}"
+    echo "----------------------------------------------------------"
+    grep "^$TODAY $HOUR2:" "$LOG_FILE" \
+        | grep "A=dovecot_" \
+        | grep -oE '\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\]' \
+        | sort | uniq -c | sort -nr | head -30
+fi
+
+# ---- All authenticated senders today (all domains) ----
+echo -e "\n${GREEN}All authenticated senders today ($TODAY) — all domains:${NC}"
+echo "----------------------------------------------------------"
+grep "$TODAY" "$LOG_FILE" \
+    | grep "A=dovecot_" \
+    | grep " <= "
+
+# ---- Rank accounts by number of messages sent today (all domains) ----
+echo -e "\n${GREEN}Top accounts ranked by messages sent today — all domains:${NC}"
+echo "----------------------------------------------------------"
+grep "$TODAY" "$LOG_FILE" \
+    | grep " <= " \
+    | grep -oE 'A=dovecot_(login|plain):[^ ]+@[A-Za-z0-9.-]+' \
+    | sed -E 's/^A=dovecot_(login|plain)://' \
+    | sort | uniq -c | sort -nr | head -30
+
+# ---- Accounts sending to external/free-mail destinations (all domains) ----
+echo -e "\n${GREEN}Authenticated senders delivering to external free-mail destinations today:${NC}"
+echo "----------------------------------------------------------"
+grep "$TODAY" "$LOG_FILE" \
+    | grep " <= " \
+    | grep "A=dovecot_" \
+    | grep -E " for .*@(gmail\.com|yahoo\.com|outlook\.com|hotmail\.com|digitaltriangle\.io)"
+
+# ---- Sender + source IP paired (all domains) ----
+echo -e "\n${GREEN}Sender + Source IP pairs today — all domains:${NC}"
+echo "----------------------------------------------------------"
+grep "$TODAY" "$LOG_FILE" \
+    | grep " <= " \
+    | grep "A=dovecot_" \
+    | sed -nE 's/.*H=.*\[([^]]*)\].*A=dovecot_[^:]*:([^ ]*@[A-Za-z0-9.-]+).*/\2  IP=\1/p' \
+    | sort | uniq -c | sort -nr | head -30
+
+echo -e "\n${YELLOW}============================================${NC}"
+echo -e "${YELLOW}  End of ALSCO Full Email Report  ${NC}"
+echo -e "${YELLOW}============================================${NC}"
+
+fi
+;;
+########################################################
+
+
+
+
+
+
 
 
 
