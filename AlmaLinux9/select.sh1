@@ -1281,15 +1281,13 @@ echo "----------------------------------------------"
 ################################################################################################################
 
 
-""WebMail Log and Setting 38"")
+"WebMail Log and Setting 38")
 echo "ALSCO Email---"
 echo "----------------------"
 
 
-#!/bin/bash
-# ==========================================================
-# WebMail Log and Setting 38
-# ==========================================================
+
+
 
 CHECK_LUA="/etc/nginx/conf.d/alsco_global_settings/LUA_Scripts/WebMail_Login_BruteForce_Check.lua"
 LOG_LUA="/etc/nginx/conf.d/alsco_global_settings/LUA_Scripts/WebMail_Login_BruteForce_Log.lua"
