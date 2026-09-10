@@ -40,6 +40,7 @@ options=(
 "Clear All SSH History 35"
 "Check Internet Speed 36"
 "Open Custom Ports in policycoreutils 37"
+"WebMail Log and Setting 38"
 
 "Quit")
 
@@ -1270,9 +1271,213 @@ echo "----------------------------------------------"
 
 
 ;;
+################################################################################################################
+################################################################################################################
 
 
 
+
+################################################################################################################
+################################################################################################################
+
+
+""WebMail Log and Setting 38"")
+echo "ALSCO Email---"
+echo "----------------------"
+
+
+#!/bin/bash
+# ==========================================================
+# WebMail Log and Setting 38
+# ==========================================================
+
+CHECK_LUA="/etc/nginx/conf.d/alsco_global_settings/LUA_Scripts/WebMail_Login_BruteForce_Check.lua"
+LOG_LUA="/etc/nginx/conf.d/alsco_global_settings/LUA_Scripts/WebMail_Login_BruteForce_Log.lua"
+WHITELIST_LUA="/etc/nginx/conf.d/alsco_global_settings/LUA_Scripts/WebMail_login_whitelist.lua"
+
+ATTEMPTS_LOG="/tmp/SG_Login_Attempts.log"
+BLOCK_LOG="/tmp/SG_Login_Block.log"
+
+# ----------------------------------------------------------
+# Helper: pull max_fails / ban_window_seconds live from the
+# Lua files, so the dashboard always matches the real config
+# instead of a hardcoded number going stale.
+# ----------------------------------------------------------
+get_max_fails() {
+    grep -oP 'local\s+max_fails\s*=\s*\K[0-9]+' "$CHECK_LUA" 2>/dev/null
+}
+
+get_ban_window() {
+    grep -oP 'local\s+ban_window_seconds\s*=\s*\K[0-9]+' "$LOG_LUA" 2>/dev/null
+}
+
+pause() {
+    echo
+    read -rp "Press Enter to return to the menu..." _
+}
+
+# ----------------------------------------------------------
+# 1) Check current settings
+# ----------------------------------------------------------
+check_settings() {
+    echo "----------------------------------------------"
+    echo "Brute-Force Check Script"
+    echo "Path : $CHECK_LUA"
+    if [[ -f "$CHECK_LUA" ]]; then
+        val=$(get_max_fails)
+        echo "max_fails = ${val:-NOT FOUND}"
+    else
+        echo "!! File not found"
+    fi
+
+    echo "----------------------------------------------"
+    echo "Brute-Force Log Script"
+    echo "Path : $LOG_LUA"
+    if [[ -f "$LOG_LUA" ]]; then
+        val=$(get_ban_window)
+        echo "ban_window_seconds = ${val:-NOT FOUND}"
+    else
+        echo "!! File not found"
+    fi
+
+    echo "----------------------------------------------"
+    echo "Login Whitelist"
+    echo "Path : $WHITELIST_LUA"
+    if [[ -f "$WHITELIST_LUA" ]]; then
+        echo "Whitelisted IPs:"
+        grep -oP '^\s*\["\K[^"]+(?="\]\s*=\s*true)' "$WHITELIST_LUA"
+    else
+        echo "!! File not found"
+    fi
+    echo "----------------------------------------------"
+    pause
+}
+
+# ----------------------------------------------------------
+# 2) Show all log paths
+# ----------------------------------------------------------
+show_log_paths() {
+    echo "----------------------------------------------"
+    echo "Login attempts log : $ATTEMPTS_LOG"
+    [[ -f "$ATTEMPTS_LOG" ]] && ls -lh "$ATTEMPTS_LOG" || echo "  (file does not exist yet)"
+    echo
+    echo "Login block log     : $BLOCK_LOG"
+    [[ -f "$BLOCK_LOG" ]] && ls -lh "$BLOCK_LOG" || echo "  (file does not exist yet)"
+    echo "----------------------------------------------"
+    pause
+}
+
+# ----------------------------------------------------------
+# 3) Real-time dashboard (top IPs / users / blocked / currently blocked)
+# ----------------------------------------------------------
+realtime_monitor() {
+    if ! command -v gawk >/dev/null 2>&1; then
+        echo "gawk is required for this option (install with: yum install gawk / apt install gawk)."
+        pause
+        return
+    fi
+
+    local ban maxf
+    ban=$(get_ban_window)
+    maxf=$(get_max_fails)
+    ban=${ban:-600}
+    maxf=${maxf:-3}
+
+    watch -n 5 "
+echo '=== TOP FAILED IPs ==='
+grep 'STATUS=FAILED' '$ATTEMPTS_LOG' 2>/dev/null | grep -oP 'ip=\K[^ ]+' | sort | uniq -c | sort -rn | head -20
+echo
+echo '=== TOP TARGETED USERNAMES ==='
+grep 'STATUS=FAILED' '$ATTEMPTS_LOG' 2>/dev/null | grep -oP 'user=\K[^ ]+' | sort | uniq -c | sort -rn | head -20
+echo
+echo '=== BLOCKED IPs (all-time) ==='
+grep -oP 'IP: \K[^,]+' '$BLOCK_LOG' 2>/dev/null | sort | uniq -c | sort -rn
+echo
+echo '=== CURRENTLY BLOCKED (ban=${ban}s, max_fails=${maxf}) ==='
+gawk -v ban=$ban -v maxf=$maxf '\''
+{
+  if (match(\$0, /^\[([0-9-]+) ([0-9:]+)\]/, tsm)) {
+    split(tsm[1], d, \"-\"); split(tsm[2], t, \":\")
+    ts = mktime(d[1]\" \"d[2]\" \"d[3]\" \"t[1]\" \"t[2]\" \"t[3])
+  } else next
+  match(\$0, /STATUS=([A-Z]+)/, sm); status = sm[1]
+  match(\$0, /ip=([^ ]+)/, im); ip = im[1]
+  if (status == \"SUCCESS\") { count[ip] = 0 }
+  else if (status == \"FAILED\") {
+    if (ts - last[ip] > ban) count[ip] = 1
+    else count[ip]++
+    last[ip] = ts
+  }
+}
+END {
+  now = systime(); found = 0
+  for (ip in count) {
+    if (count[ip] >= maxf) {
+      remaining = ban - (now - last[ip])
+      if (remaining > 0) {
+        printf \"%-18s fails=%-3d unblocks in %dm%02ds\n\", ip, count[ip], int(remaining/60), remaining%60
+        found = 1
+      }
+    }
+  }
+  if (!found) print \"(none currently blocked)\"
+}
+'\'' '$ATTEMPTS_LOG' 2>/dev/null
+"
+}
+
+# ----------------------------------------------------------
+# 4) Monitor only failed attempts (live)
+# ----------------------------------------------------------
+monitor_failed() {
+    echo "Tailing FAILED attempts only. Press Ctrl+C to stop."
+    echo "----------------------------------------------"
+    tail -f "$ATTEMPTS_LOG" | grep --line-buffered --color=always 'STATUS=FAILED'
+}
+
+# ----------------------------------------------------------
+# 5) Monitor only successful logins (live)
+# ----------------------------------------------------------
+monitor_success() {
+    echo "Tailing SUCCESS logins only. Press Ctrl+C to stop."
+    echo "----------------------------------------------"
+    tail -f "$ATTEMPTS_LOG" | grep --line-buffered --color=always 'STATUS=SUCCESS'
+}
+
+# ----------------------------------------------------------
+# Menu loop
+# ----------------------------------------------------------
+while true; do
+    clear
+    echo "===================================================="
+    echo "  WebMail Log and Setting 38"
+    echo "===================================================="
+    echo "1) Check current settings (max_fails / ban window / whitelist)"
+    echo "2) Show all log paths"
+    echo "3) Real-time monitor (dashboard)"
+    echo "4) Monitor only FAILED logins"
+    echo "5) Monitor only SUCCESSFUL logins"
+    echo "0) Exit"
+    echo "===================================================="
+    read -rp "Select an option [0-5]: " choice
+
+    case "$choice" in
+        1) check_settings ;;
+        2) show_log_paths ;;
+        3) realtime_monitor ;;
+        4) monitor_failed ;;
+        5) monitor_success ;;
+        0) echo "Bye."; exit 0 ;;
+        *) echo "Invalid option."; sleep 1 ;;
+    esac
+done
+
+
+echo "----------------------------------------------"
+
+
+
+;;
 ################################################################################################################
 ################################################################################################################
 
