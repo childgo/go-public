@@ -1369,61 +1369,9 @@ show_log_paths() {
 # ----------------------------------------------------------
 # 3) Real-time dashboard (top IPs / users / blocked / currently blocked)
 # ----------------------------------------------------------
-realtime_monitor() {
-    if ! command -v gawk >/dev/null 2>&1; then
-        echo "gawk is required for this option (install with: yum install gawk / apt install gawk)."
-        pause
-        return
-    fi
 
-    local ban maxf
-    ban=$(get_ban_window)
-    maxf=$(get_max_fails)
-    ban=${ban:-600}
-    maxf=${maxf:-3}
+watch -n 5 'echo "=== TOP FAILED IPs ==="; grep "STATUS=FAILED" /tmp/SG_Login_Attempts.log | grep -oP "ip=\K[^ ]+" | sort | uniq -c | sort -rn | head -20; echo; echo "=== TOP TARGETED USERNAMES ==="; grep "STATUS=FAILED" /tmp/SG_Login_Attempts.log | grep -oP "user=\K[^ ]+" | sort | uniq -c | sort -rn | head -20; echo; echo "=== BLOCKED IPs (all-time) ==="; grep -oP "IP: \K[^,]+" /tmp/SG_Login_Block.log | sort | uniq -c | sort -rn; echo; echo "=== CURRENTLY BLOCKED ==="; gawk -v ban=600 -v maxf=3 '\''{ if (match($0, /^\[([0-9-]+) ([0-9:]+)\]/, tsm)) { split(tsm[1], d, "-"); split(tsm[2], t, ":"); ts = mktime(d[1]" "d[2]" "d[3]" "t[1]" "t[2]" "t[3]) } else next; match($0, /STATUS=([A-Z]+)/, sm); status = sm[1]; match($0, /ip=([^ ]+)/, im); ip = im[1]; if (status == "SUCCESS") { count[ip] = 0 } else if (status == "FAILED") { if (ts - last[ip] > ban) count[ip] = 1; else count[ip]++; last[ip] = ts } } END { now = systime(); found = 0; for (ip in count) { if (count[ip] >= maxf) { remaining = ban - (now - last[ip]); if (remaining > 0) { printf "%-18s fails=%-3d unblocks in %dm%02ds\n", ip, count[ip], int(remaining/60), remaining%60; found = 1 } } } if (!found) print "(none currently blocked)" }'\'' /tmp/SG_Login_Attempts.log'
 
-    watch -n 5 "
-echo '=== TOP FAILED IPs ==='
-grep 'STATUS=FAILED' '$ATTEMPTS_LOG' 2>/dev/null | grep -oP 'ip=\K[^ ]+' | sort | uniq -c | sort -rn | head -20
-echo
-echo '=== TOP TARGETED USERNAMES ==='
-grep 'STATUS=FAILED' '$ATTEMPTS_LOG' 2>/dev/null | grep -oP 'user=\K[^ ]+' | sort | uniq -c | sort -rn | head -20
-echo
-echo '=== BLOCKED IPs (all-time) ==='
-grep -oP 'IP: \K[^,]+' '$BLOCK_LOG' 2>/dev/null | sort | uniq -c | sort -rn
-echo
-echo '=== CURRENTLY BLOCKED (ban=${ban}s, max_fails=${maxf}) ==='
-gawk -v ban=$ban -v maxf=$maxf '
-{
-  if (match(\$0, /^\[([0-9-]+) ([0-9:]+)\]/, tsm)) {
-    split(tsm[1], d, \"-\"); split(tsm[2], t, \":\")
-    ts = mktime(d[1]\" \"d[2]\" \"d[3]\" \"t[1]\" \"t[2]\" \"t[3])
-  } else next
-  match(\$0, /STATUS=([A-Z]+)/, sm); status = sm[1]
-  match(\$0, /ip=([^ ]+)/, im); ip = im[1]
-  if (status == \"SUCCESS\") { count[ip] = 0 }
-  else if (status == \"FAILED\") {
-    if (ts - last[ip] > ban) count[ip] = 1
-    else count[ip]++
-    last[ip] = ts
-  }
-}
-END {
-  now = systime(); found = 0
-  for (ip in count) {
-    if (count[ip] >= maxf) {
-      remaining = ban - (now - last[ip])
-      if (remaining > 0) {
-        printf \"%-18s fails=%-3d unblocks in %dm%02ds\n\", ip, count[ip], int(remaining/60), remaining%60
-        found = 1
-      }
-    }
-  }
-  if (!found) print \"(none currently blocked)\"
-}
-' '$ATTEMPTS_LOG' 2>/dev/null
-"
-}
 
 # ----------------------------------------------------------
 # 4) Monitor only failed attempts (live)
