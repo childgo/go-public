@@ -1288,7 +1288,6 @@ echo "----------------------"
 
 
 
-
 CHECK_LUA="/etc/nginx/conf.d/alsco_global_settings/LUA_Scripts/WebMail_Login_BruteForce_Check.lua"
 LOG_LUA="/etc/nginx/conf.d/alsco_global_settings/LUA_Scripts/WebMail_Login_BruteForce_Log.lua"
 WHITELIST_LUA="/etc/nginx/conf.d/alsco_global_settings/LUA_Scripts/WebMail_login_whitelist.lua"
