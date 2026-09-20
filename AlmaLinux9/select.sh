@@ -41,6 +41,7 @@ options=(
 "Check Internet Speed 36"
 "Open Custom Ports in policycoreutils 37"
 "WebMail Log and Setting 38"
+"Real time iftop bandwidth 39"
 
 "Quit")
 
@@ -1423,10 +1424,30 @@ while true; do
 done
 
 echo "----------------------------------------------"
-
-
-
 ;;
+
+
+
+"Real time iftop bandwidth 39")
+echo "Check bandwidth in real time..."
+
+
+( trap 'echo; kill -9 0' INT; while :; do iftop -i eth0 -n -N -B -t -s 2 2>/dev/null | awk '/Total send rate/{u=$4} /Total receive rate/{d=$4} END{printf "\r\033[K\033[1;32m▲ Upload: %s/s\033[0m   \033[1;36m▼ Download: %s/s\033[0m", u, d}' & wait $!; done )
+
+echo "----------------------------------------------"
+;;
+
+
+
+
+
+
+
+
+
+
+
+
 ################################################################################################################
 ################################################################################################################
 
