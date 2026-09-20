@@ -614,10 +614,13 @@ echo ""
 
 
 #Checking
-mmdblookup --file /usr/share/GeoIP/GeoLite2-City.mmdb --ip 66.111.53.5 country names en |awk -F'"' '{print $2}' | tr '\n' ' '
-mmdblookup --file /usr/share/GeoIP/GeoLite2-ASN.mmdb --ip 66.111.53.5 | sed -e ':a;N;$!ba;s/\n/ /g' |sed -e 's/ <[a-z0-9_]\+>/,/g' |sed -e 's/,\s\+}/}/g' | jq '(.autonomous_system_number)'
-mmdblookup --file /usr/share/GeoIP/GeoLite2-ASN.mmdb --ip 66.111.53.5 | sed -e ':a;N;$!ba;s/\n/ /g' |sed -e 's/ <[a-z0-9_]\+>/,/g' |sed -e 's/,\s\+}/}/g' | jq '(.autonomous_system_organization)' | sed -e 's/^"//' -e 's/"$//'
-mmdblookup --file /usr/share/GeoIP/GeoLite2-Country.mmdb --ip 66.111.53.5 country iso_code |awk -F'"' '{print $2}' | tr '\n' ' '
+##mmdblookup --file /usr/share/GeoIP/GeoLite2-City.mmdb --ip 66.111.53.5 country names en |awk -F'"' '{print $2}' | tr '\n' ' '
+##mmdblookup --file /usr/share/GeoIP/GeoLite2-ASN.mmdb --ip 66.111.53.5 | sed -e ':a;N;$!ba;s/\n/ /g' |sed -e 's/ <[a-z0-9_]\+>/,/g' |sed -e 's/,\s\+}/}/g' | jq '(.autonomous_system_number)'
+##mmdblookup --file /usr/share/GeoIP/GeoLite2-ASN.mmdb --ip 66.111.53.5 | sed -e ':a;N;$!ba;s/\n/ /g' |sed -e 's/ <[a-z0-9_]\+>/,/g' |sed -e 's/,\s\+}/}/g' | jq '(.autonomous_system_organization)' | sed -e 's/^"//' -e 's/"$//'
+##mmdblookup --file /usr/share/GeoIP/GeoLite2-Country.mmdb --ip 66.111.53.5 country iso_code |awk -F'"' '{print $2}' | tr '\n' ' '
+
+IP=66.111.53.5; COUNTRY=$(mmdblookup --file /usr/share/GeoIP/GeoLite2-City.mmdb --ip "$IP" country names en | awk -F'"' '{print $2}' | tr -d '\n'); ISO=$(mmdblookup --file /usr/share/GeoIP/GeoLite2-Country.mmdb --ip "$IP" country iso_code | awk -F'"' '{print $2}' | tr -d '\n'); ASN_DATA=$(mmdblookup --file /usr/share/GeoIP/GeoLite2-ASN.mmdb --ip "$IP" | sed ':a;N;$!ba;s/\n/ /g' | sed -e 's/ <[a-z0-9_]\+>/,/g' -e 's/,\s\+}/}/g'); ASN=$(echo "$ASN_DATA" | jq -r '.autonomous_system_number'); ORG=$(echo "$ASN_DATA" | jq -r '.autonomous_system_organization'); printf '\033[1;36m%-14s\033[0m \033[1;37m%s\033[0m\n\033[1;36m%-14s\033[0m \033[1;32m%s\033[0m\n\033[1;36m%-14s\033[0m \033[1;33m%s\033[0m\n\033[1;36m%-14s\033[0m \033[1;35m%s\033[0m\n\033[1;36m%-14s\033[0m \033[1;34m%s\033[0m\n' "IP:" "$IP" "Country:" "$COUNTRY" "ISO Code:" "$ISO" "ASN:" "$ASN" "Organization:" "$ORG"
+
 
 #------Delete Unwanted .repo Files:
 find "/etc/yum.repos.d/" -type f -name '*.repo' ! -name 'ALSCO_SecureGateway_AlmaLinux9.repo' ! -name 'ALSCO_SecureGateway_Module.repo' ! -name 'ALSCO_SecureGateway_Others_Requires.repo' ! -name 'ALSCO_SecureGateway_php83.repo' ! -name 'ALSCO_SecureGateway_Tools.repo' -exec rm -f {} \;
