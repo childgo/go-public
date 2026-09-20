@@ -1358,10 +1358,10 @@ check_settings() {
 show_log_paths() {
     echo "----------------------------------------------"
     echo "Login attempts log : $ATTEMPTS_LOG"
-    [[ -f "$ATTEMPTS_LOG" ]] && ls -lh "tail -f $ATTEMPTS_LOG" || echo "  (file does not exist yet)"
+    echo "tail -f $ATTEMPTS_LOG"
     echo
     echo "Login block log     : $BLOCK_LOG"
-    [[ -f "$BLOCK_LOG" ]] && ls -lh "tail -f $BLOCK_LOG" || echo "  (file does not exist yet)"
+    echo "tail -f $BLOCK_LOG"
     echo "----------------------------------------------"
     pause
 }
