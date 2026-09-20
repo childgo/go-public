@@ -1358,10 +1358,10 @@ check_settings() {
 show_log_paths() {
     echo "----------------------------------------------"
     echo "Login attempts log : $ATTEMPTS_LOG"
-    [[ -f "$ATTEMPTS_LOG" ]] && ls -lh "$ATTEMPTS_LOG" || echo "  (file does not exist yet)"
+    [[ -f "$ATTEMPTS_LOG" ]] && ls -lh "tail -f $ATTEMPTS_LOG" || echo "  (file does not exist yet)"
     echo
     echo "Login block log     : $BLOCK_LOG"
-    [[ -f "$BLOCK_LOG" ]] && ls -lh "$BLOCK_LOG" || echo "  (file does not exist yet)"
+    [[ -f "$BLOCK_LOG" ]] && ls -lh "tail -f $BLOCK_LOG" || echo "  (file does not exist yet)"
     echo "----------------------------------------------"
     pause
 }
@@ -1369,6 +1369,9 @@ show_log_paths() {
 # ----------------------------------------------------------
 # 3) Real-time dashboard (top IPs / users / blocked / currently blocked)
 # ----------------------------------------------------------
+echo "----------------------------------------------"
+sed -n 's/.*IP: \([0-9]*\.[0-9]*\.[0-9]*\)\.[0-9]*,.*/\1.0\/24/p' /tmp/SG_Login_Block.log | sort | uniq -c | sort -rn | head
+echo "----------------------------------------------"
 
 realtime_monitor() { watch -n 5 'echo "=== TOP FAILED IPs ==="; grep "STATUS=FAILED" /tmp/SG_Login_Attempts.log | grep -oP "ip=\K[^ ]+" | sort | uniq -c | sort -rn | head -20; echo; echo "=== TOP TARGETED USERNAMES ==="; grep "STATUS=FAILED" /tmp/SG_Login_Attempts.log | grep -oP "user=\K[^ ]+" | sort | uniq -c | sort -rn | head -20; echo; echo "=== BLOCKED IPs (all-time) ==="; grep -oP "IP: \K[^,]+" /tmp/SG_Login_Block.log | sort | uniq -c | sort -rn; echo; echo "=== CURRENTLY BLOCKED ==="; gawk -v ban=600 -v maxf=3 '\''{ if (match($0, /^\[([0-9-]+) ([0-9:]+)\]/, tsm)) { split(tsm[1], d, "-"); split(tsm[2], t, ":"); ts = mktime(d[1]" "d[2]" "d[3]" "t[1]" "t[2]" "t[3]) } else next; match($0, /STATUS=([A-Z]+)/, sm); status = sm[1]; match($0, /ip=([^ ]+)/, im); ip = im[1]; if (status == "SUCCESS") { count[ip] = 0 } else if (status == "FAILED") { if (ts - last[ip] > ban) count[ip] = 1; else count[ip]++; last[ip] = ts } } END { now = systime(); found = 0; for (ip in count) { if (count[ip] >= maxf) { remaining = ban - (now - last[ip]); if (remaining > 0) { printf "%-18s fails=%-3d unblocks in %dm%02ds\n", ip, count[ip], int(remaining/60), remaining%60; found = 1 } } } if (!found) print "(none currently blocked)" }'\'' /tmp/SG_Login_Attempts.log'; }
 
