@@ -1288,9 +1288,6 @@ echo "----------------------"
 
 
 
-
-
-
 CHECK_LUA="/etc/nginx/conf.d/alsco_global_settings/LUA_Scripts/WebMail_Login_BruteForce_Check.lua"
 LOG_LUA="/etc/nginx/conf.d/alsco_global_settings/LUA_Scripts/WebMail_Login_BruteForce_Log.lua"
 WHITELIST_LUA="/etc/nginx/conf.d/alsco_global_settings/LUA_Scripts/WebMail_login_whitelist.lua"
@@ -1359,10 +1356,10 @@ check_settings() {
 show_log_paths() {
     echo "----------------------------------------------"
     echo "Login attempts log : $ATTEMPTS_LOG"
-    echo "tail -f $ATTEMPTS_LOG"
+    echo "tail -F $ATTEMPTS_LOG"
     echo
     echo "Login block log     : $BLOCK_LOG"
-    echo "tail -f $BLOCK_LOG"
+    echo "tail -F $BLOCK_LOG"
     echo "----------------------------------------------"
     pause
 }
@@ -1383,7 +1380,7 @@ realtime_monitor() { watch -n 5 'echo "=== TOP FAILED IPs ==="; grep "STATUS=FAI
 monitor_failed() {
     echo "Tailing FAILED attempts only. Press Ctrl+C to stop."
     echo "----------------------------------------------"
-    tail -f "$ATTEMPTS_LOG" | grep --line-buffered --color=always 'STATUS=FAILED'
+    tail -F "$ATTEMPTS_LOG" 2>/dev/null | grep --line-buffered --color=always 'STATUS=FAILED'
 }
 
 # ----------------------------------------------------------
@@ -1392,7 +1389,25 @@ monitor_failed() {
 monitor_success() {
     echo "Tailing SUCCESS logins only. Press Ctrl+C to stop."
     echo "----------------------------------------------"
-    tail -f "$ATTEMPTS_LOG" | grep --line-buffered --color=always 'STATUS=SUCCESS'
+    tail -F "$ATTEMPTS_LOG" 2>/dev/null | grep --line-buffered --color=always 'STATUS=SUCCESS'
+}
+
+# ----------------------------------------------------------
+# 6) Monitor the whole block log (live)
+# ----------------------------------------------------------
+monitor_block_log() {
+    echo "Tailing $BLOCK_LOG. Press Ctrl+C to stop."
+    echo "----------------------------------------------"
+    tail -F "$BLOCK_LOG" 2>/dev/null
+}
+
+# ----------------------------------------------------------
+# 7) Monitor the whole attempts log (live)
+# ----------------------------------------------------------
+monitor_attempts_log() {
+    echo "Tailing $ATTEMPTS_LOG. Press Ctrl+C to stop."
+    echo "----------------------------------------------"
+    tail -F "$ATTEMPTS_LOG" 2>/dev/null
 }
 
 # ----------------------------------------------------------
@@ -1408,9 +1423,11 @@ while true; do
     echo "3) Real-time monitor (dashboard)"
     echo "4) Monitor only FAILED logins"
     echo "5) Monitor only SUCCESSFUL logins"
+    echo "6) Monitor Block log (tail -F $BLOCK_LOG)"
+    echo "7) Monitor Attempts log (tail -F $ATTEMPTS_LOG)"
     echo "0) Exit"
     echo "===================================================="
-    read -rp "Select an option [0-5]: " choice
+    read -rp "Select an option [0-7]: " choice
 
     case "$choice" in
         1) check_settings ;;
@@ -1418,6 +1435,8 @@ while true; do
         3) realtime_monitor ;;
         4) monitor_failed ;;
         5) monitor_success ;;
+        6) monitor_block_log ;;
+        7) monitor_attempts_log ;;
         0) echo "Bye."; exit 0 ;;
         *) echo "Invalid option."; sleep 1 ;;
     esac
@@ -1433,6 +1452,7 @@ echo "Check bandwidth in real time..."
 
 
 ( trap 'echo; kill -9 0' INT; while :; do iftop -i eth0 -n -N -B -t -s 2 2>/dev/null | awk '/Total send rate/{u=$4} /Total receive rate/{d=$4} END{printf "\r\033[K\033[1;32m▲ Upload: %s/s\033[0m   \033[1;36m▼ Download: %s/s\033[0m", u, d}' & wait $!; done )
+
 
 echo "----------------------------------------------"
 ;;
